@@ -235,8 +235,8 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   	<section class="content-header">
-      <h1>
-        <i class="fa fa-comments"></i> J-TALK
+      <h1 class="font-bareun">
+        <i class="fa fa-comments "></i> J-TALK
         <small>JSL연수생들과 많은 이야기를 나눠보세요.</small>
       </h1>
       <ol class="breadcrumb">
