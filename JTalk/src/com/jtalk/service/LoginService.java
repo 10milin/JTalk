@@ -1,0 +1,37 @@
+package com.jtalk.service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.jtalk.core.Service;
+
+public class LoginService implements Service{
+
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		/*ê¸°ë³¸ ?´?™ ?˜?´ì§?*/
+		String resURL = "/pages/login/login.jsp";
+		
+		String command = request.getParameter("command");
+		
+		/* *
+		 * command?— ?”°?¼ ?•„?š”?•œ ë¹„ì??‹ˆ?Š¤ ë¡œì§ ?ˆ˜?–‰
+		 * DAO?— ? ‘ê·¼í•˜?—¬ ?•„?š”?•œ ê°ì²´ë¥? request.setAttributeë¥? ?†µ?•´ ?„¤? •
+		 * */
+		
+		if(command != null) {
+			switch(command) {
+			case "action":
+				// ë¡œê·¸?¸ ?ˆ˜?–‰ ë¡œì§
+				// DBê°’ê³¼ ë¹„êµ?•˜?—¬ ?˜?´ì§? ë©”ì„¸ì§?ë¥? ?‹´ê±°ë‚˜ resURL ë³?ê²?
+				break;
+			default:
+				// ?˜ëª»ëœ ì»¤ë§¨?“œ ?…? ¥?‹œ ì²˜ë¦¬
+			}
+			
+		}
+
+		return resURL;
+	}
+
+}
