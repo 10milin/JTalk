@@ -58,20 +58,22 @@
 	
 	    <!-- /.social-auth-links -->
 	
-	    <a href="/JTalk/recovery.do">비밀번호 찾기</a><br>
-	    <a href="/JTalk/register.do">회원가입</a>
+	    <a href="javascript:actionlink('recovery.do');">비밀번호 찾기</a><br>
+	    <a href="javascript:actionlink('register.do');">회원가입</a>
 	
 	  </div>
 	  <!-- /.login-box-body -->
 	</div>
 	<!-- /.login-box -->
-	
+	<div id="actionpost"></div>
 	<!-- jQuery 3 -->
 	<script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- iCheck -->
 	<script src="/JTalk/plugins/iCheck/icheck.min.js"></script>
+	<!-- Javascript of ActionPost -->
+	<script src="/JTalk/dist/js/actionpost.js"></script>
 	<script>
 	  $(function () {
 	    $('input').iCheck({

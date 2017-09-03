@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 	session.setAttribute("member", "a");
-	request.getRequestDispatcher("/index.do").forward(request, response);
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -12,6 +10,9 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		
+		<form action="/JTalk/index.do" name="index" method="post"></form>
 	</body>
+	<script>
+		document.index.submit();
+	</script>
 </html>

@@ -59,18 +59,20 @@
 	        <!-- /.col -->
 	      </div>
 	    </form>
-	    <a href="/JTalk/login.do">로그인</a>
+	    <a href="javascript:actionlink('login.do');">로그인</a>
 	  </div>
 	  <!-- /.form-box -->
 	</div>
 	<!-- /.register-box -->
-	
+	<div id="actionpost"></div>
 	<!-- jQuery 3 -->
 	<script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- iCheck -->
 	<script src="/JTalk/plugins/iCheck/icheck.min.js"></script>
+	<!-- Javascript of ActionPost -->
+	<script src="/JTalk/dist/js/actionpost.js"></script>
 	<script>
 	  $(function () {
 	    $('input').iCheck({

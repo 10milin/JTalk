@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	ServletContext ctx =  request.getServletContext();
-	String version = ctx.getInitParameter("version");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +38,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="/JTalk/pages/main.jsp" class="logo">
+    <a href="/JTalk/index.do" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>SL</span>
       <!-- logo for regular state and mobile devices -->
@@ -795,7 +791,7 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> <%=version%>
+      <b>Version</b> ${applicationScope.version}
     </div>
     <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
     reserved.
@@ -842,5 +838,7 @@
 <script src="/JTalk/dist/js/demo.js"></script>
 <!-- Infomation Panel Switching -->
 <script src="/JTalk/dist/js/information.js"></script>
+<!-- Javascript of ActionPost -->
+<script src="/JTalk/dist/js/actionpost.js"></script>
 </body>
 </html>

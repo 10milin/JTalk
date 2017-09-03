@@ -17,7 +17,7 @@ public class Controller extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		doPost(request, response);
+		response.sendRedirect("/JTalk/");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
