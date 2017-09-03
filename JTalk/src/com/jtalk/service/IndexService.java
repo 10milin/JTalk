@@ -11,11 +11,13 @@ public class IndexService implements Service{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		/* Default URL */
 		String resURL = "/pages/login/login.jsp";
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("member") !=null) {
-			//version information to ApplicationScope
+			/*version information to ApplicationScope*/
 			ServletContext ctx =  request.getServletContext();
 			ctx.setAttribute("version", "Alpha");
 			resURL = "/pages/main.jsp"; 

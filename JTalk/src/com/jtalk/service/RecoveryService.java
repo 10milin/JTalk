@@ -10,15 +10,10 @@ public class RecoveryService implements Service{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		/*ê¸°ë³¸ ?´?™ ?˜?´ì§?*/
+		/* Default URL */
 		String resURL = "/pages/login/recovery.jsp";
 		
 		String command = request.getParameter("command");
-		
-		/* *
-		 * command?— ?”°?¼ ?•„?š”?•œ ë¹„ì??‹ˆ?Š¤ ë¡œì§ ?ˆ˜?–‰
-		 * DAO?— ? ‘ê·¼í•˜?—¬ ?•„?š”?•œ ê°ì²´ë¥? request.setAttributeë¥? ?†µ?•´ ?„¤? •
-		 * */
 		
 		if(command != null) {
 			

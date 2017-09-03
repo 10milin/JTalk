@@ -38,7 +38,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="/JTalk/index.do" class="logo">
+    <a href="javascript:actionlink('index.do');" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>SL</span>
       <!-- logo for regular state and mobile devices -->
@@ -793,12 +793,12 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> ${applicationScope.version}
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
     reserved.
   </footer>
   
 </div>
-
+<div id="actionpost"></div>
 <!-- jQuery 3 -->
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

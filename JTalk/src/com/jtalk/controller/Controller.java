@@ -17,12 +17,12 @@ public class Controller extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		response.sendRedirect("/JTalk/");
+		request.getRequestDispatcher("/pages/error/404.jsp").forward(request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		/* Encoding ?„¤? • UTF-8 */
+		/* Encoding setting UTF-8 */
 		request.setCharacterEncoding("UTF-8");
 		
 		String uri = request.getRequestURI();
@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
 		case "/login.do": service = new LoginService(); break;
 		case "/recovery.do": service = new RecoveryService(); break;
 		case "/register.do": service = new RegisterService(); break;
-		default : resURL = "";
+		default : resURL = "/index.do";
 		}
 		
 		if(service !=null) resURL = service.execute(request, response);
