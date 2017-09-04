@@ -1,0 +1,29 @@
+package com.jtalk.service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.jtalk.core.Service;
+import com.jtalk.dao.MemberDAO;
+
+public class AuthService implements Service {
+
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String resURL = "/pages/error/404.jsp";
+		
+		MemberDAO dao = MemberDAO.getInstance();
+		String email = request.getParameter("email");
+		String link = request.getParameter("link");
+
+		int check = dao.activeMember(email, link);
+		
+		if(check > 0) {
+			resURL = "/pages/login/login.jsp";
+		}
+		
+		return resURL;
+	}
+
+}

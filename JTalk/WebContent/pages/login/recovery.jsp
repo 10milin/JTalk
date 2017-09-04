@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	request.setAttribute("errorMsg", "입력하신 정보와 일치하는 회원이 존재하지<br>않습니다. 다시 한번 확인해주세요.");
+	request.setAttribute("successMsg", "xxx@xxx.com으로<br>임시 비밀번호를 전송하였습니다.");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,6 +42,20 @@
 	
 	  <div class="register-box-body">
 	    <p class="login-box-msg font-bareun">임시 비밀번호를 발급해드립니다.</p>
+	    <c:if test="${not empty errorMsg}">
+	    <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-warning"></i>발급 실패</h4>
+         	${errorMsg}
+        </div>
+	    </c:if>
+	    <c:if test="${not empty successMsg}">
+	    <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-check"></i>발급 성공</h4>
+         	${successMsg}
+        </div>
+	    </c:if>
 	    <form action="/JTalk/recovery.do?command=action" method="post">
 	      <div class="form-group has-feedback">
 	        <input type="email" class="form-control" placeholder="이메일">

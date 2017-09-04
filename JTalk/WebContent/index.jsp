@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	session.setAttribute("member", "a");
+	//session.setAttribute("member", "a");
 %>
 <!DOCTYPE html>
 <html>

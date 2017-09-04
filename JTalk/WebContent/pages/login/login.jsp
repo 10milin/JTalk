@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -30,7 +31,13 @@
 	  <!-- /.login-logo -->
 	  <div class="login-box-body">
 	    <p class="login-box-msg font-bareun">J-TALK에서 많은 이야기를 나눠보세요.</p>
-	
+	    <c:if test="${not empty errorMsg}">
+	    <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-warning"></i>로그인 실패</h4>
+         	${errorMsg}
+        </div>
+	    </c:if>
 	    <form action="/JTalk/login.do?command=action" method="post">
 	      <div class="form-group has-feedback">
 	        <input type="email" class="form-control" placeholder="이메일">

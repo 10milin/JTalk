@@ -37,6 +37,7 @@ public class Controller extends HttpServlet {
 		case "/login.do": service = new LoginService(); break;
 		case "/recovery.do": service = new RecoveryService(); break;
 		case "/register.do": service = new RegisterService(); break;
+		case "/auth.do" : service = new AuthService(); break;
 		default : resURL = "/index.do";
 		}
 		

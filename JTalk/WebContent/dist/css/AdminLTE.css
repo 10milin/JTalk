@@ -5007,3 +5007,8 @@ table.text-center th {
 .infor-hover:hover{
 	opacity: 0.6;	
 }
+@media (min-width: 992px) {
+  .padding-right{
+	padding-right: 0px;
+}
+}

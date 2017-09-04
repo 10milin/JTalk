@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -358,7 +359,7 @@
 		            <div class="box-body">
 		              <div class="col-md-6 col-sm-6">
 		              	<div class="row">
-					        <div class="col-lg-6 col-xs-12" id="it-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12" id="it-btn" style="cursor:pointer;">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-aqua" id="it-ico"><i class="fa fa-television"></i></span>
 					            <div class="info-box-content">
@@ -371,7 +372,7 @@
 					          <!-- /.info-box -->
 					        </div>
 					        <!-- ./col -->
-					        <div class="col-lg-6 col-xs-12" id="jp-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12" id="jp-btn" style="cursor:pointer;">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-green" id="jp-ico"><i class="fa fa-book"></i></span>
 					            <div class="info-box-content">
@@ -384,7 +385,7 @@
 					          <!-- /.info-box -->
 					        </div>
 					        <!-- ./col -->
-					        <div class="col-lg-6 col-xs-12" id="rst-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12" id="rst-btn" style="cursor:pointer;">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-yellow" id="rst-ico"><i class="fa fa-cutlery"></i></span>
 					            <div class="info-box-content">
@@ -397,7 +398,7 @@
 					          <!-- /.info-box -->
 					        </div>
 					        <!-- ./col -->
-					        <div class="col-lg-6 col-xs-12" id="life-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12" id="life-btn" style="cursor:pointer;">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-red" id="life-ico"><i class="fa fa-check-square-o"></i></span>
 					            <div class="info-box-content">
@@ -487,7 +488,7 @@
 	    	</div>
 	    	<!-- /.정모마당 -->
 	    	
-	    	<div class="col-md-7">
+	    	<div class="col-md-7 padding-right">
 	          <!-- Box Comment -->
 	          <div class="box box-primary">
 	          
