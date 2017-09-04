@@ -25,7 +25,7 @@ public class RegisterService implements Service{
 				String name = request.getParameter("name");
 				int period = Integer.parseInt(request.getParameter("period"));
 				String link = MemberCore.makeCode(email);
-				
+				 
 				MemberDTO member = new MemberDTO(email, pass, name, period, link);
 				MemberDAO dao = MemberDAO.getInstance();
 				dao.insertMember(member);
