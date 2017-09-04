@@ -12,7 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
-public class Register {
+public class MemberCore {
 	public static String makeCode(String email) {
 		String md5 = "";
 		
@@ -48,7 +48,7 @@ public class Register {
 				+ "email=" + email + "&link=" + link + "'>회원 인증</a>";
 		try {
 			Properties props = new Properties();
-			props.put("mail.stmp.starttls.enable", "true");
+			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.transport.protocol", "smtp");
 			props.put("mail.smtp.host", host);
 			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");

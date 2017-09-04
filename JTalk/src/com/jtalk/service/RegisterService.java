@@ -3,7 +3,7 @@ package com.jtalk.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jtalk.core.Register;
+import com.jtalk.core.MemberCore;
 import com.jtalk.core.Service;
 import com.jtalk.dao.MemberDAO;
 import com.jtalk.dto.MemberDTO;
@@ -24,13 +24,13 @@ public class RegisterService implements Service{
 				String pass = request.getParameter("pass");
 				String name = request.getParameter("name");
 				int period = Integer.parseInt(request.getParameter("period"));
-				String link = Register.makeCode(email);
+				String link = MemberCore.makeCode(email);
 				
 				MemberDTO member = new MemberDTO(email, pass, name, period, link);
 				MemberDAO dao = MemberDAO.getInstance();
 				dao.insertMember(member);
 				
-				Register.send(email, link);
+				MemberCore.send(email, link);
 				resURL = "/pages/login/login.jsp";
 				break;
 			}
