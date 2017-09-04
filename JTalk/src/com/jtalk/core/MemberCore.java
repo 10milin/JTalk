@@ -43,8 +43,8 @@ public class MemberCore {
 		final String toEmail = email;
 		
 		String subject = "JTalk 회원 인증 메일";
-		String content = "<a href = 'http://localhost:8181/JTalk/auth.html?"
-				+ "email=" + email + "&link=" + link + "'>회원 인증</a>";
+		String content = "<a href = 'http://localhost:8181/JTalk/pages/auth/action.html?"
+				+ "email=" + email + "&link=" + link + "' target='_blank'>회원 인증</a>";
 		try {
 			Properties props = new Properties();
 			// SSL 사용하는 경우
@@ -70,7 +70,7 @@ public class MemberCore {
 			msg.setFrom(new InternetAddress(fromEmail, "관리자"));
 			
 			msg.setSubject(subject, "UTF-8");
-			msg.setText(content, "UTF-8");
+			msg.setContent(content, "text/html; charset = UTF-8");
 			msg.setSentDate(new java.util.Date());
 			
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
