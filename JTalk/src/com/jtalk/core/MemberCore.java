@@ -44,8 +44,8 @@ public class MemberCore {
 		String from = "jtalkmaster@gmail.com";
 		String to1 = email;
 		
-		String content = "<a href = 'http://localhost:8181/JTalk/auth.action?"
-				+ "email=" + email + "&link=" + link + "'>회원 인증</a>";
+		String content = "<a href = 'http://localhost:8181/JTalk/pages/auth/action.html?"
+				+ "email=" + email + "&link=" + link + "' target='_blank'>회원 인증</a>";
 		try {
 			Properties props = new Properties();
 			props.put("mail.smtp.starttls.enable", "true");

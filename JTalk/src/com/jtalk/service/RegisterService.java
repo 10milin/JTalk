@@ -31,6 +31,10 @@ public class RegisterService implements Service{
 				dao.insertMember(member);
 				
 				MemberCore.send(email, link);
+				
+				request.setAttribute("successMsg", name + "님 환영합니다.<br>" +email + "로 인증메일이<br>전송 되었습니다.");
+				request.setAttribute("email", email);
+				
 				resURL = "/pages/login/login.jsp";
 				break;
 			}

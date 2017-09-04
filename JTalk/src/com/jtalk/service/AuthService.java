@@ -20,7 +20,8 @@ public class AuthService implements Service {
 		int check = dao.activeMember(email, link);
 		
 		if(check > 0) {
-			resURL = "/pages/login/login.jsp";
+			request.setAttribute("email", email);
+			resURL = "/pages/auth/success.jsp";
 		}
 		
 		return resURL;
