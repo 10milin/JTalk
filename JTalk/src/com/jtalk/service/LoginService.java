@@ -23,7 +23,7 @@ public class LoginService implements Service{
 		if(command != null) {
 			switch(command) {
 			case "action":
-				
+				String errorMsg;
 				break;
 			default:
 				
