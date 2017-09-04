@@ -22,7 +22,7 @@ public class MemberCore {
 			md.update(email.getBytes()); 
 
 			byte byteData[] = md.digest();
-
+ 
 			StringBuffer sb = new StringBuffer(); 
 
 			for(int i = 0 ; i < byteData.length ; i++){
