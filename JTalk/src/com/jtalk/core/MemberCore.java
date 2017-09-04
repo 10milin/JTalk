@@ -4,13 +4,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 
 public class MemberCore {
 	public static String makeCode(String email) {
@@ -38,38 +38,42 @@ public class MemberCore {
 	}
 	
 	public static void send(String email, String link) {
-		String host = "smtp.gmail.com";
-		String subject = "JTalk 회원 인증 메일";
-		String fromName = "JTalk Administrator";
-		String from = "jtalkmaster@gmail.com";
-		String to1 = email;
+		final String fromEmail = "jtalkmaster@gmail.com";
+		final String password = "jsl1q2w3e";
+		final String toEmail = email;
 		
+		String subject = "JTalk 회원 인증 메일";
 		String content = "<a href = 'http://localhost:8181/JTalk/auth.action?"
 				+ "email=" + email + "&link=" + link + "'>회원 인증</a>";
 		try {
 			Properties props = new Properties();
-			props.put("mail.smtp.starttls.enable", "true");
-			props.put("mail.transport.protocol", "smtp");
-			props.put("mail.smtp.host", host);
-			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			props.put("mail.smtp.port", "465");
-			props.put("mail.smtp.user", from);
-			props.put("mail.smtp.auth", "true");
+			// SSL 사용하는 경우
+			props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+			props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
+			props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
+			props.put("mail.smtp.port", "465"); //SMTP Port
 			
-			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(from, "jsl1q2w3e");
-				}
-			});
-			Message msg = new MimeMessage(mailSession);
-			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
+			Authenticator auth = new Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(fromEmail, password);
+	            }
+	        };
+	        
+			Session session = Session.getInstance(props, auth);
 			
-			InternetAddress[] address1 = {new InternetAddress(to1)};
-			msg.setRecipients(Message.RecipientType.TO, address1);
-			msg.setSubject(subject);
+			MimeMessage msg = new MimeMessage(session);
+			msg.addHeader("Content-type", "text/html; charset = UTF-8");
+			msg.addHeader("format", "flowed");
+			msg.addHeader("Content-Transfer-Encoding", "8bit");
+			
+			msg.setFrom(new InternetAddress(fromEmail, "관리자"));
+			
+			msg.setSubject(subject, "UTF-8");
+			msg.setText(content, "UTF-8");
 			msg.setSentDate(new java.util.Date());
-			msg.setContent(content, "text/html; charset = utf-8");
 			
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
 			Transport.send(msg);
 		}catch(Exception e) {
 			e.printStackTrace();
