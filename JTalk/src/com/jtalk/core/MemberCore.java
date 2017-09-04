@@ -43,7 +43,7 @@ public class MemberCore {
 		final String toEmail = email;
 		
 		String subject = "JTalk 회원 인증 메일";
-		String content = "<a href = 'http://localhost:8181/JTalk/pages/auth/action.html?"
+		String content = "<a href = 'http://localhost:8181/JTalk/pages/auth/auth.html?"
 				+ "email=" + email + "&link=" + link + "' target='_blank'>회원 인증</a>";
 		try {
 			Properties props = new Properties();
