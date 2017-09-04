@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 public class JdbcUtils {
 	public static Connection getConnection() {
 		Connection conn = null;
-		String url = "jdbc:mysql://localhost:3306/jtalk";
+		String url = "jdbc:mysql://127.0.0.1:3306/jtalk?autoReconnect=true&useSSL=false";
 		String user = "jtalk";
 		String password = "1234";
 		
