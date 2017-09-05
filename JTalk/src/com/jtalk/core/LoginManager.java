@@ -1,5 +1,6 @@
 package com.jtalk.core;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import javax.servlet.http.HttpSession;
@@ -31,6 +32,18 @@ public class LoginManager implements HttpSessionBindingListener{
 		return loginUsers.containsValue(userID);
 	}
 	
+	public void removeSession(String userID) {
+		Enumeration e = loginUsers.keys();
+		HttpSession session = null;
+		
+		while(e.hasMoreElements()) {
+			session = (HttpSession)e.nextElement();
+			if(loginUsers.get(session).equals(userID)) {
+				session.invalidate();
+			}
+		}
+	}
+	
 	@Override
 	public void valueBound(HttpSessionBindingEvent arg0) {
 		MemberDTO member = (MemberDTO)arg0.getSession().getAttribute("member");
@@ -41,10 +54,8 @@ public class LoginManager implements HttpSessionBindingListener{
 
 	@Override
 	public void valueUnbound(HttpSessionBindingEvent arg0) {
-		HttpSession session = arg0.getSession();
 		synchronized(loginUsers) {
-			System.out.println("삭제");
-			loginUsers.remove(session.getId());
+			loginUsers.remove(arg0.getSession());
 		}
 	}
 }

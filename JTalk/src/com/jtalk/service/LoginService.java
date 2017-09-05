@@ -44,13 +44,14 @@ public class LoginService implements Service{
 					LoginManager manager = LoginManager.getInstance();
 					MemberDTO member = dao.getMember(email);
 					if(manager.isUsing(email)) {
-						errorMsg = "이미 로그인 되어있는 계정입니다.";
-					}else {
-						HttpSession session = request.getSession();
-						session.setAttribute("member", member);
-						session.setAttribute("listener", manager);
-						result = true;
+						manager.removeSession(email);
 					}
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("member", member);
+					session.setAttribute("listener", manager);
+					result = true;
+					
 					break;
 				}
 				request.setAttribute("errorMsg", errorMsg);
