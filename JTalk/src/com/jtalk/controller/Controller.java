@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jtalk.core.Service;
+import com.jtalk.core.SessionValidator;
 import com.jtalk.service.*;
 
 @WebServlet("*.do")
@@ -31,18 +33,24 @@ public class Controller extends HttpServlet {
 
 		Service service = null;
 		String resURL = null;
-
+		
 		switch(action) {
-		case "/index.do": service = new IndexService(); break;
 		case "/login.do": service = new LoginService(); break;
 		case "/recovery.do": service = new RecoveryService(); break;
 		case "/register.do": service = new RegisterService(); break;
 		case "/auth.do" : service = new AuthService(); break;
+		case "/index.do": service = new IndexService(); break;
+		case "/notice.do": service = new NoticeService(); break;
 		default : resURL = "/index.do";
 		}
+
 		
 		if(service !=null) resURL = service.execute(request, response);
-
+		
+		if(SessionValidator.validate(request, response)) {
+			resURL = "/pages/login/login.jsp";
+		}
+		
 		request.getRequestDispatcher(resURL).forward(request, response);
 		
 	}

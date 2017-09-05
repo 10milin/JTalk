@@ -5,14 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
 
-public class RecoveryService implements Service{
+public class NoticeService implements Service{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		/* Default URL */
-		String resURL = "/pages/login/recovery.jsp";
-		request.setAttribute("validate", false);
+		String resURL = "/pages/notice/notice.jsp";
 		
 		String command = request.getParameter("command");
 		
