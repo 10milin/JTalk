@@ -101,4 +101,38 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	public MemberDTO getMember(String email) {
+		MemberDTO member = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from member where email = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member = new MemberDTO(rs.getString("email"), 
+						rs.getString("pass"),
+						rs.getString("name"),
+						rs.getInt("period"),
+						rs.getString("ban"),
+						rs.getString("active"),
+						rs.getString("link"),
+						rs.getDate("registerDate"),
+						rs.getString("profile")
+						);	
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return member;
+	}
 }
