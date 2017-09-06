@@ -5012,3 +5012,52 @@ table.text-center th {
 	padding-right: 0px;
 }
 }
+
+.table-field th{
+	padding : 9px 12px;
+	text-align: center;
+	background-color: #f5f5f5;
+	border-top: 1px solid #ccc !important;
+	border-bottom: 1px solid #ccc !important;
+}
+
+.table-field td{
+	padding : 9px 12px;
+	text-align: center;
+}
+
+.td-title{
+	text-align: left !important;
+	text-indent: 10px;
+}
+
+.td-title-mobile{
+	text-align: left !important;
+}
+
+@media (min-width: 992px ) {
+	.table-md{
+		display: table;
+	}
+	.table-xd{
+		display:none;	
+	}
+}
+
+@media (min-width: 769px) {
+	.table-md{
+		display: table;
+	}
+	.table-xd{
+		display:none;	
+	}
+}
+
+@media (max-width: 768px) {
+  	.table-md{
+		display: none;
+	}
+	.table-xd{
+		display:table;	
+	}
+}

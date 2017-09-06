@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>JTalk</title>
+  <title>J-Talk</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -211,7 +211,7 @@
       
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
-      	<li><a href="#"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
+      	<li><a href="javascript:actionlink('notice.do');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
         <li class="header">COMMUNITY</li>
         <li><a href="#"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
         <li><a href="#"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>

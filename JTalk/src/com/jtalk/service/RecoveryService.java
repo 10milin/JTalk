@@ -14,6 +14,7 @@ public class RecoveryService implements Service{
 		
 		/* Default URL */
 		String resURL = "/pages/login/recovery.jsp";
+		request.setAttribute("validate", false);
 		
 		String command = request.getParameter("command");
 		

@@ -12,6 +12,7 @@ public class AuthService implements Service {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String resURL = "/pages/error/404.jsp";
+		request.setAttribute("validate", false);
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		String email = request.getParameter("email");

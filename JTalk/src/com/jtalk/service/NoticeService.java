@@ -1,23 +1,33 @@
 package com.jtalk.service;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jtalk.core.Service;
 
-public class IndexService implements Service{
+public class NoticeService implements Service{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		/* Default URL */
-		String resURL = "/pages/main.jsp";
-		ServletContext ctx =  request.getServletContext();
-		ctx.setAttribute("version", "Alpha");
+		String resURL = "/pages/notice/notice.jsp";
 		
+		String command = request.getParameter("command");
+		
+		if(command != null) {
+			
+			switch(command) {
+			case "action":
+				
+				break;
+			default:
+				
+			}
+			
+		}
+
 		return resURL;
 	}
-	
+
 }

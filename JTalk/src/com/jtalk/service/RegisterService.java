@@ -14,6 +14,7 @@ public class RegisterService implements Service{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		/* Default URL */
 		String resURL = "/pages/login/register.jsp";
+		request.setAttribute("validate", false);
 		
 		String command = request.getParameter("command");
 		
