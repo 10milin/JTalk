@@ -246,6 +246,64 @@
     </section>
     <section class="content">
 	    <div class="row">
+	    	<div class="col-md-8 padding-right">
+	    	<div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 게시글 목록</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-condensed table-hover table-md">
+                <tr class="table-field">
+                  <th style="width: 50px;">번호</th>
+                  <th>제목</th>
+                  <th style="width: 10%;">글쓴이</th>
+                  <th style="width: 13%;">날짜</th>
+                  <th style="width: 9%;">조회수</th>
+                </tr>
+                <tr class="table-field">
+                  <td>1</td>
+                  <td class="td-title">이것은 게시판 제목입니다.(5) new</td>
+                  <td>관리자</td>
+                  <td>17-06-02</td>
+                  <td>5</td>
+                </tr>
+                <tr class="table-field">
+                  <td>1</td>
+                  <td class="td-title">이것은 게시판 제목입니다.(5) new</td>
+                  <td>관리자</td>
+                  <td>17-06-02</td>
+                  <td>5</td>
+                </tr>
+              </table>
+              <table class="table table-condensed table-hover table-xd">
+              	<tr class="table-field">
+                  <th>제목</th>
+                  <th style="width: 18%;">글쓴이</th>
+                  <th style="width: 20%;">날짜</th>
+                </tr>
+                <tr class="table-field">
+                  <td class="td-title-mobile">모바일 전용</td>
+                  <td>관리자</td>
+                  <td>17-06-02</td>
+                </tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+          <div class="col-md-4">
+	    	<div class="box box-primary">
+	            <div class="box-header">
+	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 검색</h3>
+	            </div>
+            <!-- /.box-header -->
+	            <div class="box-body">
+	           		d
+	            </div>
+            </div>
+         </div>
 	    </div>
 	</section>
   </div>
