@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	request.setAttribute("errorMsg", "입력하신 정보와 일치하는 회원이 존재하지<br>않습니다. 다시 한번 확인해주세요.");
-	request.setAttribute("successMsg", "xxx@xxx.com으로<br>임시 비밀번호를 전송하였습니다.");
+	request.getAttribute("errorMsg");
+	request.getAttribute("successMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -58,15 +58,15 @@
 	    </c:if>
 	    <form action="/JTalk/recovery.do?command=action" method="post">
 	      <div class="form-group has-feedback">
-	        <input type="email" class="form-control" placeholder="이메일">
+	        <input type="email" class="form-control" placeholder="이메일" name = "email">
 	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="text" class="form-control" placeholder="성명">
+	        <input type="text" class="form-control" placeholder="성명" name = "name">
 	        <span class="glyphicon glyphicon-user form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="text" class="form-control" placeholder="기수" name ="isbn" id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="2">
+	        <input type="text" class="form-control" placeholder="기수" name ="period" id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="2">
 	        <span class="fa fa-mortar-board form-control-feedback"></span>
 	      </div>
 	      <div class="row">

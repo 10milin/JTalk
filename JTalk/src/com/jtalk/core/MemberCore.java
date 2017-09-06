@@ -37,14 +37,22 @@ public class MemberCore {
 		return md5;
 	}
 	
-	public static void send(String email, String link) {
+	public static void send(String email, String input, String command) {
 		final String fromEmail = "jtalkmaster@gmail.com";
 		final String password = "jsl1q2w3e";
 		final String toEmail = email;
 		
-		String subject = "JTalk 회원 인증 메일";
-		String content = "<a href = 'http://localhost:8181/JTalk/pages/auth/auth.html?"
-				+ "email=" + email + "&link=" + link + "' target='_blank'>회원 인증</a>";
+		String subject = null;
+		String content = null;
+		
+		if(command.equals("insert")) {
+			subject = "JTalk 회원 인증 메일";
+			content = "<a href = 'http://localhost:8181/JTalk/pages/auth/auth.html?"
+					+ "email=" + email + "&link=" + input + "' target='_blank'>회원 인증</a>";
+		}else if(command.equals("find")) {
+			subject = "JTalk 임시 비밀번호 메일";
+			content = "임시 비밀번호 : [" + input + "]";
+		}
 		try {
 			Properties props = new Properties();
 			// SSL 사용하는 경우

@@ -17,6 +17,7 @@ public class MemberDAO {
 		return instance;
 	}
 	
+	//회원가입
 	public void insertMember(MemberDTO member) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -40,6 +41,7 @@ public class MemberDAO {
 		}
 	}
 	
+	//회원 활성화
 	public int activeMember(String email, String link) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -60,6 +62,7 @@ public class MemberDAO {
 		return result;
 	}
 	
+	//로그인 체크
 	public int memberCheck(String email, String pass) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -102,6 +105,7 @@ public class MemberDAO {
 		return result;
 	}
 	
+	//로그인 후 멤버 정보 session생성
 	public MemberDTO getMember(String email) {
 		MemberDTO member = null;
 		Connection conn = null;
@@ -134,5 +138,51 @@ public class MemberDAO {
 		}
 		
 		return member;
+	}
+	
+	//비밀번호 찾기를 위한 정보 확인
+	public int findCheck(String email, String name, int period) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from member where email = ? and name = ? and period = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, name);
+			pstmt.setInt(3, period);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = 1;
+			}
+		}catch(Exception e) {
+			
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		return result;
+	}
+	
+	//임시 비밀번호로 수정
+	public void findPass(String newPass, String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update member set pass = ? where email = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPass);
+			pstmt.setString(2, email);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(null, pstmt, conn);
+		}
 	}
 }
