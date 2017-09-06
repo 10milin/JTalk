@@ -46,11 +46,11 @@ public class MemberCore {
 		String content = null;
 		
 		if(command.equals("insert")) {
-			subject = "JTalk 회원 인증 메일";
+			subject = "JTalk 회원 인증 확인 메일입니다.";
 			content = "<a href = 'http://localhost:8181/JTalk/pages/auth/auth.html?"
 					+ "email=" + email + "&link=" + input + "' target='_blank'>회원 인증</a>";
 		}else if(command.equals("find")) {
-			subject = "JTalk 임시 비밀번호 메일";
+			subject = "JTalk 임시 비밀번호 발금 메일입니다.";
 			content = "임시 비밀번호 : [" + input + "]";
 		}
 		try {

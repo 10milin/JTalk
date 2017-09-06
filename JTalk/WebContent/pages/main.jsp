@@ -177,7 +177,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/JTalk/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -185,17 +185,17 @@
                 <img src="/JTalk/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
+                  <small>등록일 - ${sessionScope.member.registerDate}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="javascript:actionlink('logout.do?command=action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -269,8 +269,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -288,8 +288,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -308,8 +308,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -327,8 +327,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -423,8 +423,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -439,8 +439,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -455,8 +455,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -471,8 +471,8 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:20px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td style="width:23%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>

@@ -249,7 +249,7 @@
 	    	<div class="col-md-8 padding-right">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 게시글 목록</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -300,9 +300,50 @@
 	            </div>
             <!-- /.box-header -->
 	            <div class="box-body">
-	           		d
+	            	<form action = "/JTalk/notice.do?command=search"method="post">
+		                <div class="input-group col-md-12">
+		                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." />
+		                    <span class="input-group-btn">
+		                        <button class="btn btn-primary" type="submit">
+		                            <i class="glyphicon glyphicon-search"></i>
+		                        </button>
+		                    </span>
+		                </div>
+	                </form>
 	            </div>
             </div>
+            
+            <div class="box box-primary">
+	            <div class="box-header">
+	              <h3 class="box-title font-bareun"><i class="fa fa-cogs"></i> 기능</h3>
+	            </div>
+            <!-- /.box-header -->
+	            <div class="box-body text-center">
+	            	<a class="btn btn-app"><i class="fa fa-edit"></i> 작성</a>
+	            	<a class="btn btn-app disabled"><i class="fa fa-refresh"></i> 수정</a>
+	            	<a class="btn btn-app disabled"><i class="fa fa-remove"></i> 삭제</a>
+	            </div>
+            </div>
+            
+            <div class="box box-primary">
+	            <div class="box-header">
+	              <h3 class="box-title font-bareun"><i class="fa fa-reply-all"></i> 최근 댓글</h3>
+	            </div>
+            <!-- /.box-header -->
+	            <div class="box-body">
+	            	<table class="table table-condensed table-hover">
+		              	<tr class="table-field">
+		                  <th>내용</th>
+		                  <th style="width: 20%;">글쓴이</th>
+		                </tr>
+		                <tr class="table-field">
+		                  <td class="td-title-mobile">모바일 전용</td>
+		                  <td>관리자</td>
+		                </tr>
+		              </table>
+	            </div>
+            </div>
+            
          </div>
 	    </div>
 	</section>
