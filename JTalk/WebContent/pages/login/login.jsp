@@ -38,6 +38,13 @@
          	${successMsg}
         </div>
 	    </c:if>
+	    <c:if test="${not empty authMsg}">
+	    <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-check"></i>임시 비밀번호 발급 완료</h4>
+         	${authMsg}
+        </div>
+	    </c:if>
 	    <c:if test="${not empty errorMsg}">
 	    <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

@@ -45,13 +45,6 @@
          	${errorMsg}
         </div>
 	    </c:if>
-	    <c:if test="${not empty successMsg}">
-	    <div class="alert alert-success alert-dismissible">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <h4><i class="icon fa fa-check"></i>발급 성공</h4>
-         	${successMsg}
-        </div>
-	    </c:if>
 	    <form action="/JTalk/recovery.do?command=action" method="post">
 	      <div class="form-group has-feedback">
 	        <input type="email" class="form-control" placeholder="이메일" name = "email">

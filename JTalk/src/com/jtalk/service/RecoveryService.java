@@ -46,7 +46,8 @@ public class RecoveryService implements Service{
 					MemberCore.send(email, newPass, "find");
 					
 					String successMsg = email + "으로<br>임시 비밀번호를 전송하였습니다.";
-					request.setAttribute("successMsg", successMsg);
+					request.setAttribute("authMsg", successMsg);
+					resURL = "/pages/login/login.jsp";
 				}else {
 					String errorMsg = "입력하신 정보와 일치하는 회원이 존재하지<br>않습니다. 다시 한번 확인해주세요.";
 					request.setAttribute("errorMsg", errorMsg);

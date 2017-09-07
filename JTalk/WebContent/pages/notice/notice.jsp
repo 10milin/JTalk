@@ -34,7 +34,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="skin-blue-light sidebar-mini wysihtml5-supported sidebar-collapse fixed">
+<body class="skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature">
 <div class="wrapper">
 
   <header class="main-header">
@@ -211,7 +211,7 @@
       
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
-      	<li><a href="javascript:actionlink('notice.do');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
+      	<li><a href="javascript:actionlink('notice.do?command=action');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
         <li class="header">COMMUNITY</li>
         <li><a href="#"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
         <li><a href="#"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>
@@ -288,6 +288,12 @@
                   <td>17-06-02</td>
                 </tr>
               </table>
+              <div class="text-center">
+              	<form action="/JTalk/notice.do?command=page" method="post" id="pagination-form">
+              		<ul id="pagination" class="pagination-sm"></ul>
+              		<input id = "pagination-page" type="hidden" name="page">
+              	</form>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -296,35 +302,42 @@
           <div class="col-md-4">
 	    	<div class="box box-primary">
 	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 검색</h3>
+	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 글 검색</h3>
+	            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            	<form action = "/JTalk/notice.do?command=search" method="post">
+	                <div class="input-group col-md-12">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." />
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-primary" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+                </form>
+            </div>
+            </div>
+			
+			<div class="box box-primary">
+	            <div class="box-header">
+	              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 인기 글 목록</h3>
 	            </div>
             <!-- /.box-header -->
 	            <div class="box-body">
-	            	<form action = "/JTalk/notice.do?command=search"method="post">
-		                <div class="input-group col-md-12">
-		                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." />
-		                    <span class="input-group-btn">
-		                        <button class="btn btn-primary" type="submit">
-		                            <i class="glyphicon glyphicon-search"></i>
-		                        </button>
-		                    </span>
-		                </div>
-	                </form>
+	            	<table class="table table-condensed table-hover">
+		              	<tr class="table-field">
+		                  <th>제목</th>
+		                  <th style="width: 20%;">조회수</th>
+		                </tr>
+		                <tr class="table-field">
+		                  <td class="td-title-mobile">모바일 전용</td>
+		                  <td>관리자</td>
+		                </tr>
+		              </table>
 	            </div>
             </div>
-            
-            <div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-cogs"></i> 기능</h3>
-	            </div>
-            <!-- /.box-header -->
-	            <div class="box-body text-center">
-	            	<a class="btn btn-app"><i class="fa fa-edit"></i> 작성</a>
-	            	<a class="btn btn-app disabled"><i class="fa fa-refresh"></i> 수정</a>
-	            	<a class="btn btn-app disabled"><i class="fa fa-remove"></i> 삭제</a>
-	            </div>
-            </div>
-            
+			
             <div class="box box-primary">
 	            <div class="box-header">
 	              <h3 class="box-title font-bareun"><i class="fa fa-reply-all"></i> 최근 댓글</h3>
@@ -362,9 +375,12 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- jQuery pagination -->
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
+  pagination(${totalPage},${currentPage});
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -399,5 +415,6 @@
 <script src="/JTalk/dist/js/information.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
+
 </body>
 </html>
