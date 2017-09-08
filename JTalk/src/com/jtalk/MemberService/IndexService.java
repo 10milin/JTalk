@@ -1,4 +1,4 @@
-package com.jtalk.service;
+package com.jtalk.MemberService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

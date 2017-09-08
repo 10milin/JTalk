@@ -1,29 +1,26 @@
-package com.jtalk.service;
+package com.jtalk.NoticeService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jtalk.core.Service;
 
-public class LogoutService implements Service {
+public class DeleteService implements Service {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		/* Default URL */
-		String resURL = "/index.jsp";
+		String resURL = "/pages/notice/notice.jsp";
 		
 		String command = request.getParameter("command");
 		
 		if(command != null) {
-			
 			switch(command) {
 			case "action":
-				HttpSession session = request.getSession();
-				session.invalidate();
 				break;
 			}
 		}
+		
 		return resURL;
 	}
+
 }

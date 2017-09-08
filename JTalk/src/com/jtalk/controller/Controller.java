@@ -7,11 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jtalk.core.Service;
 import com.jtalk.core.SessionValidator;
-import com.jtalk.service.*;
+import com.jtalk.NoticeService.*;
+import com.jtalk.MemberService.*;
 
 @WebServlet("*.do")
 public class Controller extends HttpServlet {
