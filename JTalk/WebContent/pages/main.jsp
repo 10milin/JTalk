@@ -826,7 +826,7 @@
 <!-- datepicker -->
 <script src="/JTalk/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
 <!-- Slimscroll -->
 <script src="/JTalk/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->

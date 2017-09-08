@@ -249,56 +249,20 @@
 	    	<div class="col-md-8 padding-right">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
             </div>
             <!-- /.box-header -->
+            <form>
             <div class="box-body">
-              <table class="table table-condensed table-hover table-md">
-                <tr class="table-field">
-                  <th style="width: 50px;">번호</th>
-                  <th>제목</th>
-                  <th style="width: 10%;">글쓴이</th>
-                  <th style="width: 13%;">날짜</th>
-                  <th style="width: 9%;">조회수</th>
-                </tr>
-                <tr class="table-field">
-                  <td>1</td>
-                  <td class="td-title">이것은 게시판 제목입니다. <small class="label bg-yellow">5</small> <small class="label bg-green">new</small></td>
-                  <td>관리자</td>
-                  <td>17-06-02</td>
-                  <td>5</td>
-                </tr>
-                <tr class="table-field">
-                  <td>1</td>
-                  <td class="td-title">이것은 게시판 제목입니다. <small class="label bg-yellow">6</small> <small class="label bg-green">new</small></td>
-                  <td>관리자</td>
-                  <td>17-06-02</td>
-                  <td>5</td>
-                </tr>
-              </table>
-              <table class="table table-condensed table-hover table-xd">
-              	<tr class="table-field">
-                  <th>제목</th>
-                  <th style="width: 18%;">글쓴이</th>
-                  <th style="width: 20%;">날짜</th>
-                </tr>
-                <tr class="table-field">
-                  <td class="td-title-mobile">모바일 전용</td>
-                  <td>관리자</td>
-                  <td>17-06-02</td>
-                </tr>
-              </table>
-              <div class="text-right table-bottom">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.do?command=write');"><i class="fa fa-edit"></i> 쓰기</button>
+              <div>
+	                <textarea class="textarea" placeholder="Place some text here" style="width: 100%; height: 400px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
               </div>
-              <div class="text-center">
-              	<form action="/JTalk/notice.do?command=page" method="post" id="pagination-form">
-              		<ul id="pagination" class="pagination-sm"></ul>
-              		<input id = "pagination-page" type="hidden" name="page">
-              		<input type="hidden" name="search" value="${requestScope.search}">
-              	</form>
+              <div class="text-right table-bottom" style="border:0px">
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.do?command=action');"><i class="fa fa-list"></i> 목록</button>
+              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 쓰기</button>
               </div>
             </div>
+            </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
@@ -379,13 +343,6 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- jQuery pagination -->
-<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-  pagination(${totalPage},${currentPage});
-</script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -419,6 +376,11 @@
 <script src="/JTalk/dist/js/information.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
-
+<!-- Bootstrap WYSIHTML5 -->
+<script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
 </body>
 </html>

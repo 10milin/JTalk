@@ -5035,6 +5035,11 @@ table.text-center th {
 	text-align: left !important;
 }
 
+.table-bottom{
+	border-top: 1px solid #cccccc;
+	padding-top: 10px;
+}
+
 @media (min-width: 992px ) {
 	.table-md{
 		display: table;
