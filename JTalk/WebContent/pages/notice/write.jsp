@@ -28,18 +28,18 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Summernote -->
+  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature">
+<body class="${body}">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="javascript:actionlink('index.do');" class="logo">
+    <a href="javascript:actionlink('index.action');" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>SL</span>
       <!-- logo for regular state and mobile devices -->
@@ -48,7 +48,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle();">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -195,7 +195,7 @@
                   <a href="#" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="javascript:actionlink('logout.do?command=action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -211,7 +211,7 @@
       
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
-      	<li><a href="javascript:actionlink('notice.do?command=action');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
+      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
         <li class="header">COMMUNITY</li>
         <li><a href="#"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
         <li><a href="#"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>
@@ -240,7 +240,7 @@
         <small>J-Talk에서 알려드립니다.</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="javascript:actionlink('index.do');"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
         <li class="active">공지사항</li>
       </ol>
     </section>
@@ -252,80 +252,134 @@
               <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
             </div>
             <!-- /.box-header -->
-            <form>
+            <form action = "/JTalk/notice.action?command=write" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div>
-	                <textarea class="textarea" placeholder="Place some text here" style="width: 100%; height: 400px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-              </div>
-              <div class="text-right table-bottom" style="border:0px">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.do?command=action');"><i class="fa fa-list"></i> 목록</button>
+              	  <div class="input-group">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
+	                <input type="text" class="form-control" placeholder="제목" name="title" required>
+	                <input type="hidden" name="writerId" value="${member.email}">
+	                <input type="hidden" name="writerName" value="${member.name}">
+	              </div>
+	              <br>
+	              <textarea class="summernote" name="content" required></textarea>
+	              <div class="input-group col-md-6">
+					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
+	                <input id = "uploadfield" type="text" class="form-control" readonly>
+	                <div class="input-group-btn">
+		              <div class="btn btn-default btn-file">
+		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
+		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
+		                </div>
+		             </div>
+	                <!-- /btn-group -->
+			       </div>
+	              <p class="help-block">제한용량 5MB</p>
+	              <div class="text-right table-bottom" style="border:0px">
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
               	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 쓰기</button>
               </div>
+              </div>
+              
             </div>
             </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
+          
           <div class="col-md-4">
-	    	<div class="box box-primary">
+          
+          <div class="box box-primary">
 	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 글 검색</h3>
+	              <h3 class="box-title font-bareun"><i class="fa  fa-paw"></i> 이모티콘<small> Alpha</small></h3>
 	            </div>
             <!-- /.box-header -->
             <div class="box-body">
-            	<form action = "/JTalk/notice.do?command=search" method="post">
-	                <div class="input-group col-md-12">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-primary" type="submit">
-	                            <i class="glyphicon glyphicon-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-                </form>
+            	<b><span style="color:#3c8dbc;">클릭하면 에디터로 자동으로 등록됩니다.</span></b>
+		          <div class="nav-tabs-custom" style="margin-top:10px;">
+		            <ul class="nav nav-tabs">
+		              <li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-github"></i></a></li>
+		              <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-github-square"></i></a></li>
+		              <li><a href="#tab_3" data-toggle="tab"><i class="fa fa-github-alt"></i></a></li>
+		            </ul>
+		            <div class="tab-content">
+		              <div class="tab-pane active" id="tab_1">
+		              	<c:forEach var="i" begin = "0" end = "5">
+		                	<div class="col-md-12" style="display: -webkit-box;">
+		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
+		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
+				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
+				                	</div>
+		                	</c:forEach>
+		                </div>
+		                </c:forEach>
+		              </div>
+		              <!-- /.tab-pane -->
+		              <div class="tab-pane" id="tab_2">
+		                <c:forEach var="i" begin = "6" end = "11">
+		                	<div class="col-md-12" style="display: -webkit-box;">
+		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
+		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
+				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
+				                	</div>
+		                	</c:forEach>
+		                </div>
+		                </c:forEach>
+		              </div>
+		              <!-- /.tab-pane -->
+		              <div class="tab-pane" id="tab_3">
+		                <c:forEach var="i" begin = "12" end = "17">
+		                	<div class="col-md-12" style="display: -webkit-box;">
+		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
+		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
+				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
+				                	</div>
+		                	</c:forEach>
+		                </div>
+		                </c:forEach>
+		              </div>
+		              <!-- /.tab-pane -->
+		            </div>
+		            <!-- /.tab-content -->
+		          </div>
+		          <!-- nav-tabs-custom -->
             </div>
             </div>
-			
-			<div class="box box-primary">
+          
+          	<div class="box box-primary">
 	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 인기 글 목록</h3>
+	              <h3 class="box-title font-bareun"><i class="fa fa-image"></i> 사진 등록</h3>
 	            </div>
             <!-- /.box-header -->
-	            <div class="box-body">
-	            	<table class="table table-condensed table-hover">
-		              	<tr class="table-field">
-		                  <th>제목</th>
-		                  <th style="width: 20%;">조회수</th>
-		                </tr>
-		                <tr class="table-field">
-		                  <td class="td-title-mobile">모바일 전용</td>
-		                  <td>관리자</td>
-		                </tr>
-		              </table>
-	            </div>
+            <div class="box-body">
+            	<b><span style="color:#3c8dbc;">에디터 메뉴의 사진 버튼을 클릭하여 업로드합니다.</span></b>
+            	<br><br>
+            	<b><span style="color:#3c8dbc;">URL의 경우 이미지를 에디터로 드래그하여 등록합니다.</span></b><br>- 일부 URL이 함께 복사되는 경우가 있습니다.<br>- 사진의 위치는 클릭하여 수정할 수 있습니다.<br>- 모바일은 지원하지 않습니다.
+            	<div class="col-md-12 no-padding" style="margin:10px 0;">
+	            	<a href = "https://www.google.co.kr/imghp?hl=ko" target="_blank"class="btn btn-block btn-social btn-facebook">
+		                <i class="fa fa-google"></i> 구글 이미지 검색
+		              </a>
+                </div>
             </div>
-			
-            <div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-reply-all"></i> 최근 댓글</h3>
-	            </div>
-            <!-- /.box-header -->
-	            <div class="box-body">
-	            	<table class="table table-condensed table-hover">
-		              	<tr class="table-field">
-		                  <th>내용</th>
-		                  <th style="width: 20%;">글쓴이</th>
-		                </tr>
-		                <tr class="table-field">
-		                  <td class="td-title-mobile">모바일 전용</td>
-		                  <td>관리자</td>
-		                </tr>
-		              </table>
-	            </div>
             </div>
             
-         </div>
+            <div class="box box-primary">
+	            <div class="box-header">
+	              <h3 class="box-title font-bareun"><i class="fa fa-video-camera"></i> 동영상 등록</h3>
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            	<b><span style="color:#3c8dbc;">에디터 메뉴의 동영상 버튼을 클릭하여 URL등록 합니다.</span></b><br>- 원본영상이 문제있는 경우 URL을 수정해야합니다.<br>- 일부 모바일 환경에서는 작동하지 않을 수 있습니다.
+	            	<div class="col-md-12 no-padding" style="margin:10px 0;">
+	            	<a href = "https://www.youtube.com/?gl=KR" target="_blank"class="btn btn-block btn-social btn-google">
+		                <i class="fa fa-youtube-play"></i> 유튜브 동영상 검색
+		              </a>
+                </div>
+	            </div>
+	          </div>
+            
+          </div>
 	    </div>
 	</section>
   </div>
@@ -377,10 +431,29 @@
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
+<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Javascript of Sidebar toggle -->
+<script src="/JTalk/dist/js/sidebar.js"></script>
+<!-- Summernote -->
+<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Google AdSense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
+  $('.summernote').summernote({
+      height: 400,
+      tabsize: 2,
+      linkTargetBlank: false,
+      lang: 'ko-KR'
+    });
+  
+  (adsbygoogle = window.adsbygoogle || []).push({
+	    google_ad_client: "ca-pub-1929009713439429",
+	    enable_page_level_ads: true
+	  });
 </script>
 </body>
 </html>

@@ -52,7 +52,7 @@
          	${errorMsg}
         </div>
 	    </c:if>
-	    <form action="/JTalk/login.do?command=action" method="post">
+	    <form action="/JTalk/login.action?command=login" method="post">
 	      <div class="form-group has-feedback">
 	        <input type="email" class="form-control" placeholder="이메일" value="${email}" name = "email">
 	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -79,8 +79,8 @@
 	
 	    <!-- /.social-auth-links -->
 	
-	    <a href="javascript:actionlink('recovery.do');">비밀번호 찾기</a><br>
-	    <a href="javascript:actionlink('register.do');">회원가입</a>
+	    <a href="javascript:actionlink('recovery.action');">비밀번호 찾기</a><br>
+	    <a href="javascript:actionlink('register.action');">회원가입</a>
 	
 	  </div>
 	  <!-- /.login-box-body -->

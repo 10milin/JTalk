@@ -45,7 +45,7 @@
          	${errorMsg}
         </div>
 	    </c:if>
-	    <form action="/JTalk/recovery.do?command=action" method="post">
+	    <form action="/JTalk/recovery.action?command=recovery" method="post">
 	      <div class="form-group has-feedback">
 	        <input type="email" class="form-control" placeholder="이메일" name = "email">
 	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -67,7 +67,7 @@
 	        <!-- /.col -->
 	      </div>
 	    </form>
-	    <a href="javascript:actionlink('login.do');">로그인</a>
+	    <a href="javascript:actionlink('login.action');">로그인</a>
 	  </div>
 	  <!-- /.form-box -->
 	</div>

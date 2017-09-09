@@ -7,7 +7,7 @@
 		<title>J-Talk</title>
 	</head>
 	<body>
-		<form action="/JTalk/index.do" name="index" method="post"></form>
+		<form action="/JTalk/index.action" name="index" method="post"></form>
 	</body>
 	<script>
 		document.index.submit();

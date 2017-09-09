@@ -38,7 +38,7 @@
 	
 	  <div class="register-box-body">
 	    <p class="login-box-msg font-bareun">JSL연수생이라면 무료로 이용할 수 있습니다.</p>
-	    <form action="/JTalk/register.do?command=action" method="post">
+	    <form action="/JTalk/register.action?command=register" method="post">
 	      <div class="form-group has-feedback">
 	        <input type="text" class="form-control" placeholder="성명" name = "name">
 	        <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -68,7 +68,7 @@
 	        <!-- /.col -->
 	      </div>
 	    </form>
-	    <a href="javascript:actionlink('login.do');">로그인</a>
+	    <a href="javascript:actionlink('login.action');">로그인</a>
 	  </div>
 	  <!-- /.form-box -->
 	</div>

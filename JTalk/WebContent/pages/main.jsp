@@ -28,18 +28,16 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature">
+<body class="${body}">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="javascript:actionlink('index.do');" class="logo">
+    <a href="javascript:actionlink('index.action');" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>SL</span>
       <!-- logo for regular state and mobile devices -->
@@ -48,7 +46,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle();">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -195,7 +193,7 @@
                   <a href="#" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="javascript:actionlink('logout.do?command=action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -211,7 +209,7 @@
       
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
-      	<li><a href="javascript:actionlink('notice.do?command=action');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
+      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
         <li class="header">COMMUNITY</li>
         <li><a href="#"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
         <li><a href="#"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>
@@ -825,8 +823,6 @@
 <script src="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/JTalk/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
 <!-- Slimscroll -->
 <script src="/JTalk/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -841,5 +837,12 @@
 <script src="/JTalk/dist/js/information.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
+<!-- Javascript of Sidebar toggle -->
+<script src="/JTalk/dist/js/sidebar.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+	
+</script>
 </body>
 </html>

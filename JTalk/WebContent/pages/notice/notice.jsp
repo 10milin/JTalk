@@ -30,16 +30,18 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Javascript of Sidebar toggle -->
+  <script src="/JTalk/dist/js/sidebar.js"></script>
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature">
+<body class="${body}">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="javascript:actionlink('index.do');" class="logo">
+    <a href="javascript:actionlink('index.action');" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>SL</span>
       <!-- logo for regular state and mobile devices -->
@@ -48,7 +50,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle();">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -195,7 +197,7 @@
                   <a href="#" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="javascript:actionlink('logout.do?command=action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  <a href="javascript:actionlink('logout.action?command=logout');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -211,7 +213,7 @@
       
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
-      	<li><a href="javascript:actionlink('notice.do?command=action');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
+      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
         <li class="header">COMMUNITY</li>
         <li><a href="#"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
         <li><a href="#"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>
@@ -240,7 +242,7 @@
         <small>J-Talk에서 알려드립니다.</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="javascript:actionlink('index.do');"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
         <li class="active">공지사항</li>
       </ol>
     </section>
@@ -263,14 +265,14 @@
                 </tr>
                 <tr class="table-field">
                   <td>1</td>
-                  <td class="td-title">이것은 게시판 제목입니다. <small class="label bg-yellow">5</small> <small class="label bg-green">new</small></td>
+                  <td class="td-title">이것은 게시판 제목입니다.<i class="fa fa-commenting-o"></i> 5<small class="label bg-green" style="margin-left:5px;">new</small></td>
                   <td>관리자</td>
                   <td>17-06-02</td>
                   <td>5</td>
                 </tr>
                 <tr class="table-field">
                   <td>1</td>
-                  <td class="td-title">이것은 게시판 제목입니다. <small class="label bg-yellow">6</small> <small class="label bg-green">new</small></td>
+                  <td class="td-title">이것은 게시판 제목입니다.<i class="fa fa-commenting-o"></i> 3</td>
                   <td>관리자</td>
                   <td>17-06-02</td>
                   <td>5</td>
@@ -289,10 +291,10 @@
                 </tr>
               </table>
               <div class="text-right table-bottom">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.do?command=write');"><i class="fa fa-edit"></i> 쓰기</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
               </div>
               <div class="text-center">
-              	<form action="/JTalk/notice.do?command=page" method="post" id="pagination-form">
+              	<form action="/JTalk/notice.action?command=notice" method="post" id="pagination-form">
               		<ul id="pagination" class="pagination-sm"></ul>
               		<input id = "pagination-page" type="hidden" name="page">
               		<input type="hidden" name="search" value="${requestScope.search}">
@@ -310,7 +312,7 @@
 	            </div>
             <!-- /.box-header -->
             <div class="box-body">
-            	<form action = "/JTalk/notice.do?command=search" method="post">
+            	<form action = "/JTalk/notice.action?command=search" method="post">
 	                <div class="input-group col-md-12">
 	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
 	                    <span class="input-group-btn">
@@ -344,7 +346,7 @@
 			
             <div class="box box-primary">
 	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-reply-all"></i> 최근 댓글</h3>
+	              <h3 class="box-title font-bareun"><i class="fa fa-commenting-o"></i> 최근 댓글</h3>
 	            </div>
             <!-- /.box-header -->
 	            <div class="box-body">
@@ -359,6 +361,16 @@
 		                </tr>
 		              </table>
 	            </div>
+            </div>
+  
+            <div class="box box-primary" style="display:none;">
+	            <div class="box-header">
+	              <h3 class="box-title font-bareun"><i class="fa fa-credit-card"></i> 광고</h3>
+	            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            	<img src="/JTalk/dist/img/adsense.png" class="img-responsive center-block" style="padding:30px;">
+            </div>
             </div>
             
          </div>
@@ -419,6 +431,7 @@
 <script src="/JTalk/dist/js/information.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
-
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 </body>
 </html>

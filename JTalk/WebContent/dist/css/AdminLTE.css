@@ -5066,3 +5066,7 @@ table.text-center th {
 		display:table;	
 	}
 }
+
+.tab-content>.active{
+	    display: grid;
+}
