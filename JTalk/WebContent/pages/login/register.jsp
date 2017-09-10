@@ -40,23 +40,23 @@
 	    <p class="login-box-msg font-bareun">JSL연수생이라면 무료로 이용할 수 있습니다.</p>
 	    <form action="/JTalk/register.action?command=register" method="post">
 	      <div class="form-group has-feedback">
-	        <input type="text" class="form-control" placeholder="성명" name = "name">
+	        <input type="text" class="form-control" placeholder="성명" name = "name" required>
 	        <span class="glyphicon glyphicon-user form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="email" class="form-control" placeholder="이메일" name = "email">
+	        <input type="email" class="form-control" placeholder="이메일" name = "email" required>
 	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="password" class="form-control" placeholder="비밀번호" name = "pass">
+	        <input type="password" class="form-control" placeholder="비밀번호" name = "pass" required>
 	        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="password" class="form-control" placeholder="비밀번호 확인">
+	        <input type="password" class="form-control" placeholder="비밀번호 확인" required>
 	        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="text" class="form-control" placeholder="기수" name ="period" id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="2">
+	        <input type="text" class="form-control" placeholder="기수" name ="period" id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="2" required>
 	        <span class="fa fa-mortar-board form-control-feedback"></span>
 	      </div>
 	      <div class="row">

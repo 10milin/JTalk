@@ -21,6 +21,8 @@ public class AuthService implements Service{
 		if(check > 0) {
 			request.setAttribute("email", email);
 			resURL = "/pages/auth/success.jsp";
+		}else {
+			resURL = "/pages/error/404.jsp";
 		}
 		
 		return resURL;

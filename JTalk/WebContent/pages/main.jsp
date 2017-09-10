@@ -174,13 +174,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/JTalk/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="/JTalk/dist/img/user-default.png" class="user-image" alt="User Image">
               <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/JTalk/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="/JTalk/dist/img/user-default.png" class="img-circle" alt="User Image">
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
@@ -252,7 +252,6 @@
 		
 		              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 		              </div>
 		            </div>
 		            <!-- /.box-header -->
@@ -261,7 +260,7 @@
 		              <div class="col-md-6 col-sm-6">
 		              	<div class="box" style="border:0px;">
 				            <div class="box-header" style="padding:5px;">
-				              <h3 class="box-title font-bareun" style="font-size:16px;"><i class="fa fa-bullhorn"></i> 공지사항</h3>
+				              <h3 class="box-title font-bareun" style="font-size:16px;"><a href="javascript:actionlink('notice.action?command=notice');" style="color:black;"><i class="fa fa-bullhorn"></i> 공지사항</a></h3>
 				            </div>
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
@@ -350,7 +349,6 @@
 		
 		              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 		              </div>
 		            </div>
 		            <!-- /.box-header -->
@@ -498,7 +496,6 @@
 	              <div class="box-tools">
 	                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 	                </button>
-	                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 	              </div>
 	              <!-- /.box-tools -->
 	            </div>
@@ -570,7 +567,6 @@
 		              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 		                </button>
-		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 		              </div>
 		            </div>
 		            <!-- /.box-header -->
@@ -677,7 +673,6 @@
 		              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 		                </button>
-		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 		              </div>
 		            </div>
 		            <!-- /.box-header -->
@@ -727,7 +722,6 @@
 		              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 		                </button>
-		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 		              </div>
 		            </div>
 		            <!-- /.box-header -->
@@ -841,8 +835,5 @@
 <script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<script>
-	
-</script>
 </body>
 </html>

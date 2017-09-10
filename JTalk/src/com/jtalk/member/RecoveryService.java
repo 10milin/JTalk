@@ -42,6 +42,7 @@ public class RecoveryService implements Service{
 		}else {
 			String errorMsg = "입력하신 정보와 일치하는 회원이 존재하지<br>않습니다. 다시 한번 확인해주세요.";
 			request.setAttribute("errorMsg", errorMsg);
+			resURL = "/pages/login/recovery.jsp";
 		}
 		
 		return resURL;

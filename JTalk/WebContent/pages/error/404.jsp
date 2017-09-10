@@ -31,7 +31,7 @@
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="javascript:actionlink('index.do');"><b>JTalk</b></a>
+    <a href="javascript:actionlink('index.action');"><b>JTalk</b></a>
   </div>
   <!-- /.lockscreen-item -->
   <div class="help-block text-center">
@@ -42,7 +42,7 @@
     <span>페이지가 존재하지 않거나 비정상적인 방법으로 접근하였습니다.<br>서비스 이용에 불편을 드려 죄송합니다.</span>
     <br>
     <br>
-    <p><a href="javascript:actionlink('index.do');">시작화면</a>으로 이동하거나 
+    <p><a href="javascript:actionlink('index.action');">시작화면</a>으로 이동하거나 
            <a href="#">서비스 문제점 신고</a>로 알려주세요.
     </p>
   </div>

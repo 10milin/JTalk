@@ -28,15 +28,16 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- Summernote -->
-  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Javascript of Sidebar toggle -->
+  <script src="/JTalk/dist/js/sidebar.js"></script>
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="${body}">
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
     <a href="javascript:actionlink('index.action');" class="logo">
@@ -195,7 +196,7 @@
                   <a href="#" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  <a href="javascript:actionlink('logout.action?command=logout');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -249,149 +250,197 @@
 	    	<div class="col-md-8 padding-right">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-file-text-o"></i> 상세 보기</h3>
               <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		              </div>
             </div>
             <!-- /.box-header -->
-            <form action = "/JTalk/notice.action?command=write" method="post" enctype="multipart/form-data">
             <div class="box-body">
-              <div>
-              	  <div class="input-group">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" required>
-	                <input type="hidden" name="writerId" value="${member.email}">
-	                <input type="hidden" name="writerName" value="${member.name}">
-	              </div>
-	              <br>
-	              <textarea class="summernote" name="content" required></textarea>
-	              <div class="input-group col-md-6">
-					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly>
-	                <div class="input-group-btn">
-		              <div class="btn btn-default btn-file">
-		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
-		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
-		                </div>
-		             </div>
-	                <!-- /btn-group -->
-			       </div>
-	              <p class="help-block">제한용량 5MB</p>
-	              <div class="text-right table-bottom" style="border:0px">
+              <table class="table table-condensed table-hover">
+                <tr class="table-field board-headline">
+                  <th colspan="3">글제목 들어가는곳</th>
+                </tr>
+                <tr class="board-content board-white">
+                	<td>
+                		<i class="fa fa-user"></i> 김현호  
+                	</td>
+                	<td class="text-right" width="38%">
+                		<i class="fa fa-clock-o"></i> 2017.09.13 09:24  
+                	</td>
+                	<td  class="text-center" width="13%">
+                		<i class="fa fa-eye"></i> 5  
+                	</td>
+                </tr>
+                <tr class="board-white">
+                	<td colspan="3">
+                		<div>내용입력부</div>
+                	</td>
+                </tr>
+                <tr class="board-white">
+                	<td colspan="3">
+                		<div class="col-md-6 col-sm-6 col-xs-12" style="padding:10px 0px;">
+			                  <div class="mailbox-attachment-info">
+			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</span>
+			                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
+			                  </div>
+                		</div>
+                	</td>
+                </tr>
+              </table>
+              <div class="table-bottom box-comments" style="padding:10px">
+              		<div class="box-comment">
+                	<!-- User image -->
+	                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
+	
+	                <div class="comment-text">
+	                      <span class="username">
+	                        Maria Gonzales
+	                        <span class="pull-right">
+	                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
+	                        <span class="margin-right-left"><a class="color-black" onclick="console.log(this);" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+	                        <span class="text-muted">8:03 PM Today</span>
+	                        </span>
+	                      </span><!-- /.username -->
+	                  <span>
+	                  <div class="input-group" style="display:none;">
+		                  <input type="text" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
+		                  <span class="input-group-btn">
+		                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
+		                    </span>
+	                	</div>
+		                  <span class="comment-in">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span>
+	                  </span>
+	                </div>
+	                <!-- /.comment-text -->
+              </div>
+              <!-- /.유저 한명의 코멘트 -->
+              <div class="box-comment">
+                	<!-- User image -->
+	                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
+	
+	                <div class="comment-text">
+	                      <span class="username">
+	                        Maria Gonzales
+	                        <span class="pull-right">
+	                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
+	                        <span class="margin-right-left"><a class="color-black" onclick="console.log(this);" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+	                        <span class="text-muted">8:03 PM Today</span>
+	                        </span>
+	                      </span><!-- /.username -->
+	                  <span>
+	                  <div class="input-group" style="display:none;">
+		                  <input type="text" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
+		                  <span class="input-group-btn">
+		                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
+		                    </span>
+	                	</div>
+		                  <span class="comment-in">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span>
+	                  </span>
+	                </div>
+	                <!-- /.comment-text -->
+              </div>
+              <!-- /.유저 한명의 코멘트 -->
+              <form action="#" method="post">
+                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/user4-128x128.jpg" alt="Alt Text">
+                <!-- .img-push is used to add margin to elements next to floating images -->
+                <div class="img-push input-group">
+                  <input type="text" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
+                    </span>
+                </div>
+              </form>
+              </div>
+              <br>
+              <div class="text-right">
               	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
-              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 쓰기</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-pencil"></i> 수정</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-trash"></i> 삭제</button>
               </div>
-              </div>
-              
             </div>
-            </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
-          
           <div class="col-md-4">
-          
-          <div class="box box-primary">
+	    	<div class="box box-primary">
 	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa  fa-paw"></i> 이모티콘<small> Alpha</small></h3>
+	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 글 검색</h3>
 	              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		              </div>
 	            </div>
             <!-- /.box-header -->
             <div class="box-body">
-            	<b><span style="color:#3c8dbc;">클릭하면 에디터로 자동으로 등록됩니다.</span></b>
-		          <div class="nav-tabs-custom" style="margin-top:10px;">
-		            <ul class="nav nav-tabs">
-		              <li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-github"></i></a></li>
-		              <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-github-square"></i></a></li>
-		              <li><a href="#tab_3" data-toggle="tab"><i class="fa fa-github-alt"></i></a></li>
-		            </ul>
-		            <div class="tab-content">
-		              <div class="tab-pane active" id="tab_1">
-		              	<c:forEach var="i" begin = "0" end = "5">
-		                	<div class="col-md-12" style="display: -webkit-box;">
-		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
-		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
-				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
-				                	</div>
-		                	</c:forEach>
-		                </div>
-		                </c:forEach>
-		              </div>
-		              <!-- /.tab-pane -->
-		              <div class="tab-pane" id="tab_2">
-		                <c:forEach var="i" begin = "6" end = "11">
-		                	<div class="col-md-12" style="display: -webkit-box;">
-		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
-		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
-				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
-				                	</div>
-		                	</c:forEach>
-		                </div>
-		                </c:forEach>
-		              </div>
-		              <!-- /.tab-pane -->
-		              <div class="tab-pane" id="tab_3">
-		                <c:forEach var="i" begin = "12" end = "17">
-		                	<div class="col-md-12" style="display: -webkit-box;">
-		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
-		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
-				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
-				                	</div>
-		                	</c:forEach>
-		                </div>
-		                </c:forEach>
-		              </div>
-		              <!-- /.tab-pane -->
-		            </div>
-		            <!-- /.tab-content -->
-		          </div>
-		          <!-- nav-tabs-custom -->
+            	<form action = "/JTalk/notice.action?command=search" method="post">
+	                <div class="input-group col-md-12">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-primary" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+                </form>
             </div>
             </div>
-          
-          	<div class="box box-primary">
+			
+			<div class="box box-primary">
 	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-image"></i> 사진 등록</h3>
+	              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 인기 글 목록</h3>
 	              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		              </div>
 	            </div>
             <!-- /.box-header -->
-            <div class="box-body">
-            	<b><span style="color:#3c8dbc;">에디터 메뉴의 사진 버튼을 클릭하여 업로드합니다.</span></b>
-            	<br><br>
-            	<b><span style="color:#3c8dbc;">URL의 경우 이미지를 에디터로 드래그하여 등록합니다.</span></b><br>- 일부 URL이 함께 복사되는 경우가 있습니다.<br>- 사진의 위치는 클릭하여 수정할 수 있습니다.<br>- 모바일은 지원하지 않습니다.
-            	<div class="col-md-12 no-padding" style="margin:10px 0;">
-	            	<a href = "https://www.google.co.kr/imghp?hl=ko" target="_blank"class="btn btn-block btn-social btn-facebook">
-		                <i class="fa fa-google"></i> 구글 이미지 검색
-		              </a>
-                </div>
+	            <div class="box-body">
+	            	<table class="table table-condensed table-hover">
+		              	<tr class="table-field">
+		                  <th>제목</th>
+		                  <th style="width: 20%;">조회수</th>
+		                </tr>
+		                <tr class="table-field">
+		                  <td class="td-title-mobile">모바일 전용</td>
+		                  <td>관리자</td>
+		                </tr>
+		              </table>
+	            </div>
             </div>
-            </div>
-            
+			
             <div class="box box-primary">
 	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-video-camera"></i> 동영상 등록</h3>
+	              <h3 class="box-title font-bareun"><i class="fa fa-commenting-o"></i> 최근 댓글</h3>
 	              <div class="box-tools pull-right">
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		              </div>
 	            </div>
-	            <!-- /.box-header -->
+            <!-- /.box-header -->
 	            <div class="box-body">
-	            	<b><span style="color:#3c8dbc;">에디터 메뉴의 동영상 버튼을 클릭하여 URL등록 합니다.</span></b><br>- 원본영상이 문제있는 경우 URL을 수정해야합니다.<br>- 일부 모바일 환경에서는 작동하지 않을 수 있습니다.
-	            	<div class="col-md-12 no-padding" style="margin:10px 0;">
-	            	<a href = "https://www.youtube.com/?gl=KR" target="_blank"class="btn btn-block btn-social btn-google">
-		                <i class="fa fa-youtube-play"></i> 유튜브 동영상 검색
-		              </a>
-                </div>
+	            	<table class="table table-condensed table-hover">
+		              	<tr class="table-field">
+		                  <th>내용</th>
+		                  <th style="width: 20%;">글쓴이</th>
+		                </tr>
+		                <tr class="table-field">
+		                  <td class="td-title-mobile">모바일 전용</td>
+		                  <td>관리자</td>
+		                </tr>
+		              </table>
 	            </div>
-	          </div>
+            </div>
+  
+            <div class="box box-primary" style="display:none;">
+	            <div class="box-header">
+	              <h3 class="box-title font-bareun"><i class="fa fa-credit-card"></i> 광고</h3>
+	            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            	<img src="/JTalk/dist/img/adsense.png" class="img-responsive center-block" style="padding:30px;">
+            </div>
+            </div>
             
-          </div>
+         </div>
 	    </div>
 	</section>
   </div>
@@ -409,6 +458,13 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- jQuery pagination -->
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+  pagination(${totalPage},${currentPage});
+</script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -442,30 +498,9 @@
 <script src="/JTalk/dist/js/information.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
+<!-- Ajax Re-edit -->
+<script src="/JTalk/dist/js/reedit.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- Javascript of Sidebar toggle -->
-<script src="/JTalk/dist/js/sidebar.js"></script>
-<!-- Summernote -->
-<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<!-- Google AdSense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-  $('.summernote').summernote({
-      height: 400,
-      tabsize: 2,
-      linkTargetBlank: false,
-      lang: 'ko-KR'
-    });
-  
-  (adsbygoogle = window.adsbygoogle || []).push({
-	    google_ad_client: "ca-pub-1929009713439429",
-	    enable_page_level_ads: true
-	  });
-</script>
 </body>
 </html>

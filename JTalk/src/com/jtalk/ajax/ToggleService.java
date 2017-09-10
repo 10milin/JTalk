@@ -24,7 +24,7 @@ public class ToggleService implements Action{
 		if(toggle.equals("0")) {
 			session.setAttribute("toggle", "1");
 			session.setAttribute("body", "skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature sidebar-collapse");
-		}else {
+		}else{
 			session.setAttribute("toggle", "0");
 			session.setAttribute("body", "skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature");
 		}

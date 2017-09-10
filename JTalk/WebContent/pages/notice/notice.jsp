@@ -178,13 +178,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/JTalk/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="/JTalk/dist/img/user-default.png" class="user-image" alt="User Image">
               <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/JTalk/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="/JTalk/dist/img/user-default.png" class="img-circle" alt="User Image">
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
@@ -252,6 +252,9 @@
 	    	<div class="box box-primary">
             <div class="box-header">
               <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
+              <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -309,6 +312,9 @@
 	    	<div class="box box-primary">
 	            <div class="box-header">
 	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 글 검색</h3>
+	              <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		              </div>
 	            </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -328,6 +334,9 @@
 			<div class="box box-primary">
 	            <div class="box-header">
 	              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 인기 글 목록</h3>
+	              <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		              </div>
 	            </div>
             <!-- /.box-header -->
 	            <div class="box-body">
@@ -347,6 +356,9 @@
             <div class="box box-primary">
 	            <div class="box-header">
 	              <h3 class="box-title font-bareun"><i class="fa fa-commenting-o"></i> 최근 댓글</h3>
+	              <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		              </div>
 	            </div>
             <!-- /.box-header -->
 	            <div class="box-body">
@@ -366,6 +378,9 @@
             <div class="box box-primary" style="display:none;">
 	            <div class="box-header">
 	              <h3 class="box-title font-bareun"><i class="fa fa-credit-card"></i> 광고</h3>
+	              <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		              </div>
 	            </div>
             <!-- /.box-header -->
             <div class="box-body">
