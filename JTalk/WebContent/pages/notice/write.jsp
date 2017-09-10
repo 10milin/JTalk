@@ -186,13 +186,13 @@
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <small>등록일 - ${sessionScope.member.registerDate}</small>
+                  <small>가입일 - ${sessionScope.member.registerDate}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
+                  <a href="javascript:actionlink('profile.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
                   <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
@@ -309,7 +309,7 @@
 		              <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-github-square"></i></a></li>
 		              <li><a href="#tab_3" data-toggle="tab"><i class="fa fa-github-alt"></i></a></li>
 		            </ul>
-		            <div class="tab-content">
+		            <div class="tab-content grid">
 		              <div class="tab-pane active" id="tab_1">
 		              	<c:forEach var="i" begin = "0" end = "5">
 		                	<div class="col-md-12" style="display: -webkit-box;">
@@ -438,8 +438,6 @@
 <script src="/JTalk/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/JTalk/dist/js/demo.js"></script>
-<!-- Infomation Panel Switching -->
-<script src="/JTalk/dist/js/information.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
@@ -461,11 +459,6 @@
       linkTargetBlank: false,
       lang: 'ko-KR'
     });
-  
-  (adsbygoogle = window.adsbygoogle || []).push({
-	    google_ad_client: "ca-pub-1929009713439429",
-	    enable_page_level_ads: true
-	  });
 </script>
 </body>
 </html>

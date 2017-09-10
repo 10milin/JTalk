@@ -11378,7 +11378,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "<i class='fa fa-angle-right'></i>",
 	
 	
 				/**
@@ -11401,7 +11401,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "<i class='fa fa-angle-left'></i>"
 			},
 	
 			/**
@@ -11424,7 +11424,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "자료가 없습니다.",
 	
 	
 			/**

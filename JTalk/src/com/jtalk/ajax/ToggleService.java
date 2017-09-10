@@ -19,7 +19,10 @@ public class ToggleService implements Action{
 		
 		if(toggle == null) {
 			session.setAttribute("toggle", "0");
+			toggle = "0";
 		}
+		
+		
 		
 		if(toggle.equals("0")) {
 			session.setAttribute("toggle", "1");

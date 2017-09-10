@@ -184,13 +184,13 @@
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <small>등록일 - ${sessionScope.member.registerDate}</small>
+                  <small>가입일 - ${sessionScope.member.registerDate}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
+                  <a href="javascript:actionlink('profile.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
                   <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
@@ -267,7 +267,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -286,7 +286,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -306,7 +306,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -325,7 +325,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -355,7 +355,7 @@
 		            <div class="box-body">
 		              <div class="col-md-6 col-sm-6">
 		              	<div class="row">
-					        <div class="col-md-6 col-sm-12 col-xs-12" id="it-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12 pointer" id="it-btn">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-aqua" id="it-ico"><i class="fa fa-television"></i></span>
 					            <div class="info-box-content">
@@ -368,7 +368,7 @@
 					          <!-- /.info-box -->
 					        </div>
 					        <!-- ./col -->
-					        <div class="col-md-6 col-sm-12 col-xs-12" id="jp-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12 pointer" id="jp-btn">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-green" id="jp-ico"><i class="fa fa-book"></i></span>
 					            <div class="info-box-content">
@@ -381,7 +381,7 @@
 					          <!-- /.info-box -->
 					        </div>
 					        <!-- ./col -->
-					        <div class="col-md-6 col-sm-12 col-xs-12" id="rst-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12 pointer" id="rst-btn">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-yellow" id="rst-ico"><i class="fa fa-cutlery"></i></span>
 					            <div class="info-box-content">
@@ -394,7 +394,7 @@
 					          <!-- /.info-box -->
 					        </div>
 					        <!-- ./col -->
-					        <div class="col-md-6 col-sm-12 col-xs-12" id="life-btn" style="cursor:pointer;">
+					        <div class="col-md-6 col-sm-12 col-xs-12 pointer" id="life-btn">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-red" id="life-ico"><i class="fa fa-check-square-o"></i></span>
 					            <div class="info-box-content">
@@ -420,7 +420,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -436,7 +436,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -452,7 +452,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -468,7 +468,7 @@
 				              <table class="table table-hover table-condensed">
 				                <tr>
 				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:23%; text-align: center;">2017-04-03</td>
+				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
 				            </div>
@@ -503,7 +503,7 @@
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/user1-128x128.jpg" alt="User Image">
-	                <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
+	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember(1);">Jonathan Burke Jr.</a></span>
 	                <span class="description">Shared publicly - 7:30 PM Today</span>
 	              </div>
 	              <img class="img-responsive pad" src="/JTalk/dist/img/photo2.png" alt="Photo">
@@ -792,6 +792,56 @@
   
 </div>
 <div id="actionpost"></div>
+<!-- modal -->
+<div class="modal fade" id="popup-member">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="padding:15px 0;">
+        <div class="col-md-12">
+        	<div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-primary">
+              <div class="widget-user-image">
+                <img class="img-circle" src="/JTalk/dist/img/user-default.png" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username font-bareun">김현호</h3>
+              <h5 class="widget-user-desc">JSL 25기 - 2017-09-05</h5>
+            </div>
+            </div>
+            <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-info-circle"></i> 회원 정보</a></li>
+              <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-envelope"></i> 메시지 보내기</a></li>
+              <li class="pull-right active-none"><a href="#tab_3" class="active-none" data-toggle="tab" class="text-muted"><i class="fa fa-gear"></i></a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                정보
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2">
+                메시지
+              </div>
+              <div class="tab-pane" id="tab_3">
+                관리자
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- nav-tabs-custom -->
+        </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <!-- jQuery 3 -->
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -833,6 +883,8 @@
 <script src="/JTalk/dist/js/actionpost.js"></script>
 <!-- Javascript of Sidebar toggle -->
 <script src="/JTalk/dist/js/sidebar.js"></script>
+<!-- Popup Member -->
+<script src="/JTalk/dist/js/popup.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 </body>

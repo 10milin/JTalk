@@ -5067,13 +5067,17 @@ table.text-center th {
 	}
 }
 
-.tab-content>.active{
+.grid > .active{
 	    display: grid;
+}
+
+.flex > .active{
+	    display: flex;
+	    margin-top:10px;
 }
 
 .board-headline th{
 	text-align: left; 
-	border:1px solid #ddd ; 
 	padding:10px;
 }
 
@@ -5100,4 +5104,28 @@ table.text-center th {
      left:0;
      right:0;
      padding-top:20px;
+}
+.popup-close{
+	padding:10px !important;
+	color:white;
+	line-height: 1;
+}
+.active-none{
+	border:0px !important;
+}
+.bg-primary{
+	background-color: #3c8dbc !important;
+	color: white;
+}
+
+.pointer{
+	cursor:pointer;
+}
+.border-none-top{
+	border-top:none !important;
+	text-align: right;
+}
+.imformation-field{
+    padding-top: 7px;
+    margin:0px 15px;
 }
