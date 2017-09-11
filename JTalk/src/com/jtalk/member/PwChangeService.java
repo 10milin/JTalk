@@ -19,7 +19,7 @@ public class PwChangeService implements Service {
 		MemberDTO dto = (MemberDTO) session.getAttribute("member");
 		
 		String email = dto.getEmail();
-		
+		//아아니 왜 커밋이 안되는고야
 		String oldpass = request.getParameter("oldpass");
 		String newpass = request.getParameter("newpass");
 		String newpasscheck = request.getParameter("newpasscheck");
