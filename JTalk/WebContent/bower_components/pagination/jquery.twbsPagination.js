@@ -340,13 +340,13 @@ function pagination(total, start){
 	  $('#pagination').twbsPagination({
 	      totalPages: total,
 	      startPage: start,
+	      href: true,
 	      next:'<i class="fa fa-angle-right"></i>',
 	      prev:'<i class="fa fa-angle-left"></i>',
 	      first:'<i class="fa fa-angle-double-left"></i>',
 	      last:'<i class="fa fa-angle-double-right"></i>',
 	      initiateStartPageClick:false,
 	      onPageClick: function (event, page) {
-	    	 $('#pagination-page').val(page);
 	    	 $('#pagination-form').submit();
 	      }
 	});

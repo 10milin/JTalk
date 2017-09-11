@@ -297,7 +297,7 @@
               <div class="text-center">
               	<form action="/JTalk/notice.action?command=notice" method="post" id="pagination-form">
               		<ul id="pagination" class="pagination-sm"></ul>
-              		<input id = "pagination-page" type="hidden" name="page">
+              		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
               		<input type="hidden" name="search" value="${requestScope.search}">
               	</form>
               </div>
