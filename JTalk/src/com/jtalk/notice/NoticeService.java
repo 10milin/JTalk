@@ -17,7 +17,7 @@ public class NoticeService implements Service{
 		
 		
 		String totalPage = String.valueOf(30);   // ArrayList의 사이즈 전체 게시글의 페이지수
-		String currentPage = request.getParameter("page");
+		String currentPage = request.getParameter("currentPage");
 		String search = request.getParameter("search");
 		
 		if(currentPage == null) currentPage = "1";
