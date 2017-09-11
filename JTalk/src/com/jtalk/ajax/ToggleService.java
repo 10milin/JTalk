@@ -26,10 +26,10 @@ public class ToggleService implements Action{
 		
 		if(toggle.equals("0")) {
 			session.setAttribute("toggle", "1");
-			session.setAttribute("body", "skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature sidebar-collapse");
+			session.setAttribute("body", "skin-blue-light layout-boxed sidebar-mini sidebar-collapse");
 		}else{
 			session.setAttribute("toggle", "0");
-			session.setAttribute("body", "skin-blue-light sidebar-mini wysihtml5-supported fixed sidebar-mini-expand-feature");
+			session.setAttribute("body", "skin-blue-light layout-boxed sidebar-mini");
 		}
 		
 		String value = (String)session.getAttribute("toggle");

@@ -561,38 +561,6 @@
 	        </div>
 	        <!-- /.col-md-7 -->
 			<div class="col-md-5">
-				<div class="box box-primary">
-		            <div class="box-header with-border">
-		              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 제휴사이트</h3>
-		              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-		                </button>
-		              </div>
-		            </div>
-		            <!-- /.box-header -->
-		            <div class="box-body">
-		              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-		                <ol class="carousel-indicators">
-		                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-		                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-		                </ol>
-		                <div class="carousel-inner">
-		                  <div class="item active">
-		                    <img src="/JTalk/dist/img/jsl.png" alt="First slide">
-		                  </div>
-		                  
-		                  <div class="item">
-		                    <img src="http://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap" alt="Second slide">
-		                    <div class="carousel-caption">
-		                      Second Slide
-		                    </div>
-		                  </div>
-		                  
-		                </div>
-		              </div>
-		            </div>
-		            <!-- /.box-body -->
-		          </div>
 		          <!-- /.box -->
 				<!-- Calendar
 		          <div class="box box-solid bg-green-gradient">
@@ -776,6 +744,38 @@
 		            <!-- /.box-footer -->
 		          </div>
 		          <!-- /.중고나라 -->
+		          <div class="box box-primary">
+		            <div class="box-header with-border">
+		              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 제휴사이트</h3>
+		              <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		                </button>
+		              </div>
+		            </div>
+		            <!-- /.box-header -->
+		            <div class="box-body">
+		              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		                <ol class="carousel-indicators">
+		                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+		                </ol>
+		                <div class="carousel-inner">
+		                  <div class="item active">
+		                    <img src="/JTalk/dist/img/jsl.png" alt="First slide">
+		                  </div>
+		                  
+		                  <div class="item">
+		                    <img src="http://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap" alt="Second slide">
+		                    <div class="carousel-caption">
+		                      Second Slide
+		                    </div>
+		                  </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		            <!-- /.box-body -->
+		          </div>
 			</div>
 	    </div>
     </section>
