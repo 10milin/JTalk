@@ -10,11 +10,12 @@ public class NoticeDTO {
 	private String writerName;
 	private String fileName;
 	private Date writeDate;
+	private int hit;
 	
 	public NoticeDTO() {}
 	
 	public NoticeDTO(int num, String title, String content, String writerId, String writerName, String fileName,
-			Date writeDate) {
+			Date writeDate, int hit) {
 		this.num = num;
 		this.title = title;
 		this.content = content;
@@ -22,6 +23,7 @@ public class NoticeDTO {
 		this.writerName = writerName;
 		this.fileName = fileName;
 		this.writeDate = writeDate;
+		this.hit = hit;
 	}
 
 	public int getNum() {
@@ -78,6 +80,14 @@ public class NoticeDTO {
 
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	
 }

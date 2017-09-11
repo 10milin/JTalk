@@ -61,7 +61,8 @@ public class NoticeDAO {
 						rs.getString("writerId"),
 						rs.getString("writerName"),
 						rs.getString("fileName"),
-						rs.getDate("writeDate"));
+						rs.getDate("writeDate"),
+						rs.getInt("hit"));
 				list.add(notice);
 			}
 		}catch(Exception e) {
@@ -94,7 +95,8 @@ public class NoticeDAO {
 						rs.getString("writerId"),
 						rs.getString("writerName"),
 						rs.getString("fileName"),
-						rs.getDate("writeDate"));
+						rs.getDate("writeDate"),
+						rs.getInt("hit"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -110,7 +112,7 @@ public class NoticeDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "update notice set "
-				+ "title = ?, content = ?, fileName = ?, writeDate = current_timestamp "
+				+ "title = ?, content = ?, writerId = ?, writerName = ?, fileName = ?, writeDate = current_timestamp "
 				+ "where num = ?";
 		
 		try {
@@ -118,8 +120,10 @@ public class NoticeDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, notice.getTitle());
 			pstmt.setString(2, notice.getContent());
-			pstmt.setString(3, notice.getFileName());
-			pstmt.setInt(4, notice.getNum());
+			pstmt.setString(3, notice.getWriterId());
+			pstmt.setString(4, notice.getWriterName());
+			pstmt.setString(5, notice.getFileName());
+			pstmt.setInt(6, notice.getNum());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {

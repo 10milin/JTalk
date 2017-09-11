@@ -7,5 +7,6 @@ create table notice(
 	writerId varchar(50) not null,
 	writerName varchar(50) not null,
 	fileName varchar(100),
-	writeDate datetime default current_timestamp
+	writeDate datetime default current_timestamp,
+	hit int default 0
 );

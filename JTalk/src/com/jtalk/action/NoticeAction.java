@@ -5,9 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.notice.NoticeService;
-import com.jtalk.notice.SearchService;
-import com.jtalk.notice.WriteService;
+import com.jtalk.notice.*;
 
 public class NoticeAction implements Action{
 
@@ -23,9 +21,12 @@ public class NoticeAction implements Action{
 			Service service = null;
 			switch(command) {
 			case "writeform": resURL = "/pages/notice/write.jsp"; break;
+			case "modifyform" : resURL = "/pages/notice/modify.jsp"; break;
 			case "notice": service = new NoticeService(); break;
 			case "search": service = new SearchService(); break;
 			case "write": service = new WriteService(); break;
+			case "modify": service = new ModifyService(); break;
+			case "delete": service = new DeleteService(); break;
 			}
 			
 			if(service !=null) resURL = service.process(request, response);
