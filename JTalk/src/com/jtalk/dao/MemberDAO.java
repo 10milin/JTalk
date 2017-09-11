@@ -128,8 +128,8 @@ public class MemberDAO {
 						rs.getString("active"),
 						rs.getString("link"),
 						rs.getDate("registerDate"),
-						rs.getString("profile")
-						);	
+						rs.getString("profile"),
+						rs.getString("pr"));	
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

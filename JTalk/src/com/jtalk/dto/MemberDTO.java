@@ -12,9 +12,10 @@ public class MemberDTO {
 	private String link;
 	private Date registerDate;
 	private String profile;
+	private String pr;
 	
 	public MemberDTO(String email, String pass, String name, int period, String ban, String active, String link,
-			Date registerDate, String profile) {
+			Date registerDate, String profile, String pr) {
 		this.email = email;
 		this.pass = pass;
 		this.name = name;
@@ -24,6 +25,7 @@ public class MemberDTO {
 		this.link = link;
 		this.registerDate = registerDate;
 		this.profile = profile;
+		this.pr = pr;
 	}
 
 	public MemberDTO(String email, String pass, String name, int period, String link) {
@@ -104,5 +106,13 @@ public class MemberDTO {
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+
+	public String getPr() {
+		return pr;
+	}
+
+	public void setPr(String pr) {
+		this.pr = pr;
 	}
 }
