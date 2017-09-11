@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.jtalk.dto.NoticeDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -254,6 +255,9 @@
 		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		              </div>
             </div>
+            <%
+            	ArrayList<NoticeDTO> currentList = (ArrayList<NoticeDTO>)request.getAttribute("currentList");
+            %>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-condensed table-hover table-md">
@@ -264,16 +268,20 @@
                   <th style="width: 13%;">날짜</th>
                   <th style="width: 9%;">조회수</th>
                 </tr>
+                <%
+                	for(int i = 0; i < currentList.size(); i++) {
+                		%>
+						<tr class="table-field">
+							<td><%=currentList.get(i).getNum()%></td>
+							<td class="td-title"><%=currentList.get(i).getTitle()%><i class="fa fa-commenting-o"></i>0</td>
+							<td><%=currentList.get(i).getWriterName()%></td>
+							<td><%=currentList.get(i).getWriteDate()%></td>
+							<td><%=currentList.get(i).getHit()%></td>
+						</tr>
+                	<%}%>
                 <tr class="table-field">
                   <td>1</td>
                   <td class="td-title">이것은 게시판 제목입니다.<i class="fa fa-commenting-o"></i> 5<small class="label bg-green" style="margin-left:5px;">new</small></td>
-                  <td>관리자</td>
-                  <td>17-06-02</td>
-                  <td>5</td>
-                </tr>
-                <tr class="table-field">
-                  <td>1</td>
-                  <td class="td-title">이것은 게시판 제목입니다.<i class="fa fa-commenting-o"></i> 3</td>
                   <td>관리자</td>
                   <td>17-06-02</td>
                   <td>5</td>
@@ -298,7 +306,7 @@
               	<form action="/JTalk/notice.action?command=notice" method="post" id="pagination-form">
               		<ul id="pagination" class="pagination-sm"></ul>
               		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
-              		<input type="hidden" name="search" value="${requestScope.search}">
+              		<input type="hidden" name="search" value="${search}">
               	</form>
               </div>
             </div>

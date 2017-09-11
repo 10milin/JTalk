@@ -46,7 +46,7 @@ public class NoticeDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from notice";
+		String sql = "select * from notice order by num desc";
 		
 		try {
 			list = new ArrayList<NoticeDTO>();
