@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
 import com.jtalk.member.LoginService;
+import com.jtalk.member.PwChangeService;
 
 public class PasswordAction implements Action {
 
@@ -19,7 +20,7 @@ public class PasswordAction implements Action {
 		if(command != null) {
 			Service service = null;
 			switch(command) {
-			
+			case "change": service = new PwChangeService(); break;
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

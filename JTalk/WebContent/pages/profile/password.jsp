@@ -294,26 +294,26 @@
               <h3 class="box-title"><i class="glyphicon glyphicon-lock"></i> 비밀번호 변경</h3>
             </div>
             <div class="box-body">
-            <form action="" method="post">
+            <form action="/JTalk/password.action?command=change" method="post">
 				<div class="col-md-12 col-xs-12 form-horizontal">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-unlock-alt"></i> 현재 비밀번호</label>
                     <div class="col-sm-4" style="padding-top:3px;">
-                      <input type="password" class="form-control input-sm" placeholder="현재 비밀번호를 입력해주세요." required>
+                      <input type="password" class="form-control input-sm" placeholder="현재 비밀번호를 입력해주세요." name = "oldpass" required>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputName" class="col-sm-4 control-label"><i class="glyphicon glyphicon-lock"></i> 새 비밀번호</label>
                     <div class="col-sm-4" style="padding-top:3px;">
-                      <input type="password" class="form-control input-sm" placeholder="변경할 비밀번호를 입력해주세요." required>
+                      <input type="password" class="form-control input-sm" placeholder="변경할 비밀번호를 입력해주세요." name = "newpass" required>
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-check-square-o"></i> 새 비밀번호 확인</label>
                     <div class="col-sm-4" style="padding-top:3px;">
-                      <input type="password" class="form-control input-sm" placeholder="다시한번 입력해주세요." required>
+                      <input type="password" class="form-control input-sm" placeholder="다시한번 입력해주세요." name = "newpasscheck" required>
                     </div>
                   </div>
 

@@ -185,4 +185,28 @@ public class MemberDAO {
 			close(null, pstmt, conn);
 		}
 	}
+
+	public void passChange(String email, String newpass) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update member set pass = ? where email = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newpass);
+			pstmt.setString(2, email);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(null, pstmt, conn);
+		}
+	}
+	
+	//회원 정보 수정
+	/*public void changePass()
+	{
+		
+	}*/
 }
