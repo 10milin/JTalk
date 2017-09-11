@@ -289,95 +289,43 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#information" data-toggle="tab"><i class="fa fa-info-circle"></i> 회원 정보</a></li>
-              <li><a href="#market" data-toggle="tab"><i class="fa fa-shopping-cart"></i> 마켓 관리</a></li>
-              <li><a href="#settings" data-toggle="tab"><i class="fa fa-envelope-o"></i> 메시지함</a></li>
-            </ul>
-            <div class="tab-content flex">
-            
-              <div class="active tab-pane" id="information">
-                <div class="col-md-12 col-xs-12 form-horizontal">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="glyphicon glyphicon-lock"></i> 비밀번호 변경</h3>
+            </div>
+            <div class="box-body">
+            <form action="" method="post">
+				<div class="col-md-12 col-xs-12 form-horizontal">
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-envelope"></i> 이메일</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field">${sessionScope.member.email}</p>
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-unlock-alt"></i> 현재 비밀번호</label>
+                    <div class="col-sm-4" style="padding-top:3px;">
+                      <input type="password" class="form-control input-sm" placeholder="현재 비밀번호를 입력해주세요." required>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-4 control-label"><i class="fa fa-check-square-o"></i> 이메일 인증</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field">확인</p>
+                    <label for="inputName" class="col-sm-4 control-label"><i class="glyphicon glyphicon-lock"></i> 새 비밀번호</label>
+                    <div class="col-sm-4" style="padding-top:3px;">
+                      <input type="password" class="form-control input-sm" placeholder="변경할 비밀번호를 입력해주세요." required>
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-user"></i> 성명</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field">${sessionScope.member.name}</p>
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-check-square-o"></i> 새 비밀번호 확인</label>
+                    <div class="col-sm-4" style="padding-top:3px;">
+                      <input type="password" class="form-control input-sm" placeholder="다시한번 입력해주세요." required>
                     </div>
                   </div>
-                  
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-4 control-label"><i class="fa fa-mortar-board "></i> 기수</label>
 
-                    <div class="col-sm-8">
-                      <p class="imformation-field">${sessionScope.member.period}기</p>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-calendar-check-o"></i> 가입일</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field">${sessionScope.member.registerDate}</p>
-                    </div>
-                  </div>
-                  
-
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-4 control-label"><i class="fa fa-image"></i> 사진등록</label>
-                    <div class="col-sm-8">
-                    	<c:set var="str" value="http://localhost:8181/JTalk/dist/img/user-default.png"/>
-                    	<p class="imformation-field">
-                    		<c:if test="${sessionScope.member.profile eq str}">미등록</c:if>
-                    		<c:if test="${sessionScope.member.profile ne str}">등록</c:if>
-                    	</p>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-4 control-label"><i class="fa fa-user-plus"></i> 자기소개</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field">자기소개 내용 입력</p>
-                    </div>
-                  </div>
                   <div class="form-group">
                     <div class="col-md-12 text-right">
-                      <button type="button" class="btn btn-primary">정보 변경</button>
+                      <button type="submit" class="btn btn-primary">비밀번호 변경</button>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              <div class="tab-pane" id="writelist">
-                
-              </div>
-              <!-- /.tab-pane -->
-
-              <div class="tab-pane" id="market">
-                
-              </div>
-              <!-- /.tab-pane -->
+                </form>
             </div>
-            <!-- /.tab-content -->
           </div>
-          <!-- /.nav-tabs-custom -->
         </div>
         <!-- /.col -->
       </div>
@@ -439,5 +387,19 @@
 <script src="/JTalk/bower_components/datatables.net/js/jquery.dataTables.js"></script>
 <script src="/JTalk/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+  $(function () {
+	    $('#example2').DataTable({
+	      'paging'      : true,
+	      'lengthChange': false,
+	      'searching'   : false,
+	      'ordering'    : true,
+	      'info'        : true,
+	      'autoWidth'   : true,
+	      'language': {'info': '_PAGE_ / _PAGES_'}
+	    })
+	  })
+</script>
 </body>
 </html>
