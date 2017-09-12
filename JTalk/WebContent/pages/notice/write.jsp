@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -186,7 +187,8 @@
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <small>가입일 - ${sessionScope.member.registerDate}</small>
+                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <small>가입일 - ${date}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -246,14 +248,10 @@
     </section>
     <section class="content">
 	    <div class="row">
-	    	<div class="col-md-8 padding-right">
+	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
               <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
-              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-            </div>
             <!-- /.box-header -->
             <form action = "/JTalk/notice.action?command=write" method="post" enctype="multipart/form-data">
             <div class="box-body">
@@ -283,115 +281,13 @@
               	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 쓰기</button>
               </div>
               </div>
-              
             </div>
             </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
-          
-          <div class="col-md-4">
-          
-          <div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa  fa-paw"></i> 이모티콘<small> Alpha</small></h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            	<b><span style="color:#3c8dbc;">클릭하면 에디터로 자동으로 등록됩니다.</span></b>
-		          <div class="nav-tabs-custom" style="margin-top:10px;">
-		            <ul class="nav nav-tabs">
-		              <li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-github"></i></a></li>
-		              <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-github-square"></i></a></li>
-		              <li><a href="#tab_3" data-toggle="tab"><i class="fa fa-github-alt"></i></a></li>
-		            </ul>
-		            <div class="tab-content grid">
-		              <div class="tab-pane active" id="tab_1">
-		              	<c:forEach var="i" begin = "0" end = "5">
-		                	<div class="col-md-12" style="display: -webkit-box;">
-		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
-		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
-				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
-				                	</div>
-		                	</c:forEach>
-		                </div>
-		                </c:forEach>
-		              </div>
-		              <!-- /.tab-pane -->
-		              <div class="tab-pane" id="tab_2">
-		                <c:forEach var="i" begin = "6" end = "11">
-		                	<div class="col-md-12" style="display: -webkit-box;">
-		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
-		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
-				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
-				                	</div>
-		                	</c:forEach>
-		                </div>
-		                </c:forEach>
-		              </div>
-		              <!-- /.tab-pane -->
-		              <div class="tab-pane" id="tab_3">
-		                <c:forEach var="i" begin = "12" end = "17">
-		                	<div class="col-md-12" style="display: -webkit-box;">
-		                	<c:forEach var="j" begin = "${i*3+1 }" end = "${i*3+3}">
-		                			<div class="col-md-4 col-sm-4 col-xs-4 text-center" style="margin:10px 0;">
-				                		<img src="/JTalk/dist/emoticons/${j}.gif" width="50px" height="50px" onclick="insertem(${j})" style="cursor:pointer;">
-				                	</div>
-		                	</c:forEach>
-		                </div>
-		                </c:forEach>
-		              </div>
-		              <!-- /.tab-pane -->
-		            </div>
-		            <!-- /.tab-content -->
-		          </div>
-		          <!-- nav-tabs-custom -->
-            </div>
-            </div>
-          
-          	<div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-image"></i> 사진 등록</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            	<b><span style="color:#3c8dbc;">에디터 메뉴의 사진 버튼을 클릭하여 업로드합니다.</span></b>
-            	<br><br>
-            	<b><span style="color:#3c8dbc;">URL의 경우 이미지를 에디터로 드래그하여 등록합니다.</span></b><br>- 일부 URL이 함께 복사되는 경우가 있습니다.<br>- 사진의 위치는 클릭하여 수정할 수 있습니다.<br>- 모바일은 지원하지 않습니다.
-            	<div class="col-md-12 no-padding" style="margin:10px 0;">
-	            	<a href = "https://www.google.co.kr/imghp?hl=ko" target="_blank"class="btn btn-block btn-social btn-facebook">
-		                <i class="fa fa-google"></i> 구글 이미지 검색
-		              </a>
-                </div>
-            </div>
-            </div>
-            
-            <div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-video-camera"></i> 동영상 등록</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	            	<b><span style="color:#3c8dbc;">에디터 메뉴의 동영상 버튼을 클릭하여 URL등록 합니다.</span></b><br>- 원본영상이 문제있는 경우 URL을 수정해야합니다.<br>- 일부 모바일 환경에서는 작동하지 않을 수 있습니다.
-	            	<div class="col-md-12 no-padding" style="margin:10px 0;">
-	            	<a href = "https://www.youtube.com/?gl=KR" target="_blank"class="btn btn-block btn-social btn-google">
-		                <i class="fa fa-youtube-play"></i> 유튜브 동영상 검색
-		              </a>
-                </div>
-	            </div>
-	          </div>
-            
-          </div>
+	    </div>
 	    </div>
 	</section>
   </div>
@@ -459,6 +355,7 @@
       linkTargetBlank: false,
       lang: 'ko-KR'
     });
+  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
 </script>
 </body>
 </html>

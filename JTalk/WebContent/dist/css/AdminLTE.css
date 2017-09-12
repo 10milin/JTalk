@@ -5079,6 +5079,7 @@ table.text-center th {
 .board-headline th{
 	text-align: left; 
 	padding:10px;
+	font-size: 16px;
 }
 
 .board-white{
@@ -5128,4 +5129,43 @@ table.text-center th {
 .imformation-field{
     padding-top: 7px;
     margin:0px 15px;
+}
+
+.table-td-vline{
+	vertical-align: middle !important;
+	font-size:11px;
+}
+
+.none-text-indent{
+	    text-indent: 0px !important;
+}
+#searchbar{
+		float: left;
+		display:flex;
+	}
+	
+@media (min-width: 769px) {
+  	.mobile-center{
+	margin-bottom: 5px;
+	}
+	#searchbar{
+		display:inline-table;
+	}
+}
+	
+@media (max-width: 768px) {
+  	.mobile-center{
+	margin-bottom: 5px;
+	}
+	#searchbar{
+		display:inline-table;
+	}
+}
+
+.atag-black{
+	color:black !important;
+}
+
+.atag-black:hover{
+	color:#3c8dbc !important;
 }

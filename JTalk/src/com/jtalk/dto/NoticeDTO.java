@@ -1,6 +1,7 @@
 package com.jtalk.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class NoticeDTO {
 	private int num;
@@ -9,13 +10,13 @@ public class NoticeDTO {
 	private String writerId;
 	private String writerName;
 	private String fileName;
-	private Date writeDate;
+	private Timestamp writeDate;
 	private int hit;
 	
 	public NoticeDTO() {}
 	
 	public NoticeDTO(int num, String title, String content, String writerId, String writerName, String fileName,
-			Date writeDate, int hit) {
+			Timestamp writeDate, int hit) {
 		this.num = num;
 		this.title = title;
 		this.content = content;
@@ -74,11 +75,11 @@ public class NoticeDTO {
 		this.fileName = fileName;
 	}
 
-	public Date getWriteDate() {
+	public Timestamp getWriteDate() {
 		return writeDate;
 	}
 
-	public void setWriteDate(Date writeDate) {
+	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
 	}
 

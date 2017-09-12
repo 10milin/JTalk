@@ -61,7 +61,7 @@ public class NoticeDAO {
 						rs.getString("writerId"),
 						rs.getString("writerName"),
 						rs.getString("fileName"),
-						rs.getDate("writeDate"),
+						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
 				list.add(notice);
 			}
@@ -95,7 +95,7 @@ public class NoticeDAO {
 						rs.getString("writerId"),
 						rs.getString("writerName"),
 						rs.getString("fileName"),
-						rs.getDate("writeDate"),
+						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
 			}
 		}catch(Exception e) {

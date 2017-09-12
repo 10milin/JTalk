@@ -71,7 +71,7 @@
         ordered: '번호 매기기'
       },
       options: {
-        help: '도움말',
+        help: '이모티콘',
         fullscreen: '전체 화면',
         codeview: '코드 보기'
       },

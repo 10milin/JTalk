@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +189,8 @@
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <small>가입일 - ${sessionScope.member.registerDate}</small>
+                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <small>가입일 - ${date}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -264,7 +266,10 @@
                   <b>이메일</b> <a class="pull-right">${sessionScope.member.email}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>가입일</b> <a class="pull-right">${sessionScope.member.registerDate}</a>
+                  <b>가입일</b> <a class="pull-right">
+                  	<fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  	${date}
+                  </a>
                 </li>
               </ul>
 
@@ -332,10 +337,12 @@
                   </div>
                   
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-calendar-check-o"></i> 가입일</label>
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-calendar-check-o"></i> 가입일시</label>
 
                     <div class="col-sm-8">
-                      <p class="imformation-field">${sessionScope.member.registerDate}</p>
+                      <p class="imformation-field">
+                      <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                  ${date}</p>
                     </div>
                   </div>
                   

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,10 +182,10 @@
               <!-- User image -->
               <li class="user-header">
                 <img src="/JTalk/dist/img/user-default.png" class="img-circle" alt="User Image">
-
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <small>가입일 - ${sessionScope.member.registerDate}</small>
+                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <small>가입일 - ${date}</small>
                 </p>
               </li>
               <!-- Menu Footer-->

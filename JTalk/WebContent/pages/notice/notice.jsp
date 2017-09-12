@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList, com.jtalk.dto.NoticeDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -187,7 +187,8 @@
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <small>가입일 - ${sessionScope.member.registerDate}</small>
+                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <small>가입일 - ${date}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -247,154 +248,128 @@
     </section>
     <section class="content">
 	    <div class="row">
-	    	<div class="col-md-8 padding-right">
+	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
               <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
-              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
             </div>
-            <%
-            	ArrayList<NoticeDTO> currentList = (ArrayList<NoticeDTO>)request.getAttribute("currentList");
-            %>
             <!-- /.box-header -->
             <div class="box-body">
+            	<div class="col-md-12">
               <table class="table table-condensed table-hover table-md">
                 <tr class="table-field">
                   <th style="width: 50px;">번호</th>
                   <th>제목</th>
                   <th style="width: 10%;">글쓴이</th>
-                  <th style="width: 13%;">날짜</th>
+                  <th style="width: 13%;">작성일</th>
                   <th style="width: 9%;">조회수</th>
                 </tr>
-                <%
-                	for(int i = 0; i < currentList.size(); i++) {
-                		%>
-						<tr class="table-field">
-							<td><%=currentList.get(i).getNum()%></td>
-							<td class="td-title"><%=currentList.get(i).getTitle()%><i class="fa fa-commenting-o"></i>0</td>
-							<td><%=currentList.get(i).getWriterName()%></td>
-							<td><%=currentList.get(i).getWriteDate()%></td>
-							<td><%=currentList.get(i).getHit()%></td>
-						</tr>
-                	<%}%>
-                <tr class="table-field">
-                  <td>1</td>
-                  <td class="td-title">이것은 게시판 제목입니다.<i class="fa fa-commenting-o"></i> 5<small class="label bg-green" style="margin-left:5px;">new</small></td>
-                  <td>관리자</td>
-                  <td>17-06-02</td>
-                  <td>5</td>
-                </tr>
+                <c:if test="${empty currentList}">
+                	<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
+                </c:if>
+                <c:if test="${not empty currentList}">
+                	<jsp:useBean id="now" class="java.util.Date" />
+                	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
+                	<c:forEach var="item" items="${currentList}">
+                		<tr class="table-field">
+		                  <td>${item.num}</td>
+		                  <td class="td-title">
+		                  	  <a class="atag-black" href="javascript:actionparam('notice.action?command=detail', '${item.num}')">${item.title}</a>
+			                  <i class="fa fa-commenting-o"></i> 5
+							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
+							  <c:if test="${today == write_dt}">
+			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
+			                  </c:if>
+		                  </td>
+		                  <td>${item.writerName}</td>
+		                  <td>
+		                  <c:if test="${today == write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
+			              </c:if>
+			              <c:if test="${today != write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+			              </c:if>
+		                  ${fmtDate}
+		                  </td>
+		                  <td>${item.hit}</td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
               </table>
               <table class="table table-condensed table-hover table-xd">
               	<tr class="table-field">
                   <th>제목</th>
                   <th style="width: 18%;">글쓴이</th>
-                  <th style="width: 20%;">날짜</th>
+                  <th style="width: 20%;">작성일</th>
                 </tr>
-                <tr class="table-field">
-                  <td class="td-title-mobile">모바일 전용</td>
-                  <td>관리자</td>
-                  <td>17-06-02</td>
-                </tr>
+                <c:if test="${empty currentList}">
+                	<td colspan="3" align="center">등록된 게시글이 없습니다.</td>
+                </c:if>
+                <c:if test="${not empty currentList}">
+                	<c:forEach var="item" items="${currentList}">
+                		<tr class="table-field">
+		                  <td class="td-title none-text-indent"><a href="javascript:actionparam('/JTalk/notice.action?command=detail', '${item.num}')">${item.title}</a>
+			                  <i class="fa fa-commenting-o"></i> 5
+							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
+							  <c:if test="${today == write_dt}">
+			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
+			                  </c:if>
+		                  </td>
+		                  <td class="table-td-vline">${item.writerName}</td>
+		                  <td class="table-td-vline">${item.writeDate}</td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
               </table>
-              <div class="text-right table-bottom">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
               </div>
-              <div class="text-center">
+              <div class="col-md-12">
+              <div class="text-right table-bottom">
+              	<form action = "/JTalk/notice.action?command=search" method="post">
+              	<div class="col-md-3 col-xs-12 no-padding mobile-center">
+              		<c:if test="${not empty search}">
+              			<div id="searchbar"class="input-group" toggle="1" style="display:none;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+              		</c:if>
+              		<c:if test="${empty search}">
+	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+	                </c:if>
+	              </div>
+                </form>
+              
+              <div class="col-md-9 col-xs-12 text-right no-padding">
+              		<c:if test="${not empty currentList}">
+                		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                	</c:if>
+	              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
+              	</div>
+              </div>
+              <div class="col-md-12 text-center" style="display:inline-block; width:100%">
               	<form action="/JTalk/notice.action?command=notice" method="post" id="pagination-form">
               		<ul id="pagination" class="pagination-sm"></ul>
               		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
               		<input type="hidden" name="search" value="${search}">
               	</form>
               </div>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
-          <div class="col-md-4">
-	    	<div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 글 검색</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            	<form action = "/JTalk/notice.action?command=search" method="post">
-	                <div class="input-group col-md-12">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-primary" type="submit">
-	                            <i class="glyphicon glyphicon-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-                </form>
-            </div>
-            </div>
-			
-			<div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 인기 글 목록</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-	            <div class="box-body">
-	            	<table class="table table-condensed table-hover">
-		              	<tr class="table-field">
-		                  <th>제목</th>
-		                  <th style="width: 20%;">조회수</th>
-		                </tr>
-		                <tr class="table-field">
-		                  <td class="td-title-mobile">모바일 전용</td>
-		                  <td>관리자</td>
-		                </tr>
-		              </table>
-	            </div>
-            </div>
-			
-            <div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-commenting-o"></i> 최근 댓글</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-	            <div class="box-body">
-	            	<table class="table table-condensed table-hover">
-		              	<tr class="table-field">
-		                  <th>내용</th>
-		                  <th style="width: 20%;">글쓴이</th>
-		                </tr>
-		                <tr class="table-field">
-		                  <td class="td-title-mobile">모바일 전용</td>
-		                  <td>관리자</td>
-		                </tr>
-		              </table>
-	            </div>
-            </div>
-  
-            <div class="box box-primary" style="display:none;">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-credit-card"></i> 광고</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            	<img src="/JTalk/dist/img/adsense.png" class="img-responsive center-block" style="padding:30px;">
-            </div>
-            </div>
-            
-         </div>
+          
 	    </div>
 	</section>
   </div>
@@ -414,11 +389,6 @@
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- jQuery pagination -->
 <script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-  pagination(${totalPage},${currentPage});
-</script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -454,5 +424,22 @@
 <script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+  pagination(${totalPage},${currentPage});
+  
+  function searchbar(btn){
+	  var st = $('#searchbar').attr('toggle');
+	  if(st == 0){
+		  $('#searchbar').css('display', 'inline-table');
+		  $('#searchbar').find('.form-control').focus();
+		  $('#searchbar').attr('toggle','1');
+	  }else{
+		  $('#searchbar').css('display', 'none');
+		  $('#searchbar').attr('toggle','0');
+	  }
+  }
+</script>
 </body>
 </html>

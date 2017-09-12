@@ -127,7 +127,7 @@ public class MemberDAO {
 						rs.getString("ban"),
 						rs.getString("active"),
 						rs.getString("link"),
-						rs.getDate("registerDate"),
+						rs.getTimestamp("registerDate"),
 						rs.getString("profile"),
 						rs.getString("pr"));	
 			}

@@ -2213,7 +2213,7 @@ function executeupload(){
         ordered: 'Ordered list'
       },
       options: {
-        help: 'Help',
+        help: 'help',
         fullscreen: 'Full Screen',
         codeview: 'Code View'
       },
@@ -7341,10 +7341,7 @@ function executeupload(){
       return Object.keys(keyMap).map(function (key) {
         var command = keyMap[key];
         var $row = $('<div><div class="help-list-item"/></div>');
-        $row.append($('<label><kbd>' + key + '</kdb></label>').css({
-          'width': 180,
-          'margin-right': 10
-        })).append($('<span/>').html(context.memo('help.' + command) || command));
+        $row.append('<div class="nav-tabs-custom"><ul class="nav nav-tabs"><li class="active"><a href="#tab_1"data-toggle="tab"><i class="fa fa-github"></i></a></li><li><a href="#tab_2"data-toggle="tab"><i class="fa fa-github-square"></i></a></li><li><a href="#tab_3"data-toggle="tab"><i class="fa fa-github-alt"></i></a></li></ul><div class="tab-content grid"><div class="tab-pane active"id="tab_1"><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/1.gif"width="50px"height="50px"onclick="insertem(1)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/2.gif"width="50px"height="50px"onclick="insertem(2)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/3.gif"width="50px"height="50px"onclick="insertem(3)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/4.gif"width="50px"height="50px"onclick="insertem(4)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/5.gif"width="50px"height="50px"onclick="insertem(5)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/6.gif"width="50px"height="50px"onclick="insertem(6)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/7.gif"width="50px"height="50px"onclick="insertem(7)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/8.gif"width="50px"height="50px"onclick="insertem(8)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/9.gif"width="50px"height="50px"onclick="insertem(9)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/10.gif"width="50px"height="50px"onclick="insertem(10)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/11.gif"width="50px"height="50px"onclick="insertem(11)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/12.gif"width="50px"height="50px"onclick="insertem(12)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/13.gif"width="50px"height="50px"onclick="insertem(13)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/14.gif"width="50px"height="50px"onclick="insertem(14)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/15.gif"width="50px"height="50px"onclick="insertem(15)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/16.gif"width="50px"height="50px"onclick="insertem(16)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/17.gif"width="50px"height="50px"onclick="insertem(17)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/18.gif"width="50px"height="50px"onclick="insertem(18)"style="cursor:pointer;"></div></div></div><!--/.tab-pane--><div class="tab-pane"id="tab_2"><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/19.gif"width="50px"height="50px"onclick="insertem(19)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/20.gif"width="50px"height="50px"onclick="insertem(20)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/21.gif"width="50px"height="50px"onclick="insertem(21)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/22.gif"width="50px"height="50px"onclick="insertem(22)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/23.gif"width="50px"height="50px"onclick="insertem(23)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/24.gif"width="50px"height="50px"onclick="insertem(24)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/25.gif"width="50px"height="50px"onclick="insertem(25)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/26.gif"width="50px"height="50px"onclick="insertem(26)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/27.gif"width="50px"height="50px"onclick="insertem(27)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/28.gif"width="50px"height="50px"onclick="insertem(28)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/29.gif"width="50px"height="50px"onclick="insertem(29)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/30.gif"width="50px"height="50px"onclick="insertem(30)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/31.gif"width="50px"height="50px"onclick="insertem(31)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/32.gif"width="50px"height="50px"onclick="insertem(32)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/33.gif"width="50px"height="50px"onclick="insertem(33)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/34.gif"width="50px"height="50px"onclick="insertem(34)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/35.gif"width="50px"height="50px"onclick="insertem(35)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/36.gif"width="50px"height="50px"onclick="insertem(36)"style="cursor:pointer;"></div></div></div><!--/.tab-pane--><div class="tab-pane"id="tab_3"><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/37.gif"width="50px"height="50px"onclick="insertem(37)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/38.gif"width="50px"height="50px"onclick="insertem(38)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/39.gif"width="50px"height="50px"onclick="insertem(39)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/40.gif"width="50px"height="50px"onclick="insertem(40)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/41.gif"width="50px"height="50px"onclick="insertem(41)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/42.gif"width="50px"height="50px"onclick="insertem(42)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/43.gif"width="50px"height="50px"onclick="insertem(43)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/44.gif"width="50px"height="50px"onclick="insertem(44)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/45.gif"width="50px"height="50px"onclick="insertem(45)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/46.gif"width="50px"height="50px"onclick="insertem(46)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/47.gif"width="50px"height="50px"onclick="insertem(47)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/48.gif"width="50px"height="50px"onclick="insertem(48)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/49.gif"width="50px"height="50px"onclick="insertem(49)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/50.gif"width="50px"height="50px"onclick="insertem(50)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/51.gif"width="50px"height="50px"onclick="insertem(51)"style="cursor:pointer;"></div></div><div class="col-md-12"style="display: -webkit-box;"><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/52.gif"width="50px"height="50px"onclick="insertem(52)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/53.gif"width="50px"height="50px"onclick="insertem(53)"style="cursor:pointer;"></div><div class="col-md-4 col-sm-4 col-xs-4 text-center"style="margin:10px 0;"><img src="/JTalk/dist/emoticons/54.gif"width="50px"height="50px"onclick="insertem(54)"style="cursor:pointer;"></div></div></div><!--/.tab-pane--></div><!--/.tab-content--></div>')
         return $row.html();
       }).join('');
     };
@@ -7354,22 +7351,17 @@ function executeupload(){
 
       var body = [
         '<p class="text-center">',
-        '<a href="http://summernote.org/" target="_blank">Summernote 0.8.7</a> · ',
-        '<a href="https://github.com/summernote/summernote" target="_blank">Project</a> · ',
-        '<a href="https://github.com/summernote/summernote/issues" target="_blank">Issues</a>',
+        '<a href="javascript:(0);" target="_blank">이모티콘은 상업적으로 이용할 수 없습니다.</a>',
         '</p>'
       ].join('');
 
       this.$dialog = ui.dialog({
-        title: lang.options.help,
+        title: '이모티콘 <small>Alpha</small>',
         fade: options.dialogsFade,
         body: this.createShortCutList(),
         footer: body,
         callback: function ($node) {
-          $node.find('.modal-body').css({
-            'max-height': 300,
-            'overflow': 'scroll'
-          });
+          
         }
       }).render().appendTo($container);
     };
@@ -7746,8 +7738,8 @@ function executeupload(){
         ['color', ['color']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
+        ['insert', ['link', 'picture', 'video','help']],
+        ['view', ['fullscreen', 'codeview']]
       ],
 
       // popover
@@ -7843,63 +7835,11 @@ function executeupload(){
 
       keyMap: {
         pc: {
-          'ENTER': 'insertParagraph',
-          'CTRL+Z': 'undo',
-          'CTRL+Y': 'redo',
-          'TAB': 'tab',
-          'SHIFT+TAB': 'untab',
-          'CTRL+B': 'bold',
-          'CTRL+I': 'italic',
-          'CTRL+U': 'underline',
-          'CTRL+SHIFT+S': 'strikethrough',
-          'CTRL+BACKSLASH': 'removeFormat',
-          'CTRL+SHIFT+L': 'justifyLeft',
-          'CTRL+SHIFT+E': 'justifyCenter',
-          'CTRL+SHIFT+R': 'justifyRight',
-          'CTRL+SHIFT+J': 'justifyFull',
-          'CTRL+SHIFT+NUM7': 'insertUnorderedList',
-          'CTRL+SHIFT+NUM8': 'insertOrderedList',
-          'CTRL+LEFTBRACKET': 'outdent',
-          'CTRL+RIGHTBRACKET': 'indent',
-          'CTRL+NUM0': 'formatPara',
-          'CTRL+NUM1': 'formatH1',
-          'CTRL+NUM2': 'formatH2',
-          'CTRL+NUM3': 'formatH3',
-          'CTRL+NUM4': 'formatH4',
-          'CTRL+NUM5': 'formatH5',
-          'CTRL+NUM6': 'formatH6',
-          'CTRL+ENTER': 'insertHorizontalRule',
-          'CTRL+K': 'linkDialog.show'
+          'ENTER': 'insertParagraph'
         },
 
         mac: {
-          'ENTER': 'insertParagraph',
-          'CMD+Z': 'undo',
-          'CMD+SHIFT+Z': 'redo',
-          'TAB': 'tab',
-          'SHIFT+TAB': 'untab',
-          'CMD+B': 'bold',
-          'CMD+I': 'italic',
-          'CMD+U': 'underline',
-          'CMD+SHIFT+S': 'strikethrough',
-          'CMD+BACKSLASH': 'removeFormat',
-          'CMD+SHIFT+L': 'justifyLeft',
-          'CMD+SHIFT+E': 'justifyCenter',
-          'CMD+SHIFT+R': 'justifyRight',
-          'CMD+SHIFT+J': 'justifyFull',
-          'CMD+SHIFT+NUM7': 'insertUnorderedList',
-          'CMD+SHIFT+NUM8': 'insertOrderedList',
-          'CMD+LEFTBRACKET': 'outdent',
-          'CMD+RIGHTBRACKET': 'indent',
-          'CMD+NUM0': 'formatPara',
-          'CMD+NUM1': 'formatH1',
-          'CMD+NUM2': 'formatH2',
-          'CMD+NUM3': 'formatH3',
-          'CMD+NUM4': 'formatH4',
-          'CMD+NUM5': 'formatH5',
-          'CMD+NUM6': 'formatH6',
-          'CMD+ENTER': 'insertHorizontalRule',
-          'CMD+K': 'linkDialog.show'
+          'ENTER': 'insertParagraph'
         }
       },
       icons: {
@@ -7934,7 +7874,7 @@ function executeupload(){
         'orderedlist': 'note-icon-orderedlist',
         'pencil': 'note-icon-pencil',
         'picture': 'note-icon-picture',
-        'question': 'note-icon-question',
+        'question': 'fa fa-paw',
         'redo': 'note-icon-redo',
         'square': 'note-icon-square',
         'strikethrough': 'note-icon-strikethrough',

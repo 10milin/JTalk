@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,7 +186,8 @@
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <small>가입일 - ${sessionScope.member.registerDate}</small>
+                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <small>가입일 - ${date}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -245,39 +247,34 @@
     </section>
     <section class="content">
 	    <div class="row">
-	    	<div class="col-md-8 padding-right">
+	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
               <h3 class="box-title font-bareun"><i class="fa fa-file-text-o"></i> 상세 보기</h3>
-              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+            <div class="col-md-12">
               <table class="table table-condensed table-hover">
                 <tr class="table-field board-headline">
-                  <th colspan="3">글제목 들어가는곳</th>
+                  <th>${notice.title}</th>
                 </tr>
                 <tr class="board-content board-white">
                 	<td>
-                		<i class="fa fa-user"></i> 김현호  
-                	</td>
-                	<td class="text-right" width="38%">
-                		<i class="fa fa-clock-o"></i> 2017.09.13 09:24  
-                	</td>
-                	<td  class="text-center" width="13%">
-                		<i class="fa fa-eye"></i> 5  
+                		<i class="fa fa-user"></i> ${notice.writerName}<span style="margin:0 10px;"></span>
+                		<fmt:formatDate var="date" value="${notice.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                		<i class="fa fa-clock-o"></i> ${date}<span style="margin:0 10px;"></span>
+                		<i class="fa fa-eye"></i> ${notice.hit}
                 	</td>
                 </tr>
                 <tr class="board-white">
-                	<td colspan="3">
-                		<div>내용입력부</div>
+                	<td>
+                		<div>${notice.content}</div>
                 	</td>
                 </tr>
                 <tr class="board-white">
-                	<td colspan="3">
-                		<div class="col-md-6 col-sm-6 col-xs-12" style="padding:10px 0px;">
+                	<td>
+                		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
 			                  <div class="mailbox-attachment-info">
 			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</span>
 			                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
@@ -286,7 +283,7 @@
                 	</td>
                 </tr>
                 <tr class="board-white">
-                	<td colspan="3" class="border-none-top">
+                	<td class="border-none-top">
                 		<a class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> 댓글
                         (5)</a>
                 	</td>
@@ -367,84 +364,7 @@
           </div>
           <!-- /.box -->
           </div>
-          <div class="col-md-4">
-	    	<div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-search"></i> 글 검색</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            	<form action = "/JTalk/notice.action?command=search" method="post">
-	                <div class="input-group col-md-12">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-primary" type="submit">
-	                            <i class="glyphicon glyphicon-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-                </form>
-            </div>
-            </div>
-			
-			<div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-star"></i> 인기 글 목록</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-	            <div class="box-body">
-	            	<table class="table table-condensed table-hover">
-		              	<tr class="table-field">
-		                  <th>제목</th>
-		                  <th style="width: 20%;">조회수</th>
-		                </tr>
-		                <tr class="table-field">
-		                  <td class="td-title-mobile">모바일 전용</td>
-		                  <td>관리자</td>
-		                </tr>
-		              </table>
-	            </div>
-            </div>
-			
-            <div class="box box-primary">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-commenting-o"></i> 최근 댓글</h3>
-	              <div class="box-tools pull-right">
-		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		              </div>
-	            </div>
-            <!-- /.box-header -->
-	            <div class="box-body">
-	            	<table class="table table-condensed table-hover">
-		              	<tr class="table-field">
-		                  <th>내용</th>
-		                  <th style="width: 20%;">글쓴이</th>
-		                </tr>
-		                <tr class="table-field">
-		                  <td class="td-title-mobile">모바일 전용</td>
-		                  <td>관리자</td>
-		                </tr>
-		              </table>
-	            </div>
-            </div>
-  
-            <div class="box box-primary" style="display:none;">
-	            <div class="box-header">
-	              <h3 class="box-title font-bareun"><i class="fa fa-credit-card"></i> 광고</h3>
-	            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            	<img src="/JTalk/dist/img/adsense.png" class="img-responsive center-block" style="padding:30px;">
-            </div>
-            </div>
-            
-         </div>
+	    </div>
 	    </div>
 	</section>
   </div>

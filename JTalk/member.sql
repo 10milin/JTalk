@@ -8,7 +8,7 @@ create table member(
 	ban char(1) default '0',
 	active char(1) default '0',
 	link varchar(100),
-	registerDate datetime default current_timestamp,
+	registerDate TIMESTAMP default current_timestamp,
 	profile varchar(100),
 	pr varchar(1000)
 );

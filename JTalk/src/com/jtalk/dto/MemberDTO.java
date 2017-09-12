@@ -1,6 +1,6 @@
 package com.jtalk.dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class MemberDTO {
 	private String email;
@@ -10,12 +10,12 @@ public class MemberDTO {
 	private String ban;
 	private String active;
 	private String link;
-	private Date registerDate;
+	private Timestamp registerDate;
 	private String profile;
 	private String pr;
 	
 	public MemberDTO(String email, String pass, String name, int period, String ban, String active, String link,
-			Date registerDate, String profile, String pr) {
+			Timestamp registerDate, String profile, String pr) {
 		this.email = email;
 		this.pass = pass;
 		this.name = name;
@@ -92,11 +92,11 @@ public class MemberDTO {
 		this.link = link;
 	}
 
-	public Date getRegisterDate() {
+	public Timestamp getRegisterDate() {
 		return registerDate;
 	}
 
-	public void setRegisterDate(Date registerDate) {
+	public void setRegisterDate(Timestamp registerDate) {
 		this.registerDate = registerDate;
 	}
 
