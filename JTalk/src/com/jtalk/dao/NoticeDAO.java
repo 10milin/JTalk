@@ -107,6 +107,7 @@ public class NoticeDAO {
 		return notice;
 	}
 	
+	//글 검색기능
 	public ArrayList<NoticeDTO> searchNotice(String key) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
