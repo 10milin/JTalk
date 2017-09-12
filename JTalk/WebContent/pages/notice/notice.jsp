@@ -359,7 +359,8 @@
                 </form>
               
               <div class="col-md-9 col-xs-12 text-right no-padding">
-              		<c:if test="${not empty currentList}">
+              		<c:if test="${not empty currentList || not empty search}">
+              			<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
                 		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
                 	</c:if>
 	              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>

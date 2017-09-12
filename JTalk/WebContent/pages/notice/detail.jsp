@@ -357,7 +357,7 @@
               <div class="text-right">
               	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
               	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-pencil"></i> 수정</button>
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-trash"></i> 삭제</button>
+              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=delete',${notice.num});"><i class="fa fa-trash"></i> 삭제</button>
               </div>
             </div>
             <!-- /.box-body -->

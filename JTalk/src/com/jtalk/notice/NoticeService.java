@@ -31,7 +31,11 @@ public class NoticeService implements Service{
 			
 			int total = noticeList.size() / 20; // ArrayList의 사이즈 전체 게시글의 페이지수
 			
-			if(noticeList.size() % 20 != 0) {
+			if(noticeList.size() % 20 != 0) { //페이징 이후 남아있는 글 확인하여 페이지 할당
+				total++;
+			}
+			
+			if(total == 0) { // 게시글이 없는 경우 초기 1페이지
 				total++;
 			}
 			
@@ -55,7 +59,11 @@ public class NoticeService implements Service{
 			
 			int total = noticeList.size() / 20; // 검색결과의 총 페이지 수
 			
-			if(noticeList.size() % 20 != 0) {
+			if(noticeList.size() % 20 != 0) { //페이징 이후 남아있는 글 확인하여 페이지 할당
+				total++;
+			}
+			
+			if(total == 0) { // 게시글이 없는 경우 초기 1페이지
 				total++;
 			}
 			

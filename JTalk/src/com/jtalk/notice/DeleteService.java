@@ -17,7 +17,7 @@ public class DeleteService implements Service {
 		NoticeDAO dao = NoticeDAO.getInstance();
 		dao.deleteNotice(num);
 		
-		resURL = "/pages/notice/notice.jsp";
+		resURL = "notice.action?command=notice";
 		
 		return resURL;
 	}
