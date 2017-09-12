@@ -266,7 +266,10 @@
                   <b>이메일</b> <a class="pull-right">${sessionScope.member.email}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>가입일</b> <a class="pull-right">${sessionScope.member.registerDate}</a>
+                  <b>가입일</b><a class="pull-right">
+                  	<fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  	${date}
+                  </a>
                 </li>
               </ul>
 
