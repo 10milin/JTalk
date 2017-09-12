@@ -346,7 +346,8 @@ function pagination(total, start){
 	      last:'<i class="fa fa-angle-double-right"></i>',
 	      initiateStartPageClick:false,
 	      onPageClick: function (event, page) {
+	    	 $('#pagination-page').val(page);
 	    	 $('#pagination-form').submit();
 	      }
-	});
+	}); 
 }
