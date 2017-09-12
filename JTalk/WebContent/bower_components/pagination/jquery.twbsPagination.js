@@ -340,7 +340,6 @@ function pagination(total, start){
 	  $('#pagination').twbsPagination({
 	      totalPages: total,
 	      startPage: start,
-	      href: true,
 	      next:'<i class="fa fa-angle-right"></i>',
 	      prev:'<i class="fa fa-angle-left"></i>',
 	      first:'<i class="fa fa-angle-double-left"></i>',
