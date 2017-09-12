@@ -25,7 +25,7 @@ public class NoticeService implements Service{
 		String search = request.getParameter("search");
 		
 		if(currentPage == null) currentPage = "1";
-		System.out.println(currentPage);
+
 		if(search == null || search.equals("")){
 			//검색하지 않고 전체목록에서 페이지를 넘긴경우
 			
