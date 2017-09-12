@@ -333,7 +333,7 @@
               </div>
               <div class="col-md-12">
               <div class="text-right table-bottom">
-              	<form action = "/JTalk/notice.action?command=search" method="post">
+              	<form action = "/JTalk/notice.action?command=notice" method="post">
               	<div class="col-md-3 col-xs-12 no-padding mobile-center">
               		<c:if test="${not empty search}">
               			<div id="searchbar"class="input-group" toggle="1" style="display:none;">

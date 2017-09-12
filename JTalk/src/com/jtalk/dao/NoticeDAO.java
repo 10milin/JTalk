@@ -107,6 +107,38 @@ public class NoticeDAO {
 		return notice;
 	}
 	
+	public ArrayList<NoticeDTO> searchNotice(String key) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from notice where title like ? order by num";
+		ArrayList<NoticeDTO> searchList = new ArrayList<NoticeDTO>();
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+key+"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				searchList.add(new NoticeDTO(rs.getInt("num"),
+											rs.getString("title"),
+											rs.getString("content"),
+											rs.getString("writerId"),
+											rs.getString("writerName"),
+											rs.getString("fileName"),
+											rs.getTimestamp("writeDate"),
+											rs.getInt("hit")));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return searchList;
+	}
+	
 	//공지사항 수정하기
 	public void modifyNotice(NoticeDTO notice) {
 		Connection conn = null;
