@@ -5169,3 +5169,7 @@ table.text-center th {
 .atag-black:hover{
 	color:#3c8dbc !important;
 }
+
+.box-body-padding{
+	padding:0 0 15px 0;
+}

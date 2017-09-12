@@ -254,7 +254,7 @@
               <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body box-body-padding">
             	<div class="col-md-12">
               <table class="table table-condensed table-hover table-md">
                 <tr class="table-field">

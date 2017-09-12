@@ -253,6 +253,7 @@
             <div class="box-header">
               <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
             <!-- /.box-header -->
+            </div>
             <form action = "/JTalk/notice.action?command=write" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div>
@@ -287,7 +288,6 @@
           </div>
           <!-- /.box -->
           </div>
-	    </div>
 	    </div>
 	</section>
   </div>
