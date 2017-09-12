@@ -273,7 +273,7 @@
                 </li>
               </ul>
 
-              <a href="javascript:actionlink('password.action');" class="btn btn-primary btn-block"><b>비밀번호 변경</b></a>
+              <a href="javascript:actionlink('profile.action?command=passform');" class="btn btn-primary btn-block"><b>비밀번호 변경</b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -286,7 +286,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              
+              ${sessionScope.member.pr}
             </div>
             <!-- /.box-body -->
           </div>
@@ -361,12 +361,14 @@
                     <label for="inputSkills" class="col-sm-4 control-label"><i class="fa fa-user-plus"></i> 자기소개</label>
 
                     <div class="col-sm-8">
-                      <p class="imformation-field">자기소개 내용 입력</p>
+	                    <div class="imformation-field">
+	                    	${sessionScope.member.pr}
+	                    </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-md-12 text-right">
-                      <button type="button" class="btn btn-primary">정보 변경</button>
+                      <button type="button" class="btn btn-primary" onclick="actionlink('profile.action?command=profileform');">정보 변경</button>
                     </div>
                   </div>
                 </div>

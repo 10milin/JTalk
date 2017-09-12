@@ -9,6 +9,6 @@ create table member(
 	active char(1) default '0',
 	link varchar(100),
 	registerDate TIMESTAMP default current_timestamp,
-	profile varchar(100),
-	pr varchar(1000)
+	profile varchar(100) default 'http://localhost:8181/JTalk/dist/img/user-default.png',
+	pr varchar(1000) default '안녕하세요?'
 );

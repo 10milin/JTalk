@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
 import com.jtalk.member.LoginService;
+import com.jtalk.member.PfModifyService;
+import com.jtalk.member.PwChangeService;
 
 public class ProfileAction implements Action {
 
@@ -19,7 +21,10 @@ public class ProfileAction implements Action {
 		if(command != null) {
 			Service service = null;
 			switch(command) {
-			
+				case "passform": resURL = "/pages/profile/password.jsp"; break;
+				case "profileform": resURL = "/pages/profile/modify.jsp"; break;
+				case "passchange": service = new PwChangeService(); break;
+				case "profilemodify": service = new PfModifyService(); break;
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

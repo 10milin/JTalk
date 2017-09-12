@@ -27,10 +27,12 @@
   <link rel="stylesheet" href="/JTalk/bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/JTalk/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- Summernote -->
-  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -197,7 +199,7 @@
                   <a href="javascript:actionlink('profile.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  <a href="javascript:actionlink('logout.action?command=logout');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -238,57 +240,159 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-bullhorn "></i> 공지사항
-        <small>J-Talk에서 알려드립니다.</small>
+        <i class="fa fa-user "></i> 프로필
+        <small>회원정보를 확인 할 수 있습니다.</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">공지사항</li>
+        <li><a href="javascript:actionlink('profile.action');"><i class="fa fa-user"></i>프로필</a></li>
+        <li class="active">회원 정보 변경</li>
       </ol>
     </section>
     <section class="content">
-	    <div class="row">
-	    	<div class="col-md-12">
-	    	<div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
-            <!-- /.box-header -->
+		<div class="row">
+        <div class="col-md-3 padding-right">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="/JTalk/dist/img/user-default.png" alt="User profile picture">
+
+              <h3 class="profile-username text-center">${sessionScope.member.name}</h3>
+
+              <p class="text-muted text-center">JSL - ${sessionScope.member.period}기</p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>이메일</b> <a class="pull-right">${sessionScope.member.email}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>가입일</b><a class="pull-right">
+                  	<fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  	${date}
+                  </a>
+                </li>
+              </ul>
+
+              <a href="javascript:actionlink('profile.action?command=passform');" class="btn btn-primary btn-block"><b>비밀번호 변경</b></a>
             </div>
-            <form action = "/JTalk/notice.action?command=write" method="post" enctype="multipart/form-data">
-            <div class="box-body">
-              <div>
-              	  <div class="input-group">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" required>
-	                <input type="hidden" name="writerId" value="${member.email}">
-	                <input type="hidden" name="writerName" value="${member.name}">
-	              </div>
-	              <br>
-	              <textarea class="summernote" name="content" required><p>내용을 입력해주세요.</p></textarea>
-	              <div class="input-group col-md-4">
-					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly>
-	                <div class="input-group-btn">
-		              <div class="btn btn-default btn-file">
-		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
-		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
-		                </div>
-		             </div>
-	                <!-- /btn-group -->
-			       </div>
-	              <p class="help-block">제한용량 5MB</p>
-	              <div class="text-right table-bottom" style="border:0px">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
-              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 쓰기</button>
-              </div>
-              </div>
-            </div>
-            </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+  
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-user-plus margin-r-5"></i> 자기소개</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              ${sessionScope.member.pr}
+            </div>
+            <!-- /.box-body -->
           </div>
-	    </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-info-circle"></i> 회원 정보 변경</h3>
+            </div>
+            <div class="box-body">
+            <form action="/JTalk/profile.action?command=profilemodify" method="post" enctype="multipart/form-data">
+				<div class="col-md-12 col-xs-12 form-horizontal">
+					<c:if test="${not empty errorMsg}">
+				    <div class="alert alert-danger alert-dismissible">
+			          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			          <h4><i class="icon fa fa-warning"></i>변경 실패</h4>
+			         	${errorMsg}
+			        </div>
+				    </c:if>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-envelope"></i> 이메일</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field">${sessionScope.member.email}</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-4 control-label"><i class="fa fa-check-square-o"></i> 이메일 인증</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field">확인</p>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-user"></i> 성명</label>
+
+                    <div class="col-sm-8">
+                    	<p class="imformation-field">
+                      	<input type="text" class="form-control input-sm" placeholder="성명을 입력해주세요." name = "newpass" value="${sessionScope.member.name}"required>
+                      	</p>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-4 control-label"><i class="fa fa-mortar-board "></i> 기수</label>
+
+                    <div class="col-sm-8">
+                    	<p class="imformation-field">
+                    	<input type="text" class="form-control input-sm" placeholder="기수" name ="period" id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="2" value="${sessionScope.member.period}"required>
+                    	</p>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-calendar-check-o"></i> 가입일시</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field">
+                      <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                  ${date}</p>
+                    </div>
+                  </div>     
+
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-4 control-label"><i class="fa fa-image"></i> 사진등록</label>
+                    <div class="col-sm-8">
+                    		<div class="input-group imformation-field">
+			                <input id = "uploadfield" type="text" class="form-control" readonly>
+			                <div class="input-group-btn">
+				              <div class="btn btn-default btn-file">
+				                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
+				                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
+				                </div>
+				             </div>
+			                <!-- /btn-group -->
+					       </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-4 control-label"><i class="fa fa-user-plus"></i> 자기소개</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field">
+                      	<textarea rows="6" style="resize: none; width:100%;">${sessionScope.member.pr}</textarea>
+                      	</p>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12 text-right">
+                      <button type="submit" class="btn btn-primary">정보 변경</button>
+                    </div>
+                  </div>
+                </div>
+                </form>
+            </div>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
 	</section>
   </div>
   <footer class="main-footer">
@@ -305,6 +409,8 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- jQuery pagination -->
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -336,26 +442,30 @@
 <script src="/JTalk/dist/js/demo.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Javascript of Sidebar toggle -->
 <script src="/JTalk/dist/js/sidebar.js"></script>
-<!-- Summernote -->
-<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- DataTables -->
+<script src="/JTalk/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+<script src="/JTalk/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<!-- Google AdSense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
-  $('.summernote').summernote({
-      height: 400,
-      tabsize: 2,
-      linkTargetBlank: false,
-      lang: 'ko-KR'
-    });
-  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
+
+
+  function onlyNumberInput( Ev ) {
+    if (window.event) var code = window.event.keyCode;
+    else var code = Ev.which;
+
+    if ((code > 34 && code < 41) || (code > 47 && code < 58) || (code > 95 && code < 106) || code == 8 || code == 9 || code == 13 || code == 46)    {
+            window.event.returnValue = true;
+            return;
+    }
+
+    if (window.event) window.event.returnValue = false;
+    else Ev.preventDefault();
+  }
 </script>
 </body>
 </html>

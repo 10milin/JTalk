@@ -25,12 +25,16 @@ public class PwChangeService implements Service {
 		String newpasscheck = request.getParameter("newpasscheck");
 		
 		String errorMsg = null;
+		String successMsg = null;
 		
 		if(dto.getPass().equals(oldpass)&&newpass.equals(newpasscheck))
 		{
 			MemberDAO dao = MemberDAO.getInstance();
 			dao.passChange(email,newpass);
-			resURL = "/pages/login/login.jsp";
+			//세션에 추가 로직이 필요함
+			successMsg = "성공적으로 비밀번호가 변경되었습니다.";
+			request.setAttribute("successMsg", successMsg);
+			resURL = "/pages/profile/password.jsp";
 		}
 		
 		if(!dto.getPass().equals(oldpass))

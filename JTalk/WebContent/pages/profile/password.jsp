@@ -245,7 +245,8 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">프로필</li>
+        <li><a href="javascript:actionlink('profile.action');"><i class="fa fa-user"></i>프로필</a></li>
+        <li class="active">비밀번호 변경</li>
       </ol>
     </section>
     <section class="content">
@@ -273,7 +274,7 @@
                 </li>
               </ul>
 
-              <a href="javascript:actionlink('password.action');" class="btn btn-primary btn-block"><b>비밀번호 변경</b></a>
+              <a href="javascript:actionlink('profile.action?command=passform');" class="btn btn-primary btn-block"><b>비밀번호 변경</b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -286,7 +287,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              
+              ${sessionScope.member.pr}
             </div>
             <!-- /.box-body -->
           </div>
@@ -299,8 +300,22 @@
               <h3 class="box-title"><i class="glyphicon glyphicon-lock"></i> 비밀번호 변경</h3>
             </div>
             <div class="box-body">
-            <form action="/JTalk/password.action?command=change" method="post">
+            <form action="/JTalk/profile.action?command=passchange" method="post">
 				<div class="col-md-12 col-xs-12 form-horizontal">
+					<c:if test="${not empty errorMsg}">
+				    <div class="alert alert-danger alert-dismissible">
+			          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			          <h4><i class="icon fa fa-warning"></i>변경 실패</h4>
+			         	${errorMsg}
+			        </div>
+				    </c:if>
+				    <c:if test="${not empty successMsg}">
+				    <div class="alert alert-success alert-dismissible">
+			          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			          <h4><i class="icon fa fa-check"></i>변경 완료</h4>
+			         	${successMsg}
+			        </div>
+				    </c:if>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-unlock-alt"></i> 현재 비밀번호</label>
                     <div class="col-sm-4" style="padding-top:3px;">
@@ -394,17 +409,6 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
-  $(function () {
-	    $('#example2').DataTable({
-	      'paging'      : true,
-	      'lengthChange': false,
-	      'searching'   : false,
-	      'ordering'    : true,
-	      'info'        : true,
-	      'autoWidth'   : true,
-	      'language': {'info': '_PAGE_ / _PAGES_'}
-	    })
-	  })
 </script>
 </body>
 </html>
