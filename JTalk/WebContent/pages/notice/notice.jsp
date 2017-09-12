@@ -308,7 +308,8 @@
                 <c:if test="${not empty currentList}">
                 	<c:forEach var="item" items="${currentList}">
                 		<tr class="table-field">
-		                  <td class="td-title none-text-indent"><a href="javascript:actionparam('/JTalk/notice.action?command=detail', '${item.num}')">${item.title}</a>
+		                  <td class="td-title none-text-indent">
+		                  	  <a class="atag-black" href="javascript:actionparam('notice.action?command=detail', '${item.num}')">${item.title}</a>
 			                  <i class="fa fa-commenting-o"></i> 5
 							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
 							  <c:if test="${today == write_dt}">
@@ -316,7 +317,15 @@
 			                  </c:if>
 		                  </td>
 		                  <td class="table-td-vline">${item.writerName}</td>
-		                  <td class="table-td-vline">${item.writeDate}</td>
+		                  <td class="table-td-vline">
+		                  	<c:if test="${today == write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
+				            </c:if>
+				            <c:if test="${today != write_dt}">
+				                 <fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yy-MM-dd" />
+				            </c:if>
+			                  ${fmtDate}
+		                  </td>
 		                </tr>
                 	</c:forEach>
                 </c:if>
