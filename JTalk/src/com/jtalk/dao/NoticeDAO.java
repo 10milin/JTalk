@@ -111,7 +111,7 @@ public class NoticeDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from notice where title like ? order by num";
+		String sql = "select * from notice where title like ? order by num desc";
 		ArrayList<NoticeDTO> searchList = new ArrayList<NoticeDTO>();
 		
 		try {
