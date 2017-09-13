@@ -228,7 +228,32 @@ public class MemberDAO {
 		}
 	}
 	
-	
+	public String getPicture(String email)
+	{
+		String profile = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select profile from member where email = ?";
+		
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+			{
+				profile = rs.getString("profile");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return profile;
+	}
 	//회원 정보 수정
 	/*public void changePass()
 	{
