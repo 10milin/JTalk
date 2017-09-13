@@ -16,25 +16,27 @@ public class PwChangeService implements Service {
 		String resURL = null;
 		
 		HttpSession session = request.getSession();
+		
 		MemberDTO dto = (MemberDTO) session.getAttribute("member");
 		
 		String email = dto.getEmail();
-		//아아니 왜 커밋이 안되는고야
+		
 		String oldpass = request.getParameter("oldpass");
 		String newpass = request.getParameter("newpass");
 		String newpasscheck = request.getParameter("newpasscheck");
 		
 		String errorMsg = null;
-		String successMsg = null;
+		String passwordChangeSuccessMsg = null;
 		
 		if(dto.getPass().equals(oldpass)&&newpass.equals(newpasscheck))
 		{
 			MemberDAO dao = MemberDAO.getInstance();
 			dao.passChange(email,newpass);
 			//세션에 추가 로직이 필요함
-			successMsg = "성공적으로 비밀번호가 변경되었습니다.";
-			request.setAttribute("successMsg", successMsg);
-			resURL = "/pages/profile/password.jsp";
+			passwordChangeSuccessMsg = "성공적으로 비밀번호가 변경되었습니다.<br>다시 로그인해주세요.";
+			request.setAttribute("passwordChangeSuccessMsg", passwordChangeSuccessMsg);
+			resURL = "/pages/login/login.jsp";
+			session.invalidate();
 		}
 		
 		if(!dto.getPass().equals(oldpass))

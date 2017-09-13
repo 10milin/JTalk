@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Summernote -->
+  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -197,7 +197,7 @@
                   <a href="javascript:actionlink('profile.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="javascript:actionlink('logout.action?command=logout');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -251,146 +251,43 @@
 	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
-            </div>
+              <h3 class="box-title font-bareun"><i class="fa fa-pencil"></i> 글 수정</h3>
             <!-- /.box-header -->
-            <div class="box-body box-body-padding">
-            	<div class="col-md-12">
-              <table class="table table-condensed table-hover table-md">
-                <tr class="table-field">
-                  <th style="width: 50px;">번호</th>
-                  <th>제목</th>
-                  <th style="width: 10%;">글쓴이</th>
-                  <th style="width: 13%;">작성일</th>
-                  <th style="width: 9%;">조회수</th>
-                </tr>
-                <c:if test="${empty currentList}">
-                	<c:if test="${empty search}">
-	                	<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
-	                </c:if>
-	                <c:if test="${not empty search}">
-	                	<td colspan="5" align="center">검색결과가 없습니다.</td>
-	                </c:if>
-                </c:if>
-                <c:if test="${not empty currentList}">
-                	<jsp:useBean id="now" class="java.util.Date" />
-                	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
-                	<c:forEach var="item" items="${currentList}" varStatus="status">
-                		<tr class="table-field">
-		                  <td>${item.num}</td>
-		                  <td class="td-title">
-		                  	  <a class="atag-black" href="javascript:actionparam('notice.action?command=detail', '${item.num}')">${item.title}</a>
-			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
-							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
-							  <c:if test="${today == write_dt}">
-			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
-			                  </c:if>
-		                  </td>
-		                  <td>${item.writerName}</td>
-		                  <td>
-		                  <c:if test="${today == write_dt}">
-			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
-			              </c:if>
-			              <c:if test="${today != write_dt}">
-			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
-			              </c:if>
-		                  ${fmtDate}
-		                  </td>
-		                  <td>${item.hit}</td>
-		                </tr>
-                	</c:forEach>
-                </c:if>
-              </table>
-              <table class="table table-condensed table-hover table-xd">
-              	<tr class="table-field">
-                  <th>제목</th>
-                  <th style="width: 18%;">글쓴이</th>
-                  <th style="width: 20%;">작성일</th>
-                </tr>
-                <c:if test="${empty currentList}">
-                	<td colspan="3" align="center">등록된 게시글이 없습니다.</td>
-                </c:if>
-                <c:if test="${not empty currentList}">
-                	<c:forEach var="item" items="${currentList}">
-                		<tr class="table-field">
-		                  <td class="td-title none-text-indent">
-		                  	  <a class="atag-black" href="javascript:actionparam('notice.action?command=detail', '${item.num}')">${item.title}</a>
-			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
-							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
-							  <c:if test="${today == write_dt}">
-			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
-			                  </c:if>
-		                  </td>
-		                  <td class="table-td-vline">${item.writerName}</td>
-		                  <td class="table-td-vline">
-		                  	<c:if test="${today == write_dt}">
-			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
-				            </c:if>
-				            <c:if test="${today != write_dt}">
-				                 <fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yy-MM-dd" />
-				            </c:if>
-			                  ${fmtDate}
-		                  </td>
-		                </tr>
-                	</c:forEach>
-                </c:if>
-              </table>
-              </div>
-              <div class="col-md-12">
-              <div class="text-right table-bottom">
-              	<form action = "/JTalk/notice.action?command=notice" method="post">
-              	<div class="col-md-3 col-xs-12 no-padding mobile-center">
-              		<c:if test="${not empty search}">
-              			<div id="searchbar"class="input-group" toggle="1" style="display:none;">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-default" type="submit">
-	                            <i class="glyphicon glyphicon-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-              		</c:if>
-              		<c:if test="${empty search}">
-	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-default" type="submit">
-	                            <i class="glyphicon glyphicon-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-	                </c:if>
+            </div>
+            <form action = "/JTalk/notice.action?command=modify" method="post" enctype="multipart/form-data">
+            <div class="box-body">
+              <div>
+              	  <div class="input-group">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
+	                <input type="text" class="form-control" placeholder="제목" name="title" value="${notice.title}" required>
+	                <input type="hidden" name="writerId" value="${member.email}">
+	                <input type="hidden" name="writerName" value="${member.name}">
 	              </div>
-                </form>
-              
-              <div class="col-md-9 col-xs-12 text-right no-padding">
-              		<c:if test="${empty search}">
-              			<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
-                	</c:if>
-                	<c:if test="${not empty search}">
-                		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
-                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
-                	</c:if>
-                	<c:if test="${'admin' eq member.email}">
-                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
-                	</c:if>
-	              	
-              	</div>
-              </div>
-              <div class="col-md-12 text-center" style="display:inline-block; width:100%">
-              	<form action="/JTalk/notice.action?command=notice" method="post" id="pagination-form">
-              		<ul id="pagination" class="pagination-sm"></ul>
-              		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
-              		<input type="hidden" name="search" value="${search}">
-              	</form>
+	              <br>
+	              <textarea class="summernote" name="content" required>${notice.content}</textarea>
+	              <div class="input-group col-md-4">
+					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
+	                <input id = "uploadfield" type="text" class="form-control" readonly>
+	                <div class="input-group-btn">
+		              <div class="btn btn-default btn-file">
+		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
+		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
+		                </div>
+		             </div>
+	                <!-- /btn-group -->
+			       </div>
+	              <p class="help-block">제한용량 5MB</p>
+	              <div class="text-right table-bottom" style="border:0px">
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
+              	<button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i> 수정</button>
               </div>
               </div>
             </div>
+            </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
-          
 	    </div>
 	</section>
   </div>
@@ -408,8 +305,6 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- jQuery pagination -->
-<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -441,26 +336,26 @@
 <script src="/JTalk/dist/js/demo.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
-<!-- Javascript of Sidebar toggle -->
-<script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Javascript of Sidebar toggle -->
+<script src="/JTalk/dist/js/sidebar.js"></script>
+<!-- Summernote -->
+<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Google AdSense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
-  pagination(${totalPage},${currentPage});
-  
-  function searchbar(btn){
-	  var st = $('#searchbar').attr('toggle');
-	  if(st == 0){
-		  $('#searchbar').css('display', 'inline-table');
-		  $('#searchbar').find('.form-control').focus();
-		  $('#searchbar').attr('toggle','1');
-	  }else{
-		  $('#searchbar').css('display', 'none');
-		  $('#searchbar').attr('toggle','0');
-	  }
-  }
+  $('.summernote').summernote({
+      height: 400,
+      tabsize: 2,
+      linkTargetBlank: false,
+      lang: 'ko-KR'
+    });
+  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
 </script>
 </body>
 </html>

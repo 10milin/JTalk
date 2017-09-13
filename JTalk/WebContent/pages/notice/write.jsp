@@ -264,7 +264,7 @@
 	                <input type="hidden" name="writerName" value="${member.name}">
 	              </div>
 	              <br>
-	              <textarea class="summernote" name="content" required><p>내용을 입력해주세요.</p></textarea>
+	              <textarea class="summernote" name="content" required></textarea>
 	              <div class="input-group col-md-4">
 					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
 	                <input id = "uploadfield" type="text" class="form-control" readonly>

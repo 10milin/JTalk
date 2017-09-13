@@ -38,6 +38,15 @@
          	${successMsg}
         </div>
 	    </c:if>
+	    
+	    <c:if test="${not empty passwordChangeSuccessMsg}">
+	    <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-check"></i>비밀번호 변경 완료</h4>
+         	${passwordChangeSuccessMsg}
+        </div>
+	    </c:if>
+	    
 	    <c:if test="${not empty authMsg}">
 	    <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -54,7 +63,7 @@
 	    </c:if>
 	    <form action="/JTalk/login.action?command=login" method="post">
 	      <div class="form-group has-feedback">
-	        <input type="email" class="form-control" placeholder="이메일" value="${email}" name = "email">
+	        <input type="text" class="form-control" placeholder="이메일" value="${email}" name = "email">
 	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">

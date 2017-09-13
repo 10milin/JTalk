@@ -256,8 +256,8 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/JTalk/dist/img/user-default.png" alt="User profile picture">
 
+              <img class="profile-user-img img-responsive img-circle" src="${member.profile}" alt="User profile picture">
               <h3 class="profile-username text-center">${sessionScope.member.name}</h3>
 
               <p class="text-muted text-center">JSL - ${sessionScope.member.period}기</p>
@@ -330,7 +330,7 @@
 
                     <div class="col-sm-8">
                     	<p class="imformation-field">
-                      	<input type="text" class="form-control input-sm" placeholder="성명을 입력해주세요." name = "newpass" value="${sessionScope.member.name}"required>
+                      	<input type="text" class="form-control input-sm" placeholder="성명을 입력해주세요." name = "name" value="${sessionScope.member.name}"required>
                       	</p>
                     </div>
                   </div>
@@ -359,7 +359,7 @@
                     <label for="inputExperience" class="col-sm-4 control-label"><i class="fa fa-image"></i> 사진등록</label>
                     <div class="col-sm-8">
                     		<div class="input-group imformation-field">
-			                <input id = "uploadfield" type="text" class="form-control" readonly>
+			                <input id = "uploadfield" type="text" class="form-control" value = "${member.profile}" readonly>
 			                <div class="input-group-btn">
 				              <div class="btn btn-default btn-file">
 				                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
@@ -376,7 +376,7 @@
 
                     <div class="col-sm-8">
                       <p class="imformation-field">
-                      	<textarea rows="6" style="resize: none; width:100%;">${sessionScope.member.pr}</textarea>
+                      	<textarea rows="6" name="pr" style="resize: none; width:100%;">${sessionScope.member.pr}</textarea>
                       	</p>
                     </div>
                   </div>
