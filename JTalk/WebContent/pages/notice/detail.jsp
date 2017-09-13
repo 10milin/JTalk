@@ -320,10 +320,10 @@
               	<div class="box-comment">등록된 댓글이 없습니다.</div>
               </c:if>
               <c:if test="${not empty commentList}">
-	              <c:forEach var="item" items="${commentList}">
+	              <c:forEach var="item" items="${commentList}" varStatus="status">
 	              	<div class="box-comment">
 	                	<!-- User image -->
-		                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
+		                <img class="img-circle img-sm" src="${profileList.get(status.index)}" alt="User Image">
 		
 		                <div class="comment-text">
 		                      <span class="username">
