@@ -4,6 +4,7 @@ package com.jtalk.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static com.jtalk.db.JdbcUtils.*;
 import com.jtalk.dto.MemberDTO;
@@ -203,6 +204,30 @@ public class MemberDAO {
 			close(null, pstmt, conn);
 		}
 	}
+
+	public void updateProfile(MemberDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update member set name = ? , period = ? , pr = ? , profile = ? where email = ?";
+		
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getName());
+			pstmt.setInt(2, dto.getPeriod());
+			pstmt.setString(3, dto.getPr());
+			pstmt.setString(4, dto.getProfile());
+			pstmt.setString(5, dto.getEmail());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+	}
+	
 	
 	//회원 정보 수정
 	/*public void changePass()

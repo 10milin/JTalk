@@ -36,6 +36,10 @@ public class MemberDTO {
 		this.link = link;
 	}
 
+	public MemberDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getEmail() {
 		return email;
 	}

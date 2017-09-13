@@ -185,8 +185,8 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
+              
                 <img src="/JTalk/dist/img/user-default.png" class="img-circle" alt="User Image">
-
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
                   <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
@@ -255,8 +255,13 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
+            <c:if test="${sessionScope.member.profile}=='http://localhost:8181/JTalk/dist/img/user-default.png'">
               <img class="profile-user-img img-responsive img-circle" src="/JTalk/dist/img/user-default.png" alt="User profile picture">
-
+			</c:if>
+			<c:if test="${sessionScope.member.profile}!='http://localhost:8181/JTalk/dist/img/user-default.png'">
+              <img class="profile-user-img img-responsive img-circle" src="/JTalk/upload/${sessionScope.member.profile}" alt="User profile picture">
+              ${sessionScope.member.profile}
+			</c:if>
               <h3 class="profile-username text-center">${sessionScope.member.name}</h3>
 
               <p class="text-muted text-center">JSL - ${sessionScope.member.period}기</p>
