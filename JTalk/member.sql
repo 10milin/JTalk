@@ -12,3 +12,5 @@ create table member(
 	profile varchar(100) default 'http://localhost:8181/JTalk/dist/img/user-default.png',
 	pr varchar(1000) default '안녕하세요?'
 );
+
+insert into member values('admin', '1234', '관리자', 0, 0, 1, null, default, default, default);

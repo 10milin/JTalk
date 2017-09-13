@@ -5,13 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.notice.*;
-
-public class NoticeAction implements Action{
+import com.jtalk.comment.*;
+public class CommentAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
 		/* Default URL */
 		String resURL = "/pages/error/500.jsp";
 		
@@ -20,10 +18,6 @@ public class NoticeAction implements Action{
 		if(command != null) {
 			Service service = null;
 			switch(command) {
-			case "writeform": resURL = "/pages/notice/write.jsp"; break;
-			case "modifyform" : service = new ModifyFormService(); break;
-			case "notice": service = new NoticeService(); break;
-			case "detail": service = new DetailService(); break;
 			case "write": service = new WriteService(); break;
 			case "modify": service = new ModifyService(); break;
 			case "delete": service = new DeleteService(); break;
