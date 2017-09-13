@@ -316,31 +316,41 @@
 	                <!-- /.comment-text -->
               </div>
               <!-- /.유저 한명의 코멘트 -->
-              <div class="box-comment">
-                	<!-- User image -->
-	                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
-	
-	                <div class="comment-text">
-	                      <span class="username">
-	                        Maria Gonzales
-	                        <span class="pull-right">
-	                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
-	                        <span class="margin-right-left"><a class="color-black" onclick="console.log(this);" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
-	                        <span class="text-muted">8:03 PM Today</span>
-	                        </span>
-	                      </span><!-- /.username -->
-	                  <span>
-	                  <div class="input-group" style="display:none;">
-		                  <input type="text" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
-		                  <span class="input-group-btn">
-		                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
-		                    </span>
-	                	</div>
-		                  <span class="comment-in">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span>
-	                  </span>
-	                </div>
-	                <!-- /.comment-text -->
-              </div>
+              <c:if test="${empty commentList}">
+              	<div class="box-comment">등록된 댓글이 없습니다.</div>
+              </c:if>
+              <c:if test="${not empty commentList}">
+	              <c:forEach var="item" items="${commentList}">
+	              	<div class="box-comment">
+	                	<!-- User image -->
+		                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
+		
+		                <div class="comment-text">
+		                      <span class="username">
+		                        ${item.writerName}
+		                        <span class="pull-right">
+		                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
+		                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+		                        <span class="text-muted">${item.writeDate}</span>
+		                        </span>
+		                      </span><!-- /.username -->
+		                  <span>
+		                  <form action = "/JTalk/comment.action?command=modify" method = "post">
+		                  <div class="input-group" style="display:none;">
+		                  	<input type = "hidden" name = "num" value = "${item.num}"/>
+			                  <input type="text" name = "content" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
+			                  <span class="input-group-btn">
+			                      <button type="submit" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
+			                    </span>
+		                	</div>
+			               </form>
+			                  <span class="comment-in">${item.content}</span>
+		                  </span>
+		                </div>
+		                <!-- /.comment-text -->
+	              </div>
+	              </c:forEach>
+              </c:if>
               <!-- /.유저 한명의 코멘트 -->
               <form action="/JTalk/comment.action?command=write" method="post">
                 <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/user4-128x128.jpg" alt="Alt Text">

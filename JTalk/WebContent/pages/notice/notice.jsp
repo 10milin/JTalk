@@ -270,12 +270,12 @@
                 <c:if test="${not empty currentList}">
                 	<jsp:useBean id="now" class="java.util.Date" />
                 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
-                	<c:forEach var="item" items="${currentList}">
+                	<c:forEach var="item" items="${currentList}" varStatus="status">
                 		<tr class="table-field">
 		                  <td>${item.num}</td>
 		                  <td class="td-title">
 		                  	  <a class="atag-black" href="javascript:actionparam('notice.action?command=detail', '${item.num}')">${item.title}</a>
-			                  <i class="fa fa-commenting-o"></i> 5
+			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
 							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
 							  <c:if test="${today == write_dt}">
 			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
@@ -310,7 +310,7 @@
                 		<tr class="table-field">
 		                  <td class="td-title none-text-indent">
 		                  	  <a class="atag-black" href="javascript:actionparam('notice.action?command=detail', '${item.num}')">${item.title}</a>
-			                  <i class="fa fa-commenting-o"></i> 5
+			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
 							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
 							  <c:if test="${today == write_dt}">
 			                  	<small class="label bg-green" style="margin-left:5px;">new</small>

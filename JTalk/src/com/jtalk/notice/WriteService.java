@@ -51,7 +51,7 @@ public class WriteService implements Service{
 			resURL = "/notice.action?command=notice";
 
 		}catch(Exception e) {
-					e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		return resURL;

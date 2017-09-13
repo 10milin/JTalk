@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
+import com.jtalk.dao.CommentDAO;
 import com.jtalk.dao.NoticeDAO;
 import com.jtalk.dto.NoticeDTO;
 
@@ -21,9 +22,11 @@ public class NoticeService implements Service{
 		String search = request.getParameter("search");
 		String totalPage = String.valueOf(1); //전체 페이지의 초기값
 		NoticeDAO dao = NoticeDAO.getInstance();
+		CommentDAO commentDAO = CommentDAO.getInstance();
+		
 		ArrayList<NoticeDTO> noticeList; //전체 목록
 		ArrayList<NoticeDTO> currentList = new ArrayList<NoticeDTO>(); //현재 페이지 목록
-		
+		ArrayList<Integer> countList = new ArrayList<Integer>();
 		if(currentPage == null) currentPage = "1";
 		if(search == null || search.equals("")){
 			//검색하지 않고 전체목록에서 페이지를 넘긴경우
@@ -43,16 +46,19 @@ public class NoticeService implements Service{
 				if(noticeList.size() > i*20) {
 					for(int j = i*20; j < (i*20)+20 && j < noticeList.size(); j++) {
 						currentList.add(noticeList.get(j));
+						countList.add(commentDAO.countComment("notice", noticeList.get(j).getNum()));
 					}
 				}
 				if(i != Integer.parseInt(currentPage) - 1) {
 					currentList = new ArrayList<NoticeDTO>();
+					countList = new ArrayList<Integer>();
 				}
 			}
 			
 			totalPage = String.valueOf(total);
 			request.setAttribute("noticeList", noticeList);
 			request.setAttribute("currentList", currentList);
+			request.setAttribute("countList", countList);
 		}else{
 			//검색후 다음페이지로 넘긴경우
 			noticeList = dao.searchNotice(search);
@@ -71,10 +77,12 @@ public class NoticeService implements Service{
 				if(noticeList.size() > i*20) {
 					for(int j = i*20; j < (i*20)+20 && j < noticeList.size(); j++) {
 						currentList.add(noticeList.get(j));
+						countList.add(commentDAO.countComment("notice", noticeList.get(j).getNum()));
 					}
 				}
 				if(i != Integer.parseInt(currentPage) - 1) {
 					currentList = new ArrayList<NoticeDTO>();
+					countList = new ArrayList<Integer>();
 				}
 			}
 			
@@ -82,6 +90,7 @@ public class NoticeService implements Service{
 			request.setAttribute("search", search); // 해당 검색어를 계속 저장
 			request.setAttribute("noticeList", noticeList);
 			request.setAttribute("currentList", currentList);
+			request.setAttribute("countList", countList);
 		}
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);

@@ -110,4 +110,55 @@ public class CommentDAO {
 			close(null, pstmt, conn);
 		}
 	}
+	
+	//댓글의 갯수
+	public int countComment(String tableName, int postNum) {
+		int count = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from comment where tableName = ? and postNum = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tableName);
+			pstmt.setInt(2, postNum);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt("count(*)");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		return count;
+	}
+	
+	//댓글 번호로 글 번호 가져오기
+	public int getPostNum(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select postNum from comment where num = ?";
+		int postNum = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				postNum = rs.getInt("postNum");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		return postNum;
+	}
 }
