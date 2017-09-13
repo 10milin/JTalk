@@ -21,7 +21,7 @@ public class NoticeAction implements Action{
 			Service service = null;
 			switch(command) {
 			case "writeform": resURL = "/pages/notice/write.jsp"; break;
-			case "modifyform" : resURL = "/pages/notice/modify.jsp"; break;
+			case "modifyform" : service = new ModifyFormService(); break;
 			case "notice": service = new NoticeService(); break;
 			case "detail": service = new DetailService(); break;
 			case "write": service = new WriteService(); break;

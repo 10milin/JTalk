@@ -348,8 +348,8 @@
                 <div class="img-push input-group">
                   <input type="hidden" name = "tableName" value = "notice"/>
                   <input type="hidden" name = "postNum" value = "${notice.num}"/>
-                  <input type="hidden" name = "writerId" value = "${sessionScope.member.email}"/>
-                  <input type="hidden" name = "writerName" value = "${sessionScope.member.name}"/>
+                  <input type="hidden" name = "writerId" value = "${member.email}"/>
+                  <input type="hidden" name = "writerName" value = "${member.name}"/>
                   <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
                   <span class="input-group-btn">
                       <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
@@ -360,8 +360,10 @@
               <br>
               <div class="text-right">
               	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-pencil"></i> 수정</button>
-              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=delete',${notice.num});"><i class="fa fa-trash"></i> 삭제</button>
+              	<c:if test="${'admin' eq member.email}">
+	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=modifyform',${notice.num});"><i class="fa fa-pencil"></i> 수정</button>
+	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=delete',${notice.num});"><i class="fa fa-trash"></i> 삭제</button>
+              	</c:if>
               </div>
             </div>
             <!-- /.box-body -->

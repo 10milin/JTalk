@@ -54,7 +54,7 @@
 	    </c:if>
 	    <form action="/JTalk/login.action?command=login" method="post">
 	      <div class="form-group has-feedback">
-	        <input type="email" class="form-control" placeholder="이메일" value="${email}" name = "email">
+	        <input type="text" class="form-control" placeholder="이메일" value="${email}" name = "email">
 	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
