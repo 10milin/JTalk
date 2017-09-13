@@ -217,7 +217,7 @@ public class MemberDAO {
 			pstmt.setString(1, dto.getName());
 			pstmt.setInt(2, dto.getPeriod());
 			pstmt.setString(3, dto.getPr());
-			pstmt.setString(4, dto.getProfile());
+			pstmt.setString(4, "/JTalk/upload/"+dto.getProfile());
 			pstmt.setString(5, dto.getEmail());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -254,9 +254,4 @@ public class MemberDAO {
 		
 		return profile;
 	}
-	//회원 정보 수정
-	/*public void changePass()
-	{
-		
-	}*/
 }

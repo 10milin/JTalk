@@ -257,7 +257,7 @@
           <div class="box box-primary">
             <div class="box-body box-profile">
 
-              <img class="profile-user-img img-responsive img-circle" src="/JTalk/dist/img/user-default.png" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="${member.profile}" alt="User profile picture">
               <h3 class="profile-username text-center">${sessionScope.member.name}</h3>
 
               <p class="text-muted text-center">JSL - ${sessionScope.member.period}기</p>
@@ -359,7 +359,7 @@
                     <label for="inputExperience" class="col-sm-4 control-label"><i class="fa fa-image"></i> 사진등록</label>
                     <div class="col-sm-8">
                     		<div class="input-group imformation-field">
-			                <input id = "uploadfield" type="text" class="form-control" readonly>
+			                <input id = "uploadfield" type="text" class="form-control" value = "${member.profile}" readonly>
 			                <div class="input-group-btn">
 				              <div class="btn btn-default btn-file">
 				                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
