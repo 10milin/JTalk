@@ -130,7 +130,7 @@ public class MemberDAO {
 						rs.getString("link"),
 						rs.getTimestamp("registerDate"),
 						rs.getString("profile"),
-						rs.getString("pr"));	
+						rs.getString("pr"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -217,7 +217,7 @@ public class MemberDAO {
 			pstmt.setString(1, dto.getName());
 			pstmt.setInt(2, dto.getPeriod());
 			pstmt.setString(3, dto.getPr());
-			pstmt.setString(4, "/JTalk/upload/"+dto.getProfile());
+			pstmt.setString(4, dto.getProfile());
 			pstmt.setString(5, dto.getEmail());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

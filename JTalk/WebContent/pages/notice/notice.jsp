@@ -177,13 +177,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/JTalk/dist/img/user-default.png" class="user-image" alt="User Image">
+              <img src="/JTalk/upload/${member.profile}" class="user-image" alt="User Image">
               <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/JTalk/dist/img/user-default.png" class="img-circle" alt="User Image">
+                <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>

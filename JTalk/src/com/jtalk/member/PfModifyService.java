@@ -39,10 +39,10 @@ public class PfModifyService implements Service {
 			
 			HttpSession session = request.getSession();
 			String email = ((MemberDTO)session.getAttribute("member")).getEmail();
-			if(fileName.equals("null"))
+			
+			if(fileName==null)
 			{
 				fileName = ((MemberDTO)session.getAttribute("member")).getProfile();
-				fileName = fileName.substring(14);
 			}
 			
 			MemberDTO dto = new MemberDTO();

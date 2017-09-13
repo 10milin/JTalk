@@ -179,14 +179,14 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/JTalk/dist/img/user-default.png" class="user-image" alt="User Image">
+              <img src="/JTalk/upload/${member.profile}" class="user-image" alt="User Image">
               <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
               
-                <img src="/JTalk/dist/img/user-default.png" class="img-circle" alt="User Image">
+                <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
                   <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
@@ -255,7 +255,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="${member.profile}" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="/JTalk/upload/${member.profile}" alt="User profile picture">
             <%-- <c:if test="${!member.profile.equals('http://localhost:8181/JTalk/dist/img/user-default.png')}">
               <img class="profile-user-img img-responsive img-circle" src="/JTalk/upload/${member.profile}" alt="User profile picture">
 			</c:if>

@@ -176,13 +176,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/JTalk/dist/img/user-default.png" class="user-image" alt="User Image">
+              <img src="/JTalk/upload/${member.profile}" class="user-image" alt="User Image">
               <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/JTalk/dist/img/user-default.png" class="img-circle" alt="User Image">
+                <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
 
                 <p>
                   <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
@@ -323,7 +323,7 @@
 	              <c:forEach var="item" items="${commentList}" varStatus="status">
 	              	<div class="box-comment">
 	                	<!-- User image -->
-		                <img class="img-circle img-sm" src="${profileList.get(status.index)}" alt="User Image">
+		                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
 		
 		                <div class="comment-text">
 		                      <span class="username">
@@ -353,7 +353,7 @@
               </c:if>
               <!-- /.유저 한명의 코멘트 -->
               <form action="/JTalk/comment.action?command=write" method="post">
-                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/user4-128x128.jpg" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push input-group">
                   <input type="hidden" name = "tableName" value = "notice"/>
