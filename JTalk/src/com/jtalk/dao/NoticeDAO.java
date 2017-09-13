@@ -80,11 +80,15 @@ public class NoticeDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from notice where num = ?";
-		
+		String sql1 = "update notice set hit = hit + 1 where num = ?";
+		String sql2 = "select * from notice where num = ?";
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			pstmt.close();
+			pstmt = conn.prepareStatement(sql2);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			

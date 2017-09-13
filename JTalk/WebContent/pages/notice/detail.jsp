@@ -342,11 +342,15 @@
 	                <!-- /.comment-text -->
               </div>
               <!-- /.유저 한명의 코멘트 -->
-              <form action="#" method="post">
+              <form action="/JTalk/comment.action?command=write" method="post">
                 <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/user4-128x128.jpg" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push input-group">
-                  <input type="text" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
+                  <input type="hidden" name = "tableName" value = "notice"/>
+                  <input type="hidden" name = "postNum" value = "${notice.num}"/>
+                  <input type="hidden" name = "writerId" value = "${sessionScope.member.email}"/>
+                  <input type="hidden" name = "writerName" value = "${sessionScope.member.name}"/>
+                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
                   <span class="input-group-btn">
                       <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
                     </span>
