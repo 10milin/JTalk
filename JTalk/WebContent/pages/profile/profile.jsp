@@ -347,7 +347,7 @@
 
                     <div class="col-sm-8">
                       <p class="imformation-field">
-                      <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                      <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
                   ${date}</p>
                     </div>
                   </div>
@@ -358,8 +358,8 @@
                     <div class="col-sm-8">
                     	<c:set var="str" value="http://localhost:8181/JTalk/dist/img/user-default.png"/>
                     	<p class="imformation-field">
-                    		<c:if test="${sessionScope.member.profile eq str}">미등록</c:if>
-                    		<c:if test="${sessionScope.member.profile ne str}">등록</c:if>
+                    		<c:if test="${member.profile eq str}">미등록</c:if>
+                    		<c:if test="${member.profile ne str}">등록</c:if>
                     	</p>
                     </div>
                   </div>

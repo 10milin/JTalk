@@ -176,15 +176,15 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/JTalk/upload/${member.profile}" class="user-image" alt="User Image">
-              <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
+              <span class="hidden-xs font-bareun">${member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
                 <p>
-                  <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <b>JSL ${member.period}기 ${member.name}</b>
+                  <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
                   <small>가입일 - ${date}</small>
                 </p>
               </li>

@@ -5,10 +5,16 @@ $(document).ready(function() {
         	  text.html($(this).val());
         	  $(this).parent().css('display', 'none');
         	  text.css('display', 'inline');
+        	  $.ajax({ 
+  				url: '/JTalk/cmtmodify.ajax', 
+  				data: $(this).parents('.cmt').serialize(), 
+  				dataType: 'json', 
+  				type: 'POST'
+  			});
+        	  
     	  }else{
     		  $(this).focus();
     	  }
-    	  
       });
       
       $('.comment-edit-btn').on( 'click', function (e){
@@ -18,6 +24,12 @@ $(document).ready(function() {
 			  text.html(edit.val());
 	    	  edit.parent().css('display', 'none');
 	    	  text.css('display', 'inline');
+	    	  $.ajax({ 
+	  				url: '/JTalk/cmtmodify.ajax', 
+	  				data: $(this).parents('.cmt').serialize(), 
+	  				dataType: 'json', 
+	  				type: 'POST'
+	  			});
 		  }else{
 			  edit.focus();
 		  }

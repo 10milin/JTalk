@@ -73,10 +73,11 @@ public class CommentDAO {
 	}
 	
 	//댓글 수정
-	public void modifyComment(String content, int num) {
+	public int modifyComment(String content, int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "update comment set content = ?, writeDate = current_timestamp where num = ?";
+		int result = 0;
 		
 		try {
 			conn = getConnection();
@@ -84,12 +85,13 @@ public class CommentDAO {
 			pstmt.setString(1, content);
 			pstmt.setInt(2, num);
 			
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(null, pstmt, conn);
 		}
+		return result;
 	}
 	
 	//댓글 삭제

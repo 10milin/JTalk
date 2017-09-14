@@ -290,31 +290,6 @@
                 </tr>
               </table>
               <div class="table-bottom box-comments" style="padding:10px">
-              		<div class="box-comment">
-                	<!-- User image -->
-	                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
-	
-	                <div class="comment-text">
-	                      <span class="username">
-	                        Maria Gonzales
-	                        <span class="pull-right">
-	                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
-	                        <span class="margin-right-left"><a class="color-black" onclick="console.log(this);" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
-	                        <span class="text-muted">8:03 PM Today</span>
-	                        </span>
-	                      </span><!-- /.username -->
-	                  <span>
-	                  <div class="input-group" style="display:none;">
-		                  <input type="text" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
-		                  <span class="input-group-btn">
-		                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
-		                    </span>
-	                	</div>
-		                  <span class="comment-in">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span>
-	                  </span>
-	                </div>
-	                <!-- /.comment-text -->
-              </div>
               <!-- /.유저 한명의 코멘트 -->
               <c:if test="${empty commentList}">
               	<div class="box-comment">등록된 댓글이 없습니다.</div>
@@ -329,18 +304,21 @@
 		                      <span class="username">
 		                        ${item.writerName}
 		                        <span class="pull-right">
-		                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
-		                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
-		                        <span class="text-muted">${item.writeDate}</span>
+		                        <c:if test="${item.writerId eq member.email}">
+			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
+			                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+		                        </c:if>
+		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+		                        <span class="text-muted">${date}</span>
 		                        </span>
 		                      </span><!-- /.username -->
 		                  <span>
-		                  <form action = "/JTalk/comment.action?command=modify" method = "post">
+		                  <form class="cmt" method = "post" onsubmit="return false">
 		                  <div class="input-group" style="display:none;">
 		                  	<input type = "hidden" name = "num" value = "${item.num}"/>
 			                  <input type="text" name = "content" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
 			                  <span class="input-group-btn">
-			                      <button type="submit" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
+			                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
 			                    </span>
 		                	</div>
 			               </form>
@@ -391,8 +369,6 @@
     <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
     reserved.
   </footer>
-  
-</div>
 <div id="actionpost"></div>
 <!-- jQuery 3 -->
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
@@ -400,11 +376,6 @@
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- jQuery pagination -->
 <script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-  pagination(${totalPage},${currentPage});
-</script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -442,5 +413,10 @@
 <script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+  pagination(${totalPage},${currentPage});
+</script>
 </body>
 </html>

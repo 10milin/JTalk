@@ -342,7 +342,7 @@
               	<div class="col-md-3 col-xs-12 no-padding mobile-center">
               		<c:if test="${not empty search}">
               			<div id="searchbar"class="input-group" toggle="1" style="display:none;">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
 	                    <span class="input-group-btn">
 	                        <button class="btn btn-default" type="submit">
 	                            <i class="glyphicon glyphicon-search"></i>
@@ -352,7 +352,7 @@
               		</c:if>
               		<c:if test="${empty search}">
 	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${requestScope.search}" name="search" required>
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
 	                    <span class="input-group-btn">
 	                        <button class="btn btn-default" type="submit">
 	                            <i class="glyphicon glyphicon-search"></i>

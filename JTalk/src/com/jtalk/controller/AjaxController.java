@@ -35,6 +35,7 @@ public class AjaxController extends HttpServlet {
 		switch(action) {
 		case "/wysiwyg-img.ajax": service = new WysiwygService(); break;
 		case "/toggle.ajax" : service = new ToggleService(); break;
+		case "/cmtmodify.ajax" : service = new CmtModifyService(); break;
 		default : 
 		}
 		
