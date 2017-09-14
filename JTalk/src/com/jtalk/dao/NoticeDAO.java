@@ -149,8 +149,12 @@ public class NoticeDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "update notice set "
-				+ "title = ?, content = ?, writerId = ?, writerName = ?, fileName = ?, writeDate = current_timestamp "
-				+ "where num = ?";
+				+ "title = ?, content = ?, writerId = ?, writerName = ?,";
+		if(notice.getFileName()!=null)
+		{
+			sql+=" fileName = ?,";
+		}
+		sql +=" writeDate = current_timestamp "	+ "where num = ?";
 		
 		try {
 			conn = getConnection();
@@ -159,8 +163,15 @@ public class NoticeDAO {
 			pstmt.setString(2, notice.getContent());
 			pstmt.setString(3, notice.getWriterId());
 			pstmt.setString(4, notice.getWriterName());
-			pstmt.setString(5, notice.getFileName());
-			pstmt.setInt(6, notice.getNum());
+			if(notice.getFileName()!=null)
+			{
+				pstmt.setString(5, notice.getFileName());
+				pstmt.setInt(6, notice.getNum());
+			}
+			else
+			{
+				pstmt.setInt(5, notice.getNum());
+			}
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {

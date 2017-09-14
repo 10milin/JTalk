@@ -287,7 +287,7 @@
                 	<td>
                 		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
 			                  <div class="mailbox-attachment-info">
-			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</span>
+			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${notice.fileName }</span>
 			                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
 			                  </div>
                 		</div>

@@ -273,12 +273,13 @@
 	                <input type="text" class="form-control" placeholder="제목" name="title" value="${notice.title}" required>
 	                <input type="hidden" name="writerId" value="${member.email}">
 	                <input type="hidden" name="writerName" value="${member.name}">
+	                <input type="hidden" name="num" value="${notice.num}">
 	              </div>
 	              <br>
 	              <textarea class="summernote" name="content" required>${notice.content}</textarea>
 	              <div class="input-group col-md-4">
 					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly>
+	                <input id = "uploadfield" value="${notice.fileName }" type="text" class="form-control" readonly>
 	                <div class="input-group-btn">
 		              <div class="btn btn-default btn-file">
 		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드

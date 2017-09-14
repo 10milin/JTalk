@@ -45,7 +45,10 @@ public class ModifyService implements Service {
 			notice.setContent(content);
 			notice.setWriterId(writerId);
 			notice.setWriterName(writerName);
-			notice.setFileName(fileName);
+			if(fileName!=null)
+			{
+				notice.setFileName(fileName);
+			}
 			
 			NoticeDAO dao = NoticeDAO.getInstance();
 			dao.modifyNotice(notice);
