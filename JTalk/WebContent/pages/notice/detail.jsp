@@ -285,7 +285,7 @@
                 <tr class="board-white">
                 	<td class="border-none-top">
                 		<a class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> 댓글
-                        (5)</a>
+                        (${countComment})</a>
                 	</td>
                 </tr>
               </table>

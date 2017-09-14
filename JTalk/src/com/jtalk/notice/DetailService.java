@@ -20,6 +20,7 @@ public class DetailService implements Service {
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		
+		
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		NoticeDAO noticeDAO = NoticeDAO.getInstance();
 		CommentDAO commentDAO = CommentDAO.getInstance();
@@ -31,10 +32,11 @@ public class DetailService implements Service {
 		for(int i = 0; i < commentList.size(); i++) {
 			profileList.add(memberDAO.getPicture(commentList.get(i).getWriterId()));
 		}
-		
+		int countComment = commentDAO.countComment("notice", num);
 		request.setAttribute("notice", notice);
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("profileList", profileList);
+		request.setAttribute("countComment", countComment);
 		
 		resURL = "/pages/notice/detail.jsp";
 		
