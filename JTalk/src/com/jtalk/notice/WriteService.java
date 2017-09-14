@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
+import com.jtalk.dao.NewCommentDAO;
 import com.jtalk.dao.NoticeDAO;
 import com.jtalk.dto.NoticeDTO;
 import com.oreilly.servlet.MultipartRequest;
@@ -46,8 +47,10 @@ public class WriteService implements Service{
 			notice.setFileName(fileName);
 			
 			NoticeDAO dao = NoticeDAO.getInstance();
+			NewCommentDAO newDAO = NewCommentDAO.getInstance();
 			dao.insertNotice(notice);
 			
+			newDAO.insertNew("notice", dao.getLastNum(), writerId);
 			resURL = "/notice.action?command=notice";
 
 		}catch(Exception e) {

@@ -138,13 +138,23 @@
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning">${allNew}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">You have ${allNew} notifications</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
+                <c:if test="${newComment != null}">
+                  	<c:forEach var="item" items="${newComment}" varStatus="status">
+	                  	<li>
+		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
+		                      <i class="fa fa-users text-aqua"></i> ${item.newCount}개의 새 댓글이 있습니다.
+		                    </a>
+	                  	</li>
+                  	</c:forEach>
+                  </c:if>
+                  <!-- 
                   <li>
                     <a href="#">
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
@@ -171,6 +181,7 @@
                       <i class="fa fa-user text-red"></i> You changed your username
                     </a>
                   </li>
+                  -->
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>

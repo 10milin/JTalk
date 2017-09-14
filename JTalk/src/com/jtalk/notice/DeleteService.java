@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
+import com.jtalk.dao.NewCommentDAO;
 import com.jtalk.dao.NoticeDAO;
 
 public class DeleteService implements Service {
@@ -15,6 +16,9 @@ public class DeleteService implements Service {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		NoticeDAO dao = NoticeDAO.getInstance();
+		NewCommentDAO newDAO = NewCommentDAO.getInstance();
+		
+		newDAO.deleteNew("notice", num);
 		dao.deleteNotice(num);
 		
 		resURL = "notice.action?command=notice";

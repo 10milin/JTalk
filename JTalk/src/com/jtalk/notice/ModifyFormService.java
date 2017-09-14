@@ -1,14 +1,11 @@
 package com.jtalk.notice;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
 import com.jtalk.dao.NoticeDAO;
 import com.jtalk.dto.NoticeDTO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ModifyFormService implements Service {
 

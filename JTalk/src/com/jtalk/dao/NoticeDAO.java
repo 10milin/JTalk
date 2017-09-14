@@ -188,4 +188,29 @@ public class NoticeDAO {
 			close(null, pstmt, conn);
 		}
 	}
+	
+	//제일 마지막의 글 번호 가져오기
+	public int getLastNum() {
+		int lastNum = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select num from notice order by num desc";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				lastNum = rs.getInt("num");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return lastNum;
+	}
 }

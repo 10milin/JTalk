@@ -9,3 +9,5 @@ create table comment(
 	content varchar(1000) not null,
 	writeDate Timestamp default current_timestamp
 );
+
+alter table comment auto_increment = 1;

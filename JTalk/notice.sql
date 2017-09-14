@@ -10,3 +10,5 @@ create table notice(
 	writeDate Timestamp default current_timestamp,
 	hit int default 0
 );
+
+alter table notice auto_increment = 1;

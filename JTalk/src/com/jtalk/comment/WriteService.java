@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
 import com.jtalk.dao.CommentDAO;
+import com.jtalk.dao.NewCommentDAO;
 import com.jtalk.dto.CommentDTO;
 
 public class WriteService implements Service{
@@ -27,9 +28,10 @@ public class WriteService implements Service{
 		comment.setContent(content);
 		
 		CommentDAO dao = CommentDAO.getInstance();
-		
+		NewCommentDAO newDAO = NewCommentDAO.getInstance();
 		dao.insertComment(comment);
-
+		newDAO.updateNew("notice", postNum);
+		
 		resURL = "/notice.action?command=detail&num=" + postNum;
 		
 		return resURL;
