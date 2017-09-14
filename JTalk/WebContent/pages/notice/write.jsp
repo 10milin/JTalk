@@ -147,7 +147,7 @@
                   	<c:forEach var="item" items="${newComment}" varStatus="status">
 	                  	<li>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
-		                      <i class="fa fa-users text-aqua"></i> ${item.newCount}개의 새 댓글이 있습니다.
+		                      <i class="fa fa-users text-aqua"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
 		                    </a>
 	                  	</li>
                   	</c:forEach>

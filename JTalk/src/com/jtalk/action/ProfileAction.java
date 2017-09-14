@@ -42,9 +42,19 @@ public class ProfileAction implements Action {
 			NewCommentDAO newDAO = NewCommentDAO.getInstance();
 			ArrayList<NewCommentDTO> newComment = newDAO.getOneNew(member.getEmail());
 			int allNew = newDAO.getAllNew(member.getEmail());
+			ArrayList<String> tableName = new ArrayList<String>();
+			
+			for(int i = 0; i < newComment.size(); i++) {
+				switch(newComment.get(i).getTableName()) {
+				case "notice":
+					tableName.add("공지사항");
+					break;
+				}
+			}
 			
 			request.setAttribute("allNew", allNew);
 			request.setAttribute("newComment", newComment);
+			request.setAttribute("tableName", tableName);
 		}
 		
 		return resURL;
