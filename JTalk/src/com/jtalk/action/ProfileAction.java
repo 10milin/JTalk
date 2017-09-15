@@ -23,11 +23,15 @@ public class ProfileAction implements Action {
 		
 		String command = request.getParameter("command");
 		
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
 		if(command != null) {
 			Service service = null;
 			switch(command) {
 				case "passform": resURL = "/pages/profile/password.jsp"; break;
-				case "profileform": resURL = "/pages/profile/modify.jsp"; break;
+				case "profileform": resURL = "/pages/profile/modify.jsp";
+									member.setPr(member.getPr().replace("<br>","\n"));break;
 				case "passchange": service = new PwChangeService(); break;
 				case "profilemodify": service = new PfModifyService(); break;
 			}
@@ -36,8 +40,8 @@ public class ProfileAction implements Action {
 		}
 		
 		//알림창
-		HttpSession session = request.getSession();
-		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
+		
 		if(member != null) {
 			NewCommentDAO newDAO = NewCommentDAO.getInstance();
 			ArrayList<NewCommentDTO> newComment = newDAO.getOneNew(member.getEmail());

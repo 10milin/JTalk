@@ -33,6 +33,7 @@ public class NoticeAction implements Action{
 			case "write": service = new WriteService(); break;
 			case "modify": service = new ModifyService(); break;
 			case "delete": service = new DeleteService(); break;
+			case "download": service = new DownloadService(); break;
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

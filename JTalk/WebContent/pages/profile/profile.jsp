@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -141,7 +142,7 @@
               <span class="label label-warning">${allNew}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">${allNew}개의 새 알림이 있습니다.</li>
+              <li class="header">You have ${allNew} notifications</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -184,7 +185,7 @@
                   -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">모두보기</a></li>
+              <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
@@ -303,7 +304,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              ${sessionScope.member.pr}
+              <% pageContext.setAttribute("enter","\n"); %>
+		 	${fn:replace(member.pr, enter, '<br/>')}
             </div>
             <!-- /.box-body -->
           </div>
@@ -379,7 +381,7 @@
 
                     <div class="col-sm-8">
 	                    <div class="imformation-field">
-	                    	${sessionScope.member.pr}
+	                    	${fn:replace(member.pr, enter, '<br/>')}
 	                    </div>
                     </div>
                   </div>
