@@ -371,7 +371,7 @@
                   <div class="form-group">
                     <label for="inputExperience" class="col-sm-4 control-label"><i class="fa fa-image"></i> 사진등록</label>
                     <div class="col-sm-8">
-                    	<c:set var="str" value="http://localhost:8181/JTalk/dist/img/user-default.png"/>
+                    	<c:set var="str" value="user-default.png"/>
                     	<p class="imformation-field">
                     		<c:if test="${member.profile eq str}">미등록</c:if>
                     		<c:if test="${member.profile ne str}">등록</c:if>

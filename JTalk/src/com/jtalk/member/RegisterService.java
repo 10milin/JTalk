@@ -24,7 +24,7 @@ public class RegisterService implements Service{
 		MemberDAO dao = MemberDAO.getInstance();
 		dao.insertMember(member);
 		
-		AuthEmail.send(email, link, "insert");
+		AuthEmail.send(email, name, link, "insert");
 		
 		request.setAttribute("successMsg", name + "님 환영합니다.<br>" +email + "로 인증메일이<br>전송 되었습니다.");
 		request.setAttribute("email", email);
