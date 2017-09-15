@@ -77,6 +77,25 @@ public class NewCommentDAO {
 		}
 	}
 	
+	//모두 확인으로 인한 새 댓글수 리셋
+	public void resetAll(String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update newComment set newCount = 0 where email = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			
+		}finally {
+			close(null, pstmt, conn);
+		}
+	}
+	
 	//사용자의 전체 새 댓글 수
 	public int getAllNew(String email) {
 		int count = 0;
