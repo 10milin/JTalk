@@ -34,7 +34,8 @@ public class PfModifyService implements Service {
 			
 			String name = multi.getParameter("name");
 			int period = Integer.parseInt(multi.getParameter("period"));
-			String pr = multi.getParameter("pr");
+			String prtmp = multi.getParameter("pr");
+			String pr = prtmp.replace(System.getProperty("line.separator"),"<br>");
 			String fileName = multi.getFilesystemName("file");
 			
 			HttpSession session = request.getSession();
