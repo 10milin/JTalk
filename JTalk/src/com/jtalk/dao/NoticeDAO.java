@@ -80,15 +80,11 @@ public class NoticeDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql1 = "update notice set hit = hit + 1 where num = ?";
-		String sql2 = "select * from notice where num = ?";
+		String sql = "select * from notice where num = ?";
+		
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement(sql1);
-			pstmt.setInt(1, num);
-			pstmt.executeUpdate();
-			pstmt.close();
-			pstmt = conn.prepareStatement(sql2);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
@@ -109,6 +105,25 @@ public class NoticeDAO {
 		}
 		
 		return notice;
+	}
+	
+	//조회수 증가
+	public void hitUp(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update notice set hit = hit + 1 where num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(null, pstmt, conn);
+		}
 	}
 	
 	//글 검색기능
