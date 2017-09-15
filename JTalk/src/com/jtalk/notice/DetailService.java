@@ -1,6 +1,10 @@
 package com.jtalk.notice;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -46,8 +50,21 @@ public class DetailService implements Service {
 		}
 		
 		if(!check) {
+			long today = System.currentTimeMillis();
+			Calendar tomorrow = Calendar.getInstance();
+			
+			tomorrow.add(Calendar.DAY_OF_MONTH, 1);
+			tomorrow.set(Calendar.HOUR_OF_DAY, 0);
+			tomorrow.set(Calendar.MINUTE, 0);
+			tomorrow.set(Calendar.SECOND, 0);
+			tomorrow.set(Calendar.MILLISECOND, 0);
+			
+			long to = tomorrow.getTime().getTime();
+						
+			int time = (int)(to - today) / 1000;
 			Cookie noticeCookie = new Cookie("notice", String.valueOf(num));
-			noticeCookie.setMaxAge(60 * 60 * 24);
+			
+			noticeCookie.setMaxAge(time);
 			response.addCookie(noticeCookie);
 			noticeDAO.hitUp(num);
 		}
