@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("enter","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,8 +201,10 @@
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
 
                 <p>
-                  <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <b>
+                  <c:if test="${member.active eq 1}">JSL ${member.period}기 </c:if>
+                  ${member.name}</b>
+                  <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
                   <small>가입일 - ${date}</small>
                 </p>
               </li>
@@ -299,8 +302,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <% pageContext.setAttribute("enter","\n"); %>
-		 	${fn:replace(member.pr, enter, '<br/>')}
+		 	${fn:replace(member.pr, enter, '<br>')}
             </div>
             <!-- /.box-body -->
           </div>
@@ -326,7 +328,7 @@
                     <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-envelope"></i> 이메일</label>
 
                     <div class="col-sm-8">
-                      <p class="imformation-field">${sessionScope.member.email}</p>
+                      <p class="imformation-field">${member.email}</p>
                     </div>
                   </div>
 
@@ -353,7 +355,7 @@
 
                     <div class="col-sm-8">
                     	<p class="imformation-field">
-                    	<input type="text" class="form-control input-sm" placeholder="기수" name ="period" id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="2" value="${sessionScope.member.period}"required>
+                    	<input type="text" class="form-control input-sm" placeholder="기수" name ="period" id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="2" value="${member.period}"required>
                     	</p>
                     </div>
                   </div>
@@ -363,7 +365,7 @@
 
                     <div class="col-sm-8">
                       <p class="imformation-field">
-                      <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                      <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
                   ${date}</p>
                     </div>
                   </div>     
@@ -389,7 +391,7 @@
 
                     <div class="col-sm-8">
                       <p class="imformation-field">
-                      	<textarea rows="6" name="pr" style="resize: none; width:100%;">${sessionScope.member.pr}</textarea>
+                      	<textarea rows="6" name="pr" style="resize: none; width:100%;">${fn:replace(member.pr, '<br>', enter)}</textarea>
                       	</p>
                     </div>
                   </div>

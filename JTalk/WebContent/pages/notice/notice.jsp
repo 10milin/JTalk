@@ -197,8 +197,10 @@
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
 
                 <p>
-                  <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <b>
+                  <c:if test="${member.active eq 1}">JSL ${member.period}기 </c:if>
+                  ${member.name}</b>
+                  <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
                   <small>가입일 - ${date}</small>
                 </p>
               </li>
@@ -382,7 +384,7 @@
                 		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
                 		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
                 	</c:if>
-                	<c:if test="${'admin' eq member.email}">
+                	<c:if test="${member.active ge 2}">
                 		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
                 	</c:if>
 	              	

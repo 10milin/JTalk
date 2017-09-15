@@ -13,4 +13,5 @@ create table member(
 	pr varchar(1000) default '안녕하세요?'
 );
 
-insert into member values('admin', '1234', '관리자', 0, 0, 1, null, default, default, default);
+insert into member values('admin', '1234', '관리자', 0, 0, 3, null, default, default, default);
+delete from member;

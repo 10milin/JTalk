@@ -197,8 +197,10 @@
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
 
                 <p>
-                  <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <b>
+                  <c:if test="${member.active eq 1}">JSL ${member.period}기 </c:if>
+                  ${member.name}</b>
+                  <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
                   <small>가입일 - ${date}</small>
                 </p>
               </li>

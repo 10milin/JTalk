@@ -85,7 +85,7 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				if(rs.getString("active").equals("1")) {
+				if(rs.getString("active").equals("1") || rs.getString("active").equals("2")|| rs.getString("active").equals("3")) {
 					if(rs.getString("ban").equals("0")) {
 						result = 3;
 					}else {

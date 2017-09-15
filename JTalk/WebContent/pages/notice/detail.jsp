@@ -196,8 +196,10 @@
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
 
                 <p>
-                  <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <b>
+                  <c:if test="${member.active eq 1}">JSL ${member.period}기 </c:if>
+                  ${member.name}</b>
+                  <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
                   <small>가입일 - ${date}</small>
                 </p>
               </li>
@@ -283,16 +285,18 @@
                 		<div>${notice.content}</div>
                 	</td>
                 </tr>
+                <c:if test="${not empty notice.fileName}">
                 <tr class="board-white">
                 	<td>
                 		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
 			                  <div class="mailbox-attachment-info">
-			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${notice.fileName }</span>
+			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${notice.fileName}</span>
 			                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
 			                  </div>
                 		</div>
                 	</td>
                 </tr>
+                </c:if>
                 <tr class="board-white">
                 	<td class="border-none-top">
                 		<a class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> 댓글
@@ -317,8 +321,10 @@
 		                        <span class="pull-right">
 		                        <c:if test="${item.writerId eq member.email}">
 			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
-			                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
 		                        </c:if>
+		                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
+			                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+		                        </c:if>                   
 		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		                        <span class="text-muted">${date}</span>
 		                        </span>
@@ -359,7 +365,7 @@
               <br>
               <div class="text-right">
               	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
-              	<c:if test="${'admin' eq member.email}">
+              	<c:if test="${member.active ge 2}">
 	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=modifyform',${notice.num});"><i class="fa fa-pencil"></i> 수정</button>
 	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=delete',${notice.num});"><i class="fa fa-trash"></i> 삭제</button>
               	</c:if>

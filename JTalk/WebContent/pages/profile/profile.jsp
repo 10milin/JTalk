@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("enter","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,8 +201,10 @@
               
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
                 <p>
-                  <b>JSL ${sessionScope.member.period}기 ${sessionScope.member.name}</b>
-                  <fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
+                  <b>
+                  <c:if test="${member.active eq 1}">JSL ${member.period}기 </c:if>
+                  ${member.name}</b>
+                  <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
                   <small>가입일 - ${date}</small>
                 </p>
               </li>
@@ -304,7 +307,6 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <% pageContext.setAttribute("enter","\n"); %>
 		 	${fn:replace(member.pr, enter, '<br/>')}
             </div>
             <!-- /.box-body -->
@@ -381,7 +383,7 @@
 
                     <div class="col-sm-8">
 	                    <div class="imformation-field">
-	                    	${fn:replace(member.pr, enter, '<br/>')}
+	                    	${fn:replace(member.pr, enter, '<br>')}
 	                    </div>
                     </div>
                   </div>
