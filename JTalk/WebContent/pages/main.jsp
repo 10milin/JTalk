@@ -194,7 +194,7 @@
               <li class="user-header">
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
                 <p>
-                  <b> 
+                  <b>
                   <c:if test="${member.active eq 1}">JSL ${member.period}기 </c:if>
                   ${member.name}</b>
                   <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
