@@ -44,7 +44,7 @@ public class MessageDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from message where receiveId = ? and read = 0";
+		String sql = "select * from message where receiveId = ? and readMessage = 0";
 		
 		try {
 			messageList = new ArrayList<MessageDTO>();
@@ -61,7 +61,7 @@ public class MessageDAO {
 												rs.getString("sendName"),
 												rs.getString("receiveId"),
 												rs.getTimestamp("writeDate"),
-												rs.getString("read")));
+												rs.getString("readMessage")));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -95,7 +95,7 @@ public class MessageDAO {
 												rs.getString("sendName"),
 												rs.getString("receiveId"),
 												rs.getTimestamp("writeDate"),
-												rs.getString("read")));
+												rs.getString("readMessage")));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -128,7 +128,7 @@ public class MessageDAO {
 										rs.getString("sendName"),
 										rs.getString("receiveId"),
 										rs.getTimestamp("writeDate"),
-										rs.getString("read"));
+										rs.getString("readMessage"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -143,7 +143,7 @@ public class MessageDAO {
 	public void readMessage(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "update message set read = 1 where num = ?";
+		String sql = "update message set readMessage = 1 where num = ?";
 		
 		try {
 			conn = getConnection();

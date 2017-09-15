@@ -10,7 +10,7 @@ public class MessageDTO {
 	private String sendName;
 	private String receiveId;
 	private Timestamp writeDate;
-	private String read;
+	private String readMessage;
 	
 	public MessageDTO(String title, String content, String sendId, String sendName, String receiveId) {
 		this.title = title;
@@ -21,7 +21,7 @@ public class MessageDTO {
 	}
 
 	public MessageDTO(int num, String title, String content, String sendId, String sendName, String receiveId,
-			Timestamp writeDate, String read) {
+			Timestamp writeDate, String readMessage) {
 		this.num = num;
 		this.title = title;
 		this.content = content;
@@ -29,7 +29,7 @@ public class MessageDTO {
 		this.sendName = sendName;
 		this.receiveId = receiveId;
 		this.writeDate = writeDate;
-		this.read = read;
+		this.readMessage = readMessage;
 	}
 
 	public int getNum() {
@@ -88,11 +88,11 @@ public class MessageDTO {
 		this.writeDate = writeDate;
 	}
 
-	public String getRead() {
-		return read;
+	public String getReadMessage() {
+		return readMessage;
 	}
 
-	public void setRead(String read) {
-		this.read = read;
+	public void setReadMessage(String readMessage) {
+		this.readMessage = readMessage;
 	}
 }
