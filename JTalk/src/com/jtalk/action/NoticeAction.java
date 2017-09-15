@@ -1,17 +1,17 @@
 package com.jtalk.action;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.dao.NewCommentDAO;
-import com.jtalk.dto.MemberDTO;
-import com.jtalk.dto.NewCommentDTO;
-import com.jtalk.notice.*;
+import com.jtalk.notice.DeleteService;
+import com.jtalk.notice.DetailService;
+import com.jtalk.notice.DownloadService;
+import com.jtalk.notice.ModifyFormService;
+import com.jtalk.notice.ModifyService;
+import com.jtalk.notice.NoticeService;
+import com.jtalk.notice.WriteService;
 
 public class NoticeAction implements Action{
 
@@ -39,28 +39,6 @@ public class NoticeAction implements Action{
 			if(service !=null) resURL = service.process(request, response);
 		}
 		
-		//알림창
-		HttpSession session = request.getSession();
-		MemberDTO member = (MemberDTO)session.getAttribute("member");
-		if(member != null) {
-			NewCommentDAO newDAO = NewCommentDAO.getInstance();
-			ArrayList<NewCommentDTO> newComment = newDAO.getOneNew(member.getEmail());
-			int allNew = newDAO.getAllNew(member.getEmail());
-			ArrayList<String> tableName = new ArrayList<String>();
-			
-			for(int i = 0; i < newComment.size(); i++) {
-				switch(newComment.get(i).getTableName()) {
-				case "notice":
-					tableName.add("공지사항");
-					break;
-				}
-			}
-			
-			request.setAttribute("allNew", allNew);
-			request.setAttribute("newComment", newComment);
-			request.setAttribute("tableName", tableName);
-		}
-
 		return resURL;
 	}
 

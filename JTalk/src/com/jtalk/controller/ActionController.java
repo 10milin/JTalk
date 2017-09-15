@@ -1,17 +1,21 @@
 package com.jtalk.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jtalk.action.*;
 import com.jtalk.core.Action;
-import com.jtalk.validation.SessionValidator;
-import com.jtalk.validation.ToggleValidator;
+import com.jtalk.dao.NewCommentDAO;
+import com.jtalk.dto.MemberDTO;
+import com.jtalk.dto.NewCommentDTO;
+import com.jtalk.validation.*;
 
 @WebServlet("*.action")
 public class ActionController extends HttpServlet {
@@ -52,6 +56,28 @@ public class ActionController extends HttpServlet {
 		
 		if(SessionValidator.validate(request, response)) {
 			resURL = "/pages/login/login.jsp";
+		}else {
+			//알림창
+			HttpSession session = request.getSession();
+			MemberDTO member = (MemberDTO)session.getAttribute("member");
+			if(member != null) {
+				NewCommentDAO newDAO = NewCommentDAO.getInstance();
+				ArrayList<NewCommentDTO> newComment = newDAO.getOneNew(member.getEmail());
+				int allNew = newDAO.getAllNew(member.getEmail());
+				ArrayList<String> tableName = new ArrayList<String>();
+				
+				for(int i = 0; i < newComment.size(); i++) {
+					switch(newComment.get(i).getTableName()) {
+					case "notice":
+						tableName.add("공지사항");
+						break;
+					}
+				}
+				
+				session.setAttribute("allNew", allNew);
+				session.setAttribute("newComment", newComment);
+				session.setAttribute("tableName", tableName);
+			}
 		}
 		ToggleValidator.validate(request, response);
 		
