@@ -90,7 +90,7 @@ public class NewCommentDAO {
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			close(null, pstmt, conn);
 		}

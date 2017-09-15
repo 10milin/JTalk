@@ -134,54 +134,29 @@
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">${allNew}</span>
+              <span class="label label-warning" id="notifications-count">${allNew}</span>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">${allNew}개의 새 알림이 있습니다.</li>
+            <c:if test="${not empty newComment}">
+            <ul class="dropdown-menu" id="notifications-ul">
+              <li class="header">새로운 알림이 있습니다.</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  <c:if test="${newComment != null}">
                   	<c:forEach var="item" items="${newComment}" varStatus="status">
 	                  	<li>
+	                  		<c:choose >
+	                  			<c:when test="${item.tableName eq 'notice'}"><c:set var="ico" value = "fa-bullhorn"/></c:when>
+	                  		</c:choose>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
-		                      <i class="fa fa-users text-aqua"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
+		                      <i class="fa ${ico} text-aqua"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
 		                    </a>
 	                  	</li>
                   	</c:forEach>
-                  </c:if>
-                  <!-- 
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                  -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">모두보기</a></li>
+              <li class="footer"><a href="javascript:newcmtreset('${member.email}')"><i class="fa fa-bell-slash text-red"></i>모든 알림 끄기</a></li>
             </ul>
+            </c:if>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
@@ -827,7 +802,9 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-info-circle"></i> 회원 정보</a></li>
               <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-envelope"></i> 메시지 보내기</a></li>
-              <li class="pull-right active-none"><a href="#tab_3" class="active-none" data-toggle="tab" class="text-muted"><i class="fa fa-gear"></i></a></li>
+              <c:if test="${member.active ge 2}">
+              	<li class="pull-right active-none"><a href="#tab_3" class="active-none" data-toggle="tab" class="text-muted"><i class="fa fa-gear"></i></a></li>
+              </c:if>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
@@ -899,6 +876,8 @@
 <script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Popup Member -->
 <script src="/JTalk/dist/js/popup.js"></script>
+<!-- Custom javascript -->
+<script src="/JTalk/dist/js/utils.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 </body>

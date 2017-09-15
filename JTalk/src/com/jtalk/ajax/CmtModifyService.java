@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.dao.CommentDAO;
+import com.jtalk.dao.NewCommentDAO;
 
 public class CmtModifyService implements Action{
 
