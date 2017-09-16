@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("enter","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,6 +138,11 @@
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning" id="notifications-count">${allNew}</span>
             </a>
+            <c:if test="${empty newComment}">
+            <ul class="dropdown-menu" id="notifications-ul">
+              <li class="header">새로운 알림이 없습니다.</li>
+            </ul>
+            </c:if>
             <c:if test="${not empty newComment}">
             <ul class="dropdown-menu" id="notifications-ul">
               <li class="header">새로운 알림이 있습니다.</li>
@@ -145,16 +152,16 @@
                   	<c:forEach var="item" items="${newComment}" varStatus="status">
 	                  	<li>
 	                  		<c:choose >
-	                  			<c:when test="${item.tableName eq 'notice'}"><c:set var="ico" value = "fa-bullhorn"/></c:when>
+	                  			<c:when test="${item.tableName eq 'notice'}"><c:set var="ico" value = "fa-bullhorn text-blue"/></c:when>
 	                  		</c:choose>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
-		                      <i class="fa ${ico} text-aqua"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
+		                      <i class="fa ${ico}"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
 		                    </a>
 	                  	</li>
                   	</c:forEach>
                 </ul>
               </li>
-              <li class="footer"><a href="javascript:newcmtreset('${member.email}')"><i class="fa fa-bell-slash text-red"></i>모든 알림 끄기</a></li>
+              <li class="footer"><a href="javascript:newcmtreset('${member.email}')"><i class="fa fa-bell-slash text-red" style="margin-right:5px;"></i>모든 알림 끄기</a></li>
             </ul>
             </c:if>
           </li>
@@ -492,7 +499,7 @@
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/user1-128x128.jpg" alt="User Image">
-	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember(1);">Jonathan Burke Jr.</a></span>
+	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember('opzyra@naver.com');">Jonathan Burke Jr.</a></span>
 	                <span class="description">Shared publicly - 7:30 PM Today</span>
 	              </div>
 	              <img class="img-responsive pad" src="/JTalk/dist/img/photo2.png" alt="Photo">
@@ -791,11 +798,11 @@
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-primary">
               <div class="widget-user-image">
-                <img class="img-circle" src="/JTalk/dist/img/user-default.png" alt="User Avatar">
+                <img id="pop-profile"class="img-circle" src="/JTalk/dist/img/user-default.png" alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
-              <h3 class="widget-user-username font-bareun">김현호</h3>
-              <h5 class="widget-user-desc">JSL 25기 - 2017-09-05</h5>
+              <h3 class="widget-user-username font-bareun" id="pop-name1"></h3>
+              <h5 class="widget-user-desc">JSL<span id="pop-period1"></span>기 - <span id="pop-date"></span></h5>
             </div>
             </div>
             <div class="nav-tabs-custom">
@@ -807,8 +814,39 @@
               </c:if>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-                정보
+              <div class="tab-pane active form-horizontal" id="tab_1">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-envelope"></i> 이메일</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field" id="pop-email"></p>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-user"></i> 성명</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field" id="pop-name2"></p>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-4 control-label"><i class="fa fa-mortar-board "></i> 기수</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field"><span id="pop-period2"></span>기</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-4 control-label"><i class="fa fa-user-plus"></i> 자기소개</label>
+
+                    <div class="col-sm-8">
+	                    <div class="imformation-field" id="pop-pr">
+	                    </div>
+                    </div>
+                  </div>
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">

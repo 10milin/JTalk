@@ -321,7 +321,12 @@
                   <th style="width: 20%;">작성일</th>
                 </tr>
                 <c:if test="${empty currentList}">
-                	<td colspan="3" align="center">등록된 게시글이 없습니다.</td>
+                	<c:if test="${empty search}">
+	                	<td colspan="3" align="center">등록된 게시글이 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="3" align="center">검색결과가 없습니다.</td>
+	                </c:if>
                 </c:if>
                 <c:if test="${not empty currentList}">
                 	<c:forEach var="item" items="${currentList}">
@@ -354,7 +359,7 @@
               	<form action = "/JTalk/notice.action?command=notice" method="post">
               	<div class="col-md-3 col-xs-12 no-padding mobile-center">
               		<c:if test="${not empty search}">
-              			<div id="searchbar"class="input-group" toggle="1" style="display:none;">
+              			<div id="searchbar"class="input-group" toggle="1" style="display:inline-table;">
 	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
 	                    <span class="input-group-btn">
 	                        <button class="btn btn-default" type="submit">

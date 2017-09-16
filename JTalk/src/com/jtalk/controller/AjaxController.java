@@ -37,6 +37,7 @@ public class AjaxController extends HttpServlet {
 		case "/toggle.ajax" : service = new ToggleService(); break;
 		case "/cmtmodify.ajax" : service = new CmtModifyService(); break;
 		case "/newcmtreset.ajax": service = new NewCmtResetService(); break;
+		case "/profile.ajax": service = new ProfileService(); break;
 		default : 
 		}
 		

@@ -3090,7 +3090,7 @@ table.text-center th {
 }
 .widget-user-2 .widget-user-image > img {
   width: 65px;
-  height: auto;
+  height: 65px;
   float: left;
 }
 .treeview-menu {
