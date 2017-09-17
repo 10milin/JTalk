@@ -391,7 +391,7 @@
 
                     <div class="col-sm-8">
                       <p class="imformation-field">
-                      	<textarea rows="6" name="pr" style="resize: none; width:100%;">${fn:replace(member.pr, '<br>', enter)}</textarea>
+                      	<textarea class="form-control input-sm" rows="6" name="pr" style="resize: none; width:100%;">${fn:replace(member.pr, '<br>', enter)}</textarea>
                       	</p>
                     </div>
                   </div>

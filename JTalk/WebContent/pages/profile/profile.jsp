@@ -35,7 +35,6 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -319,12 +318,11 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#information" data-toggle="tab"><i class="fa fa-info-circle"></i> 회원 정보</a></li>
               <li><a href="#market" data-toggle="tab"><i class="fa fa-shopping-cart"></i> 마켓 관리</a></li>
-              <li><a href="#settings" data-toggle="tab"><i class="fa fa-envelope-o"></i> 메시지함</a></li>
+              <li><a href="#message" data-toggle="tab"><i class="fa fa-envelope-o"></i> 메시지함</a></li>
             </ul>
-            <div class="tab-content flex">
-            
-              <div class="active tab-pane" id="information">
-                <div class="col-md-12 col-xs-12 form-horizontal">
+            <div class="tab-content">
+              <div class="active tab-pane form-horizontal" id="information">
+
                   <div class="form-group">
                     <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-envelope"></i> 이메일</label>
 
@@ -392,17 +390,220 @@
                       <button type="button" class="btn btn-primary" onclick="actionlink('profile.action?command=profileform');">정보 변경</button>
                     </div>
                   </div>
-                </div>
+
               </div>
               
-              <div class="tab-pane" id="writelist">
+              <div class="tab-pane" id="market">
                 
               </div>
               <!-- /.tab-pane -->
 
-              <div class="tab-pane" id="market">
-                
-              </div>
+              <div class="tab-pane" id="message">
+				<div class="box-body no-padding">
+                  <div class="mailbox-controls">
+                    <!-- Check all button -->
+                    <button type = "button" class="btn btn-default btn-sm checkbox-toggle" id="checkedtoggle"><i id="checkbtn"class="fa fa-check-square-o"></i></button>
+                    <div class="btn-group">
+                      <button type = "button" class="btn btn-default btn-sm" onclick = ""><i class="glyphicon glyphicon-trash"></i></button>
+                      <button type="button" class="btn btn-default btn-sm" onclick = ""><i class="glyphicon glyphicon-refresh"></i></button>
+                    </div><!-- /.btn-group -->
+                    
+                    <div class="pull-right">
+                    	<div class="btn-group">
+	                    	<button type="button" class="btn btn-default btn-sm" onclick="listtoggle()"><i class="fa fa-list"></i></button>
+	                    	<button type="button" class="btn btn-sm btn-default" onclick="writetoggle()"><i class="fa fa-edit"></i></button>
+                    	</div>
+                    </div>
+                  </div>
+                  <div class="table-responsive scroll-h">		
+						<div id="div-msgwrite" class="col-md-12 col-xs-12 form-horizontal" style="padding: 15px; display:none;">
+						<form action = "" method = "post">
+		                  <div class="form-group">
+		                    <label for="inputName" class="col-sm-3 control-label"><i class="fa fa-user"></i> 받는이</label>
+		
+		                    <div class="col-sm-9">
+		                      <div class="input-group input-group-sm imformation-field">
+				                <input type="text" class="form-control input-sm" placeholder="받는 사람의 이름을 입력해주세요." name = "name" value=""required>
+				                    <span class="input-group-btn">
+				                      <button type="button" class="btn btn-default btn-flat"><i class="fa fa-search"></i> 검색</button>
+				                    </span>
+				              </div>
+		                    </div>
+		                  </div>
+		
+		                  <div class="form-group">
+		                    <label for="inputName" class="col-sm-3 control-label"><i class="glyphicon glyphicon-text-size"></i> 제목</label>
+		
+		                    <div class="col-sm-9">
+		                      <p class="imformation-field">
+		                      	<input type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "name" value=""required>
+		                    </div>
+		                  </div>
+		                  
+		                  <div class="form-group">
+		                    <label for="inputSkills" class="col-sm-3 control-label"><i class="fa fa-clone"></i> 내용</label>
+		
+		                    <div class="col-sm-9">
+		                      <p class="imformation-field">
+		                      	<textarea class="form-control input-sm" rows="6" name="pr" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
+		                      	</p>
+		                    </div>
+		                  </div>
+		                  <div class="form-group">
+		                    <div class="col-md-12 text-right">
+		                      <button type="submit" class="btn btn-sm btn-default">작성</button>
+		                    </div>
+		                  </div>
+		                  </form>
+		                </div>
+                    <table id="table-msglist" class="table table-hover">
+                      <tbody id = "messagelist" toggle="0">
+                      
+                      		<tr>
+                          		<td colspan="5" class="text-center">받은 메시지가 없습니다.</td>
+                         	<tr>
+                        
+                        	<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                       		<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                        	<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                        	<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                        	<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                        	<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                        	<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                        	<tr>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
+	                          <td class="mailbox-date">17-09-17 18:02</td>
+	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        	</tr>
+                        	<tr style="display:none;">
+                        		<td colspan="5">
+                        			<div class="message-detail">
+						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <div>
+						                	내용이 들어감
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
+                      </tbody>
+                    </table><!-- /.table -->
+                  </div><!-- /.mail-box-messages -->
+               </div><!-- /.box-body -->
+             </div><!-- /. box -->
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
@@ -468,6 +669,8 @@
 <!-- DataTables -->
 <script src="/JTalk/bower_components/datatables.net/js/jquery.dataTables.js"></script>
 <script src="/JTalk/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+<!-- Custom javascript -->
+<script src="/JTalk/dist/js/utils.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 </body>
 </html>
