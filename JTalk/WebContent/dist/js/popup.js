@@ -13,6 +13,7 @@ function showmember(email){
 			$('#pop-name2').text(member.name);
 			$('#pop-period2').text(member.period);
 			$('#pop-pr').html(member.pr);
+			$('#receiveId').val(member.email);
 			$('#popup-member').modal('show');
 		}
 	});

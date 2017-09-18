@@ -850,7 +850,36 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
-                메시지
+                <div class="form-horizontal" style="padding: 15px;">
+					<form action = "" method = "post">
+						<input id="receiveId" type="hidden" name="receiveId">
+						<input type="hidden" name="sendName" value="${member.name}">
+						<input type="hidden" name="sendId" value="${member.email}">
+	                  <div class="form-group">
+	                    <label for="inputName" class="col-sm-3 control-label"><i class="glyphicon glyphicon-text-size"></i> 제목</label>
+	
+	                    <div class="col-sm-9">
+	                      <p class="imformation-field">
+	                      	<input type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "title" required>
+	                    </div>
+	                  </div>
+	                  
+	                  <div class="form-group">
+	                    <label for="inputSkills" class="col-sm-3 control-label"><i class="fa fa-clone"></i> 내용</label>
+	
+	                    <div class="col-sm-9">
+	                      <p class="imformation-field">
+	                      	<textarea class="form-control input-sm" rows="6" name="content" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
+	                      	</p>
+	                    </div>
+	                  </div>
+	                  <div class="form-group">
+	                    <div class="col-md-12 text-right">
+	                      <button type="submit" class="btn btn-sm btn-default">작성</button>
+	                    </div>
+	                  </div>
+	                  </form>
+	                </div>
               </div>
               <div class="tab-pane" id="tab_3">
                 관리자

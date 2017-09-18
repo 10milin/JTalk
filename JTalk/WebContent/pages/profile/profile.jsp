@@ -418,25 +418,48 @@
                   <div class="table-responsive scroll-h">		
 						<div id="div-msgwrite" class="col-md-12 col-xs-12 form-horizontal" style="padding: 15px; display:none;">
 						<form action = "" method = "post">
+						  <input type="hidden" name="sendId" value="${member.email}">
+						  <input type="hidden" name="sendName" value="${member.name}">
 		                  <div class="form-group">
 		                    <label for="inputName" class="col-sm-3 control-label"><i class="fa fa-user"></i> 받는이</label>
 		
 		                    <div class="col-sm-9">
 		                      <div class="input-group input-group-sm imformation-field">
-				                <input type="text" class="form-control input-sm" placeholder="받는 사람의 이름을 입력해주세요." name = "name" value=""required>
+				                <input type="text" class="form-control input-sm" placeholder="받는 사람의 이름을 입력해주세요." name = "name" required>
 				                    <span class="input-group-btn">
 				                      <button type="button" class="btn btn-default btn-flat"><i class="fa fa-search"></i> 검색</button>
 				                    </span>
 				              </div>
 		                    </div>
 		                  </div>
+							
+						<div class="form-group">
+		                    <label for="inputName" class="col-sm-3 control-label"></label>
 		
+		                    <div class="col-sm-9">
+		                      <div class="imformation-field">
+		                      		<table class="table table-hover">
+		                      			<tr>
+		                      				<td colspan="5" class="text-center"><i class="fa fa-search"></i> 검색 결과가 없습니다.</td>
+		                      			</tr>
+		                      			<tr>
+		                      				<td><i class="fa fa-user"></i></td>
+		                      				<td>25기</td>
+		                      				<td>김현호</td>
+		                      				<td>opzyra@naver.com</td>
+		                      				<td><i class="fa fa-check-square-o"></i></td>
+		                      			</tr>
+		                      		</table>
+		                      	</div>
+		                    </div>
+		                  </div>
+							
 		                  <div class="form-group">
 		                    <label for="inputName" class="col-sm-3 control-label"><i class="glyphicon glyphicon-text-size"></i> 제목</label>
 		
 		                    <div class="col-sm-9">
 		                      <p class="imformation-field">
-		                      	<input type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "name" value=""required>
+		                      	<input type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "title" required>
 		                    </div>
 		                  </div>
 		                  
@@ -445,7 +468,7 @@
 		
 		                    <div class="col-sm-9">
 		                      <p class="imformation-field">
-		                      	<textarea class="form-control input-sm" rows="6" name="pr" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
+		                      	<textarea class="form-control input-sm" rows="6" name="content" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
 		                      	</p>
 		                    </div>
 		                  </div>
