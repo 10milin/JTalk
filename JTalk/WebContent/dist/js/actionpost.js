@@ -21,3 +21,17 @@ function actionparam(href, param){
 	form.submit();
 }
  
+function actiondownload(href, param){
+	var form = document.createElement('FORM');
+	form.method='POST';
+	form.action='/JTalk/' + href;
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "fileName");
+    hiddenField.setAttribute("value", param);
+    form.appendChild(hiddenField);
+    
+	document.getElementById('actionpost').appendChild(form);
+	form.submit();
+}
