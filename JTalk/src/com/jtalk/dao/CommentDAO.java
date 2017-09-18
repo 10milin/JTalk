@@ -113,6 +113,26 @@ public class CommentDAO {
 		}
 	}
 	
+	//글 삭제로 인한 댓글 삭제
+	public void postDeleteComment(String tableName, int postNum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from comment where tableName = ? and postNum = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tableName);
+			pstmt.setInt(2, postNum);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(null, pstmt, conn);
+		}
+	}
+	
 	//댓글의 갯수
 	public int countComment(String tableName, int postNum) {
 		int count = 0;
