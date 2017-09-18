@@ -498,61 +498,81 @@
 	            <!-- /.box-header -->
 	            <div class="box-body">
 	              <div class="user-block">
-	                <img class="img-circle" src="/JTalk/dist/img/user1-128x128.jpg" alt="User Image">
-	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember('opzyra@naver.com');">Jonathan Burke Jr.</a></span>
-	                <span class="description">Shared publicly - 7:30 PM Today</span>
+	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
+	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember('opzyra@naver.com');">J-Talk 대나무숲</a></span>
+	                <span class="description">대신 전해드립니다 - 2017-09-18 20:05</span>
 	              </div>
-	              <img class="img-responsive pad" src="/JTalk/dist/img/photo2.png" alt="Photo">
-	
-	              <p>I took this photo this morning. What do you guys think?</p>
-	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-	              <span class="pull-right text-muted">127 likes - 3 comments</span>
+	              <div class="col-md-12 tree-content">
+	              	<img class="img-responsive" src="/JTalk/dist/img/photo2.png" alt="Photo">
+	              	<p>I took this photo this morning. What do you guys think?</p>
+	              </div>
+	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
+	              <span class="pull-right text-muted">
+	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 (100)</a> 
+	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 (5)</a>
+	              	</span>
 	            </div>
 	            <!-- /.box-body -->
 	            <div class="box-footer box-comments">
 	              <div class="box-comment">
-	                <!-- User image -->
-	                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
-	
-	                <div class="comment-text">
-	                      <span class="username">
-	                        Maria Gonzales
-	                        <span class="text-muted pull-right">8:03 PM Today</span>
-	                      </span><!-- /.username -->
-	                  It is a long established fact that a reader will be distracted
-	                  by the readable content of a page when looking at its layout.
-	                </div>
-	                <!-- /.comment-text -->
-	              </div>
-	              <!-- /.box-comment -->
-	              <div class="box-comment">
-	                <!-- User image -->
-	                <img class="img-circle img-sm" src="/JTalk/dist/img/user4-128x128.jpg" alt="User Image">
-	
-	                <div class="comment-text">
-	                      <span class="username">
-	                        Luna Stark
-	                        <span class="text-muted pull-right">8:03 PM Today</span>
-	                      </span><!-- /.username -->
-	                  It is a long established fact that a reader will be distracted
-	                  by the readable content of a page when looking at its layout.
-	                </div>
-	                <!-- /.comment-text -->
-	              </div>
-	              <!-- /.box-comment -->
-	            </div>
-	            <!-- /.box-footer -->
-	            <div class="box-footer">
-	              <form action="#" method="post">
+	                <!-- /.유저 한명의 코멘트 -->
+	              <c:if test="${not empty commentList}">
+		              <c:forEach var="item" items="${commentList}" varStatus="status">
+		              	<div class="box-comment">
+		                	<!-- User image -->
+			                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
+			
+			                <div class="comment-text">
+			                      <span class="username">
+			                        ${item.writerName}
+			                        <span class="pull-right">
+			                        <c:if test="${item.writerId eq member.email}">
+				                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
+			                        </c:if>
+			                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
+				                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+			                        </c:if>                   
+			                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+			                        <span class="text-muted">${date}</span>
+			                        </span>
+			                      </span><!-- /.username -->
+			                  <span>
+			                  <form class="cmt" method = "post" onsubmit="return false">
+			                  <div class="input-group" style="display:none;">
+			                  	<input type = "hidden" name = "num" value = "${item.num}"/>
+				                  <input type="text" name = "content" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
+				                  <span class="input-group-btn">
+				                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
+				                    </span>
+			                	</div>
+				               </form>
+				                  <span class="comment-in">${item.content}</span>
+			                  </span>
+			                </div>
+			                <!-- /.comment-text -->
+		              </div>
+		              </c:forEach>
+	              </c:if>
+	              <!-- /.유저 한명의 코멘트 -->
+	              <form action="/JTalk/comment.action?command=write" method="post">
 	                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
 	                <!-- .img-push is used to add margin to elements next to floating images -->
-	                <div class="img-push">
-	                  <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+	                <div class="img-push input-group">
+	                  <input type="hidden" name = "tableName" value = "notice"/>
+	                  <input type="hidden" name = "postNum" value = "${notice.num}"/>
+	                  <input type="hidden" name = "writerId" value = "${member.email}"/>
+	                  <input type="hidden" name = "writerName" value = "${member.name}"/>
+	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
+	                  <span class="input-group-btn">
+	                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
+	                    </span>
 	                </div>
 	              </form>
-	            </div>
-	            <!-- /.box-footer -->
+		            </div>
+		            <!-- /.box-footer -->
+		          </div>
 	          </div>
+	          
 	          <!-- /.box -->
 	        </div>
 	        <!-- /.col-md-7 -->
@@ -937,6 +957,8 @@
 <script src="/JTalk/dist/js/demo.js"></script>
 <!-- Infomation Panel Switching -->
 <script src="/JTalk/dist/js/information.js"></script>
+<!-- Ajax Re-edit -->
+<script src="/JTalk/dist/js/reedit.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
 <!-- Javascript of Sidebar toggle -->
