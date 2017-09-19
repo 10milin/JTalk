@@ -482,13 +482,13 @@
 		                </div>
                     <table id="table-msglist" class="table table-hover">
                       <tbody id = "messagelist" toggle="0">
-                      		<c:if test="${empty newMessageList}">
+                      		<c:if test="${empty allMessageList}">
                       		<tr>
                           		<td colspan="5" class="text-center">받은 메시지가 없습니다.</td>
                          	</tr>
                          	</c:if>
-                         	<c:if test="${not empty newMessageList}">
-                         	<c:forEach var="item" items="${newMessageList}">
+                         	<c:if test="${not empty allMessageList}">
+                         	<c:forEach var="item" items="${allMessageList}">
                          	<tr>
 	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
 	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">${item.sendName}</a></td>

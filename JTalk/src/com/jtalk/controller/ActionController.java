@@ -85,9 +85,10 @@ public class ActionController extends HttpServlet {
 				//새 메시지 알림
 				MessageDAO messageDAO = MessageDAO.getInstance();
 				ArrayList<MessageDTO> newMessageList = messageDAO.getNotReadMessage(member.getEmail());
-				
+				ArrayList<MessageDTO> allMessageList = messageDAO.getAllMessage(member.getEmail());
 				request.setAttribute("newMessage", newMessageList.size());
 				request.setAttribute("newMessageList", newMessageList);
+				request.setAttribute("allMessageList", allMessageList);
 			}
 		}
 		ToggleValidator.validate(request, response);
