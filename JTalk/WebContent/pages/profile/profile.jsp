@@ -417,9 +417,10 @@
                   </div>
                   <div class="table-responsive scroll-h">		
 						<div id="div-msgwrite" class="col-md-12 col-xs-12 form-horizontal" style="padding: 15px; display:none;">
-						<form action = "" method = "post">
+						<form action = "/JTalk/message.action?command=send" method = "post">
 						  <input type="hidden" name="sendId" value="${member.email}">
 						  <input type="hidden" name="sendName" value="${member.name}">
+						  <input type="hidden" name="receiveId" value="admin">
 		                  <div class="form-group">
 		                    <label for="inputName" class="col-sm-3 control-label"><i class="fa fa-user"></i> 받는이</label>
 		
@@ -481,147 +482,33 @@
 		                </div>
                     <table id="table-msglist" class="table table-hover">
                       <tbody id = "messagelist" toggle="0">
-                      
+                      		<c:if test="${empty newMessageList}">
                       		<tr>
                           		<td colspan="5" class="text-center">받은 메시지가 없습니다.</td>
+                         	</tr>
+                         	</c:if>
+                         	<c:if test="${not empty newMessageList}">
+                         	<c:forEach var="item" items="${newMessageList}">
                          	<tr>
-                        
-                        	<tr>
 	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
+	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">${item.sendName}</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">${item.title}</a></td>
+	                          <fmt:formatDate var="date" value="${item.writeDate}" pattern="yy-MM-dd hh:mm" />
+	                          <td class="mailbox-date">${date}</td>
+	                          <td><a href="javascript:actionparam('message.action?command=delete',${item.num});"><i class="glyphicon glyphicon-trash"></i></a></td>
                         	</tr>
                         	<tr style="display:none;">
                         		<td colspan="5">
                         			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
+						                <h4>${item.title}</h4>
 						                <div>
-						                	내용이 들어감
+						                	${item.content}
 						                </div>
 						              </div>
                         		</td>
-                        	</tr>
-                       		<tr>
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-                        	</tr>
-                        	<tr style="display:none;">
-                        		<td colspan="5">
-                        			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
-						                <div>
-						                	내용이 들어감
-						                </div>
-						              </div>
-                        		</td>
-                        	</tr>
-                        	<tr>
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-                        	</tr>
-                        	<tr style="display:none;">
-                        		<td colspan="5">
-                        			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
-						                <div>
-						                	내용이 들어감
-						                </div>
-						              </div>
-                        		</td>
-                        	</tr>
-                        	<tr>
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-                        	</tr>
-                        	<tr style="display:none;">
-                        		<td colspan="5">
-                        			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
-						                <div>
-						                	내용이 들어감
-						                </div>
-						              </div>
-                        		</td>
-                        	</tr>
-                        	<tr>
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-                        	</tr>
-                        	<tr style="display:none;">
-                        		<td colspan="5">
-                        			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
-						                <div>
-						                	내용이 들어감
-						                </div>
-						              </div>
-                        		</td>
-                        	</tr>
-                        	<tr>
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-                        	</tr>
-                        	<tr style="display:none;">
-                        		<td colspan="5">
-                        			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
-						                <div>
-						                	내용이 들어감
-						                </div>
-						              </div>
-                        		</td>
-                        	</tr>
-                        	<tr>
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-                        	</tr>
-                        	<tr style="display:none;">
-                        		<td colspan="5">
-                        			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
-						                <div>
-						                	내용이 들어감
-						                </div>
-						              </div>
-                        		</td>
-                        	</tr>
-                        	<tr>
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">작성자</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">타이틀이 길어부리면 어떻게 하냐??</a></td>
-	                          <td class="mailbox-date">17-09-17 18:02</td>
-	                          <td><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-                        	</tr>
-                        	<tr style="display:none;">
-                        		<td colspan="5">
-                        			<div class="message-detail">
-						                <h4>타이틀이 길어부리면 어떻게 하냐??</h4>
-						                <div>
-						                	내용이 들어감
-						                </div>
-						              </div>
-                        		</td>
-                        	</tr>
+                        	</tr>                         	
+                         	</c:forEach>
+                        	</c:if>
                       </tbody>
                     </table><!-- /.table -->
                   </div><!-- /.mail-box-messages -->

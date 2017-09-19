@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static com.jtalk.db.JdbcUtils.*;
 import com.jtalk.dto.MemberDTO;
@@ -253,5 +254,32 @@ public class MemberDAO {
 		}
 		
 		return profile;
+	}
+	
+	//회원 이름으로 email 찾기
+	public ArrayList<String> nameFindEmail(String name) {
+		ArrayList<String> email = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select email from member where name = ?";
+		
+		try {
+			email = new ArrayList<String>();
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				email.add(rs.getString("email"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return email;
 	}
 }

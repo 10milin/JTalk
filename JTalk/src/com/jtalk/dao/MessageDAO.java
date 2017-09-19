@@ -44,7 +44,7 @@ public class MessageDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from message where receiveId = ? and readMessage = 0";
+		String sql = "select * from message where receiveId = ? and readMessage = 0 order by num desc";
 		
 		try {
 			messageList = new ArrayList<MessageDTO>();
@@ -78,7 +78,7 @@ public class MessageDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from message where receiveId = ?";
+		String sql = "select * from message where receiveId = ? order by num desc";
 		
 		try {
 			messageList = new ArrayList<MessageDTO>();

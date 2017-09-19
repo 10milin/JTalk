@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.jtalk.action.*;
 import com.jtalk.core.Action;
+import com.jtalk.dao.MessageDAO;
 import com.jtalk.dao.NewCommentDAO;
 import com.jtalk.dto.MemberDTO;
+import com.jtalk.dto.MessageDTO;
 import com.jtalk.dto.NewCommentDTO;
 import com.jtalk.validation.*;
 
@@ -48,6 +50,7 @@ public class ActionController extends HttpServlet {
 		case "/notice.action": service = new NoticeAction(); break;
 		case "/profile.action": service = new ProfileAction(); break;
 		case "/comment.action" : service = new CommentAction(); break;
+		case "/message.action" : service = new MessageAction(); break;
 		default : resURL = "/index.action";
 		}
 
@@ -61,6 +64,7 @@ public class ActionController extends HttpServlet {
 			HttpSession session = request.getSession();
 			MemberDTO member = (MemberDTO)session.getAttribute("member");
 			if(member != null) {
+				//새 댓글 알림
 				NewCommentDAO newDAO = NewCommentDAO.getInstance();
 				ArrayList<NewCommentDTO> newComment = newDAO.getOneNew(member.getEmail());
 				int allNew = newDAO.getAllNew(member.getEmail());
@@ -77,6 +81,13 @@ public class ActionController extends HttpServlet {
 				session.setAttribute("allNew", allNew);
 				session.setAttribute("newComment", newComment);
 				session.setAttribute("tableName", tableName);
+				
+				//새 메시지 알림
+				MessageDAO messageDAO = MessageDAO.getInstance();
+				ArrayList<MessageDTO> newMessageList = messageDAO.getNotReadMessage(member.getEmail());
+				
+				request.setAttribute("newMessage", newMessageList.size());
+				request.setAttribute("newMessageList", newMessageList);
 			}
 		}
 		ToggleValidator.validate(request, response);
