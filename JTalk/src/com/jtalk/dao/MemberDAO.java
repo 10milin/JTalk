@@ -257,22 +257,34 @@ public class MemberDAO {
 	}
 	
 	//회원 이름으로 email 찾기
-	public ArrayList<String> nameFindEmail(String name) {
-		ArrayList<String> email = null;
+	public ArrayList<MemberDTO> nameFindEmail(String name) {
+		ArrayList<MemberDTO> email = null;
+		MemberDTO member = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select email from member where name = ?";
+		String sql = "select * from member where name = ?";
 		
 		try {
-			email = new ArrayList<String>();
+			email = new ArrayList<MemberDTO>();
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				email.add(rs.getString("email"));
+				member = new MemberDTO(
+						rs.getString("email"), 
+						rs.getString("pass"),
+						rs.getString("name"),
+						rs.getInt("period"),
+						rs.getString("ban"),
+						rs.getString("active"),
+						rs.getString("link"),
+						rs.getTimestamp("registerDate"),
+						rs.getString("profile"),
+						rs.getString("pr"));
+				email.add(member);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

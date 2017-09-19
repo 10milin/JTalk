@@ -37,6 +37,7 @@ public class WriteService implements Service{
 			String writerId = multi.getParameter("writerId");
 			String writerName = multi.getParameter("writerName");
 			String fileName = multi.getFilesystemName("file");
+			String originFileName = multi.getOriginalFileName("file");
 			
 			NoticeDTO notice = new NoticeDTO();
 			
@@ -45,6 +46,7 @@ public class WriteService implements Service{
 			notice.setWriterId(writerId);
 			notice.setWriterName(writerName);
 			notice.setFileName(fileName);
+			notice.setOriginFileName(originFileName);
 			
 			NoticeDAO dao = NoticeDAO.getInstance();
 			NewCommentDAO newDAO = NewCommentDAO.getInstance();

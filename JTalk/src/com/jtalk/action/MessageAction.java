@@ -19,7 +19,6 @@ public class MessageAction implements Action{
 		if(command != null) {
 			Service service = null;
 			switch(command) {
-			case "send" : service = new SendService(); break;
 			case "delete" : service = new DeleteService(); break;
 			}
 			

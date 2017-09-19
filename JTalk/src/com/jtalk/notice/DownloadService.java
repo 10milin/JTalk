@@ -19,10 +19,10 @@ public class DownloadService implements Service {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
-		
-		String resURL = "/pages/notice/detail.jsp";
-				
+						
 		String fileName = request.getParameter("fileName");
+		String originFileName = request.getParameter("originFileName");
+		
 		ServletContext context = request.getServletContext();
 		String filePath = context.getRealPath("/upload");
 			
@@ -40,19 +40,19 @@ public class DownloadService implements Service {
             
             if(strClient.indexOf("MSIE 5.5") != -1)
             {
-            	response.setHeader("Content-Disposition", "fileName="+fileName+";");
+            	response.setHeader("Content-Disposition", "fileName="+originFileName+";");
             }
             else
             {
                 try
                 {
-					fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+                	originFileName = URLEncoder.encode(originFileName, "UTF-8").replaceAll("\\+", "%20");
 				}
                 catch (UnsupportedEncodingException e)
                 {
 					e.printStackTrace();
 				}
-                response.setHeader("Content-Disposition", "attachment; fileName="+fileName+";");
+                response.setHeader("Content-Disposition", "attachment; fileName="+originFileName+";");
             }
             
             response.setHeader("Content-Length", String.valueOf(fileSize));
@@ -99,7 +99,7 @@ public class DownloadService implements Service {
 			System.out.println("파일다운 에러");
 		}
 		
-		return resURL;
+		return null;
 	}
 
 }

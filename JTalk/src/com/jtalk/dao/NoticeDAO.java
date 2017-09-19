@@ -19,8 +19,8 @@ public class NoticeDAO {
 	public void insertNotice(NoticeDTO notice) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into notice(title, content, writerId, writerName, fileName) "
-				+ "values(?, ?, ?, ?, ?)";
+		String sql = "insert into notice(title, content, writerId, writerName, fileName, originFileName) "
+				+ "values(?, ?, ?, ?, ?, ?)";
 		
 		try {
 			conn = getConnection();
@@ -30,6 +30,7 @@ public class NoticeDAO {
 			pstmt.setString(3, notice.getWriterId());
 			pstmt.setString(4, notice.getWriterName());
 			pstmt.setString(5, notice.getFileName());
+			pstmt.setString(6, notice.getOriginFileName());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -61,6 +62,7 @@ public class NoticeDAO {
 						rs.getString("writerId"),
 						rs.getString("writerName"),
 						rs.getString("fileName"),
+						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
 				list.add(notice);
@@ -95,6 +97,7 @@ public class NoticeDAO {
 						rs.getString("writerId"),
 						rs.getString("writerName"),
 						rs.getString("fileName"),
+						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
 			}
@@ -147,6 +150,7 @@ public class NoticeDAO {
 											rs.getString("writerId"),
 											rs.getString("writerName"),
 											rs.getString("fileName"),
+											rs.getString("originFileName"),
 											rs.getTimestamp("writeDate"),
 											rs.getInt("hit")));
 			}
@@ -167,7 +171,7 @@ public class NoticeDAO {
 				+ "title = ?, content = ?, writerId = ?, writerName = ?,";
 		if(notice.getFileName()!=null)
 		{
-			sql+=" fileName = ?,";
+			sql+=" fileName = ?, originFileName = ?";
 		}
 		sql +=" writeDate = current_timestamp "	+ "where num = ?";
 		
@@ -181,7 +185,8 @@ public class NoticeDAO {
 			if(notice.getFileName()!=null)
 			{
 				pstmt.setString(5, notice.getFileName());
-				pstmt.setInt(6, notice.getNum());
+				pstmt.setString(6, notice.getOriginFileName());
+				pstmt.setInt(7, notice.getNum());
 			}
 			else
 			{

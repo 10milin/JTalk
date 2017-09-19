@@ -9,12 +9,13 @@ public class NoticeDTO {
 	private String writerId;
 	private String writerName;
 	private String fileName;
+	private String originFileName;
 	private Timestamp writeDate;
 	private int hit;
 	
 	public NoticeDTO() {}
 	
-	public NoticeDTO(int num, String title, String content, String writerId, String writerName, String fileName,
+	public NoticeDTO(int num, String title, String content, String writerId, String writerName, String fileName, String originFileName,
 			Timestamp writeDate, int hit) {
 		this.num = num;
 		this.title = title;
@@ -22,8 +23,17 @@ public class NoticeDTO {
 		this.writerId = writerId;
 		this.writerName = writerName;
 		this.fileName = fileName;
+		this.originFileName = originFileName;
 		this.writeDate = writeDate;
 		this.hit = hit;
+	}
+
+	public String getOriginFileName() {
+		return originFileName;
+	}
+
+	public void setOriginFileName(String originFileName) {
+		this.originFileName = originFileName;
 	}
 
 	public int getNum() {

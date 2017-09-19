@@ -290,8 +290,8 @@
                 	<td>
                 		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
 			                  <div class="mailbox-attachment-info">
-			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${notice.fileName}</span>
-			                          <a href="javascript:actiondownload('notice.action?command=download','${notice.fileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
+			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${notice.originFileName}</span>
+			                          <a href="javascript:actiondownload('notice.action?command=download','${notice.fileName}', '${notice.originFileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
 			                  </div>
                 		</div>
                 	</td>

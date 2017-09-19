@@ -21,7 +21,7 @@ function actionparam(href, param){
 	form.submit();
 }
  
-function actiondownload(href, param){
+function actiondownload(href, fileName, originFileName){
 	var form = document.createElement('FORM');
 	form.method='POST';
 	form.action='/JTalk/' + href;
@@ -29,7 +29,13 @@ function actiondownload(href, param){
 	var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "fileName");
-    hiddenField.setAttribute("value", param);
+    hiddenField.setAttribute("value", fileName);
+    form.appendChild(hiddenField);
+    
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "originFileName");
+    hiddenField.setAttribute("value", originFileName);
     form.appendChild(hiddenField);
     
 	document.getElementById('actionpost').appendChild(form);

@@ -1,17 +1,20 @@
-package com.jtalk.message;
+package com.jtalk.ajax;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.jtalk.core.Service;
+import com.jtalk.core.Action;
 import com.jtalk.dao.MessageDAO;
 import com.jtalk.dto.MessageDTO;
 
-public class SendService implements Service{
+public class MessageSendService implements Action{
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) {
-		String resURL = "/pages/profile/profile.jsp";
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String json = null;
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -23,7 +26,9 @@ public class SendService implements Service{
 		MessageDAO messageDAO = MessageDAO.getInstance();
 		
 		messageDAO.sendMessage(message);
-		return resURL;
+		
+		json = "{\"receiveId\": \"" + receiveId + "\", \"sendName\": \"" + sendName +"\"}";
+		
+		return json;
 	}
-
 }

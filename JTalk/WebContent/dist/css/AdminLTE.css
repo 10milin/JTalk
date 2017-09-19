@@ -5232,3 +5232,17 @@ table.text-center th {
 .margin-l-5{
 	margin-left: 5px;
 }
+
+.emailchoice{
+	background-color: #3c8dbc;
+    color: white;
+}
+
+.emailchoicea{
+	color:black !important;
+}
+
+#emailserach-table > tr:hover {
+	background-color: #3c8dbc;
+    color: white;
+}

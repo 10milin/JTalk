@@ -52,3 +52,72 @@ function writetoggle(){
 	$('#table-msglist').css('display', 'none');
 	$('#div-msgwrite').css('display', 'block');
 }
+
+//이름으로 email목록 찾기
+function namefindemail(){
+	if($('#emailserach-input').val().length == 0){
+		$('#emailserach-input').closest('.form-group').addClass('has-error');
+		$('#emailserach-div').css('display', 'none');
+	}else{
+		$('#emailserach-input').closest('.form-group').removeClass('has-error');
+		$.ajax({ 
+			url: '/JTalk/findemail.ajax', 
+			data: "name=" + $('#emailserach-input').val(), 
+			dataType: 'json', 
+			type: 'POST',
+			success: function(e){
+				if(e.length == 0){
+					var render = '<tr><td colspan="5" class="text-center"><i class="fa fa-search"></i> 검색 결과가 없습니다.</td></tr>';
+					$('#emailserach-table').empty();
+					$('#emailserach-table').append(render);
+				}else{
+					$('#emailserach-table').empty();
+					for(var i = 0; i<e.length; i++){
+						var render = '<tr>';
+						render += '<td><i class="fa fa-user"></i></td>';
+						render += '<td>' + e[i].period + '기</td>';
+						render += '<td>' + e[i].name + '</td>';
+						render += '<td>' + e[i].email + '</td>';
+						render += '<td><a class="emailchoicea" href="javascript:void(0)" onclick="emailchoice(this)"><i class="fa fa-check"></i></a></td>';
+						render += '</tr>';
+						$('#emailserach-table').append(render);
+					}
+				}
+				
+				$('#emailserach-div').css('display', 'block');
+
+			}
+		});
+	}
+}
+
+//이름으로 email 목록찾기 이벤트 추가
+$('#emailserach-input').keydown(function(key){
+	if(key.keyCode == 13){
+		namefindemail();
+		return false;
+	}
+});
+
+// 찾은사람 선택
+function emailchoice(obj){
+	var email = $(obj).parent().prev().text();
+	$(obj).closest('tbody').children('tr').removeAttr('class', 'emailchoice');
+	$(obj).closest('tr').attr('class', 'emailchoice');
+	$('#reciveId').val(email);
+}
+
+//메시지 작성
+function sendmessage(){
+	$.ajax({ 
+		url: '/JTalk/messagesend.ajax', 
+		data: $('#send-action').serialize(),
+		dataType: 'json', 
+		type: 'POST',
+		success: function(e){
+			$('#msg-complete').modal('show');
+			$('#modal-msg').text($('#emailserach-input').val() + '(' + e.receiveId + ')님께 메시지를 전송하였습니다.');
+		}
+	});
+	return false;
+}

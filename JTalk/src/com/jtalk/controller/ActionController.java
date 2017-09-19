@@ -93,7 +93,7 @@ public class ActionController extends HttpServlet {
 		}
 		ToggleValidator.validate(request, response);
 		
-		request.getRequestDispatcher(resURL).forward(request, response);
+		if(resURL != null) request.getRequestDispatcher(resURL).forward(request, response);
 		
 	}
 

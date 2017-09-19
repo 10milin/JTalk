@@ -417,39 +417,32 @@
                   </div>
                   <div class="table-responsive scroll-h">		
 						<div id="div-msgwrite" class="col-md-12 col-xs-12 form-horizontal" style="padding: 15px; display:none;">
-						<form action = "/JTalk/message.action?command=send" method = "post">
+						<form id="send-action" method = "post" onsubmit="return sendmessage()">
 						  <input type="hidden" name="sendId" value="${member.email}">
 						  <input type="hidden" name="sendName" value="${member.name}">
-						  <input type="hidden" name="receiveId" value="admin">
+						  <input id="reciveId" type="hidden" name="receiveId" value="admin">
 		                  <div class="form-group">
 		                    <label for="inputName" class="col-sm-3 control-label"><i class="fa fa-user"></i> 받는이</label>
-		
+							
 		                    <div class="col-sm-9">
 		                      <div class="input-group input-group-sm imformation-field">
-				                <input type="text" class="form-control input-sm" placeholder="받는 사람의 이름을 입력해주세요." name = "name" required>
+				                <input id="emailserach-input"type="text" class="form-control input-sm" placeholder="받는 사람의 이름을 입력해주세요." name = "name">
 				                    <span class="input-group-btn">
-				                      <button type="button" class="btn btn-default btn-flat"><i class="fa fa-search"></i> 검색</button>
+				                      <button type="button" class="btn btn-default btn-flat" onclick="namefindemail()"><i class="fa fa-search"></i> 검색</button>
 				                    </span>
 				              </div>
 		                    </div>
 		                  </div>
 							
-						<div class="form-group">
+						<div id="emailserach-div" class="form-group" style="display:none;">
 		                    <label for="inputName" class="col-sm-3 control-label"></label>
 		
 		                    <div class="col-sm-9">
 		                      <div class="imformation-field">
-		                      		<table class="table table-hover">
-		                      			<tr>
-		                      				<td colspan="5" class="text-center"><i class="fa fa-search"></i> 검색 결과가 없습니다.</td>
-		                      			</tr>
-		                      			<tr>
-		                      				<td><i class="fa fa-user"></i></td>
-		                      				<td>25기</td>
-		                      				<td>김현호</td>
-		                      				<td>opzyra@naver.com</td>
-		                      				<td><i class="fa fa-check-square-o"></i></td>
-		                      			</tr>
+		                      		<table class="table table-condensed">
+		                      			<tbody id="emailserach-table">
+		                      			
+		                      			</tbody>
 		                      		</table>
 		                      	</div>
 		                    </div>
@@ -535,6 +528,27 @@
   
 </div>
 <div id="actionpost"></div>
+<!-- modal -->
+<div class="modal fade" id="msg-complete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+   	  <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><i class="fa fa-comments"></i> J-Talk 안내 메시지</h4>
+      </div>
+      <div class="modal-body">
+        <p id="modal-msg"></p>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <!-- jQuery 3 -->
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
