@@ -8,25 +8,28 @@ public class MessageDTO {
 	private String content;
 	private String sendId;
 	private String sendName;
+	private String sendProfile;
 	private String receiveId;
 	private Timestamp writeDate;
 	private String readMessage;
 	
-	public MessageDTO(String title, String content, String sendId, String sendName, String receiveId) {
+	public MessageDTO(String title, String content, String sendId, String sendName, String sendProfile, String receiveId) {
 		this.title = title;
 		this.content = content;
 		this.sendId = sendId;
+		this.sendProfile = sendProfile;
 		this.sendName = sendName;
 		this.receiveId = receiveId;
 	}
 
-	public MessageDTO(int num, String title, String content, String sendId, String sendName, String receiveId,
+	public MessageDTO(int num, String title, String content, String sendId, String sendName, String sendProfile, String receiveId,
 			Timestamp writeDate, String readMessage) {
 		this.num = num;
 		this.title = title;
 		this.content = content;
 		this.sendId = sendId;
 		this.sendName = sendName;
+		this.sendProfile = sendProfile;
 		this.receiveId = receiveId;
 		this.writeDate = writeDate;
 		this.readMessage = readMessage;
@@ -70,6 +73,14 @@ public class MessageDTO {
 
 	public void setSendName(String sendName) {
 		this.sendName = sendName;
+	}
+
+	public String getSendProfile() {
+		return sendProfile;
+	}
+
+	public void setSendProfile(String sendProfile) {
+		this.sendProfile = sendProfile;
 	}
 
 	public String getReceiveId() {

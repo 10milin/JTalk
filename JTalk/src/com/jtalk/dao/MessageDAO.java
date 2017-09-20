@@ -19,7 +19,7 @@ public class MessageDAO {
 	public void sendMessage(MessageDTO message) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into message(title, content, sendId, sendName, receiveId) values (?, ?, ?, ?, ?)";
+		String sql = "insert into message(title, content, sendId, sendName, sendProfile, receiveId) values (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			conn = getConnection();
@@ -28,7 +28,8 @@ public class MessageDAO {
 			pstmt.setString(2, message.getContent());
 			pstmt.setString(3, message.getSendId());
 			pstmt.setString(4, message.getSendName());
-			pstmt.setString(5, message.getReceiveId());
+			pstmt.setString(5, message.getSendProfile());
+			pstmt.setString(6, message.getReceiveId());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -59,6 +60,7 @@ public class MessageDAO {
 												rs.getString("content"),
 												rs.getString("sendId"),
 												rs.getString("sendName"),
+												rs.getString("sendProfile"),
 												rs.getString("receiveId"),
 												rs.getTimestamp("writeDate"),
 												rs.getString("readMessage")));
@@ -93,6 +95,7 @@ public class MessageDAO {
 												rs.getString("content"),
 												rs.getString("sendId"),
 												rs.getString("sendName"),
+												rs.getString("sendProfile"),
 												rs.getString("receiveId"),
 												rs.getTimestamp("writeDate"),
 												rs.getString("readMessage")));
@@ -126,6 +129,7 @@ public class MessageDAO {
 										rs.getString("content"),
 										rs.getString("sendId"),
 										rs.getString("sendName"),
+										rs.getString("sendProfile"),
 										rs.getString("receiveId"),
 										rs.getTimestamp("writeDate"),
 										rs.getString("readMessage"));

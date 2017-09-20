@@ -77,11 +77,12 @@
 					<li><!-- start message -->
 						<a href="#">
 							<div class="pull-left">
-								<img src="/JTalk/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+								<img src="/JTalk/upload/${item.sendProfile}" class="img-circle" alt="User Image">
 							</div>
 							<h4>
 								${item.sendName}
-								<small><i class="fa fa-clock-o"></i></small>
+								<fmt:formatDate var="date" value="${item.writeDate}" pattern="yy-MM-dd" />
+								<small><i class="fa fa-clock-o"></i> ${date}</small>
 							</h4>
 							<p>${item.title}</p>
 						</a>

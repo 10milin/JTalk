@@ -6,6 +6,7 @@ create table message(
 	content varchar(4000) not null,
 	sendId varchar(50) not null,
 	sendName varchar(50) not null,
+	sendProfile varchar(100) not null,
 	receiveId varchar(50) not null,
 	writeDate Timestamp default current_timestamp,
 	readMessage char(1) default 0

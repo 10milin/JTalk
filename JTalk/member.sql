@@ -14,4 +14,3 @@ create table member(
 );
 
 insert into member values('admin', '1234', '관리자', 0, 0, 3, null, default, default, default);
-delete from member;

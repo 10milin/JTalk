@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.jtalk.core.Action;
 import com.jtalk.dao.MessageDAO;
+import com.jtalk.dto.MemberDTO;
 import com.jtalk.dto.MessageDTO;
 
 public class MessageSendService implements Action{
@@ -21,8 +22,10 @@ public class MessageSendService implements Action{
 		String sendId = request.getParameter("sendId");
 		String sendName = request.getParameter("sendName");
 		String receiveId = request.getParameter("receiveId");
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		
-		MessageDTO message = new MessageDTO(title, content, sendId, sendName, receiveId);
+		MessageDTO message = new MessageDTO(title, content, sendId, sendName, member.getProfile(), receiveId);
 		MessageDAO messageDAO = MessageDAO.getInstance();
 		
 		messageDAO.sendMessage(message);
