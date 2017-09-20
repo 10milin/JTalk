@@ -61,8 +61,15 @@
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">${newMessage}</span>
             </a>
+           	<c:if test="${empty newMessageList}">
+           	  <ul class="dropdown-menu">
+              	<li class="header">새로운 메시지가 없습니다.</li>
+              	<li class="footer"><a href="javascript:actionlink('profile.action?command=messagetab');">모든 메시지 보기</a></li>
+              </ul>
+           	</c:if>
+            <c:if test="${not empty newMessageList}">
             <ul class="dropdown-menu">
-              <li class="header">You have ${newMessage} messages</li>
+              <li class="header">새로운 메시지가 ${newMessage}개 있습니다.</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -82,8 +89,9 @@
                   </c:forEach>
                 </ul>
               </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
+              <li class="footer"><a href="javascript:actionlink('profile.action?command=messagetab');">모든 메시지 보기</a></li>
             </ul>
+            </c:if>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
@@ -98,7 +106,7 @@
             </c:if>
             <c:if test="${not empty newComment}">
             <ul class="dropdown-menu" id="notifications-ul">
-              <li class="header">새로운 알림이 있습니다.</li>
+              <li class="header">새로운 알림이 ${newMessage}개 있습니다.</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -155,7 +163,6 @@
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
       	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
@@ -824,16 +831,21 @@
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
                 <div class="form-horizontal" style="padding: 15px;">
-					<form action = "" method = "post">
+                	<div class="alert alert-success alert-dismissible" id="message-div" style="display:none">
+			          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			          <h4><i class="icon fa fa-check"></i>메시지 전송완료</h4>
+			         	<p id="message-p">메시지 전송이 완료되었습니다.</p>
+			        </div>
+					<form id="message-form" method = "post" onsubmit="return sendmessagemodal()">
 						<input id="receiveId" type="hidden" name="receiveId">
 						<input type="hidden" name="sendName" value="${member.name}">
-						<input type="hidden" name="sendId" value="${member.email}">
+						<input id="sendId" type="hidden" name="sendId" value="${member.email}">
 	                  <div class="form-group">
 	                    <label for="inputName" class="col-sm-3 control-label"><i class="glyphicon glyphicon-text-size"></i> 제목</label>
 	
 	                    <div class="col-sm-9">
 	                      <p class="imformation-field">
-	                      	<input type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "title" required>
+	                      	<input id="msg-title" type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "title" required>
 	                    </div>
 	                  </div>
 	                  
@@ -842,7 +854,7 @@
 	
 	                    <div class="col-sm-9">
 	                      <p class="imformation-field">
-	                      	<textarea class="form-control input-sm" rows="6" name="content" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
+	                      	<textarea id="msg-content" class="form-control input-sm" rows="6" name="content" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
 	                      	</p>
 	                    </div>
 	                  </div>

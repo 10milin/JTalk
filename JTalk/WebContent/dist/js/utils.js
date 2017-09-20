@@ -55,7 +55,7 @@ function writetoggle(){
 
 //이름으로 email목록 찾기
 function namefindemail(){
-	if($('#emailserach-input').val().length == 0){
+	if($('#emailserach-input').val().length == 0 || $('#emailserach-input').val()=='관리자'){
 		$('#emailserach-input').closest('.form-group').addClass('has-error');
 		$('#emailserach-div').css('display', 'none');
 	}else{
@@ -109,14 +109,40 @@ function emailchoice(obj){
 
 //메시지 작성
 function sendmessage(){
+	if($('#sendId').val() == $('#reciveId').val()){
+		$('#msg-complete').modal('show');
+		$('#modal-msg').text('자신에게 메시지를 보낼 수 없습니다.');
+	}else if($('#reciveId').val().length == 0){
+		$('#msg-complete').modal('show');
+		$('#modal-msg').text('받는이를 선택해주세요.');
+	}else{
+		$.ajax({ 
+			url: '/JTalk/messagesend.ajax', 
+			data: $('#send-action').serialize(),
+			dataType: 'json', 
+			type: 'POST',
+			success: function(e){
+				$('#msg-complete').modal('show');
+				$('#modal-msg').text($('#emailserach-input').val() + '(' + e.receiveId + ')님께 메시지를 전송하였습니다.');
+				$('#profile-msg-title').val('');
+				$('#profile-msg-content').val('');
+			}
+		});
+	}
+	return false;
+}
+
+function sendmessagemodal(){
 	$.ajax({ 
 		url: '/JTalk/messagesend.ajax', 
-		data: $('#send-action').serialize(),
+		data: $('#message-form').serialize(),
 		dataType: 'json', 
 		type: 'POST',
 		success: function(e){
-			$('#msg-complete').modal('show');
-			$('#modal-msg').text($('#emailserach-input').val() + '(' + e.receiveId + ')님께 메시지를 전송하였습니다.');
+			$('#msg-title').val('');
+			$('#msg-content').val('');
+			$('#message-div').css('display', 'block');
+			$('#message-p').text($('#pop-name2').text() + '(' + e.receiveId + ')님께 메시지를 전송하였습니다.');
 		}
 	});
 	return false;

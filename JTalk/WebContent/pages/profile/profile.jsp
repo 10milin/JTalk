@@ -315,7 +315,7 @@
         <!-- /.col -->
         <div class="col-md-9">
           <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="myTab">
               <li class="active"><a href="#information" data-toggle="tab"><i class="fa fa-info-circle"></i> 회원 정보</a></li>
               <li><a href="#market" data-toggle="tab"><i class="fa fa-shopping-cart"></i> 마켓 관리</a></li>
               <li><a href="#message" data-toggle="tab"><i class="fa fa-envelope-o"></i> 메시지함</a></li>
@@ -415,18 +415,18 @@
                     	</div>
                     </div>
                   </div>
-                  <div class="table-responsive scroll-h">		
+                  <div class="scroll-h">		
 						<div id="div-msgwrite" class="col-md-12 col-xs-12 form-horizontal" style="padding: 15px; display:none;">
 						<form id="send-action" method = "post" onsubmit="return sendmessage()">
-						  <input type="hidden" name="sendId" value="${member.email}">
-						  <input type="hidden" name="sendName" value="${member.name}">
-						  <input id="reciveId" type="hidden" name="receiveId" value="admin">
+						  <input id="sendId" name="sendId" type="hidden"  value="${member.email}">
+						  <input id="sendName" type="hidden" name="sendName" value="${member.name}">
+						  <input id="reciveId" type="hidden" name="receiveId">
 		                  <div class="form-group">
 		                    <label for="inputName" class="col-sm-3 control-label"><i class="fa fa-user"></i> 받는이</label>
 							
 		                    <div class="col-sm-9">
 		                      <div class="input-group input-group-sm imformation-field">
-				                <input id="emailserach-input"type="text" class="form-control input-sm" placeholder="받는 사람의 이름을 입력해주세요." name = "name">
+				                <input id="emailserach-input"type="text" class="form-control input-sm" placeholder="받는 사람의 이름을 입력해주세요." name = "name" autocomplete="off">
 				                    <span class="input-group-btn">
 				                      <button type="button" class="btn btn-default btn-flat" onclick="namefindemail()"><i class="fa fa-search"></i> 검색</button>
 				                    </span>
@@ -453,7 +453,7 @@
 		
 		                    <div class="col-sm-9">
 		                      <p class="imformation-field">
-		                      	<input type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "title" required>
+		                      	<input id = "profile-msg-title" type="text" class="form-control input-sm" placeholder="제목을 입력해주세요." name = "title" required>
 		                    </div>
 		                  </div>
 		                  
@@ -462,7 +462,7 @@
 		
 		                    <div class="col-sm-9">
 		                      <p class="imformation-field">
-		                      	<textarea class="form-control input-sm" rows="6" name="content" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
+		                      	<textarea id="profile-msg-content" class="form-control input-sm" rows="6" name="content" style="resize: none; width:100%;" placeholder="내용을 입력해주세요." required></textarea>
 		                      	</p>
 		                    </div>
 		                  </div>
@@ -596,5 +596,10 @@
 <!-- Custom javascript -->
 <script src="/JTalk/dist/js/utils.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<c:if test="${tab eq 'message'}">
+	<script>
+		$('#myTab a:last').tab('show');
+	</script>
+</c:if>
 </body>
 </html>

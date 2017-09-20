@@ -17,6 +17,8 @@ public class DeleteService implements Service{
 		MessageDAO messageDAO = MessageDAO.getInstance();
 		
 		messageDAO.deleteMessage(num);
+		request.setAttribute("tab", "message");
+		
 		return resURL;
 	}
 
