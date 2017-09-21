@@ -257,10 +257,10 @@
 	          
 	          <div class="box box-primary">
 	            <div class="box-header with-border">
-	              <form>
+	              <form action="/JTalk/anony.action?command=write" method="POST">
 	                	<textarea class="summernote" name="content" required></textarea>
-	               </form>
-	                <button type="button" class="btn btn-primary btn-block"><i class="fa fa-edit"></i> 작성</button>
+	                	<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-edit"></i> 작성</button>
+	                </form>
 	            </div>
 	            <!-- /.box-header -->
 	          </div>
@@ -270,7 +270,7 @@
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
-	                <span class="username"><a class="pointer" href="javascript:void(0)">J-Talk 대나무숲</a></span>
+	                <span class="username"><a>J-Talk 대나무숲</a></span>
 	                <span class="description">대신 전해드립니다 - 2017-09-18 20:05</span>
 	              </div>
 	              <div class="col-md-12 tree-content">
@@ -314,11 +314,10 @@
 		              </c:forEach>
 	              </c:if>
 	              <!-- /.유저 한명의 코멘트 -->
-	              <form action="/JTalk/comment.action?command=write" method="post">
+	              <form action="/JTalk/anony.action?command=comment" method="post">
 	                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="Alt Text">
 	                <!-- .img-push is used to add margin to elements next to floating images -->
 	                <div class="img-push input-group">
-	                  <input type="hidden" name = "tableName" value = "notice"/>
 	                  <input type="hidden" name = "postNum" value = "${notice.num}"/>
 	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
 	                  <span class="input-group-btn">
