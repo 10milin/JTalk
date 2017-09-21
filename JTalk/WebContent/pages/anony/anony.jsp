@@ -205,7 +205,7 @@
       	<li class="header">NOTICE</li>
       	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
         <li class="header">COMMUNITY</li>
-        <li><a href="#"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
+        <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
         <li><a href="#"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>
         <li><a href="#"><i class="fa fa-comments-o"></i> <span>선후배교류</span></a></li>
          <li><a href="#"><i class="fa fa-share-alt"></i> <span>스터디모집</span></a></li>
@@ -258,10 +258,9 @@
 	          <div class="box box-primary">
 	            <div class="box-header with-border">
 	              <form>
-	                
 	                	<textarea class="summernote" name="content" required></textarea>
-
-	                </form>
+	               </form>
+	                <button type="button" class="btn btn-primary btn-block"><i class="fa fa-edit"></i> 작성</button>
 	            </div>
 	            <!-- /.box-header -->
 	          </div>
@@ -271,7 +270,7 @@
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
-	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember('opzyra@naver.com');">J-Talk 대나무숲</a></span>
+	                <span class="username"><a class="pointer" href="javascript:void(0)">J-Talk 대나무숲</a></span>
 	                <span class="description">대신 전해드립니다 - 2017-09-18 20:05</span>
 	              </div>
 	              <div class="col-md-12 tree-content">
@@ -294,11 +293,11 @@
 		              <c:forEach var="item" items="${commentList}" varStatus="status">
 		              	<div class="box-comment">
 		                	<!-- User image -->
-			                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
+			                <img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">
 			
 			                <div class="comment-text">
 			                      <span class="username">
-			                        ${item.writerName}
+			                        J-Talk 대나무숲
 			                        <span class="pull-right">
 			                        <c:if test="${member.active ge 2}">
 				                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
@@ -316,13 +315,11 @@
 	              </c:if>
 	              <!-- /.유저 한명의 코멘트 -->
 	              <form action="/JTalk/comment.action?command=write" method="post">
-	                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
+	                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="Alt Text">
 	                <!-- .img-push is used to add margin to elements next to floating images -->
 	                <div class="img-push input-group">
 	                  <input type="hidden" name = "tableName" value = "notice"/>
 	                  <input type="hidden" name = "postNum" value = "${notice.num}"/>
-	                  <input type="hidden" name = "writerId" value = "${member.email}"/>
-	                  <input type="hidden" name = "writerName" value = "${member.name}"/>
 	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
 	                  <span class="input-group-btn">
 	                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
@@ -403,14 +400,14 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
 $('.summernote').summernote({
-    height: 200,
     tabsize: 2,
     linkTargetBlank: false,
     lang: 'ko-KR',
     toolbar: [
         ['insert', ['picture', 'video','help']]
      ],
-     placeholder: '하고싶은 말을 써주세요! 대신 전해드립니다.'
+     placeholder: '하고싶은 말을 써주세요! 대신 전해드립니다.',
+     disableDragAndDrop: true
   });
 $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
 $('.note-editing-area').click(function(){

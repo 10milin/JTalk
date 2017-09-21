@@ -19,7 +19,7 @@ public class AnonyAction implements Action{
 		if(command != null) {
 			Service service = null;
 			switch(command) {
-			case "anony": service = new AnonyService(); break;
+			case "anony": /*service = new AnonyService();*/resURL = "/pages/anony/anony.jsp"; break;
 			
 			}
 			

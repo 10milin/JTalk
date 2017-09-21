@@ -51,6 +51,7 @@ public class ActionController extends HttpServlet {
 		case "/profile.action": service = new ProfileAction(); break;
 		case "/comment.action" : service = new CommentAction(); break;
 		case "/message.action" : service = new MessageAction(); break;
+		case "/anony.action" : service = new AnonyAction(); break;
 		default : resURL = "/index.action";
 		}
 

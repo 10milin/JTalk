@@ -5250,3 +5250,7 @@ table.text-center th {
 .messagefontsize{
 	font-size: 11px;
 }
+
+.note-editor{
+	margin-bottom: 10px !important;
+}
