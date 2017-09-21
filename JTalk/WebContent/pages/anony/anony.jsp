@@ -35,6 +35,8 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- Summernote -->
+  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -236,77 +238,103 @@
     </section>
     <section class="content">
 		<div class="row">
-	        <div class="col-md-7 padding-right">
-				<div class="box box-primary">
-	          
+	        <div class="col-md-12">
+	          <div class="box box-primary">
 	            <div class="box-header with-border">
-	              
-	                <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
-	              
+	              <h3 class="box-title font-bareun"><i class="fa fa-question-circle"></i> 대나무숲이란</h3>
+	              <div class="box-tools pull-right">
+	                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	              </div>
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
+	            <div class="col-md-12 no-padding">
+	            	<img src="/JTalk/dist/img/treelogo.png" class="img-responsive" width="100%">
+	            </div>
+	            </div>
+	            <!-- ./box-body -->
+	          </div>
+	          
+	          <div class="box box-primary">
+	            <div class="box-header with-border">
+	              <form>
+	                
+	                	<textarea class="summernote" name="content" required></textarea>
+
+	                </form>
+	            </div>
+	            <!-- /.box-header -->
+	          </div>
+		          
+	          <!-- 게시글 하나 -->
+	          <div class="box box-default">
+	            <div class="box-body">
 	              <div class="user-block">
-	                <img class="img-circle" src="/JTalk/dist/img/user1-128x128.jpg" alt="User Image">
-	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember('opzyra@naver.com');">Jonathan Burke Jr.</a></span>
-	                <span class="description">Shared publicly - 7:30 PM Today</span>
+	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
+	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember('opzyra@naver.com');">J-Talk 대나무숲</a></span>
+	                <span class="description">대신 전해드립니다 - 2017-09-18 20:05</span>
 	              </div>
-	              <img class="img-responsive pad" src="/JTalk/dist/img/photo2.png" alt="Photo">
-	
-	              <p>I took this photo this morning. What do you guys think?</p>
-	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-	              <span class="pull-right text-muted">127 likes - 3 comments</span>
+	              <div class="col-md-12 tree-content">
+	              	<p>I took this photo this morning. What do you guys think?</p>
+	              </div>
+	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
+	              <c:if test="${member.active ge 2}">
+	              	<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> 삭제</button>
+	              </c:if>
+	              <span class="pull-right text-muted">
+	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 (100)</a> 
+	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 (5)</a>
+	              	</span>
 	            </div>
 	            <!-- /.box-body -->
 	            <div class="box-footer box-comments">
 	              <div class="box-comment">
-	                <!-- User image -->
-	                <img class="img-circle img-sm" src="/JTalk/dist/img/user3-128x128.jpg" alt="User Image">
-	
-	                <div class="comment-text">
-	                      <span class="username">
-	                        Maria Gonzales
-	                        <span class="text-muted pull-right">8:03 PM Today</span>
-	                      </span><!-- /.username -->
-	                  It is a long established fact that a reader will be distracted
-	                  by the readable content of a page when looking at its layout.
-	                </div>
-	                <!-- /.comment-text -->
-	              </div>
-	              <!-- /.box-comment -->
-	              <div class="box-comment">
-	                <!-- User image -->
-	                <img class="img-circle img-sm" src="/JTalk/dist/img/user4-128x128.jpg" alt="User Image">
-	
-	                <div class="comment-text">
-	                      <span class="username">
-	                        Luna Stark
-	                        <span class="text-muted pull-right">8:03 PM Today</span>
-	                      </span><!-- /.username -->
-	                  It is a long established fact that a reader will be distracted
-	                  by the readable content of a page when looking at its layout.
-	                </div>
-	                <!-- /.comment-text -->
-	              </div>
-	              <!-- /.box-comment -->
-	            </div>
-	            <!-- /.box-footer -->
-	            <div class="box-footer">
-	              <form action="#" method="post">
+	                <!-- /.유저 한명의 코멘트 -->
+	              <c:if test="${not empty commentList}">
+		              <c:forEach var="item" items="${commentList}" varStatus="status">
+		              	<div class="box-comment">
+		                	<!-- User image -->
+			                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
+			
+			                <div class="comment-text">
+			                      <span class="username">
+			                        ${item.writerName}
+			                        <span class="pull-right">
+			                        <c:if test="${member.active ge 2}">
+				                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+			                        </c:if>                   
+			                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+			                        <span class="text-muted">${date}</span>
+			                        </span>
+			                      </span><!-- /.username -->
+			                  <span>
+				                  <span class="comment-in">${item.content}</span>
+			                  </span>
+			                </div>
+		              </div>
+		              </c:forEach>
+	              </c:if>
+	              <!-- /.유저 한명의 코멘트 -->
+	              <form action="/JTalk/comment.action?command=write" method="post">
 	                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
 	                <!-- .img-push is used to add margin to elements next to floating images -->
-	                <div class="img-push">
-	                  <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+	                <div class="img-push input-group">
+	                  <input type="hidden" name = "tableName" value = "notice"/>
+	                  <input type="hidden" name = "postNum" value = "${notice.num}"/>
+	                  <input type="hidden" name = "writerId" value = "${member.email}"/>
+	                  <input type="hidden" name = "writerName" value = "${member.name}"/>
+	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
+	                  <span class="input-group-btn">
+	                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
+	                    </span>
 	                </div>
 	              </form>
-	            </div>
-	            <!-- /.box-footer -->
+		            </div>
+		          </div>
 	          </div>
-	          <!-- /.box -->
+	          <!--/.게시글 하나 -->
 	        </div>
-	        <div class="col-md-5">
-	          	w
-	        </div>
+	        
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -368,6 +396,26 @@
 <script src="/JTalk/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <!-- Custom javascript -->
 <script src="/JTalk/dist/js/utils.js"></script>
+<!-- Summernote -->
+<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+$('.summernote').summernote({
+    height: 200,
+    tabsize: 2,
+    linkTargetBlank: false,
+    lang: 'ko-KR',
+    toolbar: [
+        ['insert', ['picture', 'video','help']]
+     ],
+     placeholder: '하고싶은 말을 써주세요! 대신 전해드립니다.'
+  });
+$('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
+$('.note-editing-area').click(function(){
+	$('.note-placeholder').css('display', 'none');
+})
+</script>
 </body>
 </html>

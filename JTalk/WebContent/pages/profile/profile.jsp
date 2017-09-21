@@ -482,10 +482,10 @@
                          	</c:if>
                          	<c:if test="${not empty allMessageList}">
                          	<c:forEach var="item" items="${allMessageList}">
-                         	<tr>
+                         	<tr id="${item.num}">
 	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
 	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">${item.sendName}</a></td>
-	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0">${item.title}</a></td>
+	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0" read="${item.readMessage}">${item.title}</a></td>
 	                          <fmt:formatDate var="date" value="${item.writeDate}" pattern="yy-MM-dd hh:mm" />
 	                          <td class="mailbox-date">${date}</td>
 	                          <td><a href="javascript:actionparam('message.action?command=delete',${item.num});"><i class="glyphicon glyphicon-trash"></i></a></td>
@@ -599,6 +599,13 @@
 <c:if test="${tab eq 'message'}">
 	<script>
 		$('#myTab a:last').tab('show');
+	</script>
+</c:if>
+<c:if test="${not empty showmsg}">
+	<script>
+		var trid = $('#${showmsg}');
+		trid.next().css('display', 'table-row');
+		$(trid).children('.mailbox-subject').children().attr('detail', '1');
 	</script>
 </c:if>
 </body>

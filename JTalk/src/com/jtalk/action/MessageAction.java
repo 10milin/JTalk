@@ -12,7 +12,8 @@ public class MessageAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		/* Default URL */
-		String resURL = "/pages/error/500.jsp";
+		String resURL = "/pages/profile/profile.jsp";
+		request.setAttribute("tab", "message");
 		
 		String command = request.getParameter("command");
 		
@@ -20,6 +21,8 @@ public class MessageAction implements Action{
 			Service service = null;
 			switch(command) {
 			case "delete" : service = new DeleteService(); break;
+			case "show" : service = new ShowService(); break;
+			
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

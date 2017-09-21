@@ -64,7 +64,7 @@
            	<c:if test="${empty newMessageList}">
            	  <ul class="dropdown-menu">
               	<li class="header">새로운 메시지가 없습니다.</li>
-              	<li class="footer"><a href="javascript:actionlink('profile.action?command=messagetab');">모든 메시지 보기</a></li>
+              	<li class="footer"><a href="javascript:actionlink('message.action?command=messagetab');">모든 메시지 보기</a></li>
               </ul>
            	</c:if>
             <c:if test="${not empty newMessageList}">
@@ -75,14 +75,14 @@
                 <ul class="menu">
                   <c:forEach var = "item" items="${newMessageList}">
 					<li><!-- start message -->
-						<a href="#">
+						<a href="javascript:actionparam('message.action?command=show', '${item.num}')">
 							<div class="pull-left">
 								<img src="/JTalk/upload/${item.sendProfile}" class="img-circle" alt="User Image">
 							</div>
 							<h4>
 								${item.sendName}
 								<fmt:formatDate var="date" value="${item.writeDate}" pattern="yy-MM-dd" />
-								<small><i class="fa fa-clock-o"></i> ${date}</small>
+								<small><i class="fa fa-clock-o"></i> <span class="messagefontsize">${date}</span></small>
 							</h4>
 							<p>${item.title}</p>
 						</a>
@@ -90,7 +90,7 @@
                   </c:forEach>
                 </ul>
               </li>
-              <li class="footer"><a href="javascript:actionlink('profile.action?command=messagetab');">모든 메시지 보기</a></li>
+              <li class="footer"><a href="javascript:actionlink('message.action');">모든 메시지 보기</a></li>
             </ul>
             </c:if>
           </li>

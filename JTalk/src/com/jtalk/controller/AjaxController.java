@@ -40,6 +40,7 @@ public class AjaxController extends HttpServlet {
 		case "/profile.ajax": service = new ProfileService(); break;
 		case "/findemail.ajax": service = new NameFindEmailService(); break;
 		case "/messagesend.ajax" : service = new MessageSendService(); break;
+		case "/messagecheck.ajax": service = new MessageCheckService(); break;
 		default : 
 		}
 		

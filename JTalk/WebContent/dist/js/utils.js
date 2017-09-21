@@ -33,7 +33,19 @@ $('#checkedtoggle').click(function(){
 // 메시지 세부보기
 function msgdetail(obj){
 	var ck = $(obj).attr('detail');
+	var read = $(obj).attr('read');
 	if(ck == 0){
+		if(read == 0){
+			$.ajax({ 
+				url: '/JTalk/messagecheck.ajax', 
+				data: "num=" + $(obj).closest('tr').attr('id'), 
+				dataType: 'json', 
+				type: 'POST',
+				success: function(e){
+					$(obj).attr('read', '1');
+				}
+			});
+		}
 		$(obj).closest('tr').next().css('display', 'table-row');
 		$(obj).attr('detail', '1');
 	}else{

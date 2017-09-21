@@ -5246,3 +5246,7 @@ table.text-center th {
 	background-color: #3c8dbc;
     color: white;
 }
+
+.messagefontsize{
+	font-size: 11px;
+}
