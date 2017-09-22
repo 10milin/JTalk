@@ -159,3 +159,78 @@ function sendmessagemodal(){
 	});
 	return false;
 }
+
+//회원가입 유효성검사
+function checkemail(obj){
+	if($(obj).val().length == 0){
+		$(obj).parent().removeClass('has-error');
+		$('#msg-alert').css('display', 'none');
+		return;
+	}
+	var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	if(!regEmail.test($(obj).val())){
+		$('#msg-title').html('이메일 주소 오류');
+		$('#msg-content').html('이메일 주소가 유효하지 않습니다.<br>다시 한번 확인해주세요.');
+		$(obj).parent().addClass('has-error');
+		$('#msg-alert').css('display', 'block');
+	}else{
+		$.ajax({ 
+			url: '/JTalk/emailcheck.ajax', 
+			data: "email=" + $(obj).val(), 
+			dataType: 'json', 
+			type: 'POST',
+			success: function(e){
+				var result = e.result;
+				if(result == 0){
+					$('#msg-title').html('이메일 주소 중복');
+					$('#msg-content').html('이미 존재하는 이메일 주소입니다.<br>다른 이메일을 사용해주세요.');
+					$(obj).parent().addClass('has-error');
+					$('#msg-alert').css('display', 'block');
+				}else{
+					$(obj).parent().removeClass('has-error');
+					$('#msg-alert').css('display', 'none');
+				}
+			}
+		});
+	}
+}
+
+//비밀번호 확인 체크
+function checkpass(){
+	var a = $('#pass-a').val();
+	var b = $('#pass-b').val();
+	
+	if(a.length == 0 || b.length == 0){
+		$('#pass-a').parent().removeClass('has-error');
+		$('#pass-b').parent().removeClass('has-error');
+		$('#msg-alert').css('display', 'none');
+		return;
+	}
+	
+	if(a != b){
+		$('#msg-title').html('비밀번호 미일치');
+		$('#msg-content').html('비밀번호가 일치 하지 않습니다.<br>다시 한번 확인해주세요.');
+		$('#pass-a').parent().addClass('has-error');
+		$('#pass-b').parent().addClass('has-error');
+		$('#msg-alert').css('display', 'block');
+	}else if(a.length < 4){
+		$('#msg-title').html('비밀번호 길이 오류');
+		$('#msg-content').html('비밀번호는 최소 4자 이상입니다.<br>다른 비밀번호를 사용해주세요.');
+		$('#pass-a').parent().addClass('has-error');
+		$('#pass-b').parent().addClass('has-error');
+		$('#msg-alert').css('display', 'block');
+	}else{
+		$('#pass-a').parent().removeClass('has-error');
+		$('#pass-b').parent().removeClass('has-error');
+		$('#msg-alert').css('display', 'none');
+	}
+}
+
+// 회원가입 버튼 클릭
+function checkval(){
+	var check = $('#rg-form').find('.has-error');
+	if(check.length == 0){
+		return true;
+	}
+	return false;
+}

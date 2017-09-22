@@ -41,6 +41,7 @@ public class AjaxController extends HttpServlet {
 		case "/findemail.ajax": service = new NameFindEmailService(); break;
 		case "/messagesend.ajax" : service = new MessageSendService(); break;
 		case "/messagecheck.ajax": service = new MessageCheckService(); break;
+		case "/emailcheck.ajax":service = new EmailCheckService(); break;
 		default : 
 		}
 		

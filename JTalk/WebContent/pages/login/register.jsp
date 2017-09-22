@@ -38,21 +38,25 @@
 	
 	  <div class="register-box-body">
 	    <p class="login-box-msg font-bareun">JSL연수생이라면 무료로 이용할 수 있습니다.</p>
-	    <form action="/JTalk/register.action?command=register" method="post">
+	    <div id="msg-alert" class="alert alert-danger alert-dismissible" style="display:none;">
+          <h4><i class="icon fa fa-warning"></i><span id="msg-title"></span></h4>
+         	<p id = "msg-content"></p>
+        </div>
+	    <form id="rg-form" action="/JTalk/register.action?command=register" method="post" onsubmit="return checkval();">
 	      <div class="form-group has-feedback">
-	        <input type="text" class="form-control" placeholder="성명" name = "name" required>
+	        <input type="text" class="form-control" placeholder="성명" name = "name" maxlength="10" required>
 	        <span class="glyphicon glyphicon-user form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="email" class="form-control" placeholder="이메일" name = "email" required>
+	        <input type="email" class="form-control" placeholder="이메일" name = "email"  onkeypress = "if(event.keyCode == 32) event.returnValue = false;" onblur="checkemail(this)"  onfocus="checkemail(this)"autocomplete=”off” maxlength="30" required>
 	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="password" class="form-control" placeholder="비밀번호" name = "pass" required>
+	        <input id="pass-a" type="password" class="form-control" placeholder="비밀번호" onblur="checkpass()" onfocus="checkpass()" name = "pass" maxlength="15" required>
 	        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
-	        <input type="password" class="form-control" placeholder="비밀번호 확인" required>
+	        <input id="pass-b" type="password" class="form-control" placeholder="비밀번호 확인" onblur="checkpass()" onfocus="checkpass()" maxlength="15" required>
 	        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
 	      </div>
 	      <div class="form-group has-feedback">
@@ -82,6 +86,8 @@
 	<script src="/JTalk/plugins/iCheck/icheck.min.js"></script>
 	<!-- Javascript of ActionPost -->
 	<script src="/JTalk/dist/js/actionpost.js"></script>
+	<!-- Custom javascript -->
+<script src="/JTalk/dist/js/utils.js"></script>
 	<script>
 	  $(function () {
 	    $('input').iCheck({
