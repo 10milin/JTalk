@@ -47,7 +47,7 @@
   </div>
   <br>
   <div class="lockscreen-footer text-center">
-    Copyright &copy; 2017 <b><a href="https://adminlte.io" class="text-black">Almsaeed Studio</a></b><br>
+    Copyright &copy; 2017 <b><a class="text-black">KLM Studio</a></b><br>
     All rights reserved
   </div>
 </div>

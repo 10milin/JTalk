@@ -20,7 +20,8 @@ public class MemberDAO {
 	}
 	
 	//회원가입
-	public void insertMember(MemberDTO member) {
+	public int insertMember(MemberDTO member) {
+		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into member(email, pass, name, period, link)"
@@ -35,12 +36,13 @@ public class MemberDAO {
 			pstmt.setInt(4, member.getPeriod());
 			pstmt.setString(5, member.getLink());
 			
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(null, pstmt, conn);
 		}
+		return result;
 	}
 	
 	//회원 활성화
@@ -293,5 +295,28 @@ public class MemberDAO {
 		}
 		
 		return email;
+	}
+	
+	//비밀번호 초기화
+	public int resetPassword(String email) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update member set pass=? where email = ?";
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "1234");
+			pstmt.setString(2, email);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		
+		return result;
 	}
 }

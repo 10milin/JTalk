@@ -763,7 +763,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> ${applicationScope.version}
     </div>
-    <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2017 <a>KLM Studio</a>.</strong> All rights
     reserved.
   </footer>
   
@@ -867,8 +867,37 @@
 	                  </form>
 	                </div>
               </div>
-              <div class="tab-pane" id="tab_3">
-                관리자
+              <div class="tab-pane form-horizontal" id="tab_3">
+              <div class="alert alert-success alert-dismissible" id="message-admin-div" style="display:none">
+			          <button type="button" class="close" onclick="$('#message-admin-div').css('display', 'none')">&times;</button>
+			          <h4><i class="icon fa fa-check"></i>변경 완료</h4>
+			         	<p id="message-admin-p"></p>
+			        </div>
+                <div class="form-group">
+                    <label for="inputName" class="col-sm-4 control-label"><i class="glyphicon glyphicon-lock"></i> 비밀번호</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field"><button class="btn btn-default btn-xs" onclick="resetpassword()"><i class="fa fa-refresh"></i> 초기화</button></p>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-minus-circle"></i> 계정상태</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field" id="ban-0" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">정상</font><button class="btn btn-default btn-xs"><i class="fa fa-ban"></i> 비활성</button></p>
+                      <p class="imformation-field" id="ban-1" style="display:none;"><font color="red" style="margin-right:10px;">정지</font><button class="btn btn-default btn-xs"><i class="fa fa-bolt"></i> 활성</button></p>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-4 control-label"><i class="fa fa-key "></i> 권한부여</label>
+
+                    <div class="col-sm-8">
+                      <p class="imformation-field" id="active-1" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">일반 사용자</font><button class="btn btn-default btn-xs"><i class="fa fa-spinner"></i> 관리자 권한 부여</button></p>
+                      <p class="imformation-field" id="active-2" style="display:none;"><font color="red" style="margin-right:10px;">관리자</font><button class="btn btn-default btn-xs"><i class="fa fa-spinner"></i> 일반 사용자로 변경</button></p>
+                    </div>
+                  </div>
               </div>
               <!-- /.tab-pane -->
             </div>

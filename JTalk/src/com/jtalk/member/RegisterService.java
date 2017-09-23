@@ -22,14 +22,20 @@ public class RegisterService implements Service{
 		 
 		MemberDTO member = new MemberDTO(email, pass, name, period, link);
 		MemberDAO dao = MemberDAO.getInstance();
-		dao.insertMember(member);
+		int result = dao.insertMember(member);
 		
-		AuthEmail.send(email, name, link, "insert");
+		if(result > 0) {
+			AuthEmail.send(email, name, link, "insert");
+			
+			request.setAttribute("successMsg", name + "님 환영합니다.<br>" +email + "로 인증메일이<br>전송 되었습니다.");
+			request.setAttribute("email", email);
+			
+			resURL = "/pages/login/login.jsp";
+		}else {
+			resURL = "/pages/error/500.jsp";
+		}
 		
-		request.setAttribute("successMsg", name + "님 환영합니다.<br>" +email + "로 인증메일이<br>전송 되었습니다.");
-		request.setAttribute("email", email);
 		
-		resURL = "/pages/login/login.jsp";
 		
 		return resURL;
 	}

@@ -383,7 +383,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> ${applicationScope.version}
     </div>
-    <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2017 <a>KLM Studio</a>.</strong> All rights
     reserved.
   </footer>
 <div id="actionpost"></div>
