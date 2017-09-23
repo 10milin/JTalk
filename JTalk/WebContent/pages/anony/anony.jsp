@@ -266,23 +266,27 @@
 	          </div>
 		          
 	          <!-- 게시글 하나 -->
+	          <c:if test="${not empty currentList}">
+                <c:forEach var="item" items="${currentList}">
 	          <div class="box box-default">
 	            <div class="box-body">
+	            
 	              <div class="user-block">
+	              
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
 	                <span class="username"><a>J-Talk 대나무숲</a></span>
-	                <span class="description">대신 전해드립니다 - 2017-09-18 20:05</span>
+	                <span class="description">대신 전해드립니다 - <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd hh:mm" var="write_dt"/></span>
 	              </div>
 	              <div class="col-md-12 tree-content">
-	              	<p>I took this photo this morning. What do you guys think?</p>
+	              	<p>${item.content}</p>
 	              </div>
 	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
 	              <c:if test="${member.active ge 2}">
 	              	<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> 삭제</button>
 	              </c:if>
 	              <span class="pull-right text-muted">
-	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 (100)</a> 
-	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 (5)</a>
+	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 </a> 
+	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 </a>
 	              	</span>
 	            </div>
 	            <!-- /.box-body -->
@@ -328,6 +332,8 @@
 		            </div>
 		          </div>
 	          </div>
+	          </c:forEach>
+                </c:if>
 	          <!--/.게시글 하나 -->
 	        </div>
 	        

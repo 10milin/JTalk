@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.anony.AnonyService;
+import com.jtalk.anony.WriteService;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
 
@@ -20,8 +21,8 @@ public class AnonyAction implements Action{
 			Service service = null;
 			switch(command) {
 
-			case "anony": service = new AnonyService(); break;
-
+				case "anony": service = new AnonyService(); break;
+				case "write": service = new WriteService(); break;
 			
 			}
 			

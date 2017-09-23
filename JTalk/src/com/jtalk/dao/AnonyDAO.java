@@ -35,6 +35,7 @@ public class AnonyDAO {
 			while(rs.next())
 			{
 				anony = new AnonyDTO(rs.getInt("num"),
+						rs.getString("writerID"),
 						rs.getString("content"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("awesome"));
@@ -51,6 +52,51 @@ public class AnonyDAO {
 		}
 		
 		return list;
+	}
+
+	public void insertAnony(AnonyDTO anony) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into anony(writerID, content) values(?,?)";
+		
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, anony.getWriterId());
+			pstmt.setString(2, anony.getContent());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		
+	}
+
+	public int getLastNum() {
+		int lastNum = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select num from anony order by num desc";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				lastNum = rs.getInt("num");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return lastNum;
 	}
 
 }
