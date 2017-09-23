@@ -285,8 +285,8 @@
 	              	<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> 삭제</button>
 	              </c:if>
 	              <span class="pull-right text-muted">
-	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 </a> 
-	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 </a>
+	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 ${item.awesome} </a> 
+	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 ${countList.get(status.index)} </a>
 	              	</span>
 	            </div>
 	            <!-- /.box-body -->
@@ -318,11 +318,14 @@
 		              </c:forEach>
 	              </c:if>
 	              <!-- /.유저 한명의 코멘트 -->
-	              <form action="/JTalk/anony.action?command=comment" method="post">
+	              <form action="/JTalk/comment.action?command=write" method="post">
 	                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="Alt Text">
 	                <!-- .img-push is used to add margin to elements next to floating images -->
 	                <div class="img-push input-group">
-	                  <input type="hidden" name = "postNum" value = "${notice.num}"/>
+	                  <input type="hidden" name = "tableName" value = "anony"/>
+	                  <input type="hidden" name = "postNum" value = "${item.num}"/>
+	                  <input type="hidden" name = "writerId" value = "${member.email}"/>
+                  	  <input type="hidden" name = "writerName" value = "${member.name}"/>
 	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
 	                  <span class="input-group-btn">
 	                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>

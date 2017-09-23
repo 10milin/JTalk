@@ -52,7 +52,7 @@ public class AnonyService implements Service{
 				for(int j = i*5 ; j < (i*5)+5 && j < anonyList.size() ; j++)
 				{
 					currentList.add(anonyList.get(j));
-					/*countList.add(commentDAO.countComment("anony", anonyList.get(j).getNum()));*/
+					countList.add(commentDAO.countComment("anony", anonyList.get(j).getNum()));
 				}
 			}
 			if(i != Integer.parseInt(currentPage) - 1)
