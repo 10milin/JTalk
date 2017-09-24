@@ -31,7 +31,7 @@ public class WriteService implements Service{
 		NewCommentDAO newDAO = NewCommentDAO.getInstance();
 		dao.insertComment(comment);
 		newDAO.updateNew("notice", postNum);
-		
+
 		resURL = "/notice.action?command=detail&num=" + postNum;
 		
 		return resURL;

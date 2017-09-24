@@ -264,10 +264,10 @@
 	            </div>
 	            <!-- /.box-header -->
 	          </div>
-		      <div id="contents">
+		      <div id="contents" total="${totalPage}">
 	          <!-- 게시글 하나 -->
 	          <c:if test="${not empty currentList}">
-                <c:forEach var="item" items="${currentList}">
+                <c:forEach var="item" items="${currentList}" varStatus="st">
 	          <div class="box box-default">
 	            <div class="box-body">
 	            
@@ -286,59 +286,61 @@
 	              </c:if>
 	              <span class="pull-right text-muted">
 	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 ${item.awesome} </a> 
-	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 ${countList.get(status.index)} </a>
+	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count"> ${countList[st.index]}</span></a>
 	              	</span>
 	            </div>
 	            <!-- /.box-body -->
 	            <div class="box-footer box-comments">
-	              <div class="box-comment">
-	                <!-- /.유저 한명의 코멘트 -->
-	              <c:if test="${not empty commentList}">
-		              <c:forEach var="item" items="${commentList}" varStatus="status">
-		              	<div class="box-comment">
-		                	<!-- User image -->
-			                <img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">
-			
-			                <div class="comment-text">
-			                      <span class="username">
-			                        J-Talk 대나무숲
-			                        <span class="pull-right">
-			                        <c:if test="${member.active ge 2}">
-				                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
-			                        </c:if>                   
-			                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-			                        <span class="text-muted">${date}</span>
-			                        </span>
-			                      </span><!-- /.username -->
-			                  <span>
-				                  <span class="comment-in">${item.content}</span>
-			                  </span>
-			                </div>
-		              </div>
-		              </c:forEach>
-	              </c:if>
-	              <!-- /.유저 한명의 코멘트 -->
-	              <form action="/JTalk/comment.action?command=write" method="post">
+	              <c:if test="${empty cmtList}">
+              	<div class="box-comment nocmt">등록된 댓글이 없습니다.</div>
+              </c:if>
+              <c:if test="${not empty cmtList}">
+	              <c:forEach var="item2" items="${cmtList[st.index]}" varStatus="status">
+	              	<div class="box-comment">
+	                	<!-- User image -->
+		                <img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">
+		
+		                <div class="comment-text">
+		                      <span class="username">
+		                        J-Talk 대나무숲
+		                        <span class="pull-right">
+		                        <c:if test="${member.active ge 2}">
+			                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item2.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+		                        </c:if>                   
+		                        <fmt:formatDate var="date" value="${item2.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+		                        <span class="text-muted">${date}</span>
+		                        </span>
+		                      </span><!-- /.username -->
+		                  <span>
+			                  <span class="comment-in">${item2.content}</span>
+		                  </span>
+		                </div>
+		                <!-- /.comment-text -->
+	              </div>
+	              </c:forEach>
+              </c:if>
+	              <form onsubmit="return anonycomment(this);">
 	                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="Alt Text">
 	                <!-- .img-push is used to add margin to elements next to floating images -->
 	                <div class="img-push input-group">
 	                  <input type="hidden" name = "tableName" value = "anony"/>
 	                  <input type="hidden" name = "postNum" value = "${item.num}"/>
-	                  <input type="hidden" name = "writerId" value = "${member.email}"/>
-                  	  <input type="hidden" name = "writerName" value = "${member.name}"/>
 	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
 	                  <span class="input-group-btn">
 	                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
 	                    </span>
 	                </div>
 	              </form>
-		            </div>
 		          </div>
 	          </div>
 	          </c:forEach>
                 </c:if>
 	          <!--/.게시글 하나 -->
 	          </div> <!-- // 컨텐츠 영역 -->
+	          
+	          <div id = "loading" class="overlay text-center" style="font-size:30px;">
+	             <i class="fa fa-refresh fa-spin"></i>
+	           </div>
 	        </div>
 	        
         <!-- /.col -->
@@ -423,5 +425,16 @@ $('.note-editing-area').click(function(){
 	$('.note-placeholder').css('display', 'none');
 })
 </script>
+<c:if test="${member.active ge 2}">
+	<script>
+		var admin = 'active';
+	</script>
+</c:if>
+<c:if test="${member.active eq 1}">
+	<script>
+		var admin = 'none';
+	</script>
+</c:if>
+<script src="/JTalk/dist/js/tree.js"></script>
 </body>
 </html>

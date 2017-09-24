@@ -45,6 +45,8 @@ public class AjaxController extends HttpServlet {
 		case "/adminpw.ajax" : service = new AdminPwService(); break;
 		case "/adminban.ajax" : service = new AdminBanService(); break;
 		case "/adminassign.ajax" : service = new AdminAssignService(); break;
+		case "/anonypage.ajax" : service = new AnonyPageService(); break;
+		case "/anonycomment.ajax" : service = new AnonyCommentService(); break;
 		}
 		
 		if(service !=null) json = service.execute(request, response);

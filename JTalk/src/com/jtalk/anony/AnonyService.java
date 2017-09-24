@@ -1,6 +1,7 @@
 package com.jtalk.anony;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import com.jtalk.core.Service;
 import com.jtalk.dao.AnonyDAO;
 import com.jtalk.dao.CommentDAO;
 import com.jtalk.dto.AnonyDTO;
+import com.jtalk.dto.CommentDTO;
 
 public class AnonyService implements Service{
 
@@ -28,7 +30,7 @@ public class AnonyService implements Service{
 		ArrayList<AnonyDTO> anonyList;
 		ArrayList<AnonyDTO> currentList = new ArrayList<AnonyDTO>();
 		ArrayList<Integer> countList = new ArrayList<Integer>();
-		
+		ArrayList<ArrayList<CommentDTO>> cmtList = new ArrayList<ArrayList<CommentDTO>>();
 		if(currentPage == null) currentPage = "1";
 		
 		anonyList = dao.getAllAnony();
@@ -53,6 +55,8 @@ public class AnonyService implements Service{
 				{
 					currentList.add(anonyList.get(j));
 					countList.add(commentDAO.countComment("anony", anonyList.get(j).getNum()));
+					cmtList.add(commentDAO.getCommentList("anony", anonyList.get(j).getNum()));
+					
 				}
 			}
 			if(i != Integer.parseInt(currentPage) - 1)
@@ -63,7 +67,9 @@ public class AnonyService implements Service{
 		}
 		
 		totalPage = String.valueOf(total);
+		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("anonyList", anonyList);
+		request.setAttribute("cmtList", cmtList);
 		request.setAttribute("currentList", currentList);
 		request.setAttribute("countList", countList);
 		

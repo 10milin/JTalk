@@ -17,10 +17,11 @@ public class CommentDAO {
 	}
 	
 	//댓글 작성
-	public void insertComment(CommentDTO comment) {
+	public int insertComment(CommentDTO comment) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into comment(tableName, postNum, writerId, writerName, content) values(?, ?, ?, ?, ?)";
+		int result = 0;
 		
 		try {
 			conn = getConnection();
@@ -31,12 +32,13 @@ public class CommentDAO {
 			pstmt.setString(4, comment.getWriterName());
 			pstmt.setString(5, comment.getContent());
 			
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(null, pstmt, conn);
 		}
+		return result;
 	}
 	
 	//전체 댓글 확인

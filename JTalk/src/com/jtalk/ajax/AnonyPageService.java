@@ -14,6 +14,7 @@ import com.jtalk.dao.AnonyDAO;
 import com.jtalk.dao.CommentDAO;
 import com.jtalk.dao.MemberDAO;
 import com.jtalk.dto.AnonyDTO;
+import com.jtalk.dto.CommentDTO;
 import com.jtalk.dto.MemberDTO;
 
 public class AnonyPageService implements Action{
@@ -26,64 +27,47 @@ public class AnonyPageService implements Action{
 		String currentPage = request.getParameter("page");
 		
 		JSONObject jsonObject = new JSONObject();
-		
+		JSONArray anonyArray = new JSONArray();
+		JSONArray commentArray = new JSONArray();
 		String totalPage = String.valueOf(1); //전체 페이지의 초기값
 		
 		AnonyDAO dao = AnonyDAO.getInstance();
 		CommentDAO commentDAO = CommentDAO.getInstance();
 		
 		ArrayList<AnonyDTO> anonyList;
-		ArrayList<AnonyDTO> currentList = new ArrayList<AnonyDTO>();
 		ArrayList<Integer> countList = new ArrayList<Integer>();
 		
 		anonyList = dao.getAllAnony();
-		
-		int total = anonyList.size() / 5;
-		
-		if(anonyList.size() % 5 != 0)
-		{
-			total++;
-		}
-		
-		if(total == 0)
-		{
-			total++;
-		}
-		
-		for(int i = 0 ; i < Integer.parseInt(currentPage) ; i++)
-		{
-			if(anonyList.size() > i*5)
-			{
-				for(int j = i*5 ; j < (i*5)+5 && j < anonyList.size() ; j++)
-				{
-					currentList.add(anonyList.get(j));
-					countList.add(commentDAO.countComment("anony", anonyList.get(j).getNum()));
-				}
+		int size = anonyList.size();
+		for(int i = Integer.parseInt(currentPage)*5; i < Integer.parseInt(currentPage)*5+4; i++) {
+			if(i >= size) break;
+			AnonyDTO dto = anonyList.get(i);
+
+			JSONObject jsonDto = new JSONObject();
+			jsonDto.put("num", String.valueOf(dto.getNum()));
+			jsonDto.put("content", dto.getContent());
+			SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String date = sdp.format(dto.getWriteDate());
+			jsonDto.put("writeDate", date);
+			jsonDto.put("awesome", String.valueOf(dto.getAwesome()));
+			jsonDto.put("commentCount", String.valueOf(commentDAO.countComment("anony", anonyList.get(i).getNum())));
+			anonyArray.add(jsonDto);
+			
+			JSONArray thisArray = new JSONArray();
+			ArrayList<CommentDTO> cmtList = commentDAO.getCommentList("anony", i);
+			for(int j = 0; j <cmtList.size(); j++) {
+				CommentDTO cmtDto = cmtList.get(j);
+				JSONObject jsonCmtDto = new JSONObject();
+				jsonCmtDto.put("num", String.valueOf(cmtDto.getNum()));
+				jsonCmtDto.put("content", cmtDto.getContent());
+				String cmtDate = sdp.format(cmtDto.getWriteDate());
+				jsonCmtDto.put("writeDate", cmtDate);
+				thisArray.add(jsonCmtDto);
 			}
-			if(i != Integer.parseInt(currentPage) - 1)
-			{
-				currentList = new ArrayList<AnonyDTO>();
-				countList = new ArrayList<Integer>();
-			}
+			commentArray.add(thisArray);
 		}
-		
-		totalPage = String.valueOf(total);
-		
-		
-		
-		
-		SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd");
-		String date = sdp.format(dto.getRegisterDate());
-		
-		jsonObject.put("email", dto.getEmail());
-		jsonObject.put("name", dto.getName());
-		jsonObject.put("period", String.valueOf(dto.getPeriod()));
-		jsonObject.put("ban", dto.getBan());
-		jsonObject.put("active", dto.getActive());
-		jsonObject.put("registerDate", date);
-		jsonObject.put("profile", dto.getProfile());
-		jsonObject.put("pr", dto.getPr());
-		
+		jsonObject.put("anony", anonyArray);
+		jsonObject.put("comment", commentArray);
 		json = jsonObject.toJSONString();
 		
 		return json;
