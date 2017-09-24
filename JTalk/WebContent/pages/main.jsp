@@ -223,7 +223,7 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
+				                  <td class="td-overflow" style="max-width:1px;" onclick="showmember('opzyra@naver.com')">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
 				                  <td style="width:30%; text-align: center;">2017-04-03</td>
 				                </tr>
 				              </table>
@@ -837,7 +837,7 @@
               <div class="tab-pane" id="tab_2">
                 <div class="form-horizontal" style="padding: 15px;">
                 	<div class="alert alert-success alert-dismissible" id="message-div" style="display:none">
-			          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			          <button type="button" class="close" onclick="$('#message-div').css('display', 'none')">&times;</button>
 			          <h4><i class="icon fa fa-check"></i>메시지 전송완료</h4>
 			         	<p id="message-p">메시지 전송이 완료되었습니다.</p>
 			        </div>
@@ -889,8 +889,8 @@
                     <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-minus-circle"></i> 계정상태</label>
 
                     <div class="col-sm-8">
-                      <p class="imformation-field" id="ban-0" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">정상</font><button class="btn btn-default btn-xs"><i class="fa fa-ban"></i> 비활성</button></p>
-                      <p class="imformation-field" id="ban-1" style="display:none;"><font color="red" style="margin-right:10px;">정지</font><button class="btn btn-default btn-xs"><i class="fa fa-bolt"></i> 활성</button></p>
+                      <p class="imformation-field" id="ban-0" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">정상</font><button class="btn btn-default btn-xs" onclick="userban('1')"><i class="fa fa-ban"></i> 비활성</button></p>
+                      <p class="imformation-field" id="ban-1" style="display:none;"><font color="red" style="margin-right:10px;">정지</font><button class="btn btn-default btn-xs" onclick="userban('0')"><i class="fa fa-bolt"></i> 활성</button></p>
                     </div>
                   </div>
                   
@@ -898,8 +898,8 @@
                     <label for="inputEmail" class="col-sm-4 control-label"><i class="fa fa-key "></i> 권한부여</label>
 
                     <div class="col-sm-8">
-                      <p class="imformation-field" id="active-1" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">일반 사용자</font><button class="btn btn-default btn-xs"><i class="fa fa-spinner"></i> 관리자 권한 부여</button></p>
-                      <p class="imformation-field" id="active-2" style="display:none;"><font color="red" style="margin-right:10px;">관리자</font><button class="btn btn-default btn-xs"><i class="fa fa-spinner"></i> 일반 사용자로 변경</button></p>
+                      <p class="imformation-field" id="active-1" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">일반 사용자</font><button class="btn btn-default btn-xs" onclick="adminassign('2')"><i class="fa fa-spinner"></i> 관리자 권한 부여</button></p>
+                      <p class="imformation-field" id="active-2" style="display:none;"><font color="red" style="margin-right:10px;">관리자</font><button class="btn btn-default btn-xs" onclick="adminassign('1')"><i class="fa fa-spinner"></i> 일반 사용자로 변경</button></p>
                     </div>
                   </div>
               </div>

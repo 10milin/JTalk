@@ -264,7 +264,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	          </div>
-		          
+		      <div id="contents">
 	          <!-- 게시글 하나 -->
 	          <c:if test="${not empty currentList}">
                 <c:forEach var="item" items="${currentList}">
@@ -275,7 +275,7 @@
 	              
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
 	                <span class="username"><a>J-Talk 대나무숲</a></span>
-	                <span class="description">대신 전해드립니다 - <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd hh:mm" var="write_dt"/></span>
+	                <span class="description">대신 전해드립니다 - <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd hh:mm" var="writedt"/>${writedt}</span>
 	              </div>
 	              <div class="col-md-12 tree-content">
 	              	<p>${item.content}</p>
@@ -338,6 +338,7 @@
 	          </c:forEach>
                 </c:if>
 	          <!--/.게시글 하나 -->
+	          </div> <!-- // 컨텐츠 영역 -->
 	        </div>
 	        
         <!-- /.col -->

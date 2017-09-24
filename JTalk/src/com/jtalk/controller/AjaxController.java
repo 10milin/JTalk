@@ -43,12 +43,13 @@ public class AjaxController extends HttpServlet {
 		case "/messagecheck.ajax": service = new MessageCheckService(); break;
 		case "/emailcheck.ajax":service = new EmailCheckService(); break;
 		case "/adminpw.ajax" : service = new AdminPwService(); break;
-		default : 
+		case "/adminban.ajax" : service = new AdminBanService(); break;
+		case "/adminassign.ajax" : service = new AdminAssignService(); break;
 		}
 		
 		if(service !=null) json = service.execute(request, response);
 		
-		response.getWriter().write(json);
+		if(json != null) response.getWriter().write(json);
 	}
 
 }

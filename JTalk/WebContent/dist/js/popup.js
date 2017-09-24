@@ -48,3 +48,49 @@ function resetpassword(){
 		}
 	});
 }
+
+function userban(status){
+	$.ajax({ 
+		type: 'POST',
+		url: '/JTalk/adminban.ajax', 
+		data: {"email":  $('#pop-email').text(), "status" : status}, 
+		dataType: 'json', 
+		success: function(e){
+			if(e.result > 0){
+				if(status == 0){
+					$('#message-admin-p').html('정상 상태로 변경되었습니다.');
+					$('#ban-0').css('display', 'block');
+					$('#ban-1').css('display', 'none');
+				}else{
+					$('#message-admin-p').html('정지 상태로 변경되었습니다.');
+					$('#ban-1').css('display', 'block');
+					$('#ban-0').css('display', 'none');
+				}
+				$('#message-admin-div').css('display' , 'block');
+			}
+		}
+	});
+}
+
+function adminassign(status){
+	$.ajax({ 
+		type: 'POST',
+		url: '/JTalk/adminassign.ajax', 
+		data: {"email":  $('#pop-email').text(), "status" : status}, 
+		dataType: 'json', 
+		success: function(e){
+			if(e.result > 0){
+				if(status == 1){
+					$('#message-admin-p').html('일반 유저로 변경되었습니다.');
+					$('#active-1').css('display', 'block');
+					$('#active-2').css('display', 'none');
+				}else{
+					$('#message-admin-p').html('관리자 권한이 부여되었습니다.');
+					$('#active-2').css('display', 'block');
+					$('#active-1').css('display', 'none');
+				}
+				$('#message-admin-div').css('display' , 'block');
+			}
+		}
+	});
+}

@@ -319,4 +319,49 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	//유저 벤
+	public int adminBan(String email, String status) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update member set ban=? where email = ?";
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setString(2, email);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		
+		return result;
+	}
+	
+	//유저 권한 변경
+		public int adminAssign(String email, String status) {
+			int result = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = "update member set active=? where email = ?";
+
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, status);
+				pstmt.setString(2, email);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(null, pstmt, conn);
+			}
+			
+			return result;
+		}
 }
