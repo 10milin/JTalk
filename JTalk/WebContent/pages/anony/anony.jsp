@@ -291,10 +291,10 @@
 	            </div>
 	            <!-- /.box-body -->
 	            <div class="box-footer box-comments">
-	              <c:if test="${empty cmtList}">
+	              <c:if test="${empty cmtList[st.index]}">
               	<div class="box-comment nocmt">등록된 댓글이 없습니다.</div>
               </c:if>
-              <c:if test="${not empty cmtList}">
+              <c:if test="${not empty cmtList[st.index]}">
 	              <c:forEach var="item2" items="${cmtList[st.index]}" varStatus="status">
 	              	<div class="box-comment">
 	                	<!-- User image -->
