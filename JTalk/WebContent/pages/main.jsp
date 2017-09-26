@@ -223,8 +223,13 @@
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
 				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;" onclick="showmember('opzyra@naver.com')">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                  <td class="td-overflow" style="max-width:1px;" onclick="showmember('opzyra@naver.com')">
+									<a href="javascript:actionparam('notice.action?command=detail', '${newNotice.num}')">
+									${newNotice.title}
+									</a>
+								  </td>
+				                  <fmt:formatDate var="noticeDate" value="${newNotice.writeDate}" pattern="yyyy-MM-dd" />
+				                  <td style="width:30%; text-align: center;">${noticeDate}</td>
 				                </tr>
 				              </table>
 				            </div>
