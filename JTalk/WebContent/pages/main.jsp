@@ -222,15 +222,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;" onclick="showmember('opzyra@naver.com')">
-									<a href="javascript:actionparam('notice.action?command=detail', '${newNotice.num}')">
-									${newNotice.title}
-									</a>
-								  </td>
-				                  <fmt:formatDate var="noticeDate" value="${newNotice.writeDate}" pattern="yyyy-MM-dd" />
-				                  <td style="width:30%; text-align: center;">${noticeDate}</td>
+				              	<c:if test="${empty newNotice}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newNotice}">
+				                <c:forEach var = "item" items="${newNotice}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" onclick="showmember('opzyra@naver.com')">
+									<a href="javascript:actionparam('notice.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="noticeDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${noticeDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->

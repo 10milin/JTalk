@@ -22,9 +22,17 @@ public class IndexAction implements Action{
 		
 		NoticeDAO noticeDAO = NoticeDAO.getInstance();
 		ArrayList<NoticeDTO> notice = noticeDAO.getAllNotice();
+		ArrayList<NoticeDTO> newNotice = new ArrayList<NoticeDTO>();
+		
 		if(notice.size() != 0) {
-			request.setAttribute("newNotice", notice.get(0));
+			for(int i = 0; i < notice.size(); i++) {
+				if(i > 4) {
+					break;
+				}
+				newNotice.add(notice.get(i));
+			}
 		}
+		request.setAttribute("newNotice", newNotice);
 		return resURL;
 	}
 	

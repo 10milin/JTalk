@@ -11,3 +11,5 @@ create table message(
 	writeDate Timestamp default current_timestamp,
 	readMessage char(1) default 0
 );
+
+alter table message auto_increment = 1;
