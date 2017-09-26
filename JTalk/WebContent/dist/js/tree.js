@@ -1,3 +1,18 @@
+// 대나무숲 댓글 삭제
+function anonycommentdelete(obj, num){
+	$.ajax({ 
+		url: '/JTalk/anonycmtdelete.ajax', 
+		data: "num=" + num, 
+		dataType: 'json', 
+		type: 'POST',
+		success: function(e){
+			if(e.result > 0){
+				$(obj).closest('.box-comment').remove();
+			}
+		}
+	});
+}
+
 // 대나무숲 댓글 등록
 function anonycomment(obj){
 	$.ajax({ 
@@ -15,7 +30,7 @@ function anonycomment(obj){
 				rhtml += 'J-Talk 대나무숲';
 				rhtml += '<span class="pull-right">';
 				if(admin == 'active'){
-					rhtml += '<span class="margin-right-left"><a class="color-black" onclick="" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>';
+					rhtml += '<span class="margin-right-left"><a class="color-black" onclick="anonycommentdelete(this, \'' + e.num + '\')" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>';
 				}
 				rhtml += '<span class="text-muted">' + e.writeDate + '</span>';
 				rhtml += '</span>';
@@ -38,15 +53,16 @@ function anonycomment(obj){
 
 // 대나무숲 스크롤 페이징 처리
 var page = 1;  //페이징과 같은 방식이라고 생각하면 된다.
-var totalPage = $('#contents').attr('totalPage');
+var totalPage = $('#contents').attr('total');
 
 $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
      if($(window).scrollTop() >= $(document).height() - $(window).height()){
     	 if(page <= totalPage){
     	 getListPage(page);
-         page++;   
-    	 }else{
-    		 
+         page++;
+         if(page==totalPage){
+			 $('#loading').remove();
+		 }
     	 }
      } 
 });
@@ -73,15 +89,55 @@ function getListPage(page){
 					rhtml +='</div>';
 					rhtml += '<button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>';
 					if(admin == 'active'){
-						rhtml += '<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> 삭제</button>';
+						rhtml += '<button type="button" class="btn btn-default btn-xs" onclick="actionparam(\'anony.action?command=delete\', \'' + result.anony[i].num + '\')"><i class="fa fa-trash"></i> 삭제</button>';
 					}
 					rhtml += '<span class="pull-right text-muted">';
 					rhtml += '<a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 ' + result.anony[i].awesome + '</a>';
 					rhtml += '<a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 ' + result.anony[i].commentCount +'</a>';
 					rhtml += '</span>';
 					rhtml += '</div>';
-					 
+					rhtml += '<div class="box-footer box-comments">';
+					if(result.comment[i].length == 0){
+						rhtml += '<div class="box-comment nocmt">';
+						rhtml += '등록된 댓글이 없습니다.';
+						rhtml += '</div>';
+					}else{
+						for(var j = 0; j<result.comment[i].length; j++){
+							rhtml += '<div class="box-comment nocmt">';
+							rhtml += '<img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">';
+							rhtml += '<div class="comment-text">';
+							rhtml += '<span class="username">';
+							rhtml += 'J-Talk 대나무숲';
+							rhtml += '<span class="pull-right">';
+							if(admin == 'active'){
+								rhtml += '<span class="margin-right-left"><a class="color-black" onclick=" anonycommentdelete(this, \'' + result.comment[i][j].num +'\')" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>';
+							}
+							rhtml += '<span class="text-muted">' + result.comment[i][j].writeDate + '</span>';
+							rhtml += '</span>';
+							rhtml += '</span>';
+							rhtml += '<span>';
+							rhtml += '<span class="comment-in">' + result.comment[i][j].content +'</span>';
+							rhtml += '</span>';
+							rhtml += '</div>';
+							rhtml += '</div>';
+						}
+					}
 					
+					rhtml += '<form onsubmit="return anonycomment(this);">';
+					rhtml += '<img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="Alt Text">';
+					rhtml += '<div class="img-push input-group">';
+					rhtml += '<input type="hidden" name = "tableName" value = "anony"/>';
+					rhtml += '<input type="hidden" name = "postNum" value = "' + result.anony[i].num + '"/>';
+					rhtml += '<input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>';
+					rhtml += '<span class="input-group-btn">';
+					rhtml += '<button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>';
+					rhtml += '</span>';
+					rhtml += '</div>';
+					rhtml += '</form>';
+					rhtml += '</div>';
+					rhtml += '</div>';
+					//랜더링한 html을 붙인다.
+					$('#contents').append(rhtml);
 				}
 				
 			}

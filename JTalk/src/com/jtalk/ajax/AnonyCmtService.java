@@ -13,7 +13,7 @@ import com.jtalk.dao.MessageDAO;
 import com.jtalk.dao.NewCommentDAO;
 import com.jtalk.dto.CommentDTO;
 
-public class AnonyCommentService implements Action{
+public class AnonyCmtService implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -33,12 +33,12 @@ public class AnonyCommentService implements Action{
 		comment.setContent(content);
 		
 		CommentDAO dao = CommentDAO.getInstance();
-
 		result = dao.insertComment(comment);
-				
+		int num = dao.getMaxNum();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String date = sdf.format(new Date());
-		json = "{\"result\": \"" + result + "\", \"writeDate\": \"" + date +"\"}";
+		json = "{\"result\": \"" + result + "\", \"num\": \"" + num + "\", \"writeDate\": \"" + date +"\"}";
 		
 		return json;
 	}

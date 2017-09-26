@@ -282,7 +282,7 @@
 	              </div>
 	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
 	              <c:if test="${member.active ge 2}">
-	              	<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash"></i> 삭제</button>
+	              	<button type="button" class="btn btn-default btn-xs" onclick="actionparam('anony.action?command=delete', '${item.num}')"><i class="fa fa-trash"></i> 삭제</button>
 	              </c:if>
 	              <span class="pull-right text-muted">
 	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 ${item.awesome} </a> 
@@ -305,7 +305,7 @@
 		                        J-Talk 대나무숲
 		                        <span class="pull-right">
 		                        <c:if test="${member.active ge 2}">
-			                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item2.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+			                        <span class="margin-right-left"><a class="color-black" onclick=" anonycommentdelete(this, '${item2.num}')" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
 		                        </c:if>                   
 		                        <fmt:formatDate var="date" value="${item2.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		                        <span class="text-muted">${date}</span>

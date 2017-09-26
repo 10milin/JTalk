@@ -16,21 +16,15 @@ public class WriteService implements Service {
 	public String process(HttpServletRequest request, HttpServletResponse response) {
 		String resURL = null;
 		
-		HttpSession session = request.getSession();
-		
-		MemberDTO member = (MemberDTO) session.getAttribute("member");
 		String content = request.getParameter("content");
-		String writerId = member.getEmail();
 		
 		AnonyDTO anony = new AnonyDTO();
-		anony.setWriterId(writerId);
+		anony.setWriterId("anony");
 		anony.setContent(content);
 		
 		AnonyDAO dao = AnonyDAO.getInstance();
-		NewCommentDAO newDAO = NewCommentDAO.getInstance();
 		dao.insertAnony(anony);
 		
-		newDAO.insertNew("anony", dao.getLastNum(), writerId);
 		resURL = "/anony.action?command=anony";
 		
 		return resURL;

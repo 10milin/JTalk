@@ -97,22 +97,25 @@ public class CommentDAO {
 	}
 	
 	//댓글 삭제
-	public void deleteComment(int num) {
+	public int deleteComment(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "delete from comment where num = ?";
+		int result = 0;
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(null, pstmt, conn);
 		}
+		
+		return result;
 	}
 	
 	//글 삭제로 인한 댓글 삭제
@@ -184,5 +187,29 @@ public class CommentDAO {
 			close(rs, pstmt, conn);
 		}
 		return postNum;
+	}
+	
+	//댓글의 num 최대 번호 가져오기
+	public int getMaxNum(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select max(num) from comment";
+		int num = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				num = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		return num;
 	}
 }

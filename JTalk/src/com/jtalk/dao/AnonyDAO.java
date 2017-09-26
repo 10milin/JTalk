@@ -98,5 +98,27 @@ public class AnonyDAO {
 		
 		return lastNum;
 	}
+	
+	//댓글 삭제
+	public int deleteAnony(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from anony where num = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(null, pstmt, conn);
+		}
+		
+		return result;
+	}
 
 }

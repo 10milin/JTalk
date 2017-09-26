@@ -39,7 +39,7 @@ public class AnonyPageService implements Action{
 		
 		anonyList = dao.getAllAnony();
 		int size = anonyList.size();
-		for(int i = Integer.parseInt(currentPage)*5; i < Integer.parseInt(currentPage)*5+4; i++) {
+		for(int i = Integer.parseInt(currentPage)*5; i < Integer.parseInt(currentPage)*5+5; i++) {
 			if(i >= size) break;
 			AnonyDTO dto = anonyList.get(i);
 
@@ -54,7 +54,7 @@ public class AnonyPageService implements Action{
 			anonyArray.add(jsonDto);
 			
 			JSONArray thisArray = new JSONArray();
-			ArrayList<CommentDTO> cmtList = commentDAO.getCommentList("anony", i);
+			ArrayList<CommentDTO> cmtList = commentDAO.getCommentList("anony", dto.getNum());
 			for(int j = 0; j <cmtList.size(); j++) {
 				CommentDTO cmtDto = cmtList.get(j);
 				JSONObject jsonCmtDto = new JSONObject();
