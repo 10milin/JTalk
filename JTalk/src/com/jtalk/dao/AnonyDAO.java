@@ -37,8 +37,7 @@ public class AnonyDAO {
 				anony = new AnonyDTO(rs.getInt("num"),
 						rs.getString("writerID"),
 						rs.getString("content"),
-						rs.getTimestamp("writeDate"),
-						rs.getInt("awesome"));
+						rs.getTimestamp("writeDate"));
 				list.add(anony);
 			}
 		}

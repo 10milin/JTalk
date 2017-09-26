@@ -49,7 +49,7 @@ public class AnonyPageService implements Action{
 			SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String date = sdp.format(dto.getWriteDate());
 			jsonDto.put("writeDate", date);
-			jsonDto.put("awesome", String.valueOf(dto.getAwesome()));
+			/*jsonDto.put("awesome", String.valueOf(dto.getAwesome()));*/
 			jsonDto.put("commentCount", String.valueOf(commentDAO.countComment("anony", anonyList.get(i).getNum())));
 			anonyArray.add(jsonDto);
 			
