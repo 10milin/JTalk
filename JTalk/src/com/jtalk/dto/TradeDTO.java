@@ -7,6 +7,7 @@ public class TradeDTO {
 	private String title;
 	private String photo;
 	private String content;
+	private String writerID;
 	private String writerName;
 	private String phone;
 	private String price;
@@ -14,13 +15,14 @@ public class TradeDTO {
 	
 	public TradeDTO() {}
 	
-	public TradeDTO(int num, String title, String photo, String content, String writerName, String phone, String price,
+	public TradeDTO(int num, String title, String photo, String content, String writerID, String writerName, String phone, String price,
 			Timestamp writeDate) {
 		super();
 		this.num = num;
 		this.title = title;
 		this.photo = photo;
 		this.content = content;
+		this.writerID = writerID;
 		this.writerName = writerName;
 		this.phone = phone;
 		this.price = price;
@@ -59,6 +61,14 @@ public class TradeDTO {
 		this.content = content;
 	}
 
+	public String getWriterID() {
+		return writerID;
+	}
+
+	public void setWriterID(String writerID) {
+		this.writerID = writerID;
+	}
+	
 	public String getWriterName() {
 		return writerName;
 	}
