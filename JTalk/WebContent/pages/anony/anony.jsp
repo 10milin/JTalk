@@ -409,6 +409,7 @@
 <script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script src="/JTalk/dist/js/tree.js"></script>
 <script>
 $('.summernote').summernote({
     tabsize: 2,
@@ -425,16 +426,5 @@ $('.note-editing-area').click(function(){
 	$('.note-placeholder').css('display', 'none');
 })
 </script>
-<c:if test="${member.active ge 2}">
-	<script>
-		var admin = 'active';
-	</script>
-</c:if>
-<c:if test="${member.active eq 1}">
-	<script>
-		var admin = 'none';
-	</script>
-</c:if>
-<script src="/JTalk/dist/js/tree.js"></script>
 </body>
 </html>

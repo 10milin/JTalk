@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,6 +30,11 @@ public class AnonyPageService implements Action{
 		JSONObject jsonObject = new JSONObject();
 		JSONArray anonyArray = new JSONArray();
 		JSONArray commentArray = new JSONArray();
+		
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		String active = member.getActive();
+		
 		String totalPage = String.valueOf(1); //전체 페이지의 초기값
 		
 		AnonyDAO dao = AnonyDAO.getInstance();
@@ -68,6 +74,7 @@ public class AnonyPageService implements Action{
 		}
 		jsonObject.put("anony", anonyArray);
 		jsonObject.put("comment", commentArray);
+		jsonObject.put("active", active);
 		json = jsonObject.toJSONString();
 		
 		return json;

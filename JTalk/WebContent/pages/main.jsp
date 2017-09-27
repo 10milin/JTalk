@@ -231,7 +231,7 @@
 				              	<c:if test="${not empty newNotice}">
 				                <c:forEach var = "item" items="${newNotice}" varStatus="status">
 									<tr>
-									<td class="td-overflow" style="max-width:1px;" onclick="showmember('opzyra@naver.com')">
+									<td class="td-overflow" style="max-width:1px;" >
 									<a href="javascript:actionparam('notice.action?command=detail', '${item.num}')">
 									${item.title}
 									</a>
@@ -789,6 +789,7 @@
 </div>
 <div id="actionpost"></div>
 <!-- modal -->
+<!-- onclick="showmember('id')"-->
 <div class="modal fade" id="popup-member">
   <div class="modal-dialog">
     <div class="modal-content">

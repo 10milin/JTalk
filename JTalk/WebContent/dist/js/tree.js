@@ -29,7 +29,7 @@ function anonycomment(obj){
 				rhtml += '<span class="username">';
 				rhtml += 'J-Talk 대나무숲';
 				rhtml += '<span class="pull-right">';
-				if(admin == 'active'){
+				if(e.active == '2' || e.active == '3'){
 					rhtml += '<span class="margin-right-left"><a class="color-black" onclick="anonycommentdelete(this, \'' + e.num + '\')" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>';
 				}
 				rhtml += '<span class="text-muted">' + e.writeDate + '</span>';
@@ -87,8 +87,8 @@ function getListPage(page){
 					rhtml += '<div class="col-md-12 tree-content">';
 					rhtml += '<p>' + result.anony[i].content +'</p>';
 					rhtml +='</div>';
-					rhtml += '<button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>';
-					if(admin == 'active'){
+					rhtml += '<button type="button" class="btn btn-default btn-xs" style="margin-right: 3px;"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>';
+					if(result.active == '2' || result.active == '3'){
 						rhtml += '<button type="button" class="btn btn-default btn-xs" onclick="actionparam(\'anony.action?command=delete\', \'' + result.anony[i].num + '\')"><i class="fa fa-trash"></i> 삭제</button>';
 					}
 					rhtml += '<span class="pull-right text-muted">';
@@ -109,7 +109,7 @@ function getListPage(page){
 							rhtml += '<span class="username">';
 							rhtml += 'J-Talk 대나무숲';
 							rhtml += '<span class="pull-right">';
-							if(admin == 'active'){
+							if(result.active == '2' || result.active == '3'){
 								rhtml += '<span class="margin-right-left"><a class="color-black" onclick=" anonycommentdelete(this, \'' + result.comment[i][j].num +'\')" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>';
 							}
 							rhtml += '<span class="text-muted">' + result.comment[i][j].writeDate + '</span>';
