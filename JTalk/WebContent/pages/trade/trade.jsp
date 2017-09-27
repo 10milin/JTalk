@@ -205,7 +205,7 @@
 	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 상품 목록</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-th"></i> 상품 목록</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body box-body-padding">
@@ -215,13 +215,16 @@
 		              <div class="pi-img-wrapper">
 		                <img src="http://keenthemes.com/assets/bootsnipp/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
 		                <div>
-		                  <a href="#" class="btn">Zoom</a>
-		                  <a href="#" class="btn">View</a>
+		                	<h2 class="pi-msg" onclick="showmember('opzyra@naver.com')"><i class="fa fa-user"></i> 김현호</h2>
+		                	<h3 class="pi-msg2"><i class="fa fa-clock-o"></i> 2017.09.27 12:00:25</h3>
 		                </div>
 		              </div>
 		              <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-		              <div class="pi-price">$29.00</div>
-		              <a href="javascript:;" class="btn add2cart">Add to cart</a>
+		              
+		              <div class="pi-price">
+		              	￦<fmt:formatNumber value="20000" pattern="#,###" />
+		              </div>
+		              <a href="javascript:;" class="btn add2cart">상세보기</a>
 		              <div class="sticker sticker-new"></div>
 		            </div>
 		        </div>
@@ -230,30 +233,84 @@
 		              <div class="pi-img-wrapper">
 		                <img src="http://keenthemes.com/assets/bootsnipp/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
 		                <div>
-		                  <a href="#" class="btn">Zoom</a>
-		                  <a href="#" class="btn">View</a>
+		                	<h2 class="pi-msg" onclick="showmember('opzyra@naver.com')"><i class="fa fa-user"></i> 김현호</h2>
+		                	<h3 class="pi-msg2"><i class="fa fa-clock-o"></i> 2017.09.27 12:00:25</h3>
 		                </div>
 		              </div>
 		              <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-		              <div class="pi-price">$29.00</div>
-		              <a href="javascript:;" class="btn add2cart">Add to cart</a>
+		              <div class="pi-price">
+		              	￦<fmt:formatNumber value="20000" pattern="#,###" />
+		              </div>
+		              <a href="javascript:;" class="btn add2cart">상세보기</a>
 		            </div>
 		        </div>
 		        <div class="col-md-4">
 		            <div class="product-item">
 		              <div class="pi-img-wrapper">
 		                <img src="http://keenthemes.com/assets/bootsnipp/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
-		                <div>
-		                  <a href="#" class="btn">Zoom</a>
-		                  <a href="#" class="btn">View</a>
+		                <div class="soldout">
+				          <a class="btn soldout-btn">sold out</a>
 		                </div>
 		              </div>
 		              <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-		              <div class="pi-price">$29.00</div>
-		              <a href="javascript:;" class="btn add2cart">Add to cart</a>
+		              <div class="pi-price">
+		              	￦<fmt:formatNumber value="20000" pattern="#,###" />
+		              </div>
+		              <a href="javascript:;" class="btn add2cart">상세보기</a>
 		            </div>
 		        </div>
 		        </div>
+		        
+		        <div class="col-md-12">
+              <div class="text-right table-bottom">
+              	<form action = "/JTalk/notice.action?command=notice" method="post">
+              	<div class="col-md-3 col-xs-12 no-padding mobile-center">
+              		<c:if test="${not empty search}">
+              			<div id="searchbar"class="input-group" toggle="1" style="display:inline-table;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+              		</c:if>
+              		<c:if test="${empty search}">
+	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+	                </c:if>
+	              </div>
+                </form>
+              
+              <div class="col-md-9 col-xs-12 text-right no-padding">
+              		<c:if test="${empty search}">
+              			<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                	</c:if>
+                	<c:if test="${not empty search}">
+                		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
+                	</c:if>
+                	<c:if test="${member.active ge 2}">
+                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
+                	</c:if>
+	              	
+              	</div>
+              </div>
+              <div class="col-md-12 text-center" style="display:inline-block; width:100%">
+              	<form action="/JTalk/notice.action?command=notice" method="post" id="pagination-form">
+              		<ul id="pagination" class="pagination-sm"></ul>
+              		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
+              		<input type="hidden" name="search" value="${search}">
+              	</form>
+              </div>
+              </div>
+		        
             </div>
             <!-- /.box-body -->
           </div>
@@ -446,6 +503,8 @@
 <script src="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/JTalk/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<!-- jQuery pagination -->
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <!-- Slimscroll -->
 <script src="/JTalk/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -470,5 +529,21 @@
 <script src="/JTalk/dist/js/utils.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+  pagination(30,1);
+  
+  function searchbar(btn){
+	  var st = $('#searchbar').attr('toggle');
+	  if(st == 0){
+		  $('#searchbar').css('display', 'inline-table');
+		  $('#searchbar').find('.form-control').focus();
+		  $('#searchbar').attr('toggle','1');
+	  }else{
+		  $('#searchbar').css('display', 'none');
+		  $('#searchbar').attr('toggle','0');
+	  }
+  }
+</script>
 </body>
 </html>

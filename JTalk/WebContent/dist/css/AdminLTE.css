@@ -5259,7 +5259,7 @@ table.text-center th {
 
 .product-item {
     padding: 15px;
-    background: #ebf5fb;
+    background: #ecf0f5;
     position: relative;
     margin: 15px 0px;
 }
@@ -5283,12 +5283,50 @@ table.text-center th {
     height: 63px;
 }
 .sticker-new {
-    background: url(http://keenthemes.com/assets/bootsnipp/new.png) no-repeat;
+    background: url(/JTalk/dist/img/new.png) no-repeat;
     left: auto;
     right: 0;
 }
 .pi-img-wrapper {
     position: relative;
+}
+.pi-msg{
+    color: #fff;
+    margin: -13px 5px 0;
+    background: transparent;
+    position: relative;
+    top: 50%;
+    line-height: 1.4;
+    font-size: 18px;
+    cursor: pointer;
+}
+.pi-msg:hover{
+	color: #e84d1c;
+	font-weight: bold;
+}
+
+.pi-msg2{
+    color: #fff;
+    margin: 0px 5px 0;
+    background: transparent;
+    position: relative;
+    top: 50%;
+    line-height: 1.4;
+    font-size: 16px;
+}
+.soldout{
+	background: rgba(0,0,0,0.3);
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.soldout-btn{
+	background: #e84d1c !important;
+    border-color: #c8c8c8 !important;
 }
 .pi-img-wrapper div {
     background: rgba(0,0,0,0.3);
@@ -5313,7 +5351,7 @@ table.text-center th {
     position: relative;
     top: 50%;
     line-height: 1.4;
-    font-size: 12px;
+    font-size: 16px;
 }
 .product-item .btn:hover {
     background: #e84d1c;
