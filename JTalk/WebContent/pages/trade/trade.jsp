@@ -208,21 +208,34 @@
               <h3 class="box-title font-bareun"><i class="fa fa-th"></i> 상품 목록</h3>
             </div>
             <!-- /.box-header -->
+            <c:if test="${empty currentList}">
+                	<c:if test="${empty search}">
+	                	<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="5" align="center">검색결과가 없습니다.</td>
+	                </c:if>
+                </c:if>
+            
             <div class="box-body box-body-padding">
+            	<c:if test="${not empty currentList}">
+            	<jsp:useBean id="now" class="java.util.Date" />
+                	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
+                	<c:forEach var="item" items="${currentList}" varStatus="status">
             	<div class="col-md-12 no-padding">
            		<div class="col-md-4">
 		            <div class="product-item">
 		              <div class="pi-img-wrapper">
-		                <img src="http://keenthemes.com/assets/bootsnipp/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+		                <img src="/JTalk/upload/${item.originphoto}" class="img-responsive" alt="${item.title}">
 		                <div>
-		                	<h2 class="pi-msg" onclick="showmember('opzyra@naver.com')"><i class="fa fa-user"></i> 김현호</h2>
-		                	<h3 class="pi-msg2"><i class="fa fa-clock-o"></i> 2017.09.27 12:00:25</h3>
+		                	<h2 class="pi-msg" onclick="showmember('${item.writerID}')"><i class="fa fa-user"></i> ${item.writerName}</h2>
+		                	<h3 class="pi-msg2"><i class="fa fa-clock-o"></i> ${item.writeDate}</h3>
 		                </div>
 		              </div>
-		              <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+		              <h3><a href="shop-item.html">${item.title}</a></h3>
 		              
 		              <div class="pi-price">
-		              	￦<fmt:formatNumber value="20000" pattern="#,###" />
+		              	￦<fmt:formatNumber value="${item.price}" pattern="#,###" />
 		              </div>
 		              <a href="javascript:;" class="btn add2cart">상세보기</a>
 		              <div class="sticker sticker-new"></div>
@@ -260,7 +273,8 @@
 		            </div>
 		        </div>
 		        </div>
-		        
+		        </c:forEach>
+		        </c:if>
 		        <div class="col-md-12">
               <div class="text-right table-bottom">
               	<form action = "/JTalk/notice.action?command=notice" method="post">
@@ -294,10 +308,10 @@
                 	</c:if>
                 	<c:if test="${not empty search}">
                 		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
-                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
+                		<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=trade');"><i class="fa fa-list"></i> 목록</button>
                 	</c:if>
                 	<c:if test="${member.active ge 2}">
-                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 등록</button>
+                		<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=writeForm');"><i class="fa fa-edit"></i> 등록</button>
                 	</c:if>
 	              	
               	</div>

@@ -208,7 +208,7 @@
               <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 등록</h3>
             <!-- /.box-header -->
             </div>
-            <form action = "/JTalk/notice.action?command=write" method="post" enctype="multipart/form-data">
+            <form action = "/JTalk/trade.action?command=write" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div>
               	  <div class="input-group input-margin-btm">
@@ -223,7 +223,7 @@
 	              </div>
 	              <div class="input-group input-margin-btm">
 	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-	                <input type="text" class="form-control" placeholder="연락처" name="price" required>
+	                <input type="text" class="form-control" placeholder="연락처" name="phone" required>
 	              </div>
 	              <div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
