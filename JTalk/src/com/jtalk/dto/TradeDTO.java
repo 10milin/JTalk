@@ -6,7 +6,9 @@ public class TradeDTO {
 	private int num;
 	private String title;
 	private String photo;
+	private String originphoto;
 	private String content;
+	private String isSoldout;
 	private String writerID;
 	private String writerName;
 	private String phone;
@@ -15,18 +17,35 @@ public class TradeDTO {
 	
 	public TradeDTO() {}
 	
-	public TradeDTO(int num, String title, String photo, String content, String writerID, String writerName, String phone, String price,
-			Timestamp writeDate) {
-		super();
+	public TradeDTO(int num, String title, String photo, String originphoto, String content, String isSoldout,
+			String writerID, String writerName, String phone, String price, Timestamp writeDate) {
 		this.num = num;
 		this.title = title;
 		this.photo = photo;
+		this.originphoto = originphoto;
 		this.content = content;
+		this.isSoldout = isSoldout;
 		this.writerID = writerID;
 		this.writerName = writerName;
 		this.phone = phone;
 		this.price = price;
 		this.writeDate = writeDate;
+	}
+
+	public String getOriginphoto() {
+		return originphoto;
+	}
+
+	public void setOriginphoto(String originphoto) {
+		this.originphoto = originphoto;
+	}
+
+	public String getIsSoldout() {
+		return isSoldout;
+	}
+
+	public void setIsSoldout(String isSoldout) {
+		this.isSoldout = isSoldout;
 	}
 
 	public int getNum() {

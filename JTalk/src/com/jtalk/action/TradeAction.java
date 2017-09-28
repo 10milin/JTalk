@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
 import com.jtalk.trade.TradeService;
+import com.jtalk.trade.WriteService;
 
 public class TradeAction implements Action{
 
@@ -22,6 +23,8 @@ public class TradeAction implements Action{
 			switch(command)
 			{
 				case "trade": service = new TradeService(); break;
+				case "writeForm" : resURL = "/pages/trade/write.jsp"; break;
+				case "write": service = new WriteService(); break;
 			}
 			
 			if(service != null) resURL = service.process(request, response);
