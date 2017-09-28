@@ -192,12 +192,12 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-bullhorn "></i> 공지사항
-        <small>J-Talk에서 알려드립니다.</small>
+        <i class="fa fa-shopping-cart "></i> 중고나라
+        <small>JSL 연수기간, 물건! 버리지 말고 바꿔보세요.</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">공지사항</li>
+       <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">중고나라</li>
       </ol>
     </section>
     <section class="content">
@@ -205,23 +205,29 @@
 	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 등록</h3>
             <!-- /.box-header -->
             </div>
             <form action = "/JTalk/notice.action?command=write" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div>
-              	  <div class="input-group">
+              	  <div class="input-group input-margin-btm">
 	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
 	                <input type="text" class="form-control" placeholder="제목" name="title" required>
 	                <input type="hidden" name="writerId" value="${member.email}">
 	                <input type="hidden" name="writerName" value="${member.name}">
 	              </div>
-	              <br>
-	              <textarea class="summernote" name="content" required></textarea>
-	              <div class="input-group col-md-4">
-					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly>
+	               <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="fa fa-krw"></i></span>
+	                <input type="text" class="form-control" placeholder="가격" name="price" required>
+	              </div>
+	              <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+	                <input type="text" class="form-control" placeholder="연락처" name="price" required>
+	              </div>
+	              <div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+	                <input id = "uploadfield" type="text" class="form-control" readonly value="이미지">
 	                <div class="input-group-btn">
 		              <div class="btn btn-default btn-file">
 		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
@@ -230,10 +236,11 @@
 		             </div>
 	                <!-- /btn-group -->
 			       </div>
-	              <p class="help-block">제한용량 5MB</p>
+			       <p class="help-block input-margin-btm">제한용량 5MB</p>
+	              <textarea class="summernote" name="content" required></textarea>
 	              <div class="text-right table-bottom" style="border:0px">
               	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
-              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 쓰기</button>
+              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 등록</button>
               </div>
               </div>
             </div>

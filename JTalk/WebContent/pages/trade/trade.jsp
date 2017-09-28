@@ -179,7 +179,7 @@
         <li><a href="#"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
         <li class="header">MARKETPLACE</li>
         <li><a href="#"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
-        <li><a href="#"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
+        <li><a href="javascript:actionlink('trade.action?command=trade');"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
         <li class="header">PROJECT</li>
         <li><a href="#"><i class="fa fa-th-large"></i> <span>전시관</span></a></li>
         <li><a href="#"><i class="fa fa-code"></i> <span>소스코드</span></a></li>
@@ -297,7 +297,7 @@
                 		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
                 	</c:if>
                 	<c:if test="${member.active ge 2}">
-                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
+                		<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=writeform');"><i class="fa fa-edit"></i> 등록</button>
                 	</c:if>
 	              	
               	</div>
@@ -430,38 +430,41 @@
 	                  </form>
 	                </div>
               </div>
-              <div class="tab-pane form-horizontal" id="tab_3">
-              <div class="alert alert-success alert-dismissible" id="message-admin-div" style="display:none">
-			          <button type="button" class="close" onclick="$('#message-admin-div').css('display', 'none')">&times;</button>
-			          <h4><i class="icon fa fa-check"></i>변경 완료</h4>
-			         	<p id="message-admin-p"></p>
-			        </div>
-                <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="glyphicon glyphicon-lock"></i> 비밀번호</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field"><button class="btn btn-default btn-xs" onclick="resetpassword()"><i class="fa fa-refresh"></i> 초기화</button></p>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-minus-circle"></i> 계정상태</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field" id="ban-0" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">정상</font><button class="btn btn-default btn-xs" onclick="userban('1')"><i class="fa fa-ban"></i> 비활성</button></p>
-                      <p class="imformation-field" id="ban-1" style="display:none;"><font color="red" style="margin-right:10px;">정지</font><button class="btn btn-default btn-xs" onclick="userban('0')"><i class="fa fa-bolt"></i> 활성</button></p>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-4 control-label"><i class="fa fa-key "></i> 권한부여</label>
-
-                    <div class="col-sm-8">
-                      <p class="imformation-field" id="active-1" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">일반 사용자</font><button class="btn btn-default btn-xs" onclick="adminassign('2')"><i class="fa fa-spinner"></i> 관리자 권한 부여</button></p>
-                      <p class="imformation-field" id="active-2" style="display:none;"><font color="red" style="margin-right:10px;">관리자</font><button class="btn btn-default btn-xs" onclick="adminassign('1')"><i class="fa fa-spinner"></i> 일반 사용자로 변경</button></p>
-                    </div>
-                  </div>
-              </div>
+              <c:if test="${member.active eq 2 || member.active eq 3}">
+	              <div class="tab-pane form-horizontal" id="tab_3">
+	              <div class="alert alert-success alert-dismissible" id="message-admin-div" style="display:none">
+				          <button type="button" class="close" onclick="$('#message-admin-div').css('display', 'none')">&times;</button>
+				          <h4><i class="icon fa fa-check"></i>변경 완료</h4>
+				         	<p id="message-admin-p"></p>
+				        </div>
+	                <div class="form-group">
+	                    <label for="inputName" class="col-sm-4 control-label"><i class="glyphicon glyphicon-lock"></i> 비밀번호</label>
+	
+	                    <div class="col-sm-8">
+	                      <p class="imformation-field"><button class="btn btn-default btn-xs" onclick="resetpassword()"><i class="fa fa-refresh"></i> 초기화</button></p>
+	                    </div>
+	                  </div>
+	                  
+	                  <div class="form-group">
+	                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-minus-circle"></i> 계정상태</label>
+	
+	                    <div class="col-sm-8">
+	                      <p class="imformation-field" id="ban-0" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">정상</font><button class="btn btn-default btn-xs" onclick="userban('1')"><i class="fa fa-ban"></i> 비활성</button></p>
+	                      <p class="imformation-field" id="ban-1" style="display:none;"><font color="red" style="margin-right:10px;">정지</font><button class="btn btn-default btn-xs" onclick="userban('0')"><i class="fa fa-bolt"></i> 활성</button></p>
+	                    </div>
+	                  </div>
+	                  <c:if test="${member.active eq 3}">
+	                  <div class="form-group">
+	                    <label for="inputEmail" class="col-sm-4 control-label"><i class="fa fa-key "></i> 권한부여</label>
+	
+	                    <div class="col-sm-8">
+	                      <p class="imformation-field" id="active-1" style="display:none;"><font color="#3c8dbc" style="margin-right:10px;">일반 사용자</font><button class="btn btn-default btn-xs" onclick="adminassign('2')"><i class="fa fa-spinner"></i> 관리자 권한 부여</button></p>
+	                      <p class="imformation-field" id="active-2" style="display:none;"><font color="red" style="margin-right:10px;">관리자</font><button class="btn btn-default btn-xs" onclick="adminassign('1')"><i class="fa fa-spinner"></i> 일반 사용자로 변경</button></p>
+	                    </div>
+	                  </div>
+	                  </c:if>
+	              </div>
+              </c:if>
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->

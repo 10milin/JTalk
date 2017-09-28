@@ -64,117 +64,86 @@
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success">${newMessage}</span>
             </a>
+           	<c:if test="${empty newMessageList}">
+           	  <ul class="dropdown-menu">
+              	<li class="header">새로운 메시지가 없습니다.</li>
+              	<li class="footer"><a href="javascript:actionlink('message.action?command=messagetab');">모든 메시지 보기</a></li>
+              </ul>
+           	</c:if>
+            <c:if test="${not empty newMessageList}">
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
+              <li class="header">새로운 메시지가 ${newMessage}개 있습니다.</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="/JTalk/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="/JTalk/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        AdminLTE Design Team
-                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="/JTalk/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Developers
-                        <small><i class="fa fa-clock-o"></i> Today</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="/JTalk/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Sales Department
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="/JTalk/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Reviewers
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
+                  <c:forEach var = "item" items="${newMessageList}">
+					<li><!-- start message -->
+						<a href="javascript:actionparam('message.action?command=show', '${item.num}')">
+							<div class="pull-left">
+								<img src="/JTalk/upload/${item.sendProfile}" class="img-circle" alt="User Image">
+							</div>
+							<h4>
+								${item.sendName}
+								<fmt:formatDate var="date" value="${item.writeDate}" pattern="yy-MM-dd" />
+								<small><i class="fa fa-clock-o"></i> <span class="messagefontsize">${date}</span></small>
+							</h4>
+							<p>${item.title}</p>
+						</a>
+					</li>
+                  </c:forEach>
                 </ul>
               </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
+              <li class="footer"><a href="javascript:actionlink('message.action');">모든 메시지 보기</a></li>
             </ul>
+            </c:if>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">${allNew}</span>
+              <span class="label label-warning" id="notifications-count">${allNew}</span>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have ${allNew} notifications</li>
+            <c:if test="${empty newComment}">
+            <ul class="dropdown-menu" id="notifications-ul">
+              <li class="header">새로운 알림이 없습니다.</li>
+            </ul>
+            </c:if>
+            <c:if test="${not empty newComment}">
+            <ul class="dropdown-menu" id="notifications-ul">
+              <li class="header">새로운 알림이 ${newMessage}개 있습니다.</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                <c:if test="${newComment != null}">
                   	<c:forEach var="item" items="${newComment}" varStatus="status">
 	                  	<li>
+	                  		<c:choose >
+	                  			<c:when test="${item.tableName eq 'notice'}"><c:set var="ico" value = "fa-bullhorn text-blue"/></c:when>
+	                  		</c:choose>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
-		                      <i class="fa fa-users text-aqua"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
+		                      <i class="fa ${ico}"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
 		                    </a>
 	                  	</li>
                   	</c:forEach>
-                  </c:if>
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
+              <li class="footer"><a href="javascript:newcmtreset('${member.email}')"><i class="fa fa-bell-slash text-red" style="margin-right:5px;"></i>모든 알림 끄기</a></li>
             </ul>
+            </c:if>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/JTalk/upload/${member.profile}" class="user-image" alt="User Image">
-              <span class="hidden-xs font-bareun">${sessionScope.member.name}</span>
+              <span class="hidden-xs font-bareun">${member.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-              
                 <img src="/JTalk/upload/${member.profile}" class="img-circle" alt="User Image">
                 <p>
-                  <b>
+                  <b> 
                   <c:if test="${member.active eq 1}">JSL ${member.period}기 </c:if>
                   ${member.name}</b>
                   <fmt:formatDate var="date" value="${member.registerDate}" pattern="yyyy-MM-dd" />
@@ -187,7 +156,7 @@
                   <a href="javascript:actionlink('profile.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="javascript:actionlink('logout.action?command=logout');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -216,7 +185,7 @@
         <li><a href="#"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
         <li class="header">MARKETPLACE</li>
         <li><a href="#"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
-        <li><a href="#"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
+        <li><a href="javascript:actionlink('trade.action?command=trade');"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
         <li class="header">PROJECT</li>
         <li><a href="#"><i class="fa fa-th-large"></i> <span>전시관</span></a></li>
         <li><a href="#"><i class="fa fa-code"></i> <span>소스코드</span></a></li>
