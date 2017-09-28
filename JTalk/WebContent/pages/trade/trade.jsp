@@ -210,10 +210,10 @@
             <!-- /.box-header -->
             <c:if test="${empty currentList}">
                 	<c:if test="${empty search}">
-	                	<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
+	                	<div class="col-md-12 text-center trademsg">등록된 게시글이 없습니다.</div>
 	                </c:if>
 	                <c:if test="${not empty search}">
-	                	<td colspan="5" align="center">검색결과가 없습니다.</td>
+	                	<div class="col-md-12 text-center trademsg">검색결과가 없습니다.</div>
 	                </c:if>
                 </c:if>
             

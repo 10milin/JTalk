@@ -20,6 +20,7 @@ public class AnonyLikeService implements Action{
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		String email = member.getEmail();
 		int result = 0;
+		int check = 0;
 		
 		AwesomeDAO awesomeDAO = AwesomeDAO.getInstance();
 		AnonyDAO anonyDAO = AnonyDAO.getInstance();
@@ -27,14 +28,16 @@ public class AnonyLikeService implements Action{
 		if(awesomeDAO.checkLike(postNum, email)) {
 			awesomeDAO.deleteLike(postNum, email);
 			anonyDAO.updateLike(awesomeDAO.getLikeCount(postNum), postNum);
+			check = 0;
 		}else {
 			awesomeDAO.insertLike(postNum, email);
 			anonyDAO.updateLike(awesomeDAO.getLikeCount(postNum), postNum);
+			check = 1;
 		}
 		
 		result = awesomeDAO.getLikeCount(postNum);
 		
-		json = "{\"result\": \"" + result +"\"}";
+		json = "{\"result\": \"" + result + "\", \"check\": \"" + check +"\"}";
 		
 		return json;
 	}

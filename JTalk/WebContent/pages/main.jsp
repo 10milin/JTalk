@@ -477,19 +477,23 @@
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
-	                <span class="username"><a class="pointer" href="javascript:void(0)" onclick="showmember('opzyra@naver.com');">J-Talk 대나무숲</a></span>
+	                <span class="username"><a class="pointer" href="javascript:void(0)">J-Talk 대나무숲</a></span>
 	                <span class="description">대신 전해드립니다 - <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd hh:mm" var="write_dt"/></span>
 	              </div>
 	              <div class="col-md-12 tree-content">
-	              	<img class="img-responsive" src="/JTalk/dist/img/photo2.png" alt="Photo">
 	              	<p>${item.content}</p>
 	              </div>
-	              <button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
+	              <c:if test="${awesomeArray[st.index] eq true}">
+	              	<button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-check like-ico"></i> 좋아요</button>
+	              </c:if>
+	              <c:if test="${awesomeArray[st.index] eq false}">
+	              	<button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-thumbs-o-up like-ico"></i> 좋아요</button>
+	              </c:if>
 	              <c:if test="${member.active ge 2}">
-	              	<button type="button" class="btn btn-default btn-xs" onclick="actionparam('anony.action?command=delete', '${item.num}')"><i class="fa fa-trash"></i> 삭제</button>
+	              	<button type="button" class="btn btn-default btn-xs" onclick="anonydelete('anony.action?command=delete', '${item.num}', 'main')"><i class="fa fa-trash"></i> 삭제</button>
 	              </c:if>
 	              <span class="pull-right text-muted">
-	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 <span class="like-count"> ${item.awesome}</span></a> 
+	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5 "></i>좋아요 <span class="like-count"> ${item.awesome}</span></a> 
 	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count"> ${countList[st.index]}</span></a>
 	              	</span>
 	            </div>

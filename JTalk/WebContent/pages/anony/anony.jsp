@@ -249,7 +249,12 @@
 	              <div class="col-md-12 tree-content">
 	              	<p>${item.content}</p>
 	              </div>
-	              <button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
+	              <c:if test="${awesomeArray[st.index] eq true}">
+	              	<button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-check like-ico"></i> 좋아요</button>
+	              </c:if>
+	              <c:if test="${awesomeArray[st.index] eq false}">
+	              	<button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-thumbs-o-up like-ico"></i> 좋아요</button>
+	              </c:if>
 	              <c:if test="${member.active ge 2}">
 	              	<button type="button" class="btn btn-default btn-xs" onclick="actionparam('anony.action?command=delete', '${item.num}')"><i class="fa fa-trash"></i> 삭제</button>
 	              </c:if>

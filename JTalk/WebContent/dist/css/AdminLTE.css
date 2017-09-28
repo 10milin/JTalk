@@ -5259,6 +5259,11 @@ table.text-center th {
 	margin-bottom: 10px;
 }
 
+.trademsg{
+	padding: 0px 0px 20px;
+}
+
+
 .product-item {
     padding: 15px;
     background: #ecf0f5;

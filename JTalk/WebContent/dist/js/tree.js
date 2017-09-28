@@ -42,6 +42,7 @@ function anonycomment(obj){
 				rhtml += '</div>';
 				$(obj).parent().find('.nocmt').remove();
 				var cmtcount = $(obj).parent().parent().find('.comment-count').text();
+				$(obj).parent().parent().find('.nocmt').remove();
 				$(obj).parent().parent().find('.comment-count').text(parseInt(cmtcount) + 1);
 				$(obj).before(rhtml);
 				$(obj).find('.input-sm').val('');
@@ -87,13 +88,18 @@ function getListPage(page){
 					rhtml += '<div class="col-md-12 tree-content">';
 					rhtml += '<p>' + result.anony[i].content +'</p>';
 					rhtml +='</div>';
-					rhtml += '<button type="button" class="btn btn-default btn-xs" style="margin-right: 3px;"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>';
+					if(result.anony[i].checklike == 'like'){
+						rhtml += '<button type="button" class="btn btn-default btn-xs" style="margin-right: 3px;" onclick="anonylike(this, \'' + result.anony[i].num +'\')"><i class="fa fa-check like-ico"></i> 좋아요</button>';
+					}else{
+						rhtml += '<button type="button" class="btn btn-default btn-xs" style="margin-right: 3px;" onclick="anonylike(this, \'' + result.anony[i].num +'\')"><i class="fa fa-thumbs-o-up like-ico"></i> 좋아요</button>';
+					}
+					
 					if(result.active == '2' || result.active == '3'){
 						rhtml += '<button type="button" class="btn btn-default btn-xs" onclick="actionparam(\'anony.action?command=delete\', \'' + result.anony[i].num + '\')"><i class="fa fa-trash"></i> 삭제</button>';
 					}
 					rhtml += '<span class="pull-right text-muted">';
-					rhtml += '<a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 ' + result.anony[i].awesome + '</a>';
-					rhtml += '<a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 ' + result.anony[i].commentCount +'</a>';
+					rhtml += '<a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 <span class="like-count">' + result.anony[i].awesome + '</span></a>';
+					rhtml += '<a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count">' + result.anony[i].commentCount +'</span></a>';
 					rhtml += '</span>';
 					rhtml += '</div>';
 					rhtml += '<div class="box-footer box-comments">';
@@ -103,7 +109,7 @@ function getListPage(page){
 						rhtml += '</div>';
 					}else{
 						for(var j = 0; j<result.comment[i].length; j++){
-							rhtml += '<div class="box-comment nocmt">';
+							rhtml += '<div class="box-comment">';
 							rhtml += '<img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">';
 							rhtml += '<div class="comment-text">';
 							rhtml += '<span class="username">';
@@ -153,6 +159,13 @@ function anonylike(obj, num){
 		type: 'POST',
 		success: function(e){
 			$(obj).parent().find('.like-count').text(e.result);
+			if(e.check == 1){
+				//좋아요 누름
+				$(obj).parent().find('.like-ico').attr('class', 'fa fa-check like-ico');
+			}else{
+				$(obj).parent().find('.like-ico').attr('class', 'fa fa-thumbs-o-up like-ico');
+			}
+			
 		}
 	});
 }

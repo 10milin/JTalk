@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 
 import com.jtalk.core.Action;
 import com.jtalk.dao.AnonyDAO;
+import com.jtalk.dao.AwesomeDAO;
 import com.jtalk.dao.CommentDAO;
 import com.jtalk.dao.MemberDAO;
 import com.jtalk.dto.AnonyDTO;
@@ -55,7 +56,13 @@ public class AnonyPageService implements Action{
 			SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String date = sdp.format(dto.getWriteDate());
 			jsonDto.put("writeDate", date);
-			/*jsonDto.put("awesome", String.valueOf(dto.getAwesome()));*/
+			
+			AwesomeDAO awesomeDAO = AwesomeDAO.getInstance();
+			int awesomeCount = awesomeDAO.getLikeCount(dto.getNum());		
+			if(awesomeDAO.checkLike(dto.getNum(), member.getEmail())) {
+				jsonDto.put("checklike", String.valueOf("like"));
+			}
+			jsonDto.put("awesome", String.valueOf(awesomeCount));
 			jsonDto.put("commentCount", String.valueOf(commentDAO.countComment("anony", anonyList.get(i).getNum())));
 			anonyArray.add(jsonDto);
 			

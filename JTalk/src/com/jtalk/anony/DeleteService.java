@@ -14,13 +14,18 @@ public class DeleteService implements Service{
 		String resURL = null;
 		
 		int num = Integer.parseInt(request.getParameter("num"));
+		String main = request.getParameter("main");
 		int result = 0;
 		
 		AnonyDAO dao = AnonyDAO.getInstance();
 		result = dao.deleteAnony(num);
 		
 		if(result > 0){
-			resURL = "/anony.action?command=anony";
+			if(main.equals("main")) {
+				resURL = "/index.action";
+			}else {
+				resURL = "/anony.action?command=anony";
+			}
 		}
 		
 		return resURL;
