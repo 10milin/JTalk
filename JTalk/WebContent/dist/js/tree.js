@@ -144,3 +144,15 @@ function getListPage(page){
 		});
 	}
  }
+//대나무숲 좋아요
+function anonylike(obj, num){
+	$.ajax({ 
+		url: '/JTalk/anonylike.ajax', 
+		data: "postNum=" + num, 
+		dataType: 'json', 
+		type: 'POST',
+		success: function(e){
+			$(obj).parent().find('.like-count').text(e.result);
+		}
+	});
+}

@@ -7,17 +7,18 @@ public class AnonyDTO {
 	private String writerId;
 	private String content;
 	private Timestamp writeDate;
-	
+	private int awesome;
 	public AnonyDTO() {
 	
 	}
 
-	public AnonyDTO(int num, String writerId, String content, Timestamp writeDate) {
+	public AnonyDTO(int num, String writerId, String content, Timestamp writeDate, int awesome) {
 		super();
 		this.num = num;
 		this.writerId = writerId;
 		this.content = content;
 		this.writeDate = writeDate;
+		this.awesome = awesome;
 	}
 	
 	public int getNum() {
@@ -45,6 +46,13 @@ public class AnonyDTO {
 	public void setWriterId(String writerId) {
 		this.writerId = writerId;
 	}
-	
+
+	public int getAwesome() {
+		return awesome;
+	}
+
+	public void setAwesome(int awesome) {
+		this.awesome = awesome;
+	}
 	
 }

@@ -37,7 +37,8 @@ public class AnonyDAO {
 				anony = new AnonyDTO(rs.getInt("num"),
 						rs.getString("writerID"),
 						rs.getString("content"),
-						rs.getTimestamp("writeDate"));
+						rs.getTimestamp("writeDate"),
+						rs.getInt("awesome"));
 				list.add(anony);
 			}
 		}
@@ -118,6 +119,26 @@ public class AnonyDAO {
 		}
 		
 		return result;
+	}
+	
+	//좋아요 업데이트
+	public void updateLike(int awesome, int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update anony set awesome = ? where num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, awesome);
+			pstmt.setInt(2, num);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(null, pstmt, conn);
+		}
 	}
 
 }

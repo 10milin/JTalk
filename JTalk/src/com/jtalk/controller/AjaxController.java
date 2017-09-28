@@ -48,6 +48,7 @@ public class AjaxController extends HttpServlet {
 		case "/anonypage.ajax" : service = new AnonyPageService(); break;
 		case "/anonycomment.ajax" : service = new AnonyCmtService(); break;
 		case "/anonycmtdelete.ajax" : service = new AnonyCmtDeleteService(); break;
+		case "/anonylike.ajax" : service = new AnonyLikeService(); break;
 		}
 		
 		if(service !=null) json = service.execute(request, response);

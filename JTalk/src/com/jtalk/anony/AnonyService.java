@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
 import com.jtalk.dao.AnonyDAO;
+import com.jtalk.dao.AwesomeDAO;
 import com.jtalk.dao.CommentDAO;
 import com.jtalk.dto.AnonyDTO;
 import com.jtalk.dto.CommentDTO;
@@ -72,7 +73,7 @@ public class AnonyService implements Service{
 		request.setAttribute("cmtList", cmtList);
 		request.setAttribute("currentList", currentList);
 		request.setAttribute("countList", countList);
-		
+				
 		return resURL;
 	}
 

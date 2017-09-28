@@ -249,12 +249,12 @@
 	              <div class="col-md-12 tree-content">
 	              	<p>${item.content}</p>
 	              </div>
-	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
+	              <button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
 	              <c:if test="${member.active ge 2}">
 	              	<button type="button" class="btn btn-default btn-xs" onclick="actionparam('anony.action?command=delete', '${item.num}')"><i class="fa fa-trash"></i> 삭제</button>
 	              </c:if>
 	              <span class="pull-right text-muted">
-	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 <%-- ${item.awesome} --%> </a> 
+	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 <span class="like-count"> ${item.awesome}</span> </a> 
 	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count"> ${countList[st.index]}</span></a>
 	              	</span>
 	            </div>
