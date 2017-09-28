@@ -472,8 +472,8 @@
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
-	            <c:if test="${not empty currentList}">
-                <c:forEach var="item" items="${currentList}">
+	            <c:if test="${not empty newAnony}">
+                <c:forEach var="item" items="${newAnony}" varStatus="st">
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
@@ -484,47 +484,41 @@
 	              	<img class="img-responsive" src="/JTalk/dist/img/photo2.png" alt="Photo">
 	              	<p>${item.content}</p>
 	              </div>
-	              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
+	              <button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-thumbs-o-up"></i> 좋아요</button>
+	              <c:if test="${member.active ge 2}">
+	              	<button type="button" class="btn btn-default btn-xs" onclick="actionparam('anony.action?command=delete', '${item.num}')"><i class="fa fa-trash"></i> 삭제</button>
+	              </c:if>
 	              <span class="pull-right text-muted">
-	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 ${item.awesome}</a> 
-	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 ${countList.get(status.index)}</a>
+	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 <span class="like-count"> ${item.awesome}</span></a> 
+	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count"> ${countList[st.index]}</span></a>
 	              	</span>
 	            </div>
 	            <!-- /.box-body -->
 	            <div class="box-footer box-comments">
+	            <c:if test="${empty commentList[st.index]}">
+              	<div class="box-comment nocmt">등록된 댓글이 없습니다.</div>
+              	</c:if>
 	              <div class="box-comment">
 	                <!-- /.유저 한명의 코멘트 -->
-	              <c:if test="${not empty commentList}">
-		              <c:forEach var="item" items="${commentList}" varStatus="status">
+	              <c:if test="${not empty commentList[st.index]}">
+		              <c:forEach var="item2" items="${commentList[st.index]}" varStatus="status">
 		              	<div class="box-comment">
 		                	<!-- User image -->
-			                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
+			                <img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">
 			
 			                <div class="comment-text">
 			                      <span class="username">
-			                        ${item.writerName}
+			                        J-Talk 대나무숲
 			                        <span class="pull-right">
-			                        <c:if test="${item.writerId eq member.email}">
-				                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
-			                        </c:if>
-			                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
-				                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
-			                        </c:if>                   
-			                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+			                        <c:if test="${member.active ge 2}">
+				                        <span class="margin-right-left"><a class="color-black" onclick=" anonycommentdelete(this, '${item2.num}')" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+		                        	</c:if>
+			                        <fmt:formatDate var="date" value="${item2.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 			                        <span class="text-muted">${date}</span>
 			                        </span>
 			                      </span><!-- /.username -->
 			                  <span>
-			                  <form class="cmt" method = "post" onsubmit="return false">
-			                  <div class="input-group" style="display:none;">
-			                  	<input type = "hidden" name = "num" value = "${item.num}"/>
-				                  <input type="text" name = "content" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
-				                  <span class="input-group-btn">
-				                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
-				                    </span>
-			                	</div>
-				               </form>
-				                  <span class="comment-in">${item.content}</span>
+			                  <span class="comment-in">${item2.content}</span>
 			                  </span>
 			                </div>
 			                <!-- /.comment-text -->
@@ -532,14 +526,12 @@
 		              </c:forEach>
 	              </c:if>
 	              <!-- /.유저 한명의 코멘트 -->
-	              <form action="/JTalk/comment.action?command=write" method="post">
-	                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
+	              <form onsubmit="return anonycomment(this);">
+	                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="Alt Text">
 	                <!-- .img-push is used to add margin to elements next to floating images -->
 	                <div class="img-push input-group">
-	                  <input type="hidden" name = "tableName" value = "notice"/>
-	                  <input type="hidden" name = "postNum" value = "${notice.num}"/>
-	                  <input type="hidden" name = "writerId" value = "${member.email}"/>
-	                  <input type="hidden" name = "writerName" value = "${member.name}"/>
+	                  <input type="hidden" name = "tableName" value = "anony"/>
+	                  <input type="hidden" name = "postNum" value = "${item.num}"/>
 	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
 	                  <span class="input-group-btn">
 	                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
@@ -987,5 +979,6 @@
 <script src="/JTalk/dist/js/utils.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="/JTalk/dist/js/tree.js"></script>
 </body>
 </html>
