@@ -21,8 +21,8 @@ public class MessageAction implements Action{
 			Service service = null;
 			switch(command) {
 			case "delete" : service = new DeleteService(); break;
+			case "deletechoice" : service = new DeleteChoiceService(); break;
 			case "show" : service = new ShowService(); break;
-			
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

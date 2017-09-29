@@ -5375,9 +5375,6 @@ table.text-center th {
     padding-bottom: 4px;
     text-transform: uppercase;
 }
-.product-item h3 a {
-    color: #3e4d5c;
-}
 .product-item h3 a:hover {
     color: #E02222;
 }
@@ -5389,7 +5386,7 @@ table.text-center th {
 }
 .product-item .add2cart {
     float: right;
-    color: #a8aeb3;
+    color: #3e4d5c;
     border: 1px #ededed solid;
     padding: 3px 6px;
     text-transform: uppercase;

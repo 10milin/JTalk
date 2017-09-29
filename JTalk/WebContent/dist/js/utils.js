@@ -65,6 +65,19 @@ function writetoggle(){
 	$('#div-msgwrite').css('display', 'block');
 }
 
+//메시지 클릭시 작성으로 바로 이동
+function writelink(name, email){
+	$('#table-msglist').css('display', 'none');
+	$('#div-msgwrite').css('display', 'block');
+	$('#reciveId').val(email);
+	$('#emailserach-input').val(name);
+}
+
+//메시지 선택 삭제
+function deletechoice(){
+	$('#check-form').submit();
+}
+
 //이름으로 email목록 찾기
 function namefindemail(){
 	if($('#emailserach-input').val().length == 0 || $('#emailserach-input').val()=='관리자'){

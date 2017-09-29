@@ -1,5 +1,5 @@
 function showmember(email){
-	if($('#sendId').val() != email){
+	if($('#sendId').val() != email && email != 'admin'){
 		$.ajax({ 
 			type: 'POST',
 			url: '/JTalk/profile.ajax', 

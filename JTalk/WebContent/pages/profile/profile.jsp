@@ -345,8 +345,8 @@
                     <!-- Check all button -->
                     <button type = "button" class="btn btn-default btn-sm checkbox-toggle" id="checkedtoggle"><i id="checkbtn"class="fa fa-check-square-o"></i></button>
                     <div class="btn-group">
-                      <button type = "button" class="btn btn-default btn-sm" onclick = ""><i class="glyphicon glyphicon-trash"></i></button>
-                      <button type="button" class="btn btn-default btn-sm" onclick = ""><i class="glyphicon glyphicon-refresh"></i></button>
+                      <button type = "button" class="btn btn-default btn-sm" onclick = "deletechoice()"><i class="glyphicon glyphicon-trash"></i></button>
+                      <button type="submit" class="btn btn-default btn-sm" onclick="actionlink('message.action')"><i class="glyphicon glyphicon-refresh"></i></button>
                     </div><!-- /.btn-group -->
                     
                     <div class="pull-right">
@@ -414,6 +414,7 @@
 		                  </div>
 		                  </form>
 		                </div>
+		            <form id="check-form" action="/JTalk/message.action?command=deletechoice" method="POST">
                     <table id="table-msglist" class="table table-hover">
                       <tbody id = "messagelist" toggle="0">
                       		<c:if test="${empty allMessageList}">
@@ -424,8 +425,8 @@
                          	<c:if test="${not empty allMessageList}">
                          	<c:forEach var="item" items="${allMessageList}">
                          	<tr id="${item.num}">
-	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = ""></td>
-	                          <td class="mailbox-name"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">${item.sendName}</a></td>
+	                          <td><input class = "mailbox-check" type="checkbox" name = "selected" value = "${item.num}"></td>
+	                          <td class="mailbox-name"><a href="javascript:writelink('${item.sendName}','${item.sendId}')">${item.sendName}</a></td>
 	                          <td class="mailbox-subject"><a href="javascript:void(0)" onclick="msgdetail(this)"detail="0" read="${item.readMessage}">${item.title}</a></td>
 	                          <fmt:formatDate var="date" value="${item.writeDate}" pattern="yy-MM-dd hh:mm" />
 	                          <td class="mailbox-date">${date}</td>
@@ -445,6 +446,7 @@
                         	</c:if>
                       </tbody>
                     </table><!-- /.table -->
+                    </form>
                   </div><!-- /.mail-box-messages -->
                </div><!-- /.box-body -->
              </div><!-- /. box -->

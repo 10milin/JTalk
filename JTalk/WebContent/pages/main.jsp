@@ -479,7 +479,8 @@
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
 	                <span class="username"><a class="pointer" href="javascript:void(0)">J-Talk 대나무숲</a></span>
-	                <span class="description">대신 전해드립니다 - <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd hh:mm" var="write_dt"/></span>
+	                <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd hh:mm" var="write_dt"/>
+	                <span class="description">대신 전해드립니다 - ${write_dt}</span>
 	              </div>
 	              <div class="col-md-12 tree-content">
 	              	<p>${item.content}</p>
@@ -789,7 +790,6 @@
 </div>
 <div id="actionpost"></div>
 <!-- modal -->
-<!-- onclick="showmember('id')"-->
 <div class="modal fade" id="popup-member">
   <div class="modal-dialog">
     <div class="modal-content">

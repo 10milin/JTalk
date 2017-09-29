@@ -22,7 +22,6 @@ public class ProfileAction implements Action {
 			switch(command) {
 				case "passform": resURL = "/pages/profile/password.jsp"; break;
 				case "profileform": resURL = "/pages/profile/modify.jsp"; break;
-				
 				case "passchange": service = new PwChangeService(); break;
 				case "profilemodify": service = new PfModifyService(); break;
 			}

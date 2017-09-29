@@ -239,7 +239,7 @@
 			       <p class="help-block input-margin-btm">제한용량 5MB</p>
 	              <textarea class="summernote" name="content" required></textarea>
 	              <div class="text-right table-bottom" style="border:0px">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=trade');"><i class="fa fa-list"></i> 목록</button>
               	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 등록</button>
               </div>
               </div>
