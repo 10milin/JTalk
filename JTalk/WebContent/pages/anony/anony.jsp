@@ -396,9 +396,6 @@ $('.summernote').summernote({
      disableDragAndDrop: true
   });
 $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
-$('.note-editing-area').click(function(){
-	$('.note-placeholder').css('display', 'none');
-})
 </script>
 </body>
 </html>

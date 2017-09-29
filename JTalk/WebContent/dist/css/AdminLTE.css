@@ -5263,6 +5263,10 @@ table.text-center th {
 	padding: 0px 0px 20px;
 }
 
+.maintree-back{
+	height: 20px;
+    background: #ecf0f5;
+}
 
 .product-item {
     padding: 15px;

@@ -458,11 +458,11 @@
 	    	
 	    	<div class="col-md-7 padding-right">
 	          <!-- Box Comment -->
-	          <div class="box box-primary">
+	          <div class="box box-primary" style="box-shadow:0 0 0px !important;">
 	          
 	            <div class="box-header with-border">
 	              <div class="user-block">
-	                <h3 class="box-title font-bareun"><i class="fa fa-tree"></i> 대나무숲</h3>
+	                <h3 class="box-title font-bareun"><a href="javascript:actionlink('anony.action?command=anony');" style="color:black;"><i class="fa fa-tree"></i> 대나무숲</a></h3>
 	              </div>
 	              <!-- /.user-block -->
 	              <div class="box-tools">
@@ -474,6 +474,7 @@
 	            <!-- /.box-header -->
 	            <c:if test="${not empty newAnony}">
                 <c:forEach var="item" items="${newAnony}" varStatus="st">
+                <div>
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
@@ -506,6 +507,7 @@
 	                <!-- /.유저 한명의 코멘트 -->
 	              <c:if test="${not empty commentList[st.index]}">
 		              <c:forEach var="item2" items="${commentList[st.index]}" varStatus="status">
+		              
 		              	<div class="box-comment">
 		                	<!-- User image -->
 			                <img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">
@@ -545,6 +547,8 @@
 		            </div>
 		            <!-- /.box-footer -->
 		          </div>
+	          </div>
+	          <div class="maintree-back"></div>
 		      </c:forEach>    
 		      </c:if>    
 	          </div>

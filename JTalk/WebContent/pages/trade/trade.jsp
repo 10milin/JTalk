@@ -548,7 +548,7 @@
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
-  pagination(30,1);
+  pagination(${totalPage},${currentPage});
   
   function searchbar(btn){
 	  var st = $('#searchbar').attr('toggle');

@@ -21,7 +21,7 @@ public class DeleteService implements Service{
 		result = dao.deleteAnony(num);
 		
 		if(result > 0){
-			if(main.equals("main")) {
+			if(main != null && main.equals("main")) {
 				resURL = "/index.action";
 			}else {
 				resURL = "/anony.action?command=anony";
