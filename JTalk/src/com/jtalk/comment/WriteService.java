@@ -30,9 +30,18 @@ public class WriteService implements Service{
 		CommentDAO dao = CommentDAO.getInstance();
 		NewCommentDAO newDAO = NewCommentDAO.getInstance();
 		dao.insertComment(comment);
-		newDAO.updateNew("notice", postNum);
-
-		resURL = "/notice.action?command=detail&num=" + postNum;
+		
+		switch(tableName) {
+		case "notice":
+			newDAO.updateNew("notice", postNum);
+			resURL = "/notice.action?command=detail&num=" + postNum;
+			break;
+		case "trade":
+			newDAO.updateNew("trade", postNum);
+			resURL = "/trade.action?command=detail&num=" + postNum;
+			break;
+		}
+		
 		
 		return resURL;
 	}

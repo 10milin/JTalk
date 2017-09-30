@@ -107,7 +107,7 @@
             </c:if>
             <c:if test="${not empty newComment}">
             <ul class="dropdown-menu" id="notifications-ul">
-              <li class="header">새로운 알림이 ${newMessage}개 있습니다.</li>
+              <li class="header">새로운 알림이 ${allNew}개 있습니다.</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -115,6 +115,7 @@
 	                  	<li>
 	                  		<c:choose >
 	                  			<c:when test="${item.tableName eq 'notice'}"><c:set var="ico" value = "fa-bullhorn text-blue"/></c:when>
+	                  			<c:when test="${item.tableName eq 'trade'}"><c:set var="ico" value = "fa-shopping-cart text-blue"/></c:when>
 	                  		</c:choose>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
 		                      <i class="fa ${ico}"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
@@ -180,9 +181,9 @@
         <li class="header">MARKETPLACE</li>
         <li><a href="#"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
         <li><a href="javascript:actionlink('trade.action?command=trade');"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
-        <li class="header">PROJECT</li>
-        <li><a href="#"><i class="fa fa-th-large"></i> <span>전시관</span></a></li>
-        <li><a href="#"><i class="fa fa-code"></i> <span>소스코드</span></a></li>
+        <li class="header">PRESENTATION</li>
+        <li><a href="#"><i class="fa fa-child"></i> <span>스피치</span></a></li>
+        <li><a href="#"><i class="fa fa-code"></i> <span>프로젝트</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

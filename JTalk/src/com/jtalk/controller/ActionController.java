@@ -77,6 +77,8 @@ public class ActionController extends HttpServlet {
 					case "notice":
 						tableName.add("공지사항");
 						break;
+					case "trade":
+						tableName.add("중고나라");
 					}
 				}
 				

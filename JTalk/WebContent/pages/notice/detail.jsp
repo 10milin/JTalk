@@ -180,9 +180,9 @@
         <li class="header">MARKETPLACE</li>
         <li><a href="#"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
         <li><a href="javascript:actionlink('trade.action?command=trade');"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
-        <li class="header">PROJECT</li>
-        <li><a href="#"><i class="fa fa-th-large"></i> <span>전시관</span></a></li>
-        <li><a href="#"><i class="fa fa-code"></i> <span>소스코드</span></a></li>
+        <li class="header">PRESENTATION</li>
+        <li><a href="#"><i class="fa fa-child"></i> <span>스피치</span></a></li>
+        <li><a href="#"><i class="fa fa-code"></i> <span>프로젝트</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -264,7 +264,7 @@
 			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
 		                        </c:if>
 		                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
-			                        <span class="margin-right-left"><a class="color-black" onclick="actionparam('comment.action?command=delete',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'notice', ${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
 		                        </c:if>                   
 		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		                        <span class="text-muted">${date}</span>
@@ -305,7 +305,7 @@
               </div>
               <br>
               <div class="text-right">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice);"><i class="fa fa-list"></i> 목록</button>
               	<c:if test="${member.active ge 2}">
 	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=modifyform',${notice.num});"><i class="fa fa-pencil"></i> 수정</button>
 	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=delete',${notice.num});"><i class="fa fa-trash"></i> 삭제</button>

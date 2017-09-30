@@ -20,6 +20,27 @@ function actionparam(href, param){
 	document.getElementById('actionpost').appendChild(form);
 	form.submit();
 }
+
+function actioncmtdelete(href, table, num){
+	var form = document.createElement('FORM');
+	form.method='POST';
+	form.action='/JTalk/' + href;
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "table");
+    hiddenField.setAttribute("value", table);
+    form.appendChild(hiddenField);
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "num");
+    hiddenField.setAttribute("value", num);
+    form.appendChild(hiddenField);
+    
+	document.getElementById('actionpost').appendChild(form);
+	form.submit();
+}
  
 function actiondownload(href, fileName, originFileName){
 	var form = document.createElement('FORM');

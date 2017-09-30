@@ -14,6 +14,7 @@ public class TradeDTO {
 	private String phone;
 	private String price;
 	private Timestamp writeDate;
+	private int hit;
 	
 	public TradeDTO() {}
 	
@@ -118,6 +119,14 @@ public class TradeDTO {
 
 	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	
 	

@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% pageContext.setAttribute("enter","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,14 +27,11 @@
   <link rel="stylesheet" href="/JTalk/bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="/JTalk/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    <!-- Summernote -->
+  <!-- Summernote -->
   <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
+
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -197,129 +192,65 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-tree "></i> 대나무숲
-        <small>대신 전해드립니다.</small>
+        <i class="fa fa-shopping-cart "></i> 중고나라
+        <small>JSL 연수기간, 물건! 버리지 말고 바꿔보세요.</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">대나무숲</li>
+       <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">중고나라</li>
       </ol>
     </section>
     <section class="content">
-		<div class="row">
-	        <div class="col-md-12">
-	          <div class="box box-primary">
-	            <div class="box-header with-border">
-	              <h3 class="box-title font-bareun"><i class="fa fa-question-circle"></i> 대나무숲이란</h3>
-	              <div class="box-tools pull-right">
-	                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	    <div class="row">
+	    	<div class="col-md-12">
+	    	<div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title font-bareun"><i class="fa fa-pencil"></i> 글 수정</h3>
+            <!-- /.box-header -->
+            </div>
+            <form action = "/JTalk/trade.action?command=modify" method="post" enctype="multipart/form-data">
+            <div class="box-body">
+              <div>
+              	  <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
+	                <input type="text" class="form-control" placeholder="제목" name="title" value="${trade.title}"required>
+	                <input type="hidden" name="writerId" value="${member.email}">
+	                <input type="hidden" name="writerName" value="${member.name}">
+	                <input type="hidden" name="num" value="${trade.num}">
 	              </div>
-	            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	            <div class="col-md-12 no-padding">
-	            	<img src="/JTalk/dist/img/treelogo.png" class="img-responsive" width="100%">
-	            </div>
-	            </div>
-	            <!-- ./box-body -->
-	          </div>
-	          
-	          <div class="box box-primary">
-	            <div class="box-header with-border">
-	              <form action="/JTalk/anony.action?command=write" method="POST">
-	                	<textarea class="summernote" name="content" required></textarea>
-	                	<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-edit"></i> 작성</button>
-	                </form>
-	            </div>
-	            <!-- /.box-header -->
-	          </div>
-		      <div id="contents" total="${totalPage}">
-	          <!-- 게시글 하나 -->
-	          <c:if test="${not empty currentList}">
-                <c:forEach var="item" items="${currentList}" varStatus="st">
-	          <div class="box box-default">
-	            <div class="box-body">
-	            
-	              <div class="user-block">
-	              
-	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
-	                <span class="username"><a>J-Talk 대나무숲</a></span>
-	                <span class="description">대신 전해드립니다 - <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd hh:mm" var="writedt"/>${writedt}</span>
+	               <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="fa fa-krw"></i></span>
+	                <input type="text" class="form-control" placeholder="가격" name="price" value="${trade.price}" required>
 	              </div>
-	              <div class="col-md-12 tree-content">
-	              	<p>${item.content}</p>
+	              <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+	                <input type="text" class="form-control" placeholder="연락처" name="phone" value="${trade.phone}" required>
 	              </div>
-	              <c:if test="${awesomeArray[st.index] eq true}">
-	              	<button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-check like-ico"></i> 좋아요</button>
-	              </c:if>
-	              <c:if test="${awesomeArray[st.index] eq false}">
-	              	<button type="button" class="btn btn-default btn-xs" onclick="anonylike(this, ${item.num})"><i class="fa fa-thumbs-o-up like-ico"></i> 좋아요</button>
-	              </c:if>
-	              <c:if test="${member.active ge 2}">
-	              	<button type="button" class="btn btn-default btn-xs" onclick="actionparam('anony.action?command=delete', '${item.num}')"><i class="fa fa-trash"></i> 삭제</button>
-	              </c:if>
-	              <span class="pull-right text-muted">
-	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>좋아요 <span class="like-count"> ${item.awesome}</span> </a> 
-	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count"> ${countList[st.index]}</span></a>
-	              	</span>
-	            </div>
-	            <!-- /.box-body -->
-	            <div class="box-footer box-comments">
-	              <c:if test="${empty cmtList[st.index]}">
-              	<div class="box-comment nocmt">등록된 댓글이 없습니다.</div>
-              </c:if>
-              <c:if test="${not empty cmtList[st.index]}">
-	              <c:forEach var="item2" items="${cmtList[st.index]}" varStatus="status">
-	              	<div class="box-comment">
-	                	<!-- User image -->
-		                <img class="img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="User Image">
-		
-		                <div class="comment-text">
-		                      <span class="username">
-		                        J-Talk 대나무숲
-		                        <span class="pull-right">
-		                        <c:if test="${member.active ge 2}">
-			                        <span class="margin-right-left"><a class="color-black" onclick=" anonycommentdelete(this, '${item2.num}')" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
-		                        </c:if>                   
-		                        <fmt:formatDate var="date" value="${item2.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-		                        <span class="text-muted">${date}</span>
-		                        </span>
-		                      </span><!-- /.username -->
-		                  <span>
-			                  <span class="comment-in">${item2.content}</span>
-		                  </span>
+	              <div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+	                <input id = "uploadfield" type="text" class="form-control" readonly value="${trade.originphoto}">
+	                <div class="input-group-btn">
+		              <div class="btn btn-default btn-file">
+		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
+		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
 		                </div>
-		                <!-- /.comment-text -->
-	              </div>
-	              </c:forEach>
-              </c:if>
-	              <form onsubmit="return anonycomment(this);">
-	                <img class="img-responsive img-circle img-sm" src="/JTalk/dist/img/tree.png" alt="Alt Text">
-	                <!-- .img-push is used to add margin to elements next to floating images -->
-	                <div class="img-push input-group">
-	                  <input type="hidden" name = "tableName" value = "anony"/>
-	                  <input type="hidden" name = "postNum" value = "${item.num}"/>
-	                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
-	                  <span class="input-group-btn">
-	                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
-	                    </span>
-	                </div>
-	              </form>
-		          </div>
-	          </div>
-	          </c:forEach>
-                </c:if>
-	          <!--/.게시글 하나 -->
-	          </div> <!-- // 컨텐츠 영역 -->
-	          
-	          <div id = "loading" class="overlay text-center" style="font-size:30px;">
-	             <i class="fa fa-refresh fa-spin"></i>
-	           </div>
-	        </div>
-	        
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+		             </div>
+	                <!-- /btn-group -->
+			       </div>
+			       <p class="help-block input-margin-btm">제한용량 5MB</p>
+	              <textarea class="summernote" name="content" required>${trade.content}</textarea>
+	              <div class="text-right table-bottom" style="border:0px">
+              	<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=trade');"><i class="fa fa-list"></i> 목록</button>
+              	<button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i> 수정</button>
+              </div>
+              </div>
+            </div>
+            </form>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+	    </div>
 	</section>
   </div>
   <footer class="main-footer">
@@ -336,8 +267,6 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- jQuery pagination -->
-<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -369,33 +298,27 @@
 <script src="/JTalk/dist/js/demo.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
-<!-- Javascript of Sidebar toggle -->
-<script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- DataTables -->
-<script src="/JTalk/bower_components/datatables.net/js/jquery.dataTables.js"></script>
-<script src="/JTalk/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-<!-- Custom javascript -->
-<script src="/JTalk/dist/js/utils.js"></script>
+<!-- Javascript of Sidebar toggle -->
+<script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Summernote -->
 <script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script src="/JTalk/dist/js/tree.js"></script>
+<!-- Google AdSense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
-$('.summernote').summernote({
-    tabsize: 2,
-    linkTargetBlank: false,
-    lang: 'ko-KR',
-    toolbar: [
-        ['insert', ['picture', 'video','help']]
-     ],
-     placeholder: '하고싶은 말을 써주세요! 대신 전해드립니다.',
-     disableDragAndDrop: true
-  });
-$('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
+  $.widget.bridge('uibutton', $.ui.button);
+  $('.summernote').summernote({
+      height: 400,
+      tabsize: 2,
+      linkTargetBlank: false,
+      lang: 'ko-KR',
+      disableDragAndDrop: true
+    });
+  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
 </script>
 </body>
 </html>

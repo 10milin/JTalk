@@ -11,7 +11,8 @@ create table trade(
 	writerName varchar(50) not null,
 	phone varchar(50) not null,
 	price varchar(50) not null default 0,
-	writeDate Timestamp default current_timestamp	
+	writeDate Timestamp default current_timestamp,
+	hit int default 0
 );
 
 alter table trade auto_increment = 1;

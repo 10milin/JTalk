@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% pageContext.setAttribute("enter","\n"); %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>J-Talk</title>
+  <title>JTalk</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -31,13 +29,14 @@
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="${body}">
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
     <a href="javascript:actionlink('index.action');" class="logo">
@@ -164,6 +163,7 @@
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
+      
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
       	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
@@ -187,7 +187,6 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   	<section class="content-header">
@@ -205,114 +204,163 @@
 	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-th"></i> 상품 목록</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-file-text-o"></i> 상세 보기</h3>
             </div>
             <!-- /.box-header -->
-            <c:if test="${empty currentList}">
-                	<c:if test="${empty search}">
-	                	<div class="col-md-12 text-center trademsg">등록된 게시글이 없습니다.</div>
-	                </c:if>
-	                <c:if test="${not empty search}">
-	                	<div class="col-md-12 text-center trademsg">검색결과가 없습니다.</div>
-	                </c:if>
-                </c:if>
-            
             <div class="box-body box-body-padding">
-            	<c:if test="${not empty currentList}">
-            	<div class="col-md-12 no-padding">
-            	<jsp:useBean id="now" class="java.util.Date" />
-                	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
-                	<c:forEach var="item" items="${currentList}" varStatus="status">
-		            	
-			           		<div class="col-md-4">
-					            <div class="product-item">
-					              <div class="pi-img-wrapper">
-					                <img src="/JTalk/upload/${item.originphoto}" class="img-responsive" alt="${item.title}">
-				                	<c:if test="${item.isSoldout eq '0'}">
-				                		<div>
-					                	<h2 class="pi-msg" onclick="showmember('${item.writerID}')"><i class="fa fa-user"></i> ${item.writerName}</h2>
-					                	<fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd HH:ss" var="write_format" />
-					                	<h3 class="pi-msg2"><i class="fa fa-clock-o"></i> ${write_format} <i class="fa fa-eye"></i> ${item.hit}</h3>
-					                	</div>
-				                	</c:if>
-					                <c:if test="${item.isSoldout eq '1'}">
-				                		<div class="soldout">
-								          <a class="btn soldout-btn">sold out</a>
-						                </div>
-				                	</c:if>
-					              </div>
-					              <h3><a href="javascript:actionparam('trade.action?command=detail', '${item.num}')">${item.title}</a></h3>
-					              
-					              <div class="pi-price">
-					              	￦<fmt:formatNumber value="${item.price}" pattern="#,###" />
-					              </div>
-					              <a href="javascript:actionparam('trade.action?command=detail', '${item.num}')" class="btn add2cart">상세보기</a>
-					              <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
-					              <c:if test="${today == write_dt}">
-					              	<div class="sticker sticker-new"></div>
-					              </c:if>
-					            </div>
-					        </div>
-		        		</c:forEach>
-		        		</div>
-		        	</c:if>
-		        <div class="col-md-12">
-              <div class="text-right table-bottom">
-              	<form action = "/JTalk/trade.action?command=trade" method="post">
-              	<div class="col-md-3 col-xs-12 no-padding mobile-center">
-              		<c:if test="${not empty search}">
-              			<div id="searchbar"class="input-group" toggle="1" style="display:inline-table;">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-default" type="submit">
-	                            <i class="glyphicon glyphicon-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-              		</c:if>
-              		<c:if test="${empty search}">
-	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-default" type="submit">
-	                            <i class="glyphicon glyphicon-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-	                </c:if>
+            <div class="col-md-12">
+            	<table class="table table-condensed table-hover">
+                <tr class="table-field board-headline">
+                  <th>${trade.title}</th>
+                </tr>
+                <tr class="board-content board-white">
+                	<td>
+                		<i class="fa fa-user"></i> <a href="javascript:showmember('${trade.writerID}')">${trade.writerName}</a><span style="margin:0 10px;"></span>
+                		<fmt:formatDate var="date" value="${trade.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                		<i class="fa fa-clock-o"></i> ${date}<span style="margin:0 10px;"></span>
+                		<i class="fa fa-eye"></i> ${trade.hit}
+                	</td>
+                </tr>
+                <tr class="board-white">
+                	<td style="border:0px !important;">
+                		<div class="nav-tabs-custom">
+				            <ul class="nav nav-tabs">
+				              <li class="active"><a href="#tabs_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-info-circle"></i> 상품정보</a></li>
+				              <li class=""><a href="#tabs_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-photo"></i> 상품사진</a></li>
+				            </ul>
+				            <div class="tab-content paddingtb">
+				              <div class="tab-pane active" id="tabs_1">
+				              	<div class="col-md-6 padding-right">
+					                <div class="info-box">
+							            <span class="info-box-icon bg-blue"><i class="glyphicon glyphicon-earphone"></i></span>
+							
+							            <div class="info-box-content">
+							              <span class="info-box-text" style="font-size:20px; margin-top:12px;">연락처</span>
+							              <span class="info-box-number">
+							              	<c:if test="${trade.isSoldout eq '0'}">
+									          ${trade.phone}
+									         </c:if>
+									         <c:if test="${trade.isSoldout eq '1'}">
+									         	*****
+									         </c:if> 
+							              </span>
+							            </div>
+							          </div>
+				              	</div>
+				              	<div class="col-md-6">
+					                <div class="info-box">
+							            <span class="info-box-icon bg-blue"><i class="fa fa-krw"></i></span>
+							
+							            <div class="info-box-content">
+							              <span class="info-box-text" style="font-size:20px; margin-top:12px;">판매가격</span>
+							              <span class="info-box-number"><fmt:formatNumber value="${trade.price}" pattern="#,###" /></span>
+							            </div>
+							          </div>
+				              	</div>
+				              	<div class="col-md-12">
+				              		<div class="box box-primary">
+							            <div class="box-body">
+							              ${trade.content}
+							            </div>
+							          </div>
+				              	</div>
+				              </div>
+				              <div class="tab-pane" id="tabs_2">
+				                <div class="preview-pic tab-content">
+			                        <div class="tab-pane active" id="pic-1"><img src="/JTalk/upload/${trade.photo}"/></div>
+			                    </div>
+				              </div>
+				              <!-- /.tab-pane -->
+				            </div>
+				            <!-- /.tab-content -->
+				          </div>
+			              
+                	</td>
+                </tr>
+                <tr class="board-white">
+                	<td class="border-none-top">
+                		<a class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> 댓글
+                        (${countComment})</a>
+                	</td>
+                </tr>
+              </table>
+              <div class="table-bottom box-comments" style="padding:10px;">
+              <!-- /.유저 한명의 코멘트 -->
+              <c:if test="${empty commentList}">
+              	<div class="box-comment">등록된 댓글이 없습니다.</div>
+              </c:if>
+              <c:if test="${not empty commentList}">
+	              <c:forEach var="item" items="${commentList}" varStatus="status">
+	              	<div class="box-comment">
+	                	<!-- User image -->
+		                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
+		
+		                <div class="comment-text">
+		                      <span class="username">
+		                        <a href="javascript:showmember('${item.writerId}')">${item.writerName}</a>
+		                        <span class="pull-right">
+		                        <c:if test="${item.writerId eq member.email}">
+			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
+		                        </c:if>
+		                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
+			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'trade',${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+		                        </c:if>                   
+		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+		                        <span class="text-muted">${date}</span>
+		                        </span>
+		                      </span><!-- /.username -->
+		                  <span>
+		                  <form class="cmt" method = "post" onsubmit="return false">
+		                  <div class="input-group" style="display:none;">
+		                  	<input type = "hidden" name = "num" value = "${item.num}"/>
+			                  <input type="text" name = "content" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
+			                  <span class="input-group-btn">
+			                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
+			                    </span>
+		                	</div>
+			               </form>
+			                  <span class="comment-in">${item.content}</span>
+		                  </span>
+		                </div>
+		                <!-- /.comment-text -->
 	              </div>
-                </form>
-              
-              <div class="col-md-9 col-xs-12 text-right no-padding">
-              		<c:if test="${empty search}">
-              			<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
-                	</c:if>
-                	<c:if test="${not empty search}">
-                		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
-                		<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=trade');"><i class="fa fa-list"></i> 목록</button>
-                	</c:if>
-                	<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=writeForm');"><i class="fa fa-edit"></i> 등록</button>
-              	</div>
+	              </c:forEach>
+              </c:if>
+              <!-- /.유저 한명의 코멘트 -->
+              <form action="/JTalk/comment.action?command=write" method="post">
+                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
+                <!-- .img-push is used to add margin to elements next to floating images -->
+                <div class="img-push input-group">
+                  <input type="hidden" name = "tableName" value = "trade"/>
+                  <input type="hidden" name = "postNum" value = "${trade.num}"/>
+                  <input type="hidden" name = "writerId" value = "${member.email}"/>
+                  <input type="hidden" name = "writerName" value = "${member.name}"/>
+                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
+                    </span>
+                </div>
+              </form>
               </div>
-              <div class="col-md-12 text-center" style="display:inline-block; width:100%">
-              	<form action="/JTalk/trade.action?command=trade" method="post" id="pagination-form">
-              		<ul id="pagination" class="pagination-sm"></ul>
-              		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
-              		<input type="hidden" name="search" value="${search}">
-              	</form>
+              <br>
+              <div class="text-right">
+              	<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=trade');"><i class="fa fa-list"></i> 목록</button>
+              	<c:if test="${member.email == trade.writerID}">
+              		<button type="button" class="btn btn-default" onclick="actionparam('trade.action?command=modifyform',${trade.num});"><i class="fa fa-pencil"></i> 수정</button>
+              	</c:if>
+              	<c:if test="${member.active ge 2 || member.email == trade.writerID}">
+	              	<button type="button" class="btn btn-default" onclick="actionparam('trade.action?command=delete',${trade.num});"><i class="fa fa-trash"></i> 삭제</button>
+              	</c:if>
               </div>
-              </div>
-		        
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
 	    </div>
-    </section>
+	    </div>
+	</section>
   </div>
-  <!-- /.content-wrapper -->
-
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> ${applicationScope.version}
@@ -320,8 +368,6 @@
     <strong>Copyright &copy; 2017 <a>KLM Studio</a>.</strong> All rights
     reserved.
   </footer>
-  
-</div>
 <div id="actionpost"></div>
 <!-- modal -->
 <div class="modal fade" id="popup-member">
@@ -476,10 +522,8 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
+<!-- jQuery pagination -->
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -497,8 +541,8 @@
 <script src="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/JTalk/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-<!-- jQuery pagination -->
-<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
 <script src="/JTalk/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -509,35 +553,20 @@
 <script src="/JTalk/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/JTalk/dist/js/demo.js"></script>
-<!-- Infomation Panel Switching -->
-<script src="/JTalk/dist/js/information.js"></script>
-<!-- Ajax Re-edit -->
-<script src="/JTalk/dist/js/reedit.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
+<!-- Ajax Re-edit -->
+<script src="/JTalk/dist/js/reedit.js"></script>
 <!-- Javascript of Sidebar toggle -->
 <script src="/JTalk/dist/js/sidebar.js"></script>
-<!-- Popup Member -->
-<script src="/JTalk/dist/js/popup.js"></script>
-<!-- Custom javascript -->
-<script src="/JTalk/dist/js/utils.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Popup Member -->
+<script src="/JTalk/dist/js/popup.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
   pagination(${totalPage},${currentPage});
-  
-  function searchbar(btn){
-	  var st = $('#searchbar').attr('toggle');
-	  if(st == 0){
-		  $('#searchbar').css('display', 'inline-table');
-		  $('#searchbar').find('.form-control').focus();
-		  $('#searchbar').attr('toggle','1');
-	  }else{
-		  $('#searchbar').css('display', 'none');
-		  $('#searchbar').attr('toggle','0');
-	  }
-  }
 </script>
 </body>
 </html>
