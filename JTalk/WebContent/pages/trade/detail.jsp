@@ -163,7 +163,6 @@
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
       	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
@@ -211,7 +210,15 @@
             <div class="col-md-12">
             	<table class="table table-condensed table-hover">
                 <tr class="table-field board-headline">
-                  <th>${trade.title}</th>
+                  <th>
+                  	${trade.title}
+                  	<c:if test="${trade.isSoldout eq '0'}">
+			          <small class="label bg-blue" style="margin-left:5px;">판매중</small>
+			         </c:if>
+			         <c:if test="${trade.isSoldout eq '1'}">
+			         	<small class="label bg-red" style="margin-left:5px;">판매완료</small>
+			         </c:if> 
+                  </th>
                 </tr>
                 <tr class="board-content board-white">
                 	<td>
@@ -264,6 +271,16 @@
 							            </div>
 							          </div>
 				              	</div>
+				              	<c:if test="${trade.writerID == member.email}">
+					              	<div class="col-md-12 text-center">
+					              		<c:if test="${trade.isSoldout eq '0'}">
+					              			<button type="button" class="btn btn-sm btn-danger" onclick="actionparam('trade.action?command=soldout',${trade.num});"><i class="fa fa-check-square-o"></i> 판매 완료</button>
+					              		</c:if>
+					              		<c:if test="${trade.isSoldout eq '1'}">
+					              			<button type="button" class="btn btn-sm btn-primary" onclick="actionparam('trade.action?command=resold',${trade.num});"><i class="fa fa-refresh"></i> 판매 재개</button>
+					              		</c:if>
+					              	</div>
+				              	</c:if>
 				              </div>
 				              <div class="tab-pane" id="tabs_2">
 				                <div class="preview-pic tab-content">
@@ -566,7 +583,6 @@
 <script src="/JTalk/dist/js/popup.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
-  pagination(${totalPage},${currentPage});
 </script>
 </body>
 </html>

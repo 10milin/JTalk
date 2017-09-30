@@ -9,6 +9,8 @@ import com.jtalk.trade.DeleteService;
 import com.jtalk.trade.DetailService;
 import com.jtalk.trade.ModifyFormService;
 import com.jtalk.trade.ModifyService;
+import com.jtalk.trade.ReSoldService;
+import com.jtalk.trade.SoldoutService;
 import com.jtalk.trade.TradeService;
 import com.jtalk.trade.WriteService;
 
@@ -33,6 +35,8 @@ public class TradeAction implements Action{
 				case "delete" : service = new DeleteService(); break;
 				case "modifyform": service = new ModifyFormService(); break;
 				case "modify" : service = new ModifyService(); break;
+				case "soldout" : service = new SoldoutService(); break;
+				case "resold" : service = new ReSoldService(); break;
 			}
 			
 			if(service != null) resURL = service.process(request, response);

@@ -213,18 +213,18 @@
               <div>
               	  <div class="input-group input-margin-btm">
 	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" value="${trade.title}"required>
+	                <input type="text" class="form-control" placeholder="제목" name="title" value="${trade.title}"required >
 	                <input type="hidden" name="writerId" value="${member.email}">
 	                <input type="hidden" name="writerName" value="${member.name}">
 	                <input type="hidden" name="num" value="${trade.num}">
 	              </div>
 	               <div class="input-group input-margin-btm">
 	                <span class="input-group-addon"><i class="fa fa-krw"></i></span>
-	                <input type="text" class="form-control" placeholder="가격" name="price" value="${trade.price}" required>
+	                <input type="text" class="form-control" placeholder="가격" name="price" value="${trade.price}" required id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="7">
 	              </div>
 	              <div class="input-group input-margin-btm">
 	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-	                <input type="text" class="form-control" placeholder="연락처" name="phone" value="${trade.phone}" required>
+	                <input type="text" class="form-control" required placeholder="연락처" name="phone" data-inputmask='"mask": "999-9999-9999"' data-mask value="${trade.phone}" onblur="checkphone(this)">
 	              </div>
 	              <div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
@@ -302,13 +302,15 @@
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Javascript of Sidebar toggle -->
 <script src="/JTalk/dist/js/sidebar.js"></script>
+<!-- Custom javascript -->
+<script src="/JTalk/dist/js/utils.js"></script>
 <!-- Summernote -->
 <script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<!-- Google AdSense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- InputMask -->
+<script src="/JTalk/plugins/input-mask/jquery.inputmask.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
   $('.summernote').summernote({
@@ -319,6 +321,7 @@
       disableDragAndDrop: true
     });
   $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
+  $('[data-mask]').inputmask();
 </script>
 </body>
 </html>

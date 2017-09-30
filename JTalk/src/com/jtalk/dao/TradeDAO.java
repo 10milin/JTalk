@@ -281,4 +281,24 @@ public class TradeDAO {
 				close(null, pstmt, conn);
 			}
 		}
+		
+		//판매상태 변경
+		public void modifyisSoldOut(int num, String status) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = "update trade set isSoldout = ? where num = ?";
+			
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, status);
+				pstmt.setInt(2, num);
+				
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(null, pstmt, conn);
+			}
+		}
 }

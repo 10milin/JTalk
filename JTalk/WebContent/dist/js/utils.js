@@ -1,3 +1,30 @@
+// 숫자만 입력제한
+function onlyNumberInput(Ev) {
+	    if (window.event) var code = window.event.keyCode;
+	    else var code = Ev.which;
+	
+	    if ((code > 34 && code < 41) || (code > 47 && code < 58) || (code > 95 && code < 106) || code == 8 || code == 9 || code == 13 || code == 46)    {
+	            window.event.returnValue = true;
+	            return;
+	    }
+	
+	    if (window.event) window.event.returnValue = false;
+	    else Ev.preventDefault();
+}
+
+// 연락처 불러
+function checkphone(obj){
+	var regExp = /^\d{3}-\d{4}-\d{4}$/;
+	var val = $(obj).val();
+	if($(obj).val().length != 0){
+		if(!val.match(regExp)){
+			$(obj).val('');
+			$(obj).closest('.input-group').addClass('has-error');
+		}else{
+			$(obj).closest('.input-group').removeClass('has-error');
+		}
+	}
+}
 // 메시지 알림 끄기
 function newcmtreset(email){
 	$.ajax({ 

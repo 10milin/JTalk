@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
 import com.jtalk.dao.CommentDAO;
+import com.jtalk.dao.NewCommentDAO;
 
 public class DeleteService implements Service{
 
@@ -18,6 +19,9 @@ public class DeleteService implements Service{
 		
 		int postNum = dao.getPostNum(num);
 		dao.deleteComment(num);
+		
+		NewCommentDAO newDAO = NewCommentDAO.getInstance();
+		newDAO.deleteNew(tableName, postNum);
 		
 		switch(tableName) {
 		case "notice":

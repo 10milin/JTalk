@@ -223,7 +223,6 @@
             	<jsp:useBean id="now" class="java.util.Date" />
                 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
                 	<c:forEach var="item" items="${currentList}" varStatus="status">
-		            	
 			           		<div class="col-md-4">
 					            <div class="product-item">
 					              <div class="pi-img-wrapper">
@@ -232,7 +231,11 @@
 				                		<div>
 					                	<h2 class="pi-msg" onclick="showmember('${item.writerID}')"><i class="fa fa-user"></i> ${item.writerName}</h2>
 					                	<fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd HH:ss" var="write_format" />
-					                	<h3 class="pi-msg2"><i class="fa fa-clock-o"></i> ${write_format} <i class="fa fa-eye"></i> ${item.hit}</h3>
+					                	<h3 class="pi-msg2">
+					                		<i class="fa fa-clock-o"></i> ${write_format} 
+					                		<i class="fa fa-commenting-o"></i> ${countList.get(status.index)} 
+					                		<i class="fa fa-eye"></i> ${item.hit}
+					                	</h3>
 					                	</div>
 				                	</c:if>
 					                <c:if test="${item.isSoldout eq '1'}">
@@ -241,7 +244,7 @@
 						                </div>
 				                	</c:if>
 					              </div>
-					              <h3><a href="javascript:actionparam('trade.action?command=detail', '${item.num}')">${item.title}</a></h3>
+					              <h3 class="product-title-over"><a href="javascript:actionparam('trade.action?command=detail', '${item.num}')">${item.title}</a></h3>
 					              
 					              <div class="pi-price">
 					              	￦<fmt:formatNumber value="${item.price}" pattern="#,###" />

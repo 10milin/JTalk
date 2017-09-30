@@ -5430,3 +5430,9 @@ table.text-center th {
 	padding-left:0px !important;
 	padding-right:0px !important;
 }
+.product-title-over{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}

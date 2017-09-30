@@ -28,8 +28,20 @@ public class PwChangeService implements Service {
 		String errorMsg = null;
 		String passwordChangeSuccessMsg = null;
 		
-		if(dto.getPass().equals(oldpass)&&newpass.equals(newpasscheck))
+		if(!dto.getPass().equals(oldpass))
 		{
+			errorMsg = "현재 비밀번호와 맞지 않습니다.<br>다시 입력해주세요.";
+			resURL = "/pages/profile/password.jsp";
+			request.setAttribute("errorMsg", errorMsg);
+		}else if(!newpass.equals(newpasscheck)){
+			errorMsg = "입력하신 비밀번호와 맞지 않습니다.<br>다시 입력해주세요.";
+			resURL = "/pages/profile/password.jsp";
+			request.setAttribute("errorMsg", errorMsg);
+		}else if(newpass.length() < 4){
+			errorMsg = "비밀번호는 최소 4자 이상입니다.<br>다시 입력해주세요.";
+			resURL = "/pages/profile/password.jsp";
+			request.setAttribute("errorMsg", errorMsg);
+		}else {
 			MemberDAO dao = MemberDAO.getInstance();
 			dao.passChange(email,newpass);
 			//세션에 추가 로직이 필요함
@@ -39,18 +51,6 @@ public class PwChangeService implements Service {
 			session.invalidate();
 		}
 		
-		if(!dto.getPass().equals(oldpass))
-		{
-			errorMsg = "현재 비밀번호와 맞지 않습니다.<br>다시 입력해주세요.";
-			resURL = "/pages/profile/password.jsp";
-			request.setAttribute("errorMsg", errorMsg);
-		}
-		if(!newpass.equals(newpasscheck))
-		{
-			errorMsg = "입력하신 비밀번호와 맞지 않습니다.<br>다시 입력해주세요.";
-			resURL = "/pages/profile/password.jsp";
-			request.setAttribute("errorMsg", errorMsg);
-		}
 		
 		return resURL;
 	}

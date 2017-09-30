@@ -305,7 +305,7 @@
               </div>
               <br>
               <div class="text-right">
-              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice);"><i class="fa fa-list"></i> 목록</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('notice.action?command=notice');"><i class="fa fa-list"></i> 목록</button>
               	<c:if test="${member.active ge 2}">
 	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=modifyform',${notice.num});"><i class="fa fa-pencil"></i> 수정</button>
 	              	<button type="button" class="btn btn-default" onclick="actionparam('notice.action?command=delete',${notice.num});"><i class="fa fa-trash"></i> 삭제</button>
@@ -525,7 +525,6 @@
 <script src="/JTalk/dist/js/popup.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
-  pagination(${totalPage},${currentPage});
 </script>
 </body>
 </html>

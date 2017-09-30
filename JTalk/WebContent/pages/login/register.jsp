@@ -98,19 +98,6 @@
 	      increaseArea: '20%' // optional
 	    });
 	  });
-	
-	  function onlyNumberInput( Ev ) {
-	    if (window.event) var code = window.event.keyCode;
-	    else var code = Ev.which;
-	
-	    if ((code > 34 && code < 41) || (code > 47 && code < 58) || (code > 95 && code < 106) || code == 8 || code == 9 || code == 13 || code == 46)    {
-	            window.event.returnValue = true;
-	            return;
-	    }
-	
-	    if (window.event) window.event.returnValue = false;
-	    else Ev.preventDefault();
-	  }
 	</script>
 	</body>
 </html>
