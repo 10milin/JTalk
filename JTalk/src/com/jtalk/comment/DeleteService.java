@@ -23,14 +23,7 @@ public class DeleteService implements Service{
 		NewCommentDAO newDAO = NewCommentDAO.getInstance();
 		newDAO.deleteNew(tableName, postNum);
 		
-		switch(tableName) {
-		case "notice":
-			resURL = "/notice.action?command=detail&num=" + postNum;
-			break;
-		case "trade":
-			resURL = "/trade.action?command=detail&num=" + postNum;
-			break;
-		}
+		resURL = "/" + tableName + ".action?command=detail&num=" + postNum;
 		
 		return resURL;
 	}

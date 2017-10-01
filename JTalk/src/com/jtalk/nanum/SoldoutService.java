@@ -1,28 +1,28 @@
-package com.jtalk.comment;
+package com.jtalk.nanum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
 import com.jtalk.dao.CommentDAO;
+import com.jtalk.dao.NewCommentDAO;
+import com.jtalk.dao.NoticeDAO;
+import com.jtalk.dao.NanumDAO;
 
-public class ModifyService implements Service{
+public class SoldoutService implements Service {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
 		String resURL = null;
 		
 		int num = Integer.parseInt(request.getParameter("num"));
-		String content = request.getParameter("content");
 		
-		CommentDAO dao = CommentDAO.getInstance();
-		
-		dao.modifyComment(content, num);
-		int postNum = dao.getPostNum(num);
+		NanumDAO dao = NanumDAO.getInstance();
 
-		resURL = "/notice.action?command=detail&num=" + postNum;
+		dao.modifyisSoldOut(num, "1");
+		
+		resURL = "nanum.action?command=detail&num=" + num;
 		
 		return resURL;
 	}
-
 }

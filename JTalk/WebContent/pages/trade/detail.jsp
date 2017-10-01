@@ -177,7 +177,7 @@
         <li><a href="#"><i class="fa fa-cutlery"></i> <span>주변맛집</span></a></li>
         <li><a href="#"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
         <li class="header">MARKETPLACE</li>
-        <li><a href="#"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
+        <li><a href="javascript:actionlink('nanum.action?command=nanum');"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
         <li><a href="javascript:actionlink('trade.action?command=trade');"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
         <li class="header">PRESENTATION</li>
         <li><a href="#"><i class="fa fa-child"></i> <span>스피치</span></a></li>

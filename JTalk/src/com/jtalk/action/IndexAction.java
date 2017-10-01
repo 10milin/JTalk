@@ -11,11 +11,15 @@ import com.jtalk.core.Action;
 import com.jtalk.dao.AnonyDAO;
 import com.jtalk.dao.AwesomeDAO;
 import com.jtalk.dao.CommentDAO;
+import com.jtalk.dao.NanumDAO;
 import com.jtalk.dao.NoticeDAO;
+import com.jtalk.dao.TradeDAO;
 import com.jtalk.dto.AnonyDTO;
 import com.jtalk.dto.CommentDTO;
 import com.jtalk.dto.MemberDTO;
+import com.jtalk.dto.NanumDTO;
 import com.jtalk.dto.NoticeDTO;
+import com.jtalk.dto.TradeDTO;
 
 public class IndexAction implements Action{
 
@@ -34,13 +38,24 @@ public class IndexAction implements Action{
 		AnonyDAO anonyDAO = AnonyDAO.getInstance();
 		CommentDAO commentDAO = CommentDAO.getInstance();
 		AwesomeDAO awesomeDAO = AwesomeDAO.getInstance();
+		TradeDAO tradeDAO = TradeDAO.getInstance();
+		NanumDAO nanumDAO = NanumDAO.getInstance();
+		
 		ArrayList<NoticeDTO> notice = noticeDAO.getAllNotice();
 		ArrayList<NoticeDTO> newNotice = new ArrayList<NoticeDTO>();
+		
 		ArrayList<AnonyDTO> anony = anonyDAO.getAllAnony();
 		ArrayList<AnonyDTO> newAnony = new ArrayList<AnonyDTO>();
+		
 		ArrayList awesomeArray = new ArrayList();
 		ArrayList<ArrayList<CommentDTO>> cmtList = new ArrayList<ArrayList<CommentDTO>>();
 		ArrayList<Integer> countList = new ArrayList<Integer>();
+		
+		ArrayList<TradeDTO> trade = tradeDAO.getAllTrade();
+		ArrayList<TradeDTO> newTrade = new ArrayList<TradeDTO>();
+		
+		ArrayList<NanumDTO> nanum = nanumDAO.getAllNanum();
+		ArrayList<NanumDTO> newNanum = new ArrayList<NanumDTO>();
 		
 		//공지사항
 		if(notice.size() != 0) {
@@ -65,7 +80,29 @@ public class IndexAction implements Action{
 			}
 		}
 		
+		//중고나라
+		if(trade.size() != 0) {
+			for(int i = 0; i < trade.size(); i++) {
+				if(i > 2) {
+					break;
+				}
+				newTrade.add(trade.get(i));
+			}
+		}
+		
+		//행복나눔
+		if(nanum.size() != 0) {
+			for(int i = 0; i < nanum.size(); i++) {
+				if(i > 2) {
+					break;
+				}
+				newNanum.add(nanum.get(i));
+			}
+		}
+		
 		request.setAttribute("newNotice", newNotice);
+		request.setAttribute("newTrade", newTrade);
+		request.setAttribute("newNanum", newNanum);
 		request.setAttribute("newAnony", newAnony);
 		request.setAttribute("awesomeArray", awesomeArray);
 		request.setAttribute("countList", countList);

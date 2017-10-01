@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% pageContext.setAttribute("enter","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,12 +27,10 @@
   <link rel="stylesheet" href="/JTalk/bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="/JTalk/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Summernote -->
+  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -196,116 +192,65 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-user "></i> 프로필
-        <small>회원정보를 확인 할 수 있습니다.</small>
+        <i class="fa fa fa-heart"></i> 행복나눔
+        <small>버리기 귀찮은 물건, 이제 후배에게 양보하세요.</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="javascript:actionlink('profile.action');"><i class="fa fa-user"></i>프로필</a></li>
-        <li class="active">비밀번호 변경</li>
+       <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">행복나눔</li>
       </ol>
     </section>
     <section class="content">
-		<div class="row">
-        <div class="col-md-3 padding-right">
-
-          <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/JTalk/upload/${member.profile}" alt="User profile picture">
-
-              <h3 class="profile-username text-center">${sessionScope.member.name}</h3>
-
-              <p class="text-muted text-center">JSL - ${sessionScope.member.period}기</p>
-
-              <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                  <b>이메일</b> <a class="pull-right">${sessionScope.member.email}</a>
-                </li>
-                <li class="list-group-item">
-                  <b>가입일</b><a class="pull-right">
-                  	<fmt:formatDate var="date" value="${sessionScope.member.registerDate}" pattern="yyyy-MM-dd" />
-                  	${date}
-                  </a>
-                </li>
-              </ul>
-
-              <a href="javascript:actionlink('profile.action?command=passform');" class="btn btn-primary btn-block"><b>비밀번호 변경</b></a>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-  
-          <!-- About Me Box -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title"><i class="fa fa-user-plus margin-r-5"></i> 자기소개</h3>
-            </div>
+	    <div class="row">
+	    	<div class="col-md-12">
+	    	<div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title font-bareun"><i class="fa fa-pencil"></i> 글 수정</h3>
             <!-- /.box-header -->
-            <div class="box-body">
-              ${fn:replace(member.pr, enter, '<br>')}
             </div>
+            <form action = "/JTalk/nanum.action?command=modify" method="post" enctype="multipart/form-data">
+            <div class="box-body">
+              <div>
+              	  <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
+	                <input type="text" class="form-control" placeholder="제목" name="title" value="${nanum.title}"required maxlength="20">
+	                <input type="hidden" name="writerId" value="${member.email}">
+	                <input type="hidden" name="writerName" value="${member.name}">
+	                <input type="hidden" name="num" value="${nanum.num}">
+	              </div>
+	               <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="fa fa-krw"></i></span>
+	                <input type="text" class="form-control" placeholder="가격" value = "0" name="price" required readonly>
+	              </div>
+	              <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+	                <input type="text" class="form-control" required placeholder="연락처" name="phone" data-inputmask='"mask": "999-9999-9999"' data-mask value="${nanum.phone}" onblur="checkphone(this)">
+	              </div>
+	              <div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+	                <input id = "uploadfield" type="text" class="form-control" readonly value="${nanum.originphoto}">
+	                <div class="input-group-btn">
+		              <div class="btn btn-default btn-file">
+		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
+		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
+		                </div>
+		             </div>
+	                <!-- /btn-group -->
+			       </div>
+			       <p class="help-block input-margin-btm">제한용량 5MB</p>
+	              <textarea class="summernote" name="content" required>${nanum.content}</textarea>
+	              <div class="text-right table-bottom" style="border:0px">
+              	<button type="button" class="btn btn-default" onclick="actionlink('nanum.action?command=nanum');"><i class="fa fa-list"></i> 목록</button>
+              	<button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i> 수정</button>
+              </div>
+              </div>
+            </div>
+            </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-9">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title"><i class="glyphicon glyphicon-lock"></i> 비밀번호 변경</h3>
-            </div>
-            <div class="box-body">
-            <form action="/JTalk/profile.action?command=passchange" method="post">
-				<div class="col-md-12 col-xs-12 form-horizontal">
-					<c:if test="${not empty errorMsg}">
-				    <div class="alert alert-danger alert-dismissible">
-			          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			          <h4><i class="icon fa fa-warning"></i>변경 실패</h4>
-			         	${errorMsg}
-			        </div>
-				    </c:if>
-				    <c:if test="${not empty successMsg}">
-				    <div class="alert alert-success alert-dismissible">
-			          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			          <h4><i class="icon fa fa-check"></i>변경 완료</h4>
-			         	${successMsg}
-			        </div>
-				    </c:if>
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-unlock-alt"></i> 현재 비밀번호</label>
-                    <div class="col-sm-4" style="padding-top:3px;">
-                      <input type="password" class="form-control input-sm" placeholder="현재 비밀번호를 입력해주세요." name = "oldpass" required>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="glyphicon glyphicon-lock"></i> 새 비밀번호</label>
-                    <div class="col-sm-4" style="padding-top:3px;">
-                      <input type="password" class="form-control input-sm" placeholder="변경할 비밀번호를 입력해주세요." name = "newpass" required>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label"><i class="fa fa-check-square-o"></i> 새 비밀번호 확인</label>
-                    <div class="col-sm-4" style="padding-top:3px;">
-                      <input type="password" class="form-control input-sm" placeholder="다시한번 입력해주세요." name = "newpasscheck" required>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-12 text-right">
-                      <button type="submit" class="btn btn-primary">비밀번호 변경</button>
-                    </div>
-                  </div>
-                </div>
-                </form>
-            </div>
           </div>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+	    </div>
 	</section>
   </div>
   <footer class="main-footer">
@@ -322,8 +267,6 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- jQuery pagination -->
-<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
@@ -355,16 +298,30 @@
 <script src="/JTalk/dist/js/demo.js"></script>
 <!-- Javascript of ActionPost -->
 <script src="/JTalk/dist/js/actionpost.js"></script>
-<!-- Javascript of Sidebar toggle -->
-<script src="/JTalk/dist/js/sidebar.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/JTalk/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- DataTables -->
-<script src="/JTalk/bower_components/datatables.net/js/jquery.dataTables.js"></script>
-<script src="/JTalk/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+<!-- Javascript of Sidebar toggle -->
+<script src="/JTalk/dist/js/sidebar.js"></script>
+<!-- Custom javascript -->
+<script src="/JTalk/dist/js/utils.js"></script>
+<!-- Summernote -->
+<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
+<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- InputMask -->
+<script src="/JTalk/plugins/input-mask/jquery.inputmask.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
+  $('.summernote').summernote({
+      height: 400,
+      tabsize: 2,
+      linkTargetBlank: false,
+      lang: 'ko-KR',
+      disableDragAndDrop: true
+    });
+  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
+  $('[data-mask]').inputmask();
 </script>
 </body>
 </html>

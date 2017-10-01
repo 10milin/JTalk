@@ -116,6 +116,7 @@
 	                  		<c:choose >
 	                  			<c:when test="${item.tableName eq 'notice'}"><c:set var="ico" value = "fa-bullhorn text-blue"/></c:when>
 	                  			<c:when test="${item.tableName eq 'trade'}"><c:set var="ico" value = "fa-shopping-cart text-blue"/></c:when>
+	                  			<c:when test="${item.tableName eq 'nanum'}"><c:set var="ico" value = "fa-heart text-blue"/></c:when>
 	                  		</c:choose>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
 		                      <i class="fa ${ico}"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
@@ -179,7 +180,7 @@
         <li><a href="#"><i class="fa fa-cutlery"></i> <span>주변맛집</span></a></li>
         <li><a href="#"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
         <li class="header">MARKETPLACE</li>
-        <li><a href="#"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
+        <li><a href="javascript:actionlink('nanum.action?command=nanum');"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
         <li><a href="javascript:actionlink('trade.action?command=trade');"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
         <li class="header">PRESENTATION</li>
         <li><a href="#"><i class="fa fa-child"></i> <span>스피치</span></a></li>
@@ -643,38 +644,39 @@
 		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">
-		              <ul class="products-list product-list-in-box">
-		                <li class="item">
-		                  <div class="product-img">
-		                    <img src="/JTalk/dist/img/default-50x50.gif" alt="Product Image">
-		                  </div>
-		                  <div class="product-info">
-		                    <a href="javascript:void(0)" class="product-title">Samsung TV
-		                      <span class="label label-danger pull-right">마감</span></a>
-		                    <span class="product-description">
-		                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-		                        </span>
-		                  </div>
-		                </li>
-		                <!-- /.item -->
-		                <li class="item">
-		                  <div class="product-img">
-		                    <img src="/JTalk/dist/img/default-50x50.gif" alt="Product Image">
-		                  </div>
-		                  <div class="product-info">
-		                    <a href="javascript:void(0)" class="product-title">Samsung TV
-		                      <span class="label label-success pull-right">진행</span></a>
-		                    <span class="product-description">
-		                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-		                        </span>
-		                  </div>
-		                </li>
-		                <!-- /.item -->
-		              </ul>
+		            	<c:if test="${empty newNanum}">
+		              		등록된 게시글이 없습니다.
+		              	</c:if>
+		              	<c:if test="${not empty newNanum}">
+		              		<ul class="products-list product-list-in-box">
+		              		<c:forEach items="${newNanum}" var="item">
+		              			<li class="item">
+				                  <div class="product-img">
+				                    <img src="/JTalk/upload/${item.photo}" alt="Product Image" class="img-rounded">
+				                  </div>
+				                  <div class="product-info">
+				                    <a href="javascript:actionparam('nanum.action?command=detail', '${item.num}')" class="product-title">${item.title}
+				                      <c:if test="${item.isSoldout eq '0'}">
+				                      	<span class="label label-success pull-right">진행</span></a>
+				                      </c:if>
+				                      <c:if test="${item.isSoldout eq '1'}">
+				                      	<span class="label label-danger pull-right">마감</span></a>
+				                      </c:if>
+				                    </a>
+				                    <span class="product-description">
+				                    	<fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd HH:ss" var="write_format" />
+			                            <i class="fa fa-clock-o"></i> ${write_format}  
+			                			<i class="fa fa-eye"></i> ${item.hit}
+			                        </span>
+				                  </div>
+				                </li>
+		              		</c:forEach>
+		              		</ul>
+		              	</c:if>
 		            </div>
 		            <!-- /.box-body -->
 		            <div class="box-footer text-center">
-		              <a href="javascript:void(0)" class="uppercase">자세히 보기</a>
+		              <a href="javascript:actionlink('nanum.action?command=nanum');" class="uppercase">자세히 보기</a>
 		            </div>
 		            <!-- /.box-footer -->
 		          </div>
@@ -692,52 +694,41 @@
 		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">
-		              <ul class="products-list product-list-in-box">
-		                <li class="item">
-		                  <div class="product-img">
-		                    <img src="/JTalk/dist/img/default-50x50.gif" alt="Product Image">
-		                  </div>
-		                  <div class="product-info">
-		                    <a href="javascript:void(0)" class="product-title">Samsung TV
-		                      <span class="label label-danger pull-right">마감</span></a>
-		                    <span class="product-description">
-		                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-		                        </span>
-		                  </div>
-		                </li>
-		                <!-- /.item -->
-		                <li class="item">
-		                  <div class="product-img">
-		                    <img src="/JTalk/dist/img/default-50x50.gif" alt="Product Image">
-		                  </div>
-		                  <div class="product-info">
-		                    <a href="javascript:void(0)" class="product-title">Samsung TV
-		                      <span class="label label-success pull-right">진행</span></a>
-		                    <span class="product-description">
-		                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-		                        </span>
-		                  </div>
-		                </li>
-		                <!-- /.item -->
-		                <!-- /.item -->
-		                <li class="item">
-		                  <div class="product-img">
-		                    <img src="/JTalk/dist/img/default-50x50.gif" alt="Product Image">
-		                  </div>
-		                  <div class="product-info">
-		                    <a href="javascript:void(0)" class="product-title">Samsung TV
-		                      <span class="label label-primary pull-right">￦ 5000</span></a>
-		                    <span class="product-description">
-		                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-		                        </span>
-		                  </div>
-		                </li>
-		                <!-- /.item -->
-		              </ul>
+		              	<c:if test="${empty newTrade}">
+		              		등록된 게시글이 없습니다.
+		              	</c:if>
+		              	<c:if test="${not empty newTrade}">
+		              		<ul class="products-list product-list-in-box">
+		              		<c:forEach items="${newTrade}" var="item">
+		              			<li class="item">
+				                  <div class="product-img">
+				                    <img src="/JTalk/upload/${item.photo}" alt="Product Image" class="img-rounded">
+				                  </div>
+				                  <div class="product-info">
+				                    <a href="javascript:actionparam('trade.action?command=detail', '${item.num}')" class="product-title">${item.title}
+				                      <c:if test="${item.isSoldout eq '0'}">
+				                      	<span class="label label-primary pull-right">
+				                      		￦ <fmt:formatNumber value="${item.price}" pattern="#,###" />
+				                      	</span>
+				                      </c:if>
+				                      <c:if test="${item.isSoldout eq '1'}">
+				                      	<span class="label label-danger pull-right">판매완료</span>
+				                      </c:if>
+				                    </a>
+				                    <span class="product-description">
+				                    	<fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd HH:ss" var="write_format" />
+			                            <i class="fa fa-clock-o"></i> ${write_format}  
+			                			<i class="fa fa-eye"></i> ${item.hit}
+			                        </span>
+				                  </div>
+				                </li>
+		              		</c:forEach>
+		              		</ul>
+		              	</c:if>
 		            </div>
 		            <!-- /.box-body -->
 		            <div class="box-footer text-center">
-		              <a href="javascript:void(0)" class="uppercase">자세히 보기</a>
+		              <a href="javascript:actionlink('trade.action?command=trade');" class="uppercase">자세히 보기</a>
 		            </div>
 		            <!-- /.box-footer -->
 		          </div>

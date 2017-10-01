@@ -19,7 +19,6 @@ public class CommentAction implements Action {
 			Service service = null;
 			switch(command) {
 			case "write": service = new WriteService(); break;
-			case "modify": service = new ModifyService(); break;
 			case "delete": service = new DeleteService(); break;
 			}
 			
