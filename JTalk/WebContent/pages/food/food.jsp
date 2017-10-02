@@ -157,7 +157,7 @@
         <li><a href="#"><i class="fa fa-comments-o"></i> <span>선후배교류</span></a></li>
          <li><a href="#"><i class="fa fa-share-alt"></i> <span>스터디모집</span></a></li>
         <li class="header">INFORMATION</li>
-        <li><a href="#"><i class="fa fa-television"></i> <span>IT</span></a></li>
+        <li><a href="javascript:actionlink('it.action?command=it');"><i class="fa fa-television"></i> <span>IT</span></a></li>
         <li><a href="#"><i class="fa fa-book"></i> <span>일본어</span></a></li>
         <li><a href="#"><i class="fa fa-cutlery"></i> <span>주변맛집</span></a></li>
         <li><a href="#"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
@@ -173,14 +173,14 @@
   </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  	<section class="content-header">
+  	 <section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-book"></i> 일본어
+        <i class="fa fa-cutlery"></i> 주변맛집
         <small>JSL연수생들과 다양한 정보를 공유하세요.</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">일본어</li>
+        <li class="active">주변맛집</li>
       </ol>
     </section>
     <section class="content">
@@ -188,121 +188,149 @@
 	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-file-text-o"></i> 상세 보기</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body box-body-padding">
-            <div class="col-md-12">
-              <table class="table table-condensed table-hover">
-                <tr class="table-field board-headline">
-                  <th>${japanese.title}</th>
+            	<div class="col-md-12">
+              <table class="table table-condensed table-hover table-md">
+                <tr class="table-field">
+                  <th style="width: 50px;">번호</th>
+                  <th>제목</th>
+                  <th style="width: 10%;">글쓴이</th>
+                  <th style="width: 13%;">작성일</th>
+                  <th style="width: 9%;">조회수</th>
                 </tr>
-                <tr class="board-content board-white">
-                	<td>
-                		<i class="fa fa-user"></i> <a href="javascript:showmember('${japanese.writerId}')">${japanese.writerName}</a><span style="margin:0 10px;"></span>
-                		<fmt:formatDate var="date" value="${japanese.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                		<i class="fa fa-clock-o"></i> ${date}<span style="margin:0 10px;"></span>
-                		<i class="fa fa-eye"></i> ${japanese.hit}
-                	</td>
-                </tr>
-                <tr class="board-white">
-                	<td>
-                		<div>${japanese.content}</div>
-                	</td>
-                </tr>
-                <c:if test="${not empty japanese.fileName}">
-                <tr class="board-white">
-                	<td>
-                		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
-			                  <div class="mailbox-attachment-info">
-			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${japanese.originFileName}</span>
-			                          <a href="javascript:actiondownload('japanese.action?command=download','${japanese.fileName}', '${japanese.originFileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
-			                  </div>
-                		</div>
-                	</td>
-                </tr>
+                <c:if test="${empty currentList}">
+                	<c:if test="${empty search}">
+	                	<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="5" align="center">검색결과가 없습니다.</td>
+	                </c:if>
                 </c:if>
-                <tr class="board-white">
-                	<td class="border-none-top">
-                		<a class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> 댓글
-                        (${countComment})</a>
-                	</td>
-                </tr>
+                <c:if test="${not empty currentList}">
+                	<jsp:useBean id="now" class="java.util.Date" />
+                	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
+                	<c:forEach var="item" items="${currentList}" varStatus="status">
+                		<tr class="table-field">
+		                  <td>${item.num}</td>
+		                  <td class="td-title">
+		                  	  <a class="atag-black" href="javascript:actionparam('food.action?command=detail', '${item.num}')">${item.title}</a>
+			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
+							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
+							  <c:if test="${today == write_dt}">
+			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
+			                  </c:if>
+		                  </td>
+		                  <td><a href="javascript:showmember('${item.writerId}')">${item.writerName}</a></td>
+		                  <td>
+		                  <c:if test="${today == write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
+			              </c:if>
+			              <c:if test="${today != write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+			              </c:if>
+		                  ${fmtDate}
+		                  </td>
+		                  <td>${item.hit}</td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
               </table>
-              <div class="table-bottom box-comments" style="padding:10px">
-              <!-- /.유저 한명의 코멘트 -->
-              <c:if test="${empty commentList}">
-              	<div class="box-comment">등록된 댓글이 없습니다.</div>
-              </c:if>
-              <c:if test="${not empty commentList}">
-	              <c:forEach var="item" items="${commentList}" varStatus="status">
-	              	<div class="box-comment">
-	                	<!-- User image -->
-		                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
-		
-		                <div class="comment-text">
-		                      <span class="username">
-		                        <a href="javascript:showmember('${item.writerId}')">${item.writerName}</a>
-		                        <span class="pull-right">
-		                        <c:if test="${item.writerId eq member.email}">
-			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
-		                        </c:if>
-		                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
-			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'japanese', ${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
-		                        </c:if>                   
-		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-		                        <span class="text-muted">${date}</span>
-		                        </span>
-		                      </span><!-- /.username -->
-		                  <span>
-		                  <form class="cmt" method = "post" onsubmit="return false">
-		                  <div class="input-group" style="display:none;">
-		                  	<input type = "hidden" name = "num" value = "${item.num}"/>
-			                  <input type="text" name = "content" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
-			                  <span class="input-group-btn">
-			                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
-			                    </span>
-		                	</div>
-			               </form>
-			                  <span class="comment-in">${item.content}</span>
-		                  </span>
-		                </div>
-		                <!-- /.comment-text -->
-	              </div>
-	              </c:forEach>
-              </c:if>
-              <!-- /.유저 한명의 코멘트 -->
-              <form action="/JTalk/comment.action?command=write" method="post">
-                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
-                <div class="img-push input-group">
-                  <input type="hidden" name = "tableName" value = "japanese"/>
-                  <input type="hidden" name = "postNum" value = "${japanese.num}"/>
-                  <input type="hidden" name = "writerId" value = "${member.email}"/>
-                  <input type="hidden" name = "writerName" value = "${member.name}"/>
-                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
-                  <span class="input-group-btn">
-                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
-                    </span>
-                </div>
-              </form>
+              <table class="table table-condensed table-hover table-xd">
+              	<tr class="table-field">
+                  <th>제목</th>
+                  <th style="width: 18%;">글쓴이</th>
+                  <th style="width: 20%;">작성일</th>
+                </tr>
+                <c:if test="${empty currentList}">
+                	<c:if test="${empty search}">
+	                	<td colspan="3" align="center">등록된 게시글이 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="3" align="center">검색결과가 없습니다.</td>
+	                </c:if>
+                </c:if>
+                <c:if test="${not empty currentList}">
+                	<c:forEach var="item" items="${currentList}">
+                		<tr class="table-field">
+		                  <td class="td-title none-text-indent">
+		                  	  <a class="atag-black" href="javascript:actionparam('food.action?command=detail', '${item.num}')">${item.title}</a>
+			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
+							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
+							  <c:if test="${today == write_dt}">
+			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
+			                  </c:if>
+		                  </td>
+		                  <td class="table-td-vline"><a href="javascript:showmember('${item.writerId}')">${item.writerName}</a></td>
+		                  <td class="table-td-vline">
+		                  	<c:if test="${today == write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
+				            </c:if>
+				            <c:if test="${today != write_dt}">
+				                 <fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yy-MM-dd" />
+				            </c:if>
+			                  ${fmtDate}
+		                  </td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
+              </table>
               </div>
-              <br>
-              <div class="text-right">
-              	<button type="button" class="btn btn-default" onclick="actionlink('japanese.action?command=japanese');"><i class="fa fa-list"></i> 목록</button>
-              	<c:if test="${member.email == japanese.writerId}">
-	              	<button type="button" class="btn btn-default" onclick="actionparam('japanese.action?command=modifyform',${japanese.num});"><i class="fa fa-pencil"></i> 수정</button>
-              	</c:if>
-              	<c:if test="${member.email == japanese.writerId || member.active ge 2}">
-              		<button type="button" class="btn btn-default" onclick="actionparam('japanese.action?command=delete',${japanese.num});"><i class="fa fa-trash"></i> 삭제</button>
-              	</c:if>
+              <div class="col-md-12">
+              <div class="text-right table-bottom">
+              	<form action = "/JTalk/food.action?command=food" method="post">
+              	<div class="col-md-3 col-xs-12 no-padding mobile-center">
+              		<c:if test="${not empty search}">
+              			<div id="searchbar"class="input-group" toggle="1" style="display:inline-table;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+              		</c:if>
+              		<c:if test="${empty search}">
+	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+	                </c:if>
+	              </div>
+                </form>
+              
+              <div class="col-md-9 col-xs-12 text-right no-padding">
+              		<c:if test="${empty search}">
+              			<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                	</c:if>
+                	<c:if test="${not empty search}">
+                		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                		<button type="button" class="btn btn-default" onclick="actionlink('food.action?command=food');"><i class="fa fa-list"></i> 목록</button>
+                	</c:if>
+                	<button type="button" class="btn btn-default" onclick="actionlink('food.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
+	              	
+              	</div>
+              </div>
+              <div class="col-md-12 text-center" style="display:inline-block; width:100%">
+              	<form action="/JTalk/food.action?command=food" method="post" id="pagination-form">
+              		<ul id="pagination" class="pagination-sm"></ul>
+              		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
+              		<input type="hidden" name="search" value="${search}">
+              	</form>
+              </div>
               </div>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
-	    </div>
+          
 	    </div>
 	</section>
   </div>
@@ -313,6 +341,7 @@
     <strong>Copyright &copy; 2017 <a>KLM Studio</a>.</strong> All rights
     reserved.
   </footer>
+</div>
 <div id="actionpost"></div>
 <!-- modal -->
 <div class="modal fade" id="popup-member">
@@ -469,5 +498,8 @@
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
+<script>
+  pagination(${totalPage},${currentPage});
+</script>
 </body>
 </html>

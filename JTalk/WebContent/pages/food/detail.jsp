@@ -175,12 +175,12 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-book"></i> 일본어
+        <i class="fa fa-cutlery"></i> 주변맛집
         <small>JSL연수생들과 다양한 정보를 공유하세요.</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">일본어</li>
+        <li class="active">주변맛집</li>
       </ol>
     </section>
     <section class="content">
@@ -195,28 +195,28 @@
             <div class="col-md-12">
               <table class="table table-condensed table-hover">
                 <tr class="table-field board-headline">
-                  <th>${japanese.title}</th>
+                  <th>${food.title}</th>
                 </tr>
                 <tr class="board-content board-white">
                 	<td>
-                		<i class="fa fa-user"></i> <a href="javascript:showmember('${japanese.writerId}')">${japanese.writerName}</a><span style="margin:0 10px;"></span>
-                		<fmt:formatDate var="date" value="${japanese.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                		<i class="fa fa-user"></i> <a href="javascript:showmember('${food.writerId}')">${food.writerName}</a><span style="margin:0 10px;"></span>
+                		<fmt:formatDate var="date" value="${food.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 		<i class="fa fa-clock-o"></i> ${date}<span style="margin:0 10px;"></span>
-                		<i class="fa fa-eye"></i> ${japanese.hit}
+                		<i class="fa fa-eye"></i> ${food.hit}
                 	</td>
                 </tr>
                 <tr class="board-white">
                 	<td>
-                		<div>${japanese.content}</div>
+                		<div>${food.content}</div>
                 	</td>
                 </tr>
-                <c:if test="${not empty japanese.fileName}">
+                <c:if test="${not empty food.fileName}">
                 <tr class="board-white">
                 	<td>
                 		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
 			                  <div class="mailbox-attachment-info">
-			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${japanese.originFileName}</span>
-			                          <a href="javascript:actiondownload('japanese.action?command=download','${japanese.fileName}', '${japanese.originFileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
+			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${food.originFileName}</span>
+			                          <a href="javascript:actiondownload('japanese.action?command=download','${food.fileName}', '${food.originFileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
 			                  </div>
                 		</div>
                 	</td>
@@ -248,7 +248,7 @@
 			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
 		                        </c:if>
 		                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
-			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'japanese', ${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'food', ${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
 		                        </c:if>                   
 		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		                        <span class="text-muted">${date}</span>
@@ -276,8 +276,8 @@
                 <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push input-group">
-                  <input type="hidden" name = "tableName" value = "japanese"/>
-                  <input type="hidden" name = "postNum" value = "${japanese.num}"/>
+                  <input type="hidden" name = "tableName" value = "food"/>
+                  <input type="hidden" name = "postNum" value = "${food.num}"/>
                   <input type="hidden" name = "writerId" value = "${member.email}"/>
                   <input type="hidden" name = "writerName" value = "${member.name}"/>
                   <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
@@ -289,12 +289,12 @@
               </div>
               <br>
               <div class="text-right">
-              	<button type="button" class="btn btn-default" onclick="actionlink('japanese.action?command=japanese');"><i class="fa fa-list"></i> 목록</button>
-              	<c:if test="${member.email == japanese.writerId}">
-	              	<button type="button" class="btn btn-default" onclick="actionparam('japanese.action?command=modifyform',${japanese.num});"><i class="fa fa-pencil"></i> 수정</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('food.action?command=food');"><i class="fa fa-list"></i> 목록</button>
+              	<c:if test="${member.email == food.writerId}">
+	              	<button type="button" class="btn btn-default" onclick="actionparam('food.action?command=modifyform',${food.num});"><i class="fa fa-pencil"></i> 수정</button>
               	</c:if>
               	<c:if test="${member.email == japanese.writerId || member.active ge 2}">
-              		<button type="button" class="btn btn-default" onclick="actionparam('japanese.action?command=delete',${japanese.num});"><i class="fa fa-trash"></i> 삭제</button>
+              		<button type="button" class="btn btn-default" onclick="actionparam('food.action?command=delete',${food.num});"><i class="fa fa-trash"></i> 삭제</button>
               	</c:if>
               </div>
             </div>
