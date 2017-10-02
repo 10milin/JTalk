@@ -301,4 +301,50 @@ public class TradeDAO {
 				close(null, pstmt, conn);
 			}
 		}
+		
+		public ArrayList getMarketList(String email) {
+			ArrayList list = null;
+			TradeDTO trade = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from (select *, 'trade' as category from trade union select *, 'nanum' as category from nanum) as market where writerID = ? order by num desc";
+			
+			try
+			{
+				list = new ArrayList();
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, email);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next())
+				{
+					trade = new TradeDTO(rs.getInt("num"),
+							rs.getString("title"),
+							rs.getString("photo"),
+							rs.getString("originphoto"),
+							rs.getString("content"),
+							rs.getString("isSoldout"),
+							rs.getString("writerID"),
+							rs.getString("writerName"),
+							rs.getString("phone"),
+							rs.getString("price"),
+							rs.getTimestamp("writeDate"));
+					trade.setHit(rs.getInt("hit"));
+					trade.setCategory(rs.getString("category"));
+					list.add(trade);
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				close(rs, pstmt, conn);
+			}
+			
+			return list;
+		}
 }

@@ -15,6 +15,7 @@ public class TradeDTO {
 	private String price;
 	private Timestamp writeDate;
 	private int hit;
+	private String category;
 	
 	public TradeDTO() {}
 	
@@ -127,6 +128,14 @@ public class TradeDTO {
 
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

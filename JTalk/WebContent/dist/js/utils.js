@@ -1,3 +1,202 @@
+// Resolve conflict in jQuery UI tooltip with Bootstrap tooltip
+  $.widget.bridge('uibutton', $.ui.button);
+
+//action post
+function actionlink(href){
+	var form = document.createElement('FORM');
+	form.method='POST';
+	form.action='/JTalk/' + href;
+	document.getElementById('actionpost').appendChild(form);
+	form.submit();
+}
+
+function actionparam(href, param){
+	var form = document.createElement('FORM');
+	form.method='POST';
+	form.action='/JTalk/' + href;
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "num");
+    hiddenField.setAttribute("value", param);
+    form.appendChild(hiddenField);
+    
+	document.getElementById('actionpost').appendChild(form);
+	form.submit();
+}
+
+function actioncmtdelete(href, table, num){
+	var form = document.createElement('FORM');
+	form.method='POST';
+	form.action='/JTalk/' + href;
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "table");
+    hiddenField.setAttribute("value", table);
+    form.appendChild(hiddenField);
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "num");
+    hiddenField.setAttribute("value", num);
+    form.appendChild(hiddenField);
+    
+	document.getElementById('actionpost').appendChild(form);
+	form.submit();
+}
+ 
+function actiondownload(href, fileName, originFileName){
+	var form = document.createElement('FORM');
+	form.method='POST';
+	form.action='/JTalk/' + href;
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "fileName");
+    hiddenField.setAttribute("value", fileName);
+    form.appendChild(hiddenField);
+    
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "originFileName");
+    hiddenField.setAttribute("value", originFileName);
+    form.appendChild(hiddenField);
+    
+	document.getElementById('actionpost').appendChild(form);
+	form.submit();
+}
+
+function anonydelete(href, num, main){
+	var form = document.createElement('FORM');
+	form.method='POST';
+	form.action='/JTalk/' + href;
+	
+	var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "num");
+    hiddenField.setAttribute("value", num);
+    form.appendChild(hiddenField);
+    
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "main");
+    hiddenField.setAttribute("value", main);
+    form.appendChild(hiddenField);
+    
+	document.getElementById('actionpost').appendChild(form);
+	form.submit();
+}
+
+//사이드바 토글
+function toggle(){
+	$.ajax({      
+        type:'POST',  
+        url:'/JTalk/toggle.ajax',
+        dataType: 'json',
+        success:function(result){   
+        }
+	});  
+}
+
+//팝업 라이브러리
+function showmember(email){
+	if($('#sendId').val() != email && email != 'admin'){
+		$.ajax({ 
+			type: 'POST',
+			url: '/JTalk/profile.ajax', 
+			data: "email=" + email, 
+			dataType: 'json', 
+			success: function(member){
+				$('#pop-profile').attr('src', '/JTalk/upload/' + member.profile);
+				$('#pop-name1').text(member.name);
+				$('#pop-period1').text(member.period);
+				$('#pop-date').text(member.registerDate);
+				$('#pop-email').text(member.email);
+				$('#pop-name2').text(member.name);
+				$('#pop-period2').text(member.period);
+				$('#pop-pr').html(member.pr);
+				$('#receiveId').val(member.email);
+				
+				if(member.ban == 0){
+					$('#ban-0').css('display','block');
+				}else{
+					$('#ban-1').css('display','block');
+				}
+				
+				if(member.active == 1){
+					$('#active-1').css('display','block');
+				}else if(member.active == 2){
+					$('#active-2').css('display','block');
+				}
+				
+				$('#popup-member').modal('show');
+			}
+		});
+	}
+}
+
+function resetpassword(){
+	$.ajax({ 
+		type: 'POST',
+		url: '/JTalk/adminpw.ajax', 
+		data: "email=" + $('#pop-email').text(), 
+		dataType: 'json', 
+		success: function(e){
+			if(e.result > 0){
+				$('#message-admin-p').html('비밀번호가 1234로 초기화 되었습니다.');
+				$('#message-admin-div').css('display' , 'block');
+			}
+		}
+	});
+}
+
+function userban(status){
+	$.ajax({ 
+		type: 'POST',
+		url: '/JTalk/adminban.ajax', 
+		data: {"email":  $('#pop-email').text(), "status" : status}, 
+		dataType: 'json', 
+		success: function(e){
+			if(e.result > 0){
+				if(status == 0){
+					$('#message-admin-p').html('정상 상태로 변경되었습니다.');
+					$('#ban-0').css('display', 'block');
+					$('#ban-1').css('display', 'none');
+				}else{
+					$('#message-admin-p').html('정지 상태로 변경되었습니다.');
+					$('#ban-1').css('display', 'block');
+					$('#ban-0').css('display', 'none');
+				}
+				$('#message-admin-div').css('display' , 'block');
+			}
+		}
+	});
+}
+
+function adminassign(status){
+	$.ajax({ 
+		type: 'POST',
+		url: '/JTalk/adminassign.ajax', 
+		data: {"email":  $('#pop-email').text(), "status" : status}, 
+		dataType: 'json', 
+		success: function(e){
+			if(e.result > 0){
+				if(status == 1){
+					$('#message-admin-p').html('일반 유저로 변경되었습니다.');
+					$('#active-1').css('display', 'block');
+					$('#active-2').css('display', 'none');
+				}else{
+					$('#message-admin-p').html('관리자 권한이 부여되었습니다.');
+					$('#active-2').css('display', 'block');
+					$('#active-1').css('display', 'none');
+				}
+				$('#message-admin-div').css('display' , 'block');
+			}
+		}
+	});
+}
+
 // 숫자만 입력제한
 function onlyNumberInput(Ev) {
 	    if (window.event) var code = window.event.keyCode;
@@ -269,4 +468,129 @@ function checkval(){
 		return true;
 	}
 	return false;
+}
+
+// 코멘트 수정 Aajax
+$(document).ready(function() {
+    $('.comment-edit').on( 'keyup', function (e){
+  	  if(e.keyCode == 13 && $(this).val().length != 0){
+  		  var text = $(this).parents('.comment-text').find('.comment-in');
+      	  text.html($(this).val());
+      	  $(this).parent().css('display', 'none');
+      	  text.css('display', 'inline');
+      	  $.ajax({ 
+				url: '/JTalk/cmtmodify.ajax', 
+				data: $(this).parents('.cmt').serialize(), 
+				dataType: 'json', 
+				type: 'POST'
+			});
+      	  
+  	  }else{
+  		  $(this).focus();
+  	  }
+    });
+    
+    $('.comment-edit-btn').on( 'click', function (e){
+		  var text = $(this).parents('.comment-text').find('.comment-in');
+		  var edit = $(this).parents('.comment-text').find('.comment-edit');
+		  if(edit.val().length != 0){
+			  text.html(edit.val());
+	    	  edit.parent().css('display', 'none');
+	    	  text.css('display', 'inline');
+	    	  $.ajax({ 
+	  				url: '/JTalk/cmtmodify.ajax', 
+	  				data: $(this).parents('.cmt').serialize(), 
+	  				dataType: 'json', 
+	  				type: 'POST'
+	  			});
+		  }else{
+			  edit.focus();
+		  }
+  	  
+    });
+});
+
+function editstart(obj){
+	var obj = $(obj);
+	var edit = obj.parents('.comment-text').find('.comment-edit');
+	var editdiv = edit.parent();
+	var text = obj.parents('.comment-text').find('.comment-in');
+	edit.val(text.html());
+	editdiv.css('display', 'table');
+	text.css('display', 'none');
+	edit.focus();
+}
+
+//information 판넬 스위칭
+$('#it-btn').on('click', function(){
+	  $('#it-panel').css('display','inline');
+	  $('#jp-panel').css('display','none');
+	  $('#rst-panel').css('display','none');
+	  $('#life-panel').css('display','none');
+});
+
+$('#jp-btn').on('click', function(){
+	  $('#it-panel').css('display','none');
+	  $('#jp-panel').css('display','inline');
+	  $('#rst-panel').css('display','none');
+	  $('#life-panel').css('display','none');
+});
+
+$('#rst-btn').on('click', function(){
+	  $('#it-panel').css('display','none');
+	  $('#jp-panel').css('display','none');
+	  $('#rst-panel').css('display','inline');
+	  $('#life-panel').css('display','none');
+});
+
+$('#life-btn').on('click', function(){
+	  $('#it-panel').css('display','none');
+	  $('#jp-panel').css('display','none');
+	  $('#rst-panel').css('display','none');
+	  $('#life-panel').css('display','inline');
+});
+
+$('#it-btn').mouseenter(function(){
+	$('#it-ico').css('opacity','0.6');
+});
+
+$('#it-btn').mouseleave(function(){
+	$('#it-ico').css('opacity','1');
+});
+
+$('#jp-btn').mouseenter(function(){
+	$('#jp-ico').css('opacity','0.6');
+});
+
+$('#jp-btn').mouseleave(function(){
+	$('#jp-ico').css('opacity','1');
+});
+
+$('#rst-btn').mouseenter(function(){
+	$('#rst-ico').css('opacity','0.6');
+});
+
+$('#rst-btn').mouseleave(function(){
+	$('#rst-ico').css('opacity','1');
+});
+
+$('#life-btn').mouseenter(function(){
+	$('#life-ico').css('opacity','0.6');
+});
+
+$('#life-btn').mouseleave(function(){
+	$('#life-ico').css('opacity','1');
+});
+
+//검색창 열기
+function searchbar(btn){
+	  var st = $('#searchbar').attr('toggle');
+	  if(st == 0){
+		  $('#searchbar').css('display', 'inline-table');
+		  $('#searchbar').find('.form-control').focus();
+		  $('#searchbar').attr('toggle','1');
+	  }else{
+		  $('#searchbar').css('display', 'none');
+		  $('#searchbar').attr('toggle','0');
+	  }
 }

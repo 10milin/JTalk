@@ -5436,3 +5436,11 @@ table.text-center th {
     text-overflow: ellipsis;
     max-width: 100%;
 }
+.market-table-over{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    text-align: left !important;
+    text-indent: 10px !important;
+}
