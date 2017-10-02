@@ -199,7 +199,7 @@
                 </tr>
                 <tr class="board-content board-white">
                 	<td>
-                		<i class="fa fa-user"></i> ${it.writerName}<span style="margin:0 10px;"></span>
+                		<i class="fa fa-user"></i> <a href="javascript:showmember('${it.writerId}')">${it.writerName}</a><span style="margin:0 10px;"></span>
                 		<fmt:formatDate var="date" value="${it.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 		<i class="fa fa-clock-o"></i> ${date}<span style="margin:0 10px;"></span>
                 		<i class="fa fa-eye"></i> ${it.hit}

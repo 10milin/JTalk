@@ -55,6 +55,7 @@ public class ActionController extends HttpServlet {
 		case "/trade.action" : service = new TradeAction(); break;
 		case "/nanum.action" : service = new NanumAction(); break;
 		case "/it.action" : service = new ItAction(); break;
+		case "/japanese.action" : service = new JapaneseAction(); break;
 		default : resURL = "/index.action";
 		}
 
@@ -87,6 +88,9 @@ public class ActionController extends HttpServlet {
 						break;
 					case "it":
 						tableName.add("IT");
+						break;
+					case "japanese":
+						tableName.add("일본어");
 						break;
 					}
 				}

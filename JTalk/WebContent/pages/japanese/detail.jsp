@@ -17,8 +17,6 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/JTalk/dist/css/AdminLTE.css">
   <link rel="stylesheet" href="/JTalk/dist/css/skins/_all-skins.css">
-  <!-- Summernote -->
-  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -177,12 +175,12 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa fa-heart"></i> 행복나눔
-        <small>버리기 귀찮은 물건, 이제 후배에게 양보하세요.</small>
+        <i class="fa fa-book"></i> 일본어
+        <small>JSL연수생들과 다양한 정보를 공유하세요.</small>
       </h1>
       <ol class="breadcrumb">
-       <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">행복나눔</li>
+        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">일본어</li>
       </ol>
     </section>
     <section class="content">
@@ -190,50 +188,121 @@
 	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 등록</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-file-text-o"></i> 상세 보기</h3>
+            </div>
             <!-- /.box-header -->
-            </div>
-            <form action = "/JTalk/nanum.action?command=write" method="post" enctype="multipart/form-data">
-            <div class="box-body">
-              <div>
-              	  <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" required maxlength="20">
-	                <input type="hidden" name="writerId" value="${member.email}">
-	                <input type="hidden" name="writerName" value="${member.name}">
-	              </div>
-	               <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="fa fa-krw"></i></span>
-	                <input type="text" class="form-control" placeholder="가격" value = "0" name="price" required readonly>
-	              </div>
-	              <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-	                <input type="text" class="form-control" required placeholder="연락처" name="phone" data-inputmask='"mask": "999-9999-9999"' data-mask onblur="checkphone(this)">
-	              </div>
-	              <div class="input-group">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly value="이미지">
-	                <div class="input-group-btn">
-		              <div class="btn btn-default btn-file">
-		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
-		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
+            <div class="box-body box-body-padding">
+            <div class="col-md-12">
+              <table class="table table-condensed table-hover">
+                <tr class="table-field board-headline">
+                  <th>${japanese.title}</th>
+                </tr>
+                <tr class="board-content board-white">
+                	<td>
+                		<i class="fa fa-user"></i> <a href="javascript:showmember('${japanese.writerId}')">${japanese.writerName}</a><span style="margin:0 10px;"></span>
+                		<fmt:formatDate var="date" value="${japanese.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                		<i class="fa fa-clock-o"></i> ${date}<span style="margin:0 10px;"></span>
+                		<i class="fa fa-eye"></i> ${japanese.hit}
+                	</td>
+                </tr>
+                <tr class="board-white">
+                	<td>
+                		<div>${japanese.content}</div>
+                	</td>
+                </tr>
+                <c:if test="${not empty it.fileName}">
+                <tr class="board-white">
+                	<td>
+                		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
+			                  <div class="mailbox-attachment-info">
+			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${japanese.originFileName}</span>
+			                          <a href="javascript:actiondownload('japanese.action?command=download','${japanese.fileName}', '${japanese.originFileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
+			                  </div>
+                		</div>
+                	</td>
+                </tr>
+                </c:if>
+                <tr class="board-white">
+                	<td class="border-none-top">
+                		<a class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> 댓글
+                        (${countComment})</a>
+                	</td>
+                </tr>
+              </table>
+              <div class="table-bottom box-comments" style="padding:10px">
+              <!-- /.유저 한명의 코멘트 -->
+              <c:if test="${empty commentList}">
+              	<div class="box-comment">등록된 댓글이 없습니다.</div>
+              </c:if>
+              <c:if test="${not empty commentList}">
+	              <c:forEach var="item" items="${commentList}" varStatus="status">
+	              	<div class="box-comment">
+	                	<!-- User image -->
+		                <img class="img-circle img-sm" src="/JTalk/upload/${profileList.get(status.index)}" alt="User Image">
+		
+		                <div class="comment-text">
+		                      <span class="username">
+		                        <a href="javascript:showmember('${item.writerId}')">${item.writerName}</a>
+		                        <span class="pull-right">
+		                        <c:if test="${item.writerId eq member.email}">
+			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
+		                        </c:if>
+		                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
+			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'it', ${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+		                        </c:if>                   
+		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+		                        <span class="text-muted">${date}</span>
+		                        </span>
+		                      </span><!-- /.username -->
+		                  <span>
+		                  <form class="cmt" method = "post" onsubmit="return false">
+		                  <div class="input-group" style="display:none;">
+		                  	<input type = "hidden" name = "num" value = "${item.num}"/>
+			                  <input type="text" name = "content" class="form-control input-sm comment-edit" placeholder="수정할 내용을 입력해주세요.">
+			                  <span class="input-group-btn">
+			                      <button type="button" class="btn btn-sm btn-default btn-flat comment-edit-btn"><i class="fa fa-pencil"></i> 수정</button>
+			                    </span>
+		                	</div>
+			               </form>
+			                  <span class="comment-in">${item.content}</span>
+		                  </span>
 		                </div>
-		             </div>
-	                <!-- /btn-group -->
-			       </div>
-			       <p class="help-block input-margin-btm">제한용량 5MB</p>
-	              <textarea class="summernote" name="content" required></textarea>
-	              <div class="text-right table-bottom" style="border:0px">
-              	<button type="button" class="btn btn-default" onclick="actionlink('nanum.action?command=nanum');"><i class="fa fa-list"></i> 목록</button>
-              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 등록</button>
+		                <!-- /.comment-text -->
+	              </div>
+	              </c:forEach>
+              </c:if>
+              <!-- /.유저 한명의 코멘트 -->
+              <form action="/JTalk/comment.action?command=write" method="post">
+                <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
+                <!-- .img-push is used to add margin to elements next to floating images -->
+                <div class="img-push input-group">
+                  <input type="hidden" name = "tableName" value = "japanese"/>
+                  <input type="hidden" name = "postNum" value = "${japanese.num}"/>
+                  <input type="hidden" name = "writerId" value = "${member.email}"/>
+                  <input type="hidden" name = "writerName" value = "${member.name}"/>
+                  <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-pencil"></i> 댓글 등록</button>
+                    </span>
+                </div>
+              </form>
               </div>
+              <br>
+              <div class="text-right">
+              	<button type="button" class="btn btn-default" onclick="actionlink('japanese.action?command=japanese');"><i class="fa fa-list"></i> 목록</button>
+              	<c:if test="${member.email == japanese.writerId}">
+	              	<button type="button" class="btn btn-default" onclick="actionparam('japanese.action?command=modifyform',${japanese.num});"><i class="fa fa-pencil"></i> 수정</button>
+              	</c:if>
+              	<c:if test="${member.email == japanese.writerId || member.active ge 2}">
+              		<button type="button" class="btn btn-default" onclick="actionparam('japanese.action?command=delete',${japanese.num});"><i class="fa fa-trash"></i> 삭제</button>
+              	</c:if>
               </div>
             </div>
-            </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
+	    </div>
 	    </div>
 	</section>
   </div>
@@ -244,7 +313,6 @@
     <strong>Copyright &copy; 2017 <a>KLM Studio</a>.</strong> All rights
     reserved.
   </footer>
-</div>
 <div id="actionpost"></div>
 <!-- modal -->
 <div class="modal fade" id="popup-member">
@@ -397,23 +465,9 @@
 <!-- /.modal -->
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
-<script src="/JTalk/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
-<script>
-  $('.summernote').summernote({
-      height: 400,
-      tabsize: 2,
-      linkTargetBlank: false,
-      lang: 'ko-KR',
-      disableDragAndDrop: true
-    });
-  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
-  $('[data-mask]').inputmask();
-</script>
 </body>
 </html>

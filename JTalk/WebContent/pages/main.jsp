@@ -109,6 +109,7 @@
 	                  			<c:when test="${item.tableName eq 'trade'}"><c:set var="ico" value = "fa-shopping-cart text-blue"/></c:when>
 	                  			<c:when test="${item.tableName eq 'nanum'}"><c:set var="ico" value = "fa-heart text-blue"/></c:when>
 	                  			<c:when test="${item.tableName eq 'it'}"><c:set var="ico" value = "fa-television text-blue"/></c:when>
+	                  			<c:when test="${item.tableName eq 'japanese'}"><c:set var="ico" value = "fa-book text-blue"/></c:when>
 	                  		</c:choose>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
 		                      <i class="fa ${ico}"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
@@ -168,7 +169,7 @@
          <li><a href="#"><i class="fa fa-share-alt"></i> <span>스터디모집</span></a></li>
         <li class="header">INFORMATION</li>
         <li><a href="javascript:actionlink('it.action?command=it');"><i class="fa fa-television"></i> <span>IT</span></a></li>
-        <li><a href="#"><i class="fa fa-book"></i> <span>일본어</span></a></li>
+        <li><a href="javascript:actionlink('japanese.action?command=japanese');"><i class="fa fa-book"></i> <span>일본어</span></a></li>
         <li><a href="#"><i class="fa fa-cutlery"></i> <span>주변맛집</span></a></li>
         <li><a href="#"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
         <li class="header">MARKETPLACE</li>

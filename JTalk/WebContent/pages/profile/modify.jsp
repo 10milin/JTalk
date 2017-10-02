@@ -340,7 +340,6 @@
     <strong>Copyright &copy; 2017 <a>KLM Studio</a>.</strong> All rights
     reserved.
   </footer>
-  
 </div>
 <div id="actionpost"></div>
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>

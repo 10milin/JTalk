@@ -17,8 +17,6 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/JTalk/dist/css/AdminLTE.css">
   <link rel="stylesheet" href="/JTalk/dist/css/skins/_all-skins.css">
-  <!-- Summernote -->
-  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -159,7 +157,7 @@
         <li><a href="#"><i class="fa fa-comments-o"></i> <span>선후배교류</span></a></li>
          <li><a href="#"><i class="fa fa-share-alt"></i> <span>스터디모집</span></a></li>
         <li class="header">INFORMATION</li>
-        <li><a href="#"><i class="fa fa-television"></i> <span>IT</span></a></li>
+        <li><a href="javascript:actionlink('it.action?command=it');"><i class="fa fa-television"></i> <span>IT</span></a></li>
         <li><a href="#"><i class="fa fa-book"></i> <span>일본어</span></a></li>
         <li><a href="#"><i class="fa fa-cutlery"></i> <span>주변맛집</span></a></li>
         <li><a href="#"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
@@ -177,12 +175,12 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa fa-heart"></i> 행복나눔
-        <small>버리기 귀찮은 물건, 이제 후배에게 양보하세요.</small>
+        <i class="fa fa-book"></i> 일본어
+        <small>JSL연수생들과 다양한 정보를 공유하세요.</small>
       </h1>
       <ol class="breadcrumb">
-       <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">행복나눔</li>
+        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">일본어</li>
       </ol>
     </section>
     <section class="content">
@@ -190,50 +188,149 @@
 	    	<div class="col-md-12">
 	    	<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 등록</h3>
+              <h3 class="box-title font-bareun"><i class="fa fa-list"></i> 글 목록</h3>
+            </div>
             <!-- /.box-header -->
-            </div>
-            <form action = "/JTalk/nanum.action?command=write" method="post" enctype="multipart/form-data">
-            <div class="box-body">
-              <div>
-              	  <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" required maxlength="20">
-	                <input type="hidden" name="writerId" value="${member.email}">
-	                <input type="hidden" name="writerName" value="${member.name}">
+            <div class="box-body box-body-padding">
+            	<div class="col-md-12">
+              <table class="table table-condensed table-hover table-md">
+                <tr class="table-field">
+                  <th style="width: 50px;">번호</th>
+                  <th>제목</th>
+                  <th style="width: 10%;">글쓴이</th>
+                  <th style="width: 13%;">작성일</th>
+                  <th style="width: 9%;">조회수</th>
+                </tr>
+                <c:if test="${empty currentList}">
+                	<c:if test="${empty search}">
+	                	<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="5" align="center">검색결과가 없습니다.</td>
+	                </c:if>
+                </c:if>
+                <c:if test="${not empty currentList}">
+                	<jsp:useBean id="now" class="java.util.Date" />
+                	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
+                	<c:forEach var="item" items="${currentList}" varStatus="status">
+                		<tr class="table-field">
+		                  <td>${item.num}</td>
+		                  <td class="td-title">
+		                  	  <a class="atag-black" href="javascript:actionparam('japanese.action?command=detail', '${item.num}')">${item.title}</a>
+			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
+							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
+							  <c:if test="${today == write_dt}">
+			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
+			                  </c:if>
+		                  </td>
+		                  <td><a href="javascript:showmember('${item.writerId}')">${item.writerName}</a></td>
+		                  <td>
+		                  <c:if test="${today == write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
+			              </c:if>
+			              <c:if test="${today != write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+			              </c:if>
+		                  ${fmtDate}
+		                  </td>
+		                  <td>${item.hit}</td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
+              </table>
+              <table class="table table-condensed table-hover table-xd">
+              	<tr class="table-field">
+                  <th>제목</th>
+                  <th style="width: 18%;">글쓴이</th>
+                  <th style="width: 20%;">작성일</th>
+                </tr>
+                <c:if test="${empty currentList}">
+                	<c:if test="${empty search}">
+	                	<td colspan="3" align="center">등록된 게시글이 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="3" align="center">검색결과가 없습니다.</td>
+	                </c:if>
+                </c:if>
+                <c:if test="${not empty currentList}">
+                	<c:forEach var="item" items="${currentList}">
+                		<tr class="table-field">
+		                  <td class="td-title none-text-indent">
+		                  	  <a class="atag-black" href="javascript:actionparam('japanese.action?command=detail', '${item.num}')">${item.title}</a>
+			                  <i class="fa fa-commenting-o"></i> ${countList.get(status.index)}
+							  <fmt:formatDate value="${item.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
+							  <c:if test="${today == write_dt}">
+			                  	<small class="label bg-green" style="margin-left:5px;">new</small>
+			                  </c:if>
+		                  </td>
+		                  <td class="table-td-vline"><a href="javascript:showmember('${item.writerId}')">${item.writerName}</a></td>
+		                  <td class="table-td-vline">
+		                  	<c:if test="${today == write_dt}">
+			                  	<fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="HH:mm" />
+				            </c:if>
+				            <c:if test="${today != write_dt}">
+				                 <fmt:formatDate var="fmtDate" value="${item.writeDate}" pattern="yy-MM-dd" />
+				            </c:if>
+			                  ${fmtDate}
+		                  </td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
+              </table>
+              </div>
+              <div class="col-md-12">
+              <div class="text-right table-bottom">
+              	<form action = "/JTalk/japanese.action?command=japanese" method="post">
+              	<div class="col-md-3 col-xs-12 no-padding mobile-center">
+              		<c:if test="${not empty search}">
+              			<div id="searchbar"class="input-group" toggle="1" style="display:inline-table;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+              		</c:if>
+              		<c:if test="${empty search}">
+	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+	                </c:if>
 	              </div>
-	               <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="fa fa-krw"></i></span>
-	                <input type="text" class="form-control" placeholder="가격" value = "0" name="price" required readonly>
-	              </div>
-	              <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-	                <input type="text" class="form-control" required placeholder="연락처" name="phone" data-inputmask='"mask": "999-9999-9999"' data-mask onblur="checkphone(this)">
-	              </div>
-	              <div class="input-group">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly value="이미지">
-	                <div class="input-group-btn">
-		              <div class="btn btn-default btn-file">
-		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
-		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
-		                </div>
-		             </div>
-	                <!-- /btn-group -->
-			       </div>
-			       <p class="help-block input-margin-btm">제한용량 5MB</p>
-	              <textarea class="summernote" name="content" required></textarea>
-	              <div class="text-right table-bottom" style="border:0px">
-              	<button type="button" class="btn btn-default" onclick="actionlink('nanum.action?command=nanum');"><i class="fa fa-list"></i> 목록</button>
-              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 등록</button>
+                </form>
+              
+              <div class="col-md-9 col-xs-12 text-right no-padding">
+              		<c:if test="${empty search}">
+              			<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                	</c:if>
+                	<c:if test="${not empty search}">
+                		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                		<button type="button" class="btn btn-default" onclick="actionlink('japanese.action?command=japanese');"><i class="fa fa-list"></i> 목록</button>
+                	</c:if>
+                	<button type="button" class="btn btn-default" onclick="actionlink('japanese.action?command=writeform');"><i class="fa fa-edit"></i> 쓰기</button>
+	              	
+              	</div>
+              </div>
+              <div class="col-md-12 text-center" style="display:inline-block; width:100%">
+              	<form action="/JTalk/japanese.action?command=japanese" method="post" id="pagination-form">
+              		<ul id="pagination" class="pagination-sm"></ul>
+              		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
+              		<input type="hidden" name="search" value="${search}">
+              	</form>
               </div>
               </div>
             </div>
-            </form>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
           </div>
+          
 	    </div>
 	</section>
   </div>
@@ -397,23 +494,12 @@
 <!-- /.modal -->
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
-<script src="/JTalk/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script>
-  $('.summernote').summernote({
-      height: 400,
-      tabsize: 2,
-      linkTargetBlank: false,
-      lang: 'ko-KR',
-      disableDragAndDrop: true
-    });
-  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
-  $('[data-mask]').inputmask();
+  pagination(${totalPage},${currentPage});
 </script>
 </body>
 </html>
