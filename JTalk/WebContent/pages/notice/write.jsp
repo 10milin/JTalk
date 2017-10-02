@@ -247,6 +247,7 @@
 <script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
+<script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script>
   $('.summernote').summernote({
       height: 400,

@@ -253,11 +253,11 @@
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
-<!-- Summernote -->
 <script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <script src="/JTalk/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script>
   $('.summernote').summernote({
       height: 400,

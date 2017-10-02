@@ -47,5 +47,6 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
+<script src="/JTalk/dist/js/adminlte.min.js"></script>
 </body>
 </html>

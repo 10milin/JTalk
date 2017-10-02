@@ -349,5 +349,6 @@
 <script src="/JTalk/bower_components/datatables.net/js/jquery.dataTables.js"></script>
 <script src="/JTalk/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
+<script src="/JTalk/dist/js/adminlte.min.js"></script>
 </body>
 </html>
