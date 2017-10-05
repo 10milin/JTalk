@@ -25,7 +25,12 @@ public class RegisterService implements Service{
 		int result = dao.insertMember(member);
 		
 		if(result > 0) {
-			AuthEmail.send(email, name, link, "insert");
+			AuthEmail.setRequest(request);
+			try {
+				AuthEmail.send(email, name, link, "insert");
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 			
 			request.setAttribute("successMsg", name + "님 환영합니다.<br>" +email + "로 인증메일이<br>전송 되었습니다.");
 			request.setAttribute("email", email);
@@ -34,8 +39,6 @@ public class RegisterService implements Service{
 		}else {
 			resURL = "/pages/error/500.jsp";
 		}
-		
-		
 		
 		return resURL;
 	}

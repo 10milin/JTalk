@@ -34,7 +34,11 @@ public class RecoveryService implements Service{
 			
 			dao.findPass(newPass, email);
 			
-			AuthEmail.send(email, name, newPass, "find");
+			try {
+				AuthEmail.send(email, name, newPass, "find");
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 			
 			String successMsg = email + "으로<br>임시 비밀번호를 전송하였습니다.";
 			request.setAttribute("authMsg", successMsg);
