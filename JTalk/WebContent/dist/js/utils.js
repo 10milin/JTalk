@@ -472,6 +472,12 @@ function checkval(){
 
 // 코멘트 수정 Aajax
 $(document).ready(function() {
+	$('#address').on( 'keyup', function (e){
+	  	  if(e.keyCode == 13 && $(this).val().length != 0){
+	  		initialize();
+	  	  }
+	    });
+	
     $('.comment-edit').on( 'keyup', function (e){
   	  if(e.keyCode == 13 && $(this).val().length != 0){
   		  var text = $(this).parents('.comment-text').find('.comment-in');

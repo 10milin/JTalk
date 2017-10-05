@@ -402,7 +402,8 @@
       height: 400,
       tabsize: 2,
       linkTargetBlank: false,
-      lang: 'ko-KR'
+      lang: 'ko-KR',
+      disableDragAndDrop: true
     });
   $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
 </script>

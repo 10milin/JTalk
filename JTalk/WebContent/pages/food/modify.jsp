@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKf9LlUhWBeusRC2T6s_nXGd0i8s3hf-Y&language=Ko&region=Ko"></script>
 </head>
 <body class="${body}">
 <div class="wrapper">
@@ -196,14 +197,22 @@
             <form action = "/JTalk/food.action?command=modify" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div>
-              	  <div class="input-group">
+              	  <div class="input-group input-margin-btm">
 	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
 	                <input type="text" class="form-control" placeholder="제목" name="title" value="${food.title}" required>
 	                <input type="hidden" name="writerId" value="${member.email}">
 	                <input type="hidden" name="writerName" value="${member.name}">
 	                <input type="hidden" name="num" value="${food.num}">
 	              </div>
-	              <br>
+	              <div class="input-group input-margin-btm">
+	                <span class="input-group-addon"><i class="fa fa-map-marker" style="width:14px; height:16px"></i></span>
+	                <input id="address" type="text" class="form-control" placeholder="주소" name="address" value="${food.address}" required>
+	                <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary btn-flat" onclick="initialize();"><i class="fa fa-google"></i> 지도연동</button>
+                    </span>
+	              </div>
+	              <div id="map-canvas" style="width: 100%; height: 340px;"></div>
+	              <p class="help-block input-margin-btm">정확한 주소를 입력하시면 지도에 표시됩니다. 『JSL인재개발원 - > 대전광역시 중구 용두동 JSL인재개발원』</p>
 	              <textarea class="summernote" name="content" required>${food.content}</textarea>
 	              <div class="input-group col-md-4">
 					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
@@ -397,12 +406,15 @@
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
+<script src="/JTalk/dist/js/map.js"></script>
 <script>
+	initialize();
   $('.summernote').summernote({
       height: 400,
       tabsize: 2,
       linkTargetBlank: false,
-      lang: 'ko-KR'
+      lang: 'ko-KR',
+      disableDragAndDrop: true
     });
   $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
 </script>

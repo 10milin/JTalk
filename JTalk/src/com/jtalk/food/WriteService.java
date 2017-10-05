@@ -34,6 +34,7 @@ public class WriteService implements Service{
 			
 			String title = multi.getParameter("title");
 			String content = multi.getParameter("content");
+			String address = multi.getParameter("address");
 			String writerId = multi.getParameter("writerId");
 			String writerName = multi.getParameter("writerName");
 			String fileName = multi.getFilesystemName("file");
@@ -43,6 +44,7 @@ public class WriteService implements Service{
 			
 			notice.setTitle(title);
 			notice.setContent(content);
+			notice.setAddress(address);
 			notice.setWriterId(writerId);
 			notice.setWriterName(writerName);
 			notice.setFileName(fileName);

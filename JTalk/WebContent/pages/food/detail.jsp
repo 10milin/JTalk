@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/JTalk/dist/css/skins/_all-skins.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKf9LlUhWBeusRC2T6s_nXGd0i8s3hf-Y&language=Ko&region=Ko"></script>
 </head>
 <body class="${body}">
 <div class="wrapper">
@@ -222,6 +223,12 @@
                 	</td>
                 </tr>
                 </c:if>
+                <tr class="board-white">
+                	<td>
+                		<input id="address" type="hidden" value="${food.address}">
+                		<div id="map-canvas" style="width: 100%; height: 340px;"></div>
+                	</td>
+                </tr>
                 <tr class="board-white">
                 	<td class="border-none-top">
                 		<a class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> 댓글
@@ -469,5 +476,7 @@
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
+<script src="/JTalk/dist/js/map.js"></script>
+<script>initialize()</script>
 </body>
 </html>

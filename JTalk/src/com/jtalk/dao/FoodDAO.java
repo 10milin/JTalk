@@ -19,18 +19,19 @@ public class FoodDAO {
 	public void insertFood(FoodDTO food) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into food(title, content, writerId, writerName, fileName, originFileName) "
-				+ "values(?, ?, ?, ?, ?, ?)";
+		String sql = "insert into food(title, content, address, writerId, writerName, fileName, originFileName) "
+				+ "values(?, ?, ?, ?, ?, ?,?)";
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, food.getTitle());
 			pstmt.setString(2, food.getContent());
-			pstmt.setString(3, food.getWriterId());
-			pstmt.setString(4, food.getWriterName());
-			pstmt.setString(5, food.getFileName());
-			pstmt.setString(6, food.getOriginFileName());
+			pstmt.setString(3, food.getAddress());
+			pstmt.setString(4, food.getWriterId());
+			pstmt.setString(5, food.getWriterName());
+			pstmt.setString(6, food.getFileName());
+			pstmt.setString(7, food.getOriginFileName());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -65,6 +66,7 @@ public class FoodDAO {
 						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
+				food.setAddress(rs.getString("address"));
 				list.add(food);
 			}
 		}catch(Exception e) {
@@ -100,6 +102,7 @@ public class FoodDAO {
 						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
+				food.setAddress(rs.getString("address"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -144,15 +147,17 @@ public class FoodDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				searchList.add(new FoodDTO(rs.getInt("num"),
-											rs.getString("title"),
-											rs.getString("content"),
-											rs.getString("writerId"),
-											rs.getString("writerName"),
-											rs.getString("fileName"),
-											rs.getString("originFileName"),
-											rs.getTimestamp("writeDate"),
-											rs.getInt("hit")));
+				FoodDTO food = new FoodDTO(rs.getInt("num"),
+						rs.getString("title"),
+						rs.getString("content"),
+						rs.getString("writerId"),
+						rs.getString("writerName"),
+						rs.getString("fileName"),
+						rs.getString("originFileName"),
+						rs.getTimestamp("writeDate"),
+						rs.getInt("hit"));
+				food.setAddress(rs.getString("address"));
+				searchList.add(food);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -168,7 +173,7 @@ public class FoodDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "update food set "
-				+ "title = ?, content = ?, writerId = ?, writerName = ?,";
+				+ "title = ?, content = ?, address = ?, writerId = ?, writerName = ?,";
 		if(food.getFileName()!=null)
 		{
 			sql+=" fileName = ?, originFileName = ?";
@@ -180,17 +185,18 @@ public class FoodDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, food.getTitle());
 			pstmt.setString(2, food.getContent());
-			pstmt.setString(3, food.getWriterId());
-			pstmt.setString(4, food.getWriterName());
+			pstmt.setString(3, food.getAddress());
+			pstmt.setString(4, food.getWriterId());
+			pstmt.setString(5, food.getWriterName());
 			if(food.getFileName()!=null)
 			{
-				pstmt.setString(5, food.getFileName());
-				pstmt.setString(6, food.getOriginFileName());
-				pstmt.setInt(7, food.getNum());
+				pstmt.setString(6, food.getFileName());
+				pstmt.setString(7, food.getOriginFileName());
+				pstmt.setInt(8, food.getNum());
 			}
 			else
 			{
-				pstmt.setInt(5, food.getNum());
+				pstmt.setInt(6, food.getNum());
 			}
 			
 			pstmt.executeUpdate();

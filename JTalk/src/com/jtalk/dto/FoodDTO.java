@@ -6,6 +6,7 @@ public class FoodDTO {
 	private int num;
 	private String title;
 	private String content;
+	private String address;
 	private String writerId;
 	private String writerName;
 	private String fileName;
@@ -99,5 +100,15 @@ public class FoodDTO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
 	
 }
