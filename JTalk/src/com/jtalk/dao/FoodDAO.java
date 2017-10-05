@@ -176,7 +176,7 @@ public class FoodDAO {
 				+ "title = ?, content = ?, address = ?, writerId = ?, writerName = ?,";
 		if(food.getFileName()!=null)
 		{
-			sql+=" fileName = ?, originFileName = ?";
+			sql+=" fileName = ?, originFileName = ?,";
 		}
 		sql +=" writeDate = current_timestamp "	+ "where num = ?";
 		

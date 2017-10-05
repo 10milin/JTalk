@@ -1,11 +1,15 @@
-package com.jtalk.notice;
+package com.jtalk.life;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
+import com.jtalk.dao.JapaneseDAO;
+import com.jtalk.dao.LifeDAO;
 import com.jtalk.dao.NoticeDAO;
+import com.jtalk.dto.JapaneseDTO;
+import com.jtalk.dto.LifeDTO;
 import com.jtalk.dto.NoticeDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -38,8 +42,8 @@ public class ModifyService implements Service {
 			String writerName = multi.getParameter("writerName");
 			String fileName = multi.getFilesystemName("file");
 			String originFileName = multi.getOriginalFileName("file");
-
-			NoticeDTO notice = new NoticeDTO();
+			
+			LifeDTO notice = new LifeDTO();
 			
 			notice.setNum(num);
 			notice.setTitle(title);
@@ -52,10 +56,10 @@ public class ModifyService implements Service {
 				notice.setOriginFileName(originFileName);
 			}
 			
-			NoticeDAO dao = NoticeDAO.getInstance();
-			dao.modifyNotice(notice);
+			LifeDAO dao = LifeDAO.getInstance();
+			dao.modifyLife(notice);
 			
-			resURL = "/notice.action?command=notice";
+			resURL = "/life.action?command=life";
 
 		}catch(Exception e) {
 			e.printStackTrace();

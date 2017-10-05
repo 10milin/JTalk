@@ -171,7 +171,7 @@ public class JapaneseDAO {
 				+ "title = ?, content = ?, writerId = ?, writerName = ?,";
 		if(japanese.getFileName()!=null)
 		{
-			sql+=" fileName = ?, originFileName = ?";
+			sql+=" fileName = ?, originFileName = ?,";
 		}
 		sql +=" writeDate = current_timestamp "	+ "where num = ?";
 		

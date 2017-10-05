@@ -1,4 +1,4 @@
-package com.jtalk.japanese;
+package com.jtalk.life;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,9 +12,10 @@ import com.jtalk.core.Service;
 import com.jtalk.dao.CommentDAO;
 import com.jtalk.dao.MemberDAO;
 import com.jtalk.dao.NewCommentDAO;
-import com.jtalk.dao.JapaneseDAO;
+import com.jtalk.dao.LifeDAO;
 import com.jtalk.dto.CommentDTO;
 import com.jtalk.dto.JapaneseDTO;
+import com.jtalk.dto.LifeDTO;
 import com.jtalk.dto.MemberDTO;
 
 public class DetailService implements Service {
@@ -26,7 +27,7 @@ public class DetailService implements Service {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		MemberDAO memberDAO = MemberDAO.getInstance();
-		JapaneseDAO japaneseDAO = JapaneseDAO.getInstance();
+		LifeDAO lifeDAO = LifeDAO.getInstance();
 		CommentDAO commentDAO = CommentDAO.getInstance();
 		NewCommentDAO newDAO = NewCommentDAO.getInstance();
 		
@@ -38,7 +39,7 @@ public class DetailService implements Service {
 		boolean check = false;
 		
 		for(int i = 0; i < cookie.length; i++) {
-			if(cookie[i].getName().equals("japanese")) {
+			if(cookie[i].getName().equals("life")) {
 				if(cookie[i].getValue().equals(String.valueOf(num))) {
 					check = true;
 					break;
@@ -63,17 +64,17 @@ public class DetailService implements Service {
 			
 			noticeCookie.setMaxAge(time);
 			response.addCookie(noticeCookie);
-			japaneseDAO.hitUp(num);
+			lifeDAO.hitUp(num);
 		}
 		
 		//게시글과 댓글을 읽어옴
-		JapaneseDTO notice = japaneseDAO.getJapanese(num);
-		ArrayList<CommentDTO> commentList = commentDAO.getCommentList("japanese", num);
+		LifeDTO notice = lifeDAO.getLife(num);
+		ArrayList<CommentDTO> commentList = commentDAO.getCommentList("life", num);
 		ArrayList<String> profileList = new ArrayList<String>();
 		
 		//글쓴이가 글을 읽은 경우 새 댓글 알림 초기화
 		if(member.getEmail().equals(notice.getWriterId())) {
-			newDAO.resetNew("japanese", num);
+			newDAO.resetNew("life", num);
 		}
 		
 		//댓글의 프로필 사진 파일명
@@ -82,14 +83,14 @@ public class DetailService implements Service {
 		}
 		
 		//댓글의 총 갯수
-		int countComment = commentDAO.countComment("japanese", num);
+		int countComment = commentDAO.countComment("life", num);
 		
-		request.setAttribute("japanese", notice);
+		request.setAttribute("life", notice);
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("profileList", profileList);
 		request.setAttribute("countComment", countComment);
 				
-		resURL = "/pages/japanese/detail.jsp";
+		resURL = "/pages/life/detail.jsp";
 		
 		return resURL;
 	}

@@ -150,7 +150,6 @@
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">NOTICE</li>
       	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
@@ -178,12 +177,12 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-shopping-cart "></i> 중고나라
-        <small>JSL 연수기간, 물건! 버리지 말고 바꿔보세요.</small>
+        <i class="fa fa fa-check-square-o"></i> 생활정보
+        <small>JSL연수생들과 다양한 정보를 공유하세요.</small>
       </h1>
       <ol class="breadcrumb">
-       <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">중고나라</li>
+        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">생활정보</li>
       </ol>
     </section>
     <section class="content">
@@ -194,27 +193,21 @@
               <h3 class="box-title font-bareun"><i class="fa fa-pencil"></i> 글 수정</h3>
             <!-- /.box-header -->
             </div>
-            <form action = "/JTalk/trade.action?command=modify" method="post" enctype="multipart/form-data">
+            <form action = "/JTalk/life.action?command=modify" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div>
-              	  <div class="input-group input-margin-btm">
+              	  <div class="input-group">
 	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" value="${trade.title}"required maxlength="20">
+	                <input type="text" class="form-control" placeholder="제목" name="title" value="${life.title}" required>
 	                <input type="hidden" name="writerId" value="${member.email}">
 	                <input type="hidden" name="writerName" value="${member.name}">
-	                <input type="hidden" name="num" value="${trade.num}">
+	                <input type="hidden" name="num" value="${life.num}">
 	              </div>
-	               <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="fa fa-krw"></i></span>
-	                <input type="text" class="form-control" placeholder="가격" name="price" value="${trade.price}" required id="isbn" onKeyDown = "javascript:onlyNumberInput(event)" style='IME-MODE: disabled' maxlength="7">
-	              </div>
-	              <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-	                <input type="text" class="form-control" required placeholder="연락처" name="phone" data-inputmask='"mask": "999-9999-9999"' data-mask value="${trade.phone}" onblur="checkphone(this)">
-	              </div>
-	              <div class="input-group">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly value="${trade.originphoto}">
+	              <br>
+	              <textarea class="summernote" name="content" required>${life.content}</textarea>
+	              <div class="input-group col-md-4">
+					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
+	                <input id = "uploadfield" value="${life.fileName }" type="text" class="form-control" readonly>
 	                <div class="input-group-btn">
 		              <div class="btn btn-default btn-file">
 		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
@@ -223,10 +216,9 @@
 		             </div>
 	                <!-- /btn-group -->
 			       </div>
-			       <p class="help-block input-margin-btm">제한용량 5MB</p>
-	              <textarea class="summernote" name="content" required>${trade.content}</textarea>
+	              <p class="help-block">제한용량 5MB</p>
 	              <div class="text-right table-bottom" style="border:0px">
-              	<button type="button" class="btn btn-default" onclick="actionlink('trade.action?command=trade');"><i class="fa fa-list"></i> 목록</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('life.action?command=life');"><i class="fa fa-list"></i> 목록</button>
               	<button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i> 수정</button>
               </div>
               </div>
@@ -400,11 +392,10 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
-<script src="/JTalk/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script>
   $('.summernote').summernote({
@@ -415,7 +406,6 @@
       disableDragAndDrop: true
     });
   $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
-  $('[data-mask]').inputmask();
 </script>
 </body>
 </html>

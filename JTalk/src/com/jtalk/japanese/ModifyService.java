@@ -39,6 +39,7 @@ public class ModifyService implements Service {
 			String writerId = multi.getParameter("writerId");
 			String writerName = multi.getParameter("writerName");
 			String fileName = multi.getFilesystemName("file");
+			String originFileName = multi.getOriginalFileName("file");
 			
 			JapaneseDTO notice = new JapaneseDTO();
 			
@@ -50,6 +51,7 @@ public class ModifyService implements Service {
 			if(fileName!=null)
 			{
 				notice.setFileName(fileName);
+				notice.setOriginFileName(originFileName);
 			}
 			
 			JapaneseDAO dao = JapaneseDAO.getInstance();

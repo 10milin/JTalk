@@ -171,7 +171,7 @@ public class NoticeDAO {
 				+ "title = ?, content = ?, writerId = ?, writerName = ?,";
 		if(notice.getFileName()!=null)
 		{
-			sql+=" fileName = ?, originFileName = ?";
+			sql+=" fileName = ?, originFileName = ?,";
 		}
 		sql +=" writeDate = current_timestamp "	+ "where num = ?";
 		
