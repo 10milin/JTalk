@@ -61,6 +61,8 @@ public class ActionController extends HttpServlet {
 		case "/we.action" : service = new WeAction(); break;
 		case "/study.action" : service = new StudyAction(); break;
 		case "/exchange.action" : service = new ExchangeAction(); break;
+		case "/speech.action" : service = new SpeechAction(); break;
+		case "/project.action" : service = new ProjectAction(); break;
 		default : resURL = "/index.action";
 		}
 
@@ -111,6 +113,12 @@ public class ActionController extends HttpServlet {
 						break;
 					case "exchange":
 						tableName.add("선후배교류");
+						break;
+					case "speech":
+						tableName.add("스피치");
+						break;
+					case "project":
+						tableName.add("프로젝트");
 						break;
 					}
 				}
