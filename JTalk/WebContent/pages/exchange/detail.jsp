@@ -176,7 +176,7 @@
   	<section class="content-header">
       <h1 class="font-bareun">
         <i class="fa fa-comments-o"></i> 선후배교류
-        <small>선후배간에 다양한 이야기를 나눠봐요.</small>
+        <small>선후배간에 다양한 이야기를 나눠보세요.</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
