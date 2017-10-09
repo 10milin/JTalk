@@ -173,20 +173,14 @@
   </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  	<c:if test="${member.active eq 2 || member.active eq 3}">
-  		<c:set var="text" value="같은 기수들 끼리 함께 이야기해요."/>
-  	</c:if>
-  	<c:if test="${member.active eq 1}">
-  		<c:set var="text" value="${member.period}기 끼리 함께 이야기해요."/>
-  	</c:if>
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-group"></i> 우리끼리
-        <small>${text}</small>
+        <i class="fa fa-share-alt"></i> 스터디모집
+        <small>JSL연수생과 함께 공부해요.</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">우리끼리</li>
+        <li class="active">스터디모집</li>
       </ol>
     </section>
     <section class="content">
@@ -201,28 +195,48 @@
             <div class="col-md-12">
               <table class="table table-condensed table-hover">
                 <tr class="table-field board-headline">
-                  <th>${we.title}</th>
+                	<jsp:useBean id="now" class="java.util.Date" />
+                	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
+                	<fmt:formatDate value="${study.writeDate}" pattern="yyyy-MM-dd" var="write_dt"/>
+					<fmt:formatDate value="${study.closingDate}" pattern="yyyy-MM-dd" var="closing_dt"/>
+                  <th>
+                  [${study.period}기] [${study.category}] ${study.title} 
+                  <c:if test="${today == closing_dt}">
+                  	<small class="label bg-red" style="margin-left:5px;">마감임박</small>
+                  </c:if>
+                  <c:if test="${today > closing_dt}">
+                  	<small class="label bg-red" style="margin-left:5px;">마감</small>
+                  </c:if>
+                  </th>
                 </tr>
                 <tr class="board-content board-white">
                 	<td>
-                		<i class="fa fa-user"></i> <a href="javascript:showmember('${we.writerId}')">${we.writerName}</a><span style="margin:0 10px;"></span>
-                		<fmt:formatDate var="date" value="${we.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                		<i class="fa fa-user"></i> <a href="javascript:showmember('${study.writerId}')">${study.writerName}</a><span style="margin:0 10px;"></span>
+                		<fmt:formatDate var="date" value="${study.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 		<i class="fa fa-clock-o"></i> ${date}<span style="margin:0 10px;"></span>
-                		<i class="fa fa-eye"></i> ${we.hit}
+                		<i class="fa fa-eye"></i> ${study.hit}
                 	</td>
                 </tr>
                 <tr class="board-white">
                 	<td>
-                		<div>${we.content}</div>
+                		<div class="moreinformation">
+                			<i class="fa fa-group" style="width:14px; height:16px;"></i> 모집인원 ${study.recruitNum}명<br>
+                			<i class="fa fa-calendar" style="width:14px; height:16px;"></i> 마감일 ${study.closingDate}
+                		</div>
                 	</td>
                 </tr>
-                <c:if test="${not empty we.fileName}">
+                <tr class="board-white">
+                	<td>
+                		<div>${study.content}</div>
+                	</td>
+                </tr>
+                <c:if test="${not empty study.fileName}">
                 <tr class="board-white">
                 	<td>
                 		<div class="col-md-4 col-sm-4 col-xs-12" style="padding:10px 0px;">
 			                  <div class="mailbox-attachment-info">
-			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${we.originFileName}</span>
-			                          <a href="javascript:actiondownload('we.action?command=download','${we.fileName}', '${we.originFileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
+			                    <span class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ${study.originFileName}</span>
+			                          <a href="javascript:actiondownload('study.action?command=download','${study.fileName}', '${study.originFileName}');" class="btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-download-alt"></i></a>
 			                  </div>
                 		</div>
                 	</td>
@@ -254,7 +268,7 @@
 			                        <span class="margin-right-left"><a class="color-black" onclick="editstart(this);" style="cursor:pointer;"><i class="fa fa-pencil"></i></a></span>
 		                        </c:if>
 		                        <c:if test="${item.writerId eq member.email || member.active ge 2}">
-			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'we', ${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
+			                        <span class="margin-right-left"><a class="color-black" onclick="actioncmtdelete('comment.action?command=delete', 'study', ${item.num});" style="cursor:pointer;"><i class="fa fa-trash"></i></a></span>
 		                        </c:if>                   
 		                        <fmt:formatDate var="date" value="${item.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		                        <span class="text-muted">${date}</span>
@@ -282,8 +296,8 @@
                 <img class="img-responsive img-circle img-sm" src="/JTalk/upload/${member.profile}" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push input-group">
-                  <input type="hidden" name = "tableName" value = "we"/>
-                  <input type="hidden" name = "postNum" value = "${we.num}"/>
+                  <input type="hidden" name = "tableName" value = "study"/>
+                  <input type="hidden" name = "postNum" value = "${study.num}"/>
                   <input type="hidden" name = "writerId" value = "${member.email}"/>
                   <input type="hidden" name = "writerName" value = "${member.name}"/>
                   <input type="text"  name = "content" class="form-control input-sm" placeholder="댓글을 입력해주세요." required>
@@ -295,12 +309,12 @@
               </div>
               <br>
               <div class="text-right">
-              	<button type="button" class="btn btn-default" onclick="actionlink('we.action?command=we');"><i class="fa fa-list"></i> 목록</button>
-              	<c:if test="${member.email == we.writerId}">
-	              	<button type="button" class="btn btn-default" onclick="actionparam('we.action?command=modifyform',${we.num});"><i class="fa fa-pencil"></i> 수정</button>
+              	<button type="button" class="btn btn-default" onclick="actionlink('study.action?command=study');"><i class="fa fa-list"></i> 목록</button>
+              	<c:if test="${member.email == study.writerId}">
+	              	<button type="button" class="btn btn-default" onclick="actionparam('study.action?command=modifyform',${study.num});"><i class="fa fa-pencil"></i> 수정</button>
               	</c:if>
-              	<c:if test="${member.email == we.writerId || member.active ge 2}">
-              		<button type="button" class="btn btn-default" onclick="actionparam('we.action?command=delete',${we.num});"><i class="fa fa-trash"></i> 삭제</button>
+              	<c:if test="${member.email == study.writerId || member.active ge 2}">
+              		<button type="button" class="btn btn-default" onclick="actionparam('study.action?command=delete',${study.num});"><i class="fa fa-trash"></i> 삭제</button>
               	</c:if>
               </div>
             </div>

@@ -113,6 +113,8 @@
 	                  			<c:when test="${item.tableName eq 'food'}"><c:set var="ico" value = "fa-cutlery text-blue"/></c:when>
 	                  			<c:when test="${item.tableName eq 'life'}"><c:set var="ico" value = "fa-check-square-o text-blue"/></c:when>
 	                  			<c:when test="${item.tableName eq 'we'}"><c:set var="ico" value = "fa-group text-blue"/></c:when>
+	                  			<c:when test="${item.tableName eq 'study'}"><c:set var="ico" value = "fa-share-alt text-blue"/></c:when>
+	                  			<c:when test="${item.tableName eq 'exchange'}"><c:set var="ico" value = "fa-comments-o text-blue"/></c:when>
 	                  		</c:choose>
 		                    <a href="javascript:actionparam('${item.tableName}.action?command=detail', '${item.postNum}')">
 		                      <i class="fa ${ico}"></i> ${tableName.get(status.index)} ${item.postNum}번 글 : ${item.newCount}개의 새 댓글
@@ -168,8 +170,8 @@
         <li class="header">COMMUNITY</li>
         <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
         <li><a href="javascript:actionlink('we.action?command=we');"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>
-        <li><a href="#"><i class="fa fa-comments-o"></i> <span>선후배교류</span></a></li>
-         <li><a href="#"><i class="fa fa-share-alt"></i> <span>스터디모집</span></a></li>
+        <li><a href="javascript:actionlink('exchange.action?command=exchange');"><i class="fa fa-comments-o"></i> <span>선후배교류</span></a></li>
+         <li><a href="javascript:actionlink('study.action?command=study');"><i class="fa fa-share-alt"></i> <span>스터디모집</span></a></li>
         <li class="header">INFORMATION</li>
         <li><a href="javascript:actionlink('it.action?command=it');"><i class="fa fa-television"></i> <span>IT</span></a></li>
         <li><a href="javascript:actionlink('japanese.action?command=japanese');"><i class="fa fa-book"></i> <span>일본어</span></a></li>

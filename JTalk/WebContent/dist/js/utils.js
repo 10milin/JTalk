@@ -88,6 +88,35 @@ function anonydelete(href, num, main){
 	form.submit();
 }
 
+// 데이트 피커
+var maxDate = new Date();
+var dd = maxDate.getDate() + 15;
+maxDate.setDate(dd);
+
+$('#datepicker').datepicker({
+    	autoclose: true,
+    	endDate: maxDate
+  })
+  
+// 카테고리 체크
+function categorycheck(obj){
+	var category = obj.category;
+	if(category.value == 'none'){
+		$(category).closest('.input-group').addClass('has-error');
+		return false;
+	}else{
+		$(category).closest('.input-group').removeClass('has-error');
+		return true;
+	}
+}
+
+$(document).ready(function() {
+	   $('#category-default').css('color','gray');
+	   $('#category-default').click(function() {
+	        $('#category-default').css('color','black');
+	   }); 
+	});
+
 //사이드바 토글
 function toggle(){
 	$.ajax({      

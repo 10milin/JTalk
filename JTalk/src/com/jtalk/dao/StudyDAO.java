@@ -1,37 +1,40 @@
 package com.jtalk.dao;
 
 import static com.jtalk.db.JdbcUtils.*;
-import com.jtalk.dto.WeDTO;
+import com.jtalk.dto.StudyDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class WeDAO {
-	private WeDAO() {}
+public class StudyDAO {
+	private StudyDAO() {}
 	
-	private static WeDAO instance = new WeDAO();
+	private static StudyDAO instance = new StudyDAO();
 	
-	public static WeDAO getInstance() {
+	public static StudyDAO getInstance() {
 		return instance;
 	}
 	
 	//공지사항 작성
-	public void insertWe(WeDTO we) {
+	public void insertStudy(StudyDTO study) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into we(title, content, writerId, writerName, fileName, originFileName, period) "
-				+ "values(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into study(title, content, writerId, writerName, fileName, originFileName, period, category, recruitNum, closingDate) "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, we.getTitle());
-			pstmt.setString(2, we.getContent());
-			pstmt.setString(3, we.getWriterId());
-			pstmt.setString(4, we.getWriterName());
-			pstmt.setString(5, we.getFileName());
-			pstmt.setString(6, we.getOriginFileName());
-			pstmt.setInt(7, we.getPeriod());
+			pstmt.setString(1, study.getTitle());
+			pstmt.setString(2, study.getContent());
+			pstmt.setString(3, study.getWriterId());
+			pstmt.setString(4, study.getWriterName());
+			pstmt.setString(5, study.getFileName());
+			pstmt.setString(6, study.getOriginFileName());
+			pstmt.setInt(7, study.getPeriod());
+			pstmt.setString(8, study.getCategory());
+			pstmt.setInt(9, study.getRecruitNum());
+			pstmt.setDate(10, study.getClosingDate());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -42,23 +45,23 @@ public class WeDAO {
 	}
 	
 	//전체 공지사항 불러오기
-	public ArrayList<WeDTO> getAllWe(int period) {
-		ArrayList<WeDTO> list = null;
-		WeDTO we = null;
+	public ArrayList<StudyDTO> getAllStudy(int period) {
+		ArrayList<StudyDTO> list = null;
+		StudyDTO study = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from we where period = ? order by num desc";
+		String sql = "select * from study where period = ? order by num desc";
 		
 		try {
-			list = new ArrayList<WeDTO>();
+			list = new ArrayList<StudyDTO>();
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, period);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				we = new WeDTO(rs.getInt("num"),
+				study = new StudyDTO(rs.getInt("num"),
 						rs.getString("title"),
 						rs.getString("content"),
 						rs.getString("writerId"),
@@ -67,8 +70,11 @@ public class WeDAO {
 						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
-				we.setPeriod(rs.getInt("period"));
-				list.add(we);
+				study.setPeriod(rs.getInt("period"));
+				study.setCategory(rs.getString("category"));
+				study.setRecruitNum(rs.getInt("recruitNum"));
+				study.setClosingDate(rs.getDate("closingDate"));
+				list.add(study);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -80,22 +86,22 @@ public class WeDAO {
 	}
 	
 	//관리자가 열람시 전체글 뽑아오기
-	public ArrayList<WeDTO> getAllWe() {
-		ArrayList<WeDTO> list = null;
-		WeDTO we = null;
+	public ArrayList<StudyDTO> getAllStudy() {
+		ArrayList<StudyDTO> list = null;
+		StudyDTO study = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from we order by num desc";
+		String sql = "select * from study order by num desc";
 		
 		try {
-			list = new ArrayList<WeDTO>();
+			list = new ArrayList<StudyDTO>();
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				we = new WeDTO(rs.getInt("num"),
+				study = new StudyDTO(rs.getInt("num"),
 						rs.getString("title"),
 						rs.getString("content"),
 						rs.getString("writerId"),
@@ -104,8 +110,11 @@ public class WeDAO {
 						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
-				we.setPeriod(rs.getInt("period"));
-				list.add(we);
+				study.setPeriod(rs.getInt("period"));
+				study.setCategory(rs.getString("category"));
+				study.setRecruitNum(rs.getInt("recruitNum"));
+				study.setClosingDate(rs.getDate("closingDate"));
+				list.add(study);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -117,12 +126,12 @@ public class WeDAO {
 	}
 	
 	//공지사항 내용 불러오기
-	public WeDTO getWe(int num) {
-		WeDTO we = null;
+	public StudyDTO getStudy(int num) {
+		StudyDTO study = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from we where num = ?";
+		String sql = "select * from study where num = ?";
 		
 		try {
 			conn = getConnection();
@@ -131,7 +140,7 @@ public class WeDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				we = new WeDTO(rs.getInt("num"),
+				study = new StudyDTO(rs.getInt("num"),
 						rs.getString("title"),
 						rs.getString("content"),
 						rs.getString("writerId"),
@@ -140,7 +149,10 @@ public class WeDAO {
 						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
-				we.setPeriod(rs.getInt("period"));
+				study.setPeriod(rs.getInt("period"));
+				study.setCategory(rs.getString("category"));
+				study.setRecruitNum(rs.getInt("recruitNum"));
+				study.setClosingDate(rs.getDate("closingDate"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -148,14 +160,14 @@ public class WeDAO {
 			close(rs, pstmt, conn);
 		}
 		
-		return we;
+		return study;
 	}
 	
 	//조회수 증가
 	public void hitUp(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "update we set hit = hit + 1 where num = ?";
+		String sql = "update study set hit = hit + 1 where num = ?";
 		
 		try {
 			conn = getConnection();
@@ -171,49 +183,12 @@ public class WeDAO {
 	}
 	
 	//글 검색기능
-	public ArrayList<WeDTO> searchWe(String key, int period) {
+	public ArrayList<StudyDTO> searchStudy(String key) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from we where title like ? and period = ? order by num desc";
-		ArrayList<WeDTO> searchList = new ArrayList<WeDTO>();
-		
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+key+"%");
-			pstmt.setInt(2, period);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				WeDTO weDto = new WeDTO(rs.getInt("num"),
-						rs.getString("title"),
-						rs.getString("content"),
-						rs.getString("writerId"),
-						rs.getString("writerName"),
-						rs.getString("fileName"),
-						rs.getString("originFileName"),
-						rs.getTimestamp("writeDate"),
-						rs.getInt("hit"));
-				weDto.setPeriod(rs.getInt("period"));
-				searchList.add(weDto);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(rs, pstmt, conn);
-		}
-		
-		return searchList;
-	}
-	
-	//관리자가 검색시 전체 리스트 뽑아오기
-	public ArrayList<WeDTO> searchWe(String key) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "select * from we where title like ? order by num desc";
-		ArrayList<WeDTO> searchList = new ArrayList<WeDTO>();
+		String sql = "select * from study where title like ? order by num desc";
+		ArrayList<StudyDTO> searchList = new ArrayList<StudyDTO>();
 		
 		try {
 			conn = getConnection();
@@ -222,7 +197,7 @@ public class WeDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				WeDTO weDto = new WeDTO(rs.getInt("num"),
+				StudyDTO studyDto = new StudyDTO(rs.getInt("num"),
 						rs.getString("title"),
 						rs.getString("content"),
 						rs.getString("writerId"),
@@ -231,8 +206,11 @@ public class WeDAO {
 						rs.getString("originFileName"),
 						rs.getTimestamp("writeDate"),
 						rs.getInt("hit"));
-				weDto.setPeriod(rs.getInt("period"));
-				searchList.add(weDto);
+				studyDto.setPeriod(rs.getInt("period"));
+				studyDto.setCategory(rs.getString("category"));
+				studyDto.setRecruitNum(rs.getInt("recruitNum"));
+				studyDto.setClosingDate(rs.getDate("closingDate"));
+				searchList.add(studyDto);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -244,35 +222,41 @@ public class WeDAO {
 	}
 	
 	//공지사항 수정하기
-	public void modifyWe(WeDTO we) {
+	public void modifyStudy(StudyDTO study) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "update we set "
+		String sql = "update study set "
 				+ "title = ?, content = ?, writerId = ?, writerName = ?,";
-		if(we.getFileName()!=null)
+		if(study.getFileName()!=null)
 		{
 			sql+=" fileName = ?, originFileName = ?,";
 		}
-		sql +=" writeDate = current_timestamp, period = ? "	+ "where num = ?";
+		sql +=" writeDate = current_timestamp, period = ?, category = ?, recruitNum = ?, closingDate = ? "	+ "where num = ?";
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, we.getTitle());
-			pstmt.setString(2, we.getContent());
-			pstmt.setString(3, we.getWriterId());
-			pstmt.setString(4, we.getWriterName());
-			if(we.getFileName()!=null)
+			pstmt.setString(1, study.getTitle());
+			pstmt.setString(2, study.getContent());
+			pstmt.setString(3, study.getWriterId());
+			pstmt.setString(4, study.getWriterName());
+			if(study.getFileName()!=null)
 			{
-				pstmt.setString(5, we.getFileName());
-				pstmt.setString(6, we.getOriginFileName());
-				pstmt.setInt(7, we.getPeriod());
-				pstmt.setInt(8, we.getNum());
+				pstmt.setString(5, study.getFileName());
+				pstmt.setString(6, study.getOriginFileName());
+				pstmt.setInt(7, study.getPeriod());
+				pstmt.setString(8, study.getCategory());
+				pstmt.setInt(9, study.getRecruitNum());
+				pstmt.setDate(10, study.getClosingDate());
+				pstmt.setInt(11, study.getNum());
 			}
 			else
 			{
-				pstmt.setInt(5, we.getPeriod());
-				pstmt.setInt(6, we.getNum());
+				pstmt.setInt(5, study.getPeriod());
+				pstmt.setString(6, study.getCategory());
+				pstmt.setInt(7, study.getRecruitNum());
+				pstmt.setDate(8, study.getClosingDate());
+				pstmt.setInt(9, study.getNum());
 			}
 			
 			pstmt.executeUpdate();
@@ -284,10 +268,10 @@ public class WeDAO {
 	}
 	
 	//공지사항 삭제
-	public void deleteWe(int num) {
+	public void deleteStudy(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "delete from we where num = ?";
+		String sql = "delete from study where num = ?";
 		
 		try {
 			conn = getConnection();
@@ -308,7 +292,7 @@ public class WeDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select num from we order by num desc";
+		String sql = "select num from study order by num desc";
 		
 		try {
 			conn = getConnection();

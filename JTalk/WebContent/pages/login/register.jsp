@@ -75,14 +75,5 @@
 	<script src="/JTalk/plugins/iCheck/icheck.min.js"></script>
 	<script src="/JTalk/dist/js/utils.js"></script>
 	<script src="/JTalk/dist/js/adminlte.min.js"></script>
-	<script>
-	  $(function () {
-	    $('input').iCheck({
-	      checkboxClass: 'icheckbox_square-blue',
-	      radioClass: 'iradio_square-blue',
-	      increaseArea: '20%' // optional
-	    });
-	  });
-	</script>
 	</body>
 </html>

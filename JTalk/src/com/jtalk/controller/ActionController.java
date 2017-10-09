@@ -59,6 +59,8 @@ public class ActionController extends HttpServlet {
 		case "/food.action" : service = new FoodAction(); break;
 		case "/life.action" : service = new LifeAction(); break;
 		case "/we.action" : service = new WeAction(); break;
+		case "/study.action" : service = new StudyAction(); break;
+		case "/exchange.action" : service = new ExchangeAction(); break;
 		default : resURL = "/index.action";
 		}
 
@@ -103,6 +105,12 @@ public class ActionController extends HttpServlet {
 						break;
 					case "we":
 						tableName.add("우리끼리");
+						break;
+					case "study":
+						tableName.add("스터디모집");
+						break;
+					case "exchange":
+						tableName.add("선후배교류");
 						break;
 					}
 				}

@@ -175,10 +175,16 @@
   </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  	<c:if test="${member.active eq 2 || member.active eq 3}">
+  		<c:set var="text" value="같은 기수들 끼리 함께 이야기해요."/>
+  	</c:if>
+  	<c:if test="${member.active eq 1}">
+  		<c:set var="text" value="${member.period}기 끼리 함께 이야기해요."/>
+  	</c:if>
   	<section class="content-header">
       <h1 class="font-bareun">
         <i class="fa fa-group"></i> 우리끼리
-        <small>${member.period}기 끼리 함께 이야기해요.</small>
+        <small>${text}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
