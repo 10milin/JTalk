@@ -1,36 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("enter","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>JTalk</title>
+  <title>J-Talk</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/JTalk/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/JTalk/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/JTalk/dist/css/AdminLTE.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="/JTalk/dist/css/skins/_all-skins.css">
-  <!-- Summernote -->
-  <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="${body}">
+<body class="${body_admin}">
 <div class="wrapper">
- <header class="main-header">
+  <header class="main-header">
     <!-- Logo -->
-    <a href="javascript:actionlink('index.action');" class="logo">
+    <a href="javascript:actionlink('admin.action');" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>SL</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>J-TALK</b></span>
+      <span class="logo-lg"><b>J-TALK</b> <small>admin</small></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -124,11 +128,9 @@
             </ul>
             </c:if>
           </li>
-          <c:if test="${member.active eq 3}">
-          	<li>
-              <a href="javascript:actionlink('admin.action');"><i class="fa fa-cogs"></i></a>
+          <li>
+              <a href="javascript:actionlink('index.action');"><i class="glyphicon glyphicon-home"></i></a>
           </li>
-          </c:if>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -149,9 +151,6 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="javascript:actionlink('profile.action?command=profile');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-user"></i> 프로필</a>
-                </div>
                 <div class="pull-right">
                   <a href="javascript:actionlink('logout.action');" class="btn btn-default btn-flat font-bareun"><i class="fa fa-sign-out"></i> 로그아웃</a>
                 </div>
@@ -167,101 +166,38 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
-      	<li class="header">NOTICE</li>
-      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-bullhorn"></i> <span>공지사항</span></a></li>
-        <li class="header">COMMUNITY</li>
-        <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-tree"></i> <span>대나무숲</span></a></li>
-        <li><a href="javascript:actionlink('we.action?command=we');"><i class="fa fa-group"></i> <span>우리끼리</span></a></li>
-        <li><a href="javascript:actionlink('exchange.action?command=exchange');"><i class="fa fa-comments-o"></i> <span>선후배교류</span></a></li>
-         <li><a href="javascript:actionlink('study.action?command=study');"><i class="fa fa-share-alt"></i> <span>스터디모집</span></a></li>
-        <li class="header">INFORMATION</li>
-        <li><a href="javascript:actionlink('it.action?command=it');"><i class="fa fa-television"></i> <span>IT</span></a></li>
-        <li><a href="javascript:actionlink('japanese.action?command=japanese');"><i class="fa fa-book"></i> <span>일본어</span></a></li>
-        <li><a href="javascript:actionlink('food.action?command=food');"><i class="fa fa-cutlery"></i> <span>주변맛집</span></a></li>
-        <li><a href="javascript:actionlink('life.action?command=life');"><i class="fa fa-check-square-o"></i> <span>생활정보</span></a></li>
-        <li class="header">MARKETPLACE</li>
-        <li><a href="javascript:actionlink('nanum.action?command=nanum');"><i class="fa fa-heart"></i> <span>행복나눔</span></a></li>
-        <li><a href="javascript:actionlink('trade.action?command=trade');"><i class="fa fa-shopping-cart"></i> <span>중고나라</span></a></li>
-        <li class="header">PRESENTATION</li>
-        <li><a href="javascript:actionlink('speech.action?command=speech');"><i class="fa fa-child"></i> <span>스피치</span></a></li>
-        <li><a href="javascript:actionlink('project.action?command=project');"><i class="fa fa-code"></i> <span>프로젝트</span></a></li>
+      	<li class="header">MEMBER</li>
+      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-group"></i> <span>회원관리</span></a></li>
+      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-user-plus"></i> <span>관리자관리</span></a></li>
+      	<li class="header">BOARD</li>
+        <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-clone"></i> <span>게시물관리</span></a></li>
+        <li class="header">SYSTEM</li>
+        <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-database"></i> <span>저장공간</span></a></li>
+                <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-code-fork"></i> <span>관리자로그</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-comments-o"></i> 선후배교류
-        <small>선후배간에 다양한 이야기를 나눠보세요.</small>
+        <i class="fa fa-dashboard "></i> 시스템 개요
+        <small>J-Talk 어플리케이션의 상태 정보를 제공합니다.</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="javascript:actionlink('index.action');"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">선후배교류</li>
+        <li class="active"><i class="fa fa-home"></i> Home</li>
       </ol>
     </section>
     <section class="content">
 	    <div class="row">
-	    	<div class="col-md-12">
-	    	<div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title font-bareun"><i class="fa fa-edit"></i> 글 쓰기</h3>
-            <!-- /.box-header -->
-            </div>
-            <form action = "/JTalk/exchange.action?command=write" method="post" enctype="multipart/form-data" onsubmit="return categorycheck(this);">
-            <div class="box-body">
-              <div>
-              	  <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" required>
-	                <input type="hidden" name="writerId" value="${member.email}">
-	                <input type="hidden" name="writerName" value="${member.name}">
-	                <input type="hidden" name="period" value="${member.period}">
-	              </div>
-	              <div class="input-group input-margin-btm">
-	                <span class="input-group-addon"><i class="fa fa-bars" style="width:14px; height:16px;"></i></span>
-	                <select id="category-default" class="form-control" name="category" required>
-	                    <option value="none" disabled selected hidden>카테고리</option>
-	                    <optgroup label="선배">
-	                    	<option value="기업정보">기업정보</option>
-	                    	<option value="연수후기">연수후기</option>
-		                    <option value="일본생활팁">일본생활팁</option>
-		                    <option value="조언한마디">조언한마디</option>
-	                    </optgroup>
-	                    <optgroup label="후배">
-	                    	<option value="궁금해요">궁금해요</option>
-	                    	<option value="부탁해요">부탁해요</option>
-	                    </optgroup>
-                 	 </select>
-	              </div>
-	              <textarea class="summernote" name="content" required></textarea>
-	              <div class="input-group col-md-4">
-					<span class="input-group-addon"><i class="fa fa-upload"></i></span>
-	                <input id = "uploadfield" type="text" class="form-control" readonly>
-	                <div class="input-group-btn">
-		              <div class="btn btn-default btn-file">
-		                  <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;업로드
-		                  <input type="file" name="file" onchange="$('#uploadfield').val(this.value.split('\\')[2]);">
-		                </div>
-		             </div>
-	                <!-- /btn-group -->
-			       </div>
-	              <p class="help-block">제한용량 5MB</p>
-	              <div class="text-right table-bottom" style="border:0px">
-              	<button type="button" class="btn btn-default" onclick="actionlink('exchange.action?command=exchange');"><i class="fa fa-list"></i> 목록</button>
-              	<button type="submit" class="btn btn-default"><i class="fa fa-edit"></i> 쓰기</button>
-              </div>
-              </div>
-            </div>
-            </form>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-          </div>
+
 	    </div>
-	</section>
+    </section>
   </div>
+  <!-- /.content-wrapper -->
+
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> ${applicationScope.version}
@@ -269,6 +205,7 @@
     <strong>Copyright &copy; 2017 <a>KLM Studio</a>.</strong> All rights
     reserved.
   </footer>
+  
 </div>
 <div id="actionpost"></div>
 <!-- modal -->
@@ -423,20 +360,8 @@
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/summernote.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/lang/summernote-ko-KR.js"></script>
-<script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
-<script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
-<script>
-  $('.summernote').summernote({
-      height: 400,
-      tabsize: 2,
-      linkTargetBlank: false,
-      lang: 'ko-KR',
-      disableDragAndDrop: true
-    });
-  $('.note-insert').contents(":last-child").attr('data-original-title', '이모티콘');
-</script>
+<script src="/JTalk/dist/js/utils.js"></script>
+<script src="/JTalk/dist/js/tree.js"></script>
 </body>
 </html>

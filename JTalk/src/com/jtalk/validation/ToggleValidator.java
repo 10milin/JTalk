@@ -11,6 +11,7 @@ public class ToggleValidator {
 		if(session.getAttribute("toggle") == null) {
 			session.setAttribute("toggle", "0");
 			session.setAttribute("body", "skin-blue-light layout-boxed sidebar-mini");
+			session.setAttribute("body_admin", "skin-red-light layout-boxed sidebar-mini");
 		}
 
 	}

@@ -3,6 +3,7 @@ package com.jtalk.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jtalk.admin.AdminAccessService;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
 import com.jtalk.member.PfModifyService;
@@ -26,6 +27,7 @@ public class ProfileAction implements Action {
 				case "profile" : service = new ProFileService(); break;
 				case "passchange": service = new PwChangeService(); break;
 				case "profilemodify": service = new PfModifyService(); break;
+				case "adminaccess" : service = new AdminAccessService(); break;
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

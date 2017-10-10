@@ -124,6 +124,11 @@
             </ul>
             </c:if>
           </li>
+          <c:if test="${member.active eq 3}">
+          	<li>
+              <a href="javascript:actionlink('admin.action');"><i class="fa fa-cogs"></i></a>
+          </li>
+          </c:if>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

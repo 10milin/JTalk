@@ -19,13 +19,17 @@ public class ProFileService implements Service{
 		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
-		
-		TradeDAO tradeDAO = TradeDAO.getInstance();
-		ArrayList marketList = tradeDAO.getMarketList(member.getEmail());
-		
-		request.setAttribute("marketList", marketList);
+		if(member != null){
+			TradeDAO tradeDAO = TradeDAO.getInstance();
+			ArrayList marketList = tradeDAO.getMarketList(member.getEmail());
+			
+			request.setAttribute("marketList", marketList);
 
-		resURL = "/pages/profile/profile.jsp";
+			resURL = "/pages/profile/profile.jsp";
+		}else{
+			resURL = "/pages/error/500.jsp";
+		}
+		
 
 		
 		return resURL;
