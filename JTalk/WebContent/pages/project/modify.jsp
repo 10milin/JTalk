@@ -211,7 +211,7 @@
               <div>
               	<div class="input-group input-margin-btm">
 	                <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
-	                <input type="text" class="form-control" placeholder="제목" name="title" required value="${project.title}">
+	                <input type="text" class="form-control" placeholder="프로젝트명" name="title" required value="${project.title}">
 	                <input type="hidden" name="writerId" value="${member.email}">
 	                <input type="hidden" name="writerName" value="${member.name}">
 	                <input type="hidden" name="period" value="${project.period}">
@@ -434,6 +434,7 @@
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
+<script src="/JTalk/dist/js/date.js"></script>
 <script>
   $('.summernote').summernote({
       height: 400,

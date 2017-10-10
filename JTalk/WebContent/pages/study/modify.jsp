@@ -248,7 +248,7 @@
 		             </div>
 	                <!-- /btn-group -->
 			       </div>
-	              <p class="help-block">제한용량 5MB</p>
+	              <p class="help-block">제한용량 10MB</p>
 	              <div class="text-right table-bottom" style="border:0px">
               	<button type="button" class="btn btn-default" onclick="actionlink('study.action?command=study');"><i class="fa fa-list"></i> 목록</button>
               	<button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i> 수정</button>
@@ -430,6 +430,7 @@
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
+<script src="/JTalk/dist/js/date.js"></script>
 <script>
   $('.summernote').summernote({
       height: 400,

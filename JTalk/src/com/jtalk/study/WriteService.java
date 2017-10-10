@@ -27,7 +27,7 @@ public class WriteService implements Service{
 		String resURL = null;
 		
 		String savePath = "upload";
-		int uploadFileSizeLimit = 5 * 1024 *1024;
+		int uploadFileSizeLimit = 10 * 1024 *1024;
 		String encType = "UTF-8";
 		
 		ServletContext context = request.getSession().getServletContext();

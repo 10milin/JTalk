@@ -202,13 +202,6 @@
 		<div class="row">
 	        <div class="col-md-12">
 	          <div class="box box-primary">
-	            <div class="box-header with-border">
-	              <h3 class="box-title font-bareun"><i class="fa fa-question-circle"></i> 대나무숲이란</h3>
-	              <div class="box-tools pull-right">
-	                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-	              </div>
-	            </div>
-	            <!-- /.box-header -->
 	            <div class="box-body">
 	            <div class="col-md-12 no-padding">
 	            	<img src="/JTalk/dist/img/treelogo.png" class="img-responsive" width="100%">

@@ -433,6 +433,7 @@
 <script src="/JTalk/bower_components/moment/min/moment.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
+<script src="/JTalk/dist/js/date.js"></script>
 <script>
   $('.summernote').summernote({
       height: 400,

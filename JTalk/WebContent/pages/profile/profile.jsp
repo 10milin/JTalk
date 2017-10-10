@@ -255,6 +255,9 @@
               <li class="active"><a href="#information" data-toggle="tab"><i class="fa fa-info-circle"></i> 회원 정보</a></li>
               <li><a href="#market" data-toggle="tab"><i class="fa fa-shopping-cart"></i> 마켓 관리</a></li>
               <li><a href="#message" data-toggle="tab"><i class="fa fa-envelope-o"></i> 메시지함</a></li>
+              <c:if test="${member.active eq 3}">
+              <li><a href="#admin" data-toggle="tab"><i class="fa fa-cog"></i> 관리자 페이지</a></li>
+              </c:if>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane form-horizontal" id="information">
@@ -479,6 +482,40 @@
                   </div><!-- /.mail-box-messages -->
                </div><!-- /.box-body -->
              </div><!-- /. box -->
+             <c:if test="${member.active eq 3}">
+	              <div class="tab-pane" id="admin">
+	                <div class="box-body no-padding">
+	                	<form action="/JTalk/profile.action?command=admin" method="post">
+							<div class="col-md-12 col-xs-12 form-horizontal">
+								<div class="form-group text-center">
+									<img src="/JTalk/dist/img/logo.png">
+								</div>
+								<c:if test="${not empty errorMsg}">
+							    <div class="alert alert-danger alert-dismissible">
+						          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						          <h4><i class="icon fa fa-warning"></i>접속 실패</h4>
+						         	${errorMsg}
+						        </div>
+							    </c:if>
+			
+			                  <div class="form-group">
+			                    <label for="inputName" class="col-sm-4 control-label"><i class="glyphicon glyphicon-lock"></i> 비밀번호</label>
+			                    <div class="col-sm-4" style="padding-top:3px;">
+			                      <input type="password" class="form-control input-sm" placeholder="비밀번호를 입력해주세요." name = "pass" required>
+			                    </div>
+			                  </div>
+			
+			                  <div class="form-group">
+			                    <div class="col-md-12 text-center">
+			                      <button type="submit" class="btn btn-primary">관리자 접속</button>
+			                    </div>
+			                  </div>
+			                </div>
+			                </form>
+	                </div>
+	              </div>
+	              <!-- /.tab-pane -->
+              </c:if>
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->

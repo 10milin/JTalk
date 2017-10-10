@@ -257,10 +257,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                <c:if test="${empty newWe}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newWe}">
+				                <c:forEach var = "item" items="${newWe}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" >
+									<a href="javascript:actionparam('we.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="weDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${weDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->
@@ -277,10 +292,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                <c:if test="${empty newStudy}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newStudy}">
+				                <c:forEach var = "item" items="${newStudy}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" >
+									<a href="javascript:actionparam('study.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="studyDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${studyDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->
@@ -296,10 +326,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                <c:if test="${empty newExchange}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newExchange}">
+				                <c:forEach var = "item" items="${newExchange}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" >
+									<a href="javascript:actionparam('exchange.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="exchangeDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${exchangeDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->
@@ -391,10 +436,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                <c:if test="${empty newIt}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newIt}">
+				                <c:forEach var = "item" items="${newIt}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" >
+									<a href="javascript:actionparam('it.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="itDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${itDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->
@@ -407,10 +467,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                <c:if test="${empty newJapanese}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newJapanese}">
+				                <c:forEach var = "item" items="${newJapanese}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" >
+									<a href="javascript:actionparam('japanese.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="japaneseDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${japaneseDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->
@@ -423,10 +498,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                <c:if test="${empty newFood}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newFood}">
+				                <c:forEach var = "item" items="${newFood}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" >
+									<a href="javascript:actionparam('food.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="foodDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${foodDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->
@@ -439,10 +529,25 @@
 				            <!-- /.box-header -->
 				            <div class="box-body no-padding">
 				              <table class="table table-hover table-condensed">
-				                <tr>
-				                  <td class="td-overflow" style="max-width:1px;">게시글1번의 내용이 길어지면 white-space를 적용하여 내용이 줄어든다..</td>
-				                  <td style="width:30%; text-align: center;">2017-04-03</td>
+				                <c:if test="${empty newLife}">
+				              	<tr>
+				                  <td class="td-overflow" style="max-width:1px;">등록된 게시글이 없습니다.</td>
+				                  <td style="width:30%; text-align: center;"></td>
 				                </tr>
+				              	</c:if>
+				              	<c:if test="${not empty newLife}">
+				                <c:forEach var = "item" items="${newLife}" varStatus="status">
+									<tr>
+									<td class="td-overflow" style="max-width:1px;" >
+									<a href="javascript:actionparam('life.action?command=detail', '${item.num}')">
+									${item.title}
+									</a>
+									</td>
+									<fmt:formatDate var="lifeDate" value="${item.writeDate}" pattern="yyyy-MM-dd" />
+									<td style="width:30%; text-align: center;">${lifeDate}</td>
+									</tr>
+				                </c:forEach>
+				                </c:if>
 				              </table>
 				            </div>
 				            <!-- /.box-body -->
@@ -473,6 +578,11 @@
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
+	            <c:if test="${empty newAnony}">
+	            	<div class="box-body">
+		              		등록된 게시글이 없습니다.
+		            </div>
+	            </c:if>
 	            <c:if test="${not empty newAnony}">
                 <c:forEach var="item" items="${newAnony}" varStatus="st">
                 <div>
