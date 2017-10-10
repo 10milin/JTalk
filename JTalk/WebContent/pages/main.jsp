@@ -130,7 +130,7 @@
           </li>
           <c:if test="${member.active eq 3}">
           	<li>
-              <a href="javascript:actionlink('admin.action');"><i class="fa fa-cogs"></i></a>
+              <a href="javascript:actionlink('admin.action?command=main');"><i class="fa fa-cogs"></i></a>
           </li>
           </c:if>
           <!-- User Account: style can be found in dropdown.less -->
@@ -383,8 +383,8 @@
 					            <span class="info-box-icon bg-aqua" id="it-ico"><i class="fa fa-television"></i></span>
 					            <div class="info-box-content">
 					              <span class="info-box-number">IT</span>
-					              <span class="info-box-text">등록된 정보 50개</span>
-					              <span class="info-box-text">새로운 정보 5개</span>
+					              <span class="info-box-text">${ItSize}개의 정보</span>
+					              <span class="info-box-text"><span class="badge bg-aqua">NEW ${ItNew}</span></span>
 					            </div>
 					            <!-- /.info-box-content -->
 					          </div>
@@ -396,8 +396,8 @@
 					            <span class="info-box-icon bg-green" id="jp-ico"><i class="fa fa-book"></i></span>
 					            <div class="info-box-content">
 					              <span class="info-box-number">일본어</span>
-					              <span class="info-box-text">등록된 정보 50개</span>
-					              <span class="info-box-text">새로운 정보 5개</span>
+								  <span class="info-box-text">${JapaneseSize}개의 정보</span>
+					              <span class="info-box-text"><span class="badge bg-green">NEW ${JapaneseNew}</span></span>
 					            </div>
 					            <!-- /.info-box-content -->
 					          </div>
@@ -409,8 +409,8 @@
 					            <span class="info-box-icon bg-yellow" id="rst-ico"><i class="fa fa-cutlery"></i></span>
 					            <div class="info-box-content">
 					              <span class="info-box-number">주변맛집</span>
-					              <span class="info-box-text">등록된 정보 50개</span>
-					              <span class="info-box-text">새로운 정보 5개</span>
+					              <span class="info-box-text">${FoodSize}개의 정보</span>
+					              <span class="info-box-text"><span class="badge bg-yellow">NEW ${FoodNew}</span></span>
 					            </div>
 					            <!-- /.info-box-content -->
 					          </div>
@@ -422,8 +422,8 @@
 					            <span class="info-box-icon bg-red" id="life-ico"><i class="fa fa-check-square-o"></i></span>
 					            <div class="info-box-content">
 					              <span class="info-box-number">생활정보</span>
-					              <span class="info-box-text">등록된 정보 50개</span>
-					              <span class="info-box-text">새로운 정보 5개</span>
+					              <span class="info-box-text">${LifeSize}개의 정보</span>
+					              <span class="info-box-text"><span class="badge bg-red">NEW ${LifeNew}</span></span>
 					            </div>
 					            <!-- /.info-box-content -->
 					          </div>

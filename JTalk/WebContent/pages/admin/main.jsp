@@ -30,7 +30,7 @@
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
-    <a href="javascript:actionlink('admin.action');" class="logo">
+    <a href="javascript:actionlink('admin.action?command=main');" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>SL</span>
       <!-- logo for regular state and mobile devices -->
@@ -42,7 +42,6 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle();">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
@@ -178,7 +177,6 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   	<section class="content-header">
@@ -192,7 +190,168 @@
     </section>
     <section class="content">
 	    <div class="row">
+			<div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>${memberCount}</h3>
 
+              <p class="font-bareun">회원 수</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-android-people"></i>
+            </div>
+            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>${memberAdminCount}</h3>
+
+              <p class="font-bareun">관리자 수</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>${logCount}</h3>
+
+              <p class="font-bareun">로그 수</p>
+            </div>
+            <div class="icon">
+              <i class="ion-fork-repo"></i>
+            </div>
+            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3><fmt:formatNumber value="${dbCapacity}" pattern="0"/><sup style="font-size: 20px">MB</sup></h3>
+
+              <p class="font-bareun">DB 용량</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-md-12 col-xs-12">
+        	<div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title font-bareun"><i class="fa fa-info-circle"></i> 정보마당</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+            	<div class="col-md-6">
+            		<p class="text-center">
+                    <strong>정보마당 전체 게시글 비율</strong>
+                  </p>
+            		<canvas id="pieChart" style="height:250px"></canvas>
+            	</div>
+	           	<div class="col-md-6">
+                  <p class="text-center">
+                    <strong>각 게시판별 게시글 수</strong>
+                  </p>
+                  
+				  <div class="progress-group">
+                    <span class="progress-text">IT</span>
+                    <span class="progress-number"><b>${ItSize}</b>/${InforSize}</span>
+
+                    <div class="progress sm">
+                      <fmt:formatNumber var="per" value="${ItSize/InforSize}" type="percent"/>
+                      <div class="progress-bar progress-bar-red" style="width: ${per}"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                    <span class="progress-text">일본어</span>
+                    <span class="progress-number"><b>${JapaneseSize}</b>/${InforSize}</span>
+
+                    <div class="progress sm">
+                      <fmt:formatNumber var="per" value="${JapaneseSize/InforSize}" type="percent"/>
+                      <div class="progress-bar progress-bar-green" style="width: ${per}"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                    <span class="progress-text">주변맛집</span>
+                    <span class="progress-number"><b>${FoodSize}</b>/${InforSize}</span>
+
+                    <div class="progress sm">
+                      <fmt:formatNumber var="per" value="${FoodSize/InforSize}" type="percent"/>
+                      <div class="progress-bar progress-bar-yellow" style="width: ${per}"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                    <span class="progress-text">생활정보</span>
+                    <span class="progress-number"><b>${LifeSize}</b>/${InforSize}</span>
+
+                    <div class="progress sm">
+                      <fmt:formatNumber var="per" value="${LifeSize/InforSize}" type="percent"/>
+                      <div class="progress-bar progress-bar-aqua" style="width: ${per}"></div>
+                    </div>
+                  </div>
+                  <!-- /.progress-group -->
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                  	<h4 class="font-bareun">IT</h4>
+                    <span class="badge bg-red">NEW ${ItNew}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                  	<h4 class="font-bareun">일본어</h4>
+                    <span class="badge bg-green">NEW ${JapaneseNew}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                    <h4 class="font-bareun">주변맛집</h4>
+                    <span class="badge bg-yellow">NEW ${FoodNew}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block">
+                    <h4 class="font-bareun">생활정보</h4>
+                    <span class="badge bg-aqua">NEW ${LifeNew}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+              </div>
+              <!-- /.row -->
+            </div>
+            
+          </div>
+        </div>
 	    </div>
     </section>
   </div>
@@ -363,5 +522,51 @@
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/dist/js/tree.js"></script>
+<script src="/JTalk/bower_components/chart.js/Chart.js"></script>
+<script>
+$(function () {
+var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+var pieChart       = new Chart(pieChartCanvas)
+var PieData        = [
+  {
+    value    : ${ItSize},
+    color    : '#f56954',
+    highlight: '#f56954',
+    label    : 'IT'
+  },
+  {
+    value    : ${JapaneseSize},
+    color    : '#00a65a',
+    highlight: '#00a65a',
+    label    : '일본어'
+  },
+  {
+    value    : ${FoodSize},
+    color    : '#f39c12',
+    highlight: '#f39c12',
+    label    : '주변맛집'
+  },
+  {
+    value    : ${LifeSize},
+    color    : '#00c0ef',
+    highlight: '#00c0ef',
+    label    : '생활정보'
+  }
+]
+var pieOptions     = {
+  segmentShowStroke    : true,
+  segmentStrokeColor   : '#fff',
+  segmentStrokeWidth   : 2,
+  percentageInnerCutout: 50,
+  animationSteps       : 100,
+  animationEasing      : 'easeOutBounce',
+  animateRotate        : true,
+  animateScale         : false,
+  responsive           : true,
+  maintainAspectRatio  : true
+}
+pieChart.Doughnut(PieData, pieOptions);
+});
+</script>
 </body>
 </html>

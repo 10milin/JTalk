@@ -229,6 +229,19 @@ public class IndexAction implements Action{
 		request.setAttribute("awesomeArray", awesomeArray);
 		request.setAttribute("countList", countList);
 		request.setAttribute("commentList", cmtList);
+		
+		request.setAttribute("ItSize", it.size());
+		request.setAttribute("ItNew", itDAO.getNewCount());
+		
+		request.setAttribute("JapaneseSize", japanese.size());
+		request.setAttribute("JapaneseNew", japaneseDAO.getNewCount());
+		
+		request.setAttribute("FoodSize", food.size());
+		request.setAttribute("FoodNew", foodDAO.getNewCount());
+		
+		request.setAttribute("LifeSize", life.size());
+		request.setAttribute("LifeNew", lifeDAO.getNewCount());
+		
 		return resURL;
 	}
 	

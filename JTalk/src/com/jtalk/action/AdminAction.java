@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jtalk.admin.MainService;
 import com.jtalk.anony.AnonyService;
 import com.jtalk.anony.DeleteService;
 import com.jtalk.anony.WriteService;
@@ -18,19 +19,16 @@ public class AdminAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		/* Default URL */
-		String resURL = "/pages/admin/main.jsp";
+		String resURL = "/pages/error/500.jsp";
 		ServletContext ctx =  request.getServletContext();
 		ctx.setAttribute("version", "Alpha");
-		
-		HttpSession session = request.getSession();
-		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		
 		String command = request.getParameter("command");
 		
 		if(command != null) {
 			Service service = null;
 			switch(command) {
-				case "anony": service = new AnonyService(); break;
+				case "main": service = new MainService(); break;
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

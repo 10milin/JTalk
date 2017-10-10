@@ -364,4 +364,54 @@ public class MemberDAO {
 			
 			return result;
 		}
+		
+		//전체 회원수 추출
+		public int getMemberCount() {
+			int lastNum = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select count(*) from member";
+			
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					lastNum = rs.getInt(1);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, conn);
+			}
+			
+			return lastNum-1;
+		}
+		
+		//관리자 권한 부여받은 회원수 추출
+		public int getMemberAdminCount() {
+			int lastNum = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select count(*) from member where active = 2";
+			
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					lastNum = rs.getInt(1);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, conn);
+			}
+			
+			return lastNum;
+		}
 }
