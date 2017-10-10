@@ -488,7 +488,7 @@
 	                	<form action="/JTalk/profile.action?command=admin" method="post">
 							<div class="col-md-12 col-xs-12 form-horizontal">
 								<div class="form-group text-center">
-									<img src="/JTalk/dist/img/logo.png">
+									<img src="/JTalk/dist/img/logo.png"> 
 								</div>
 								<c:if test="${not empty errorMsg}">
 							    <div class="alert alert-danger alert-dismissible">
