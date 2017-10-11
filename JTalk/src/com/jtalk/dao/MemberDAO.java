@@ -414,4 +414,43 @@ public class MemberDAO {
 			
 			return lastNum;
 		}
+		
+		//관리자를 제외한 모든 회원정보 추출
+		public ArrayList<MemberDTO> getAllMember() {
+			ArrayList<MemberDTO> email = null;
+			MemberDTO member = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where email != ?";
+			
+			try {
+				email = new ArrayList<MemberDTO>();
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "admin");
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					member = new MemberDTO(
+							rs.getString("email"), 
+							rs.getString("pass"),
+							rs.getString("name"),
+							rs.getInt("period"),
+							rs.getString("ban"),
+							rs.getString("active"),
+							rs.getString("link"),
+							rs.getTimestamp("registerDate"),
+							rs.getString("profile"),
+							rs.getString("pr"));
+					email.add(member);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, conn);
+			}
+			
+			return email;
+		}
 }

@@ -1,5 +1,7 @@
 package com.jtalk.admin;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import com.jtalk.dao.JapaneseDAO;
 import com.jtalk.dao.LifeDAO;
 import com.jtalk.dao.LogDAO;
 import com.jtalk.dao.MemberDAO;
+import com.jtalk.dto.LifeDTO;
 import com.jtalk.dto.MemberDTO;
 
 public class MainService implements Service {
@@ -36,6 +39,19 @@ public class MainService implements Service {
 		
 		int inforSize = itSize + japaneseSize + foodSize + lifeSize;
 		
+		ArrayList<MemberDTO> member = memberDAO.getAllMember();
+		ArrayList<MemberDTO> newMember = new ArrayList<MemberDTO>();
+		
+		// 가장 최근에 가입한 회원정보 추출
+		if(member.size() != 0) {
+			for(int i = 0; i < member.size(); i++) {
+				if(i > 7) {
+					break;
+				}
+				newMember.add(member.get(i));
+			}
+		}
+		
 		request.setAttribute("memberCount", memberDAO.getMemberCount());
 		request.setAttribute("memberAdminCount", memberDAO.getMemberAdminCount());
 		request.setAttribute("logCount", logDAO.getLogCount());
@@ -52,6 +68,7 @@ public class MainService implements Service {
 		request.setAttribute("FoodNew", foodDAO.getNewCount());
 		request.setAttribute("LifeNew", lifeDAO.getNewCount());
 		
+		request.setAttribute("newMember", newMember);
 		
 		return resURL;
 	}

@@ -181,226 +181,149 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-dashboard "></i> 시스템 개요
-        <small>J-Talk 어플리케이션의 상태 정보를 제공합니다.</small>
+        <i class="fa fa-code-fork "></i> 로그
+        <small>관리자에 의한 게시글 삭제 이력를 확인 할 수 있습니다.</small>
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-home"></i> Home</li>
+        <li><a href="javascript:actionlink('admin.action?command=main');"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">로그</li>
       </ol>
     </section>
     <section class="content">
 	    <div class="row">
-			<div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>${memberCount}</h3>
+	    	<div class="col-md-12">
+	    	<div class="box box-danger">
+            <div class="box-header">
 
-              <p class="font-bareun">회원 수</p>
             </div>
-            <div class="icon">
-              <i class="ion ion-android-people"></i>
-            </div>
-            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>${memberAdminCount}</h3>
-
-              <p class="font-bareun">관리자 수</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>${logCount}</h3>
-
-              <p class="font-bareun">로그 수</p>
-            </div>
-            <div class="icon">
-              <i class="ion-fork-repo"></i>
-            </div>
-            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3><fmt:formatNumber value="${dbCapacity}" pattern="0"/><sup style="font-size: 20px">MB</sup></h3>
-
-              <p class="font-bareun">DB 용량</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer font-bareun">자세히 보기 <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-md-12 col-xs-12">
-        	<div class="box box-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title font-bareun"><i class="fa fa-info-circle"></i> 정보마당</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <!-- /.box-header -->
+            <div class="box-body box-body-padding">
+            	<div class="col-md-12">
+              <table class="table table-condensed table-hover table-md">
+                <tr class="table-field">
+                  <th style="width: 12%;">분류</th>
+                  <th>게시글 제목</th>
+                  <th style="width: 13%;">작업자</th>
+                  <th style="width: 20%;">삭제일시</th>
+                </tr>
+                <c:if test="${empty currentList}">
+                	<c:if test="${empty search}">
+	                	<td colspan="5" align="center">로그가 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="5" align="center">검색결과가 없습니다.</td>
+	                </c:if>
+                </c:if>
+                <c:if test="${not empty currentList}">
+                	<jsp:useBean id="now" class="java.util.Date" />
+                	<c:forEach var="item" items="${currentList}" varStatus="status">
+                		<tr class="table-field">
+		                  <td>${item.board}</td>
+		                  <td class="td-title">
+							<a href="javascript:void(0)" onclick="msgdetail(this)" detail="0">${item.title}</a>      
+		                  </td>
+		                  <td><a href="javascript:showmember('${item.deleteId}')">${item.deleteName}</a></td>
+		                  <td>
+		                  	<fmt:formatDate value="${item.executeDate}" pattern="yyyy-MM-dd HH:mm:ss" var="executeDate" /> 
+		                  	${executeDate}
+		                  </td>
+		                </tr>
+		                <tr style="display:none;">
+                        		<td colspan="4">
+                        			<div class="message-detail">
+						                <p><i class="fa fa-pencil"></i> <a href="javascript:showmember('${item.writerId}')">${item.writerName}</a></p>
+						                <div>
+						                	${item.content}
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr> 
+                	</c:forEach>
+                </c:if>
+              </table>
+              <table class="table table-condensed table-hover table-xd">
+              	<tr class="table-field">
+                  <th>게시글 제목</th>
+                  <th style="width: 18%;">작업자</th>
+                  <th style="width: 20%;">삭제일시</th>
+                </tr>
+                <c:if test="${empty currentList}">
+                	<c:if test="${empty search}">
+	                	<td colspan="3" align="center">로그가 없습니다.</td>
+	                </c:if>
+	                <c:if test="${not empty search}">
+	                	<td colspan="3" align="center">검색결과가 없습니다.</td>
+	                </c:if>
+                </c:if>
+                <c:if test="${not empty currentList}">
+                	<c:forEach var="item" items="${currentList}">
+                		<tr class="table-field">
+		                  <td class="td-title none-text-indent table-td-vline-origin">
+		                  	  <i class="fa fa-pencil"></i><a href="javascript:showmember('${item.writerId}')">${item.writerName}</a><br>${item.title}
+		                  </td>
+		                  <td class="table-td-vline"><a href="javascript:showmember('${item.deleteId}')">${item.deleteName}</a></td>
+		                  <td class="table-td-vline">
+							 <fmt:formatDate var="executeDate" value="${item.executeDate}" pattern="yy-MM-dd HH:mm:ss" />
+			                  ${executeDate}
+		                  </td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
+              </table>
               </div>
-            </div>
-            <div class="box-body">
-            	<div class="col-md-6">
-            		<p class="text-center">
-                    <strong>정보마당 전체 게시글 비율</strong>
-                  </p>
-            		<canvas id="pieChart" style="height:250px"></canvas>
-            	</div>
-	           	<div class="col-md-6">
-                  <p class="text-center">
-                    <strong>게시판별 게시글 수</strong>
-                  </p>
-                  
-				  <div class="progress-group">
-                    <span class="progress-text">IT</span>
-                    <span class="progress-number"><b id="ItSize">${ItSize}</b>/${InforSize}</span>
-
-                    <div class="progress sm">
-                      <fmt:formatNumber var="per" value="${ItSize/InforSize}" type="percent"/>
-                      <div class="progress-bar progress-bar-red" style="width: ${per}"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">일본어</span>
-                    <span class="progress-number"><b id="JapaneseSize">${JapaneseSize}</b>/${InforSize}</span>
-
-                    <div class="progress sm">
-                      <fmt:formatNumber var="per" value="${JapaneseSize/InforSize}" type="percent"/>
-                      <div class="progress-bar progress-bar-green" style="width: ${per}"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">주변맛집</span>
-                    <span class="progress-number"><b id="FoodSize">${FoodSize}</b>/${InforSize}</span>
-
-                    <div class="progress sm">
-                      <fmt:formatNumber var="per" value="${FoodSize/InforSize}" type="percent"/>
-                      <div class="progress-bar progress-bar-yellow" style="width: ${per}"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">생활정보</span>
-                    <span class="progress-number"><b id="LifeSize">${LifeSize}</b>/${InforSize}</span>
-
-                    <div class="progress sm">
-                      <fmt:formatNumber var="per" value="${LifeSize/InforSize}" type="percent"/>
-                      <div class="progress-bar progress-bar-aqua" style="width: ${per}"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                </div>
+              <div class="col-md-12">
+              <div class="text-right table-bottom">
+              	<form action = "/JTalk/admin.action?command=log" method="post">
+              	<div class="col-md-3 col-xs-12 no-padding mobile-center">
+              		<c:if test="${not empty search}">
+              			<div id="searchbar"class="input-group" toggle="1" style="display:inline-table;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+              		</c:if>
+              		<c:if test="${empty search}">
+	                <div id="searchbar"class="input-group" toggle="0" style="display:none;">
+	                    <input type="text" class="form-control" placeholder="검색어를 입력해주세요." value="${search}" name="search" required>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                </div>
+	                </c:if>
+	              </div>
+                </form>
+              
+              <div class="col-md-9 col-xs-12 text-right no-padding">
+              		<c:if test="${empty search}">
+              			<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                	</c:if>
+                	<c:if test="${not empty search}">
+                		<button type="button" class="btn btn-default" onclick="searchbar(this);"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                		<button type="button" class="btn btn-default" onclick="actionlink('admin.action?command=log');"><i class="fa fa-list"></i> 목록</button>
+                	</c:if>
+              	</div>
+              </div>
+              <div class="col-md-12 text-center" style="display:inline-block; width:100%">
+              	<form action="/JTalk/admin.action?command=log" method="post" id="pagination-form">
+              		<ul id="pagination" class="pagination-sm"></ul>
+              		<input id = "pagination-page" type="hidden" name="currentPage" value="${currentPage}">
+              		<input type="hidden" name="search" value="${search}">
+              	</form>
+              </div>
+              </div>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                  	<h4 class="font-bareun">IT</h4>
-                    <span class="badge bg-red">NEW ${ItNew}</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                  	<h4 class="font-bareun">일본어</h4>
-                    <span class="badge bg-green">NEW ${JapaneseNew}</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <h4 class="font-bareun">주변맛집</h4>
-                    <span class="badge bg-yellow">NEW ${FoodNew}</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block">
-                    <h4 class="font-bareun">생활정보</h4>
-                    <span class="badge bg-aqua">NEW ${LifeNew}</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-              </div>
-              <!-- /.row -->
-            </div>
           </div>
-        </div>
-        <div class="col-md-12 col-xs-12 no-padding">
-        	<div class="col-md-8 padding-right">
-        		<div class="box box-danger">
-	                <div class="box-header with-border">
-	                  <h3 class="box-title font-bareun"><i class="fa fa-code-fork"></i> 로그</h3>
-	                  <div class="box-tools pull-right">
-	                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-	                  </div>
-	                </div>
-	                <!-- /.box-header -->
-	                <div class="box-body no-padding">
-	                </div>
-	          </div>
-        	</div>
-	        <div class="col-md-4">
-	              <!-- USERS LIST -->
-	              <div class="box box-danger">
-	                <div class="box-header with-border">
-	                  <h3 class="box-title font-bareun"><i class="fa fa-group"></i> 최근에 가입한 회원</h3>
-	                  <div class="box-tools pull-right">
-	                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-	                  </div>
-	                </div>
-	                <!-- /.box-header -->
-	                <div class="box-body no-padding">
-	                  <ul class="users-list clearfix">
-	                    <c:if test="${empty newMember}">
-	                    	<li style="width: 100% !important; text-align: left !important;">
-	                    		최근에 가입한 회원이 없습니다.
-	                    	</li>
-	                    </c:if>
-	                  	<c:if test="${not empty newMember}">
-	                  		<c:forEach var="item" items="${newMember}">
-	                  			<li>
-			                      <img class="user-img" src="/JTalk/upload/${item.profile}" alt="User Image" width="128px">
-			                      <a class="users-list-name" href="javascript:showmember('${item.email}')">${item.name}</a>
-			                      <span class="users-list-date">${item.period} 기</span>
-			                    </li>
-	                  		</c:forEach>
-	                  	</c:if>
-	                  </ul>
-	                  <!-- /.users-list -->
-	                </div>
-	              </div>
-	              <!--/.box -->
-	            </div>
-        	</div>
-        	
+          <!-- /.box -->
+          </div>
+          
 	    </div>
-    </section>
+	</section>
   </div>
   <!-- /.content-wrapper -->
 
@@ -565,10 +488,12 @@
 <!-- /.modal -->
 <script src="/JTalk/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/JTalk/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src ="/JTalk/bower_components/pagination/jquery.twbsPagination.js"></script>
 <script src="/JTalk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
-<script src="/JTalk/bower_components/chart.js/Chart.js"></script>
-<script src="/JTalk/dist/js/inforchart.js"></script>
+<script>
+  pagination(${totalPage},${currentPage});
+</script>
 </body>
 </html>

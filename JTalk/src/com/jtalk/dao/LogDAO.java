@@ -5,6 +5,7 @@ import static com.jtalk.db.JdbcUtils.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+import com.jtalk.dto.ItDTO;
 import com.jtalk.dto.LogDTO;
 
 
@@ -131,6 +132,44 @@ public class LogDAO {
 		}
 		
 		return lastNum;
+	}
+	
+	//글 검색기능
+	public ArrayList<LogDTO> searchLog(String key) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		LogDTO log = null;
+		String sql = "select * from log where title like ? order by num desc";
+		ArrayList<LogDTO> searchList = new ArrayList<LogDTO>();
+		
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+key+"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				log = new LogDTO();
+				log.setNum(rs.getInt("num"));
+				log.setBoard(rs.getString("board"));
+				log.setTitle(rs.getString("title"));
+				log.setContent(rs.getString("content"));
+				log.setWriterId(rs.getString("writerId"));
+				log.setWriterName(rs.getString("writerName"));
+				log.setDeleteId(rs.getString("deleteId"));
+				log.setDeleteName(rs.getString("deleteName"));
+				log.setExecuteDate(rs.getTimestamp("executeDate"));
+				searchList.add(log);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return searchList;
 	}
 
 }
