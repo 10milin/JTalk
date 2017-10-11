@@ -3,16 +3,14 @@ package com.jtalk.action;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.jtalk.admin.AdminService;
 import com.jtalk.admin.LogService;
 import com.jtalk.admin.MainService;
-import com.jtalk.anony.AnonyService;
-import com.jtalk.anony.DeleteService;
-import com.jtalk.anony.WriteService;
+import com.jtalk.admin.MemberService;
+import com.jtalk.admin.StorageService;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.dto.MemberDTO;
 
 public class AdminAction implements Action{
 
@@ -31,6 +29,9 @@ public class AdminAction implements Action{
 			switch(command) {
 				case "main": service = new MainService(); break;
 				case "log" : service = new LogService(); break;
+				case "member" : service = new MemberService(); break;
+				case "admin" : service = new AdminService(); break;
+				case "storage" : service = new StorageService(); break;
 			}
 			
 			if(service !=null) resURL = service.process(request, response);

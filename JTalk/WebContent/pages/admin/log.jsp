@@ -166,13 +166,11 @@
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
       	<li class="header">MEMBER</li>
-      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-group"></i> <span>회원관리</span></a></li>
-      	<li><a href="javascript:actionlink('notice.action?command=notice');"><i class="fa fa-user-plus"></i> <span>관리자관리</span></a></li>
-      	<li class="header">BOARD</li>
-        <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-clone"></i> <span>게시물관리</span></a></li>
+      	<li><a href="javascript:actionlink('admin.action?command=member');"><i class="fa fa-group"></i> <span>회원정보</span></a></li>
+      	<li><a href="javascript:actionlink('admin.action?command=admin');"><i class="fa fa-user-plus"></i> <span>관리자정보</span></a></li>
         <li class="header">SYSTEM</li>
-        <li><a href="javascript:actionlink('anony.action?command=anony');"><i class="fa fa-database"></i> <span>저장공간</span></a></li>
         <li><a href="javascript:actionlink('admin.action?command=log');"><i class="fa fa-code-fork"></i> <span>로그</span></a></li>
+        <li><a href="javascript:actionlink('admin.action?command=storage');"><i class="fa fa-database"></i> <span>저장공간</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -181,8 +179,8 @@
   <div class="content-wrapper">
   	<section class="content-header">
       <h1 class="font-bareun">
-        <i class="fa fa-code-fork "></i> 로그
-        <small>관리자에 의한 게시글 삭제 이력를 확인 할 수 있습니다.</small>
+        <i class="fa fa-code-fork "></i> 로그 
+        <small>게시글 삭제 이력를 확인 할 수 있습니다.</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="javascript:actionlink('admin.action?command=main');"><i class="fa fa-home"></i> Home</a></li>
@@ -259,14 +257,24 @@
                 	<c:forEach var="item" items="${currentList}">
                 		<tr class="table-field">
 		                  <td class="td-title none-text-indent table-td-vline-origin">
-		                  	  <i class="fa fa-pencil"></i><a href="javascript:showmember('${item.writerId}')">${item.writerName}</a><br>${item.title}
+		                  	  <a a href="javascript:void(0)" onclick="msgdetail(this)" detail="0">${item.title}</a>
 		                  </td>
 		                  <td class="table-td-vline"><a href="javascript:showmember('${item.deleteId}')">${item.deleteName}</a></td>
 		                  <td class="table-td-vline">
-							 <fmt:formatDate var="executeDate" value="${item.executeDate}" pattern="yy-MM-dd HH:mm:ss" />
+							 <fmt:formatDate var="executeDate" value="${item.executeDate}" pattern="yy-MM-dd HH:mm" />
 			                  ${executeDate}
 		                  </td>
 		                </tr>
+		                <tr style="display:none;">
+                        		<td colspan="3">
+                        			<div class="message-detail">
+						                <p><i class="fa fa-pencil"></i> <a href="javascript:showmember('${item.writerId}')">${item.writerName}</a></p>
+						                <div>
+						                	${item.content}
+						                </div>
+						              </div>
+                        		</td>
+                        	</tr>
                 	</c:forEach>
                 </c:if>
               </table>

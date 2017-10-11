@@ -15,6 +15,7 @@ import com.jtalk.dao.LifeDAO;
 import com.jtalk.dao.LogDAO;
 import com.jtalk.dao.MemberDAO;
 import com.jtalk.dto.LifeDTO;
+import com.jtalk.dto.LogDTO;
 import com.jtalk.dto.MemberDTO;
 
 public class MainService implements Service {
@@ -31,6 +32,18 @@ public class MainService implements Service {
 		JapaneseDAO japaneseDAO = JapaneseDAO.getInstance();
 		FoodDAO foodDAO = FoodDAO.getInstance();
 		LifeDAO lifeDAO = LifeDAO.getInstance();
+		
+		ArrayList<LogDTO> log = logDAO.getAllLog();
+		ArrayList<LogDTO> newLog = new ArrayList<LogDTO>();
+		
+		if(log.size() != 0) {
+			for(int i = 0; i < log.size(); i++) {
+				if(i > 6) {
+					break;
+				}
+				newLog.add(log.get(i));
+			}
+		}
 		
 		int itSize = itDAO.getCount();
 		int japaneseSize = japaneseDAO.getCount();
@@ -70,6 +83,7 @@ public class MainService implements Service {
 		
 		request.setAttribute("newMember", newMember);
 		
+		request.setAttribute("newLog", newLog);
 		return resURL;
 	}
 

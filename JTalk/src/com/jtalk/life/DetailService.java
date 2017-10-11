@@ -39,7 +39,7 @@ public class DetailService implements Service {
 		boolean check = false;
 		
 		for(int i = 0; i < cookie.length; i++) {
-			if(cookie[i].getName().equals("life")) {
+			if(cookie[i].getName().equals("life" + String.valueOf(num))) {
 				if(cookie[i].getValue().equals(String.valueOf(num))) {
 					check = true;
 					break;
@@ -60,7 +60,7 @@ public class DetailService implements Service {
 			long to = tomorrow.getTime().getTime();
 						
 			int time = (int)(to - today) / 1000;
-			Cookie noticeCookie = new Cookie("life", String.valueOf(num));
+			Cookie noticeCookie = new Cookie("life" + String.valueOf(num), String.valueOf(num));
 			
 			noticeCookie.setMaxAge(time);
 			response.addCookie(noticeCookie);

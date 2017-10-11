@@ -453,4 +453,164 @@ public class MemberDAO {
 			
 			return email;
 		}
+		
+		//관리자를 제외한 모든 회원정보 추출
+		public ArrayList<MemberDTO> getAllNonActiveMember() {
+			ArrayList<MemberDTO> email = null;
+			MemberDTO member = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where active = ? or active = ? order by period desc";
+			
+			try {
+				email = new ArrayList<MemberDTO>();
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "0");
+				pstmt.setString(2, "1");
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					member = new MemberDTO(
+							rs.getString("email"), 
+							rs.getString("pass"),
+							rs.getString("name"),
+							rs.getInt("period"),
+							rs.getString("ban"),
+							rs.getString("active"),
+							rs.getString("link"),
+							rs.getTimestamp("registerDate"),
+							rs.getString("profile"),
+							rs.getString("pr"));
+					email.add(member);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, conn);
+			}
+			
+			return email;
+		}
+		
+		//관리자를 제외한 모든 회원정보 추출
+		public ArrayList<MemberDTO> searchNonActiveMember(String key) {
+			ArrayList<MemberDTO> email = null;
+			MemberDTO member = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where active in(?,?) and name like ? order by period desc";
+			
+			try {
+				email = new ArrayList<MemberDTO>();
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "0");
+				pstmt.setString(2, "1");
+				pstmt.setString(3, "%"+key+"%");
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					member = new MemberDTO(
+							rs.getString("email"), 
+							rs.getString("pass"),
+							rs.getString("name"),
+							rs.getInt("period"),
+							rs.getString("ban"),
+							rs.getString("active"),
+							rs.getString("link"),
+							rs.getTimestamp("registerDate"),
+							rs.getString("profile"),
+							rs.getString("pr"));
+					email.add(member);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, conn);
+			}
+			
+			return email;
+		}
+		
+		//관리자를 제외한 모든 회원정보 추출
+		public ArrayList<MemberDTO> getAllActiveMember() {
+			ArrayList<MemberDTO> email = null;
+			MemberDTO member = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where active = ? order by period desc";
+			
+			try {
+				email = new ArrayList<MemberDTO>();
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "2");
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					member = new MemberDTO(
+							rs.getString("email"), 
+							rs.getString("pass"),
+							rs.getString("name"),
+							rs.getInt("period"),
+							rs.getString("ban"),
+							rs.getString("active"),
+							rs.getString("link"),
+							rs.getTimestamp("registerDate"),
+							rs.getString("profile"),
+							rs.getString("pr"));
+					email.add(member);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, conn);
+			}
+			
+			return email;
+		}
+		
+		//관리자를 제외한 모든 회원정보 추출
+		public ArrayList<MemberDTO> searchActiveMember(String key) {
+			ArrayList<MemberDTO> email = null;
+			MemberDTO member = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where active = ? and name like ? order by period desc";
+			
+			try {
+				email = new ArrayList<MemberDTO>();
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "2");
+				pstmt.setString(2, "%"+key+"%");
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					member = new MemberDTO(
+							rs.getString("email"), 
+							rs.getString("pass"),
+							rs.getString("name"),
+							rs.getInt("period"),
+							rs.getString("ban"),
+							rs.getString("active"),
+							rs.getString("link"),
+							rs.getTimestamp("registerDate"),
+							rs.getString("profile"),
+							rs.getString("pr"));
+					email.add(member);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, conn);
+			}
+			
+			return email;
+		}
 }
