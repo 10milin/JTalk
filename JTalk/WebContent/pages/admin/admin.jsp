@@ -231,6 +231,12 @@
 			                  	<c:when test="${item.active eq 1 && item.ban eq 1}">
 			                  		<font color="red">정지</font>
 			                  	</c:when>
+			                  	<c:when test="${item.active eq 2 && item.ban eq 1}">
+			                  		<font color="red">정지</font>
+			                  	</c:when>
+			                  	<c:otherwise>
+			                  		정상
+			                  	</c:otherwise>
 		                  	</c:choose>
 		                  </td>
 		                  <td>
@@ -276,6 +282,12 @@
 			                  	<c:when test="${item.active eq 1 && item.ban eq 1}">
 			                  		<font color="red">정지</font>
 			                  	</c:when>
+			                  	<c:when test="${item.active eq 2 && item.ban eq 1}">
+			                  		<font color="red">정지</font>
+			                  	</c:when>
+			                  	<c:otherwise>
+			                  		정상
+			                  	</c:otherwise>
 		                  	</c:choose>
 		                  </td>
 		                  <td class="table-td-vline">

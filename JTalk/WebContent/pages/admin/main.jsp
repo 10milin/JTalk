@@ -370,7 +370,7 @@
 				                	<tr>
 										<td style="width:20%; text-align: center;">${item.board}</td>
 										<td class="td-overflow" style="max-width:1px;">${item.title}</td>
-										<td style="width:15%; text-align: center;">${item.deleteId}</td>
+										<td style="width:15%; text-align: center;">${item.deleteName}</td>
 										<fmt:formatDate var="executeDate" value="${item.executeDate}" pattern="yy-MM-dd HH:mm" />
 										<td style="width:30%; text-align: center;">${executeDate}</td>
 									</tr>

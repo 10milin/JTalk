@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -438,6 +440,8 @@
 <script src="/JTalk/bower_components/summernote/dist/emoticons.js"></script>
 <script src="/JTalk/dist/js/adminlte.min.js"></script>
 <script src="/JTalk/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<script src="/JTalk/bower_components/moment/min/moment.min.js"></script>
+<script src="/JTalk/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="/JTalk/dist/js/utils.js"></script>
 <script src="/JTalk/dist/js/date.js"></script>
 <script>
