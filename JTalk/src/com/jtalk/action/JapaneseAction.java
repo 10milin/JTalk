@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.japanese.DeleteService;
-import com.jtalk.japanese.DetailService;
-import com.jtalk.japanese.DownloadService;
-import com.jtalk.japanese.ModifyFormService;
-import com.jtalk.japanese.ModifyService;
-import com.jtalk.japanese.JapaneseService;
-import com.jtalk.japanese.WriteService;
+import com.jtalk.service.japanese.DeleteService;
+import com.jtalk.service.japanese.DetailService;
+import com.jtalk.service.japanese.DownloadService;
+import com.jtalk.service.japanese.JapaneseService;
+import com.jtalk.service.japanese.ModifyFormService;
+import com.jtalk.service.japanese.ModifyService;
+import com.jtalk.service.japanese.WriteService;
 
 public class JapaneseAction implements Action{
 

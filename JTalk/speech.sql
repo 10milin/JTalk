@@ -11,6 +11,6 @@ create table speech(
 	writeDate Timestamp default current_timestamp,
 	hit int default 0,
 	period int not null
-);
+)COLLATE='utf8_general_ci';
 
 alter table speech auto_increment = 1;

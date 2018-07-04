@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.we.DeleteService;
-import com.jtalk.we.DetailService;
-import com.jtalk.we.DownloadService;
-import com.jtalk.we.ModifyFormService;
-import com.jtalk.we.ModifyService;
-import com.jtalk.we.WeService;
-import com.jtalk.we.WriteService;
+import com.jtalk.service.we.DeleteService;
+import com.jtalk.service.we.DetailService;
+import com.jtalk.service.we.DownloadService;
+import com.jtalk.service.we.ModifyFormService;
+import com.jtalk.service.we.ModifyService;
+import com.jtalk.service.we.WeService;
+import com.jtalk.service.we.WriteService;
 
 public class WeAction implements Action{
 

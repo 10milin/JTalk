@@ -6,6 +6,6 @@ create table anony(
 	content varchar(4000) not null,	
 	writeDate Timestamp default current_timestamp,
 	awesome int default 0
-);
+)COLLATE='utf8_general_ci';
 
 alter table anony auto_increment = 1;

@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.speech.DeleteService;
-import com.jtalk.speech.DetailService;
-import com.jtalk.speech.DownloadService;
-import com.jtalk.speech.ModifyFormService;
-import com.jtalk.speech.ModifyService;
-import com.jtalk.speech.WriteService;
-import com.jtalk.speech.SpeechService;
+import com.jtalk.service.speech.DeleteService;
+import com.jtalk.service.speech.DetailService;
+import com.jtalk.service.speech.DownloadService;
+import com.jtalk.service.speech.ModifyFormService;
+import com.jtalk.service.speech.ModifyService;
+import com.jtalk.service.speech.SpeechService;
+import com.jtalk.service.speech.WriteService;
 
 public class SpeechAction implements Action{
 

@@ -5,14 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.trade.DeleteService;
-import com.jtalk.trade.DetailService;
-import com.jtalk.trade.ModifyFormService;
-import com.jtalk.trade.ModifyService;
-import com.jtalk.trade.ReSoldService;
-import com.jtalk.trade.SoldoutService;
-import com.jtalk.trade.TradeService;
-import com.jtalk.trade.WriteService;
+import com.jtalk.service.trade.DeleteService;
+import com.jtalk.service.trade.DetailService;
+import com.jtalk.service.trade.ModifyFormService;
+import com.jtalk.service.trade.ModifyService;
+import com.jtalk.service.trade.ReSoldService;
+import com.jtalk.service.trade.SoldoutService;
+import com.jtalk.service.trade.TradeService;
+import com.jtalk.service.trade.WriteService;
 
 public class TradeAction implements Action{
 

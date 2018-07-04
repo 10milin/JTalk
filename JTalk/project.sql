@@ -15,6 +15,6 @@ create table project(
 	closingDate varchar(100) not null,
 	teamName varchar(100) not null,
 	teamMember varchar(500) not null
-);
+)COLLATE='utf8_general_ci';
 
 alter table project auto_increment = 1;

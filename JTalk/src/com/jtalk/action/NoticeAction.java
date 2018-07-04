@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.notice.DeleteService;
-import com.jtalk.notice.DetailService;
-import com.jtalk.notice.DownloadService;
-import com.jtalk.notice.ModifyFormService;
-import com.jtalk.notice.ModifyService;
-import com.jtalk.notice.NoticeService;
-import com.jtalk.notice.WriteService;
+import com.jtalk.service.notice.DeleteService;
+import com.jtalk.service.notice.DetailService;
+import com.jtalk.service.notice.DownloadService;
+import com.jtalk.service.notice.ModifyFormService;
+import com.jtalk.service.notice.ModifyService;
+import com.jtalk.service.notice.NoticeService;
+import com.jtalk.service.notice.WriteService;
 
 public class NoticeAction implements Action{
 

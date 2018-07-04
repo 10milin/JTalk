@@ -619,3 +619,12 @@ function searchbar(btn){
 		  $('#searchbar').attr('toggle','0');
 	  }
 }
+
+//새로고침 방지
+if(typeof(history.pushState) == 'function') {
+	
+	var renewURL = location.href;
+	
+	history.pushState(null, null, renewURL.substring(0, renewURL.indexOf("JTalk")) + "JTalk/");
+
+}

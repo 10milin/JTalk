@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.food.FoodService;
-import com.jtalk.food.DeleteService;
-import com.jtalk.food.DetailService;
-import com.jtalk.food.DownloadService;
-import com.jtalk.food.ModifyFormService;
-import com.jtalk.food.ModifyService;
-import com.jtalk.food.WriteService;
+import com.jtalk.service.food.DeleteService;
+import com.jtalk.service.food.DetailService;
+import com.jtalk.service.food.DownloadService;
+import com.jtalk.service.food.FoodService;
+import com.jtalk.service.food.ModifyFormService;
+import com.jtalk.service.food.ModifyService;
+import com.jtalk.service.food.WriteService;
 
 public class FoodAction implements Action{
 

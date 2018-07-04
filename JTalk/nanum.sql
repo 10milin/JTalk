@@ -13,6 +13,6 @@ create table nanum(
 	price varchar(50) not null default 0,
 	writeDate Timestamp default current_timestamp,
 	hit int default 0
-);
+)COLLATE='utf8_general_ci';
 
 alter table nanum auto_increment = 1;

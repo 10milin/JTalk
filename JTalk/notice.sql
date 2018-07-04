@@ -10,6 +10,6 @@ create table notice(
 	originFileName varchar(100),
 	writeDate Timestamp default current_timestamp,
 	hit int default 0
-);
+)COLLATE='utf8_general_ci';
 
 alter table notice auto_increment = 1;

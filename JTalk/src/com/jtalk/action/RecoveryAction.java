@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
-import com.jtalk.member.RecoveryService;
+import com.jtalk.service.member.RecoveryService;
 import com.jtalk.core.Action;
 
 public class RecoveryAction implements Action{

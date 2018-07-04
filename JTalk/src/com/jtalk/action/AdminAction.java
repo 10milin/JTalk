@@ -4,13 +4,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jtalk.admin.AdminService;
-import com.jtalk.admin.LogService;
-import com.jtalk.admin.MainService;
-import com.jtalk.admin.MemberService;
-import com.jtalk.admin.StorageService;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
+import com.jtalk.service.admin.AdminService;
+import com.jtalk.service.admin.LogService;
+import com.jtalk.service.admin.MainService;
+import com.jtalk.service.admin.MemberService;
+import com.jtalk.service.admin.StorageService;
 
 public class AdminAction implements Action{
 

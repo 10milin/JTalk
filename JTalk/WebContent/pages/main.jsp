@@ -590,7 +590,7 @@
 	            </c:if>
 	            <c:if test="${not empty newAnony}">
                 <c:forEach var="item" items="${newAnony}" varStatus="st">
-                <div>
+                <div class="items">
 	            <div class="box-body">
 	              <div class="user-block">
 	                <img class="img-circle" src="/JTalk/dist/img/tree.png" alt="User Image">
@@ -612,11 +612,11 @@
 	              </c:if>
 	              <span class="pull-right text-muted">
 	              <a class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5 "></i>좋아요 <span class="like-count"> ${item.awesome}</span></a> 
-	              <a class="link-black text-sm"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count"> ${countList[st.index]}</span></a>
+	              <a class="link-black text-sm" href="javascript:void(0);"><span onclick="anonyComment(this)"><i class="fa fa-comments-o margin-l-5 margin-r-5"></i>댓글 <span class="comment-count"> ${countList[st.index]}</span></span></a>
 	              	</span>
 	            </div>
 	            <!-- /.box-body -->
-	            <div class="box-footer box-comments">
+	            <div class="box-footer box-comments hidden">
 	            <c:if test="${empty commentList[st.index]}">
               	<div class="box-comment nocmt">등록된 댓글이 없습니다.</div>
               	</c:if>
@@ -857,15 +857,8 @@
 		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">
-		              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-		                <ol class="carousel-indicators">
-		                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-		                </ol>
-		                <div class="carousel-inner">
-		                  <div class="item active">
-		                    <a href="http://www.jslhrd.com/" target="_blank"><img src="/JTalk/dist/img/jsl.png" alt="First slide"></a>
-		                  </div>
-		                </div>
+		              <div class="col-md-12 text-center"> 
+		              	<a href="http://www.jslhrd.com/" target="_blank"><img src="http://www.jslhrd.com/img_up/shop_pds/jslcom/build/option/jsl-logo_01-011523350685.png" alt="First slide" style="margin:0 auto;"></a>
 		              </div>
 		            </div>
 		            <!-- /.box-body -->

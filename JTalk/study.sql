@@ -14,6 +14,6 @@ create table study(
 	category varchar(100) not null,
 	recruitNum int not null,
 	closingDate date not null
-);
+)COLLATE='utf8_general_ci';
 
 alter table study auto_increment = 1;

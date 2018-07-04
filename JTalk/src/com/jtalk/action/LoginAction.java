@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.member.LoginService;
+import com.jtalk.service.member.LoginService;
 
 public class LoginAction implements Action{
 	@Override

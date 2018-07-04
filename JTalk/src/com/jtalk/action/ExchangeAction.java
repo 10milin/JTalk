@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.exchange.ExchangeService;
-import com.jtalk.exchange.DeleteService;
-import com.jtalk.exchange.DetailService;
-import com.jtalk.exchange.DownloadService;
-import com.jtalk.exchange.ModifyFormService;
-import com.jtalk.exchange.ModifyService;
-import com.jtalk.exchange.WriteService;
+import com.jtalk.service.exchange.DeleteService;
+import com.jtalk.service.exchange.DetailService;
+import com.jtalk.service.exchange.DownloadService;
+import com.jtalk.service.exchange.ExchangeService;
+import com.jtalk.service.exchange.ModifyFormService;
+import com.jtalk.service.exchange.ModifyService;
+import com.jtalk.service.exchange.WriteService;
 
 public class ExchangeAction implements Action{
 

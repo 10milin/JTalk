@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.study.StudyService;
-import com.jtalk.study.DeleteService;
-import com.jtalk.study.DetailService;
-import com.jtalk.study.DownloadService;
-import com.jtalk.study.ModifyFormService;
-import com.jtalk.study.ModifyService;
-import com.jtalk.study.WriteService;
+import com.jtalk.service.study.DeleteService;
+import com.jtalk.service.study.DetailService;
+import com.jtalk.service.study.DownloadService;
+import com.jtalk.service.study.ModifyFormService;
+import com.jtalk.service.study.ModifyService;
+import com.jtalk.service.study.StudyService;
+import com.jtalk.service.study.WriteService;
 
 public class StudyAction implements Action{
 

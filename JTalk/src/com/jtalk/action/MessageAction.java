@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.message.*;
+import com.jtalk.service.message.DeleteChoiceService;
+import com.jtalk.service.message.DeleteService;
+import com.jtalk.service.message.ShowService;
 
 public class MessageAction implements Action{
 

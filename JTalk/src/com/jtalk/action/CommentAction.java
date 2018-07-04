@@ -5,7 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.comment.*;
+import com.jtalk.service.comment.DeleteService;
+import com.jtalk.service.comment.WriteService;
 public class CommentAction implements Action {
 
 	@Override

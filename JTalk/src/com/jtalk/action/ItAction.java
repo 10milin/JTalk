@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.it.DeleteService;
-import com.jtalk.it.DetailService;
-import com.jtalk.it.DownloadService;
-import com.jtalk.it.ModifyFormService;
-import com.jtalk.it.ModifyService;
-import com.jtalk.it.ItService;
-import com.jtalk.it.WriteService;
+import com.jtalk.service.it.DeleteService;
+import com.jtalk.service.it.DetailService;
+import com.jtalk.service.it.DownloadService;
+import com.jtalk.service.it.ItService;
+import com.jtalk.service.it.ModifyFormService;
+import com.jtalk.service.it.ModifyService;
+import com.jtalk.service.it.WriteService;
 
 public class ItAction implements Action{
 

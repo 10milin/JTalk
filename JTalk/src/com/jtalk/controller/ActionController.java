@@ -10,14 +10,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jtalk.action.*;
+import com.jtalk.action.AdminAction;
+import com.jtalk.action.AnonyAction;
+import com.jtalk.action.AuthAction;
+import com.jtalk.action.CommentAction;
+import com.jtalk.action.ExchangeAction;
+import com.jtalk.action.FoodAction;
+import com.jtalk.action.IndexAction;
+import com.jtalk.action.ItAction;
+import com.jtalk.action.JapaneseAction;
+import com.jtalk.action.LifeAction;
+import com.jtalk.action.LoginAction;
+import com.jtalk.action.LogoutAction;
+import com.jtalk.action.MessageAction;
+import com.jtalk.action.NanumAction;
+import com.jtalk.action.NoticeAction;
+import com.jtalk.action.ProfileAction;
+import com.jtalk.action.ProjectAction;
+import com.jtalk.action.RecoveryAction;
+import com.jtalk.action.RegisterAction;
+import com.jtalk.action.SpeechAction;
+import com.jtalk.action.StudyAction;
+import com.jtalk.action.TradeAction;
+import com.jtalk.action.WeAction;
 import com.jtalk.core.Action;
 import com.jtalk.dao.MessageDAO;
 import com.jtalk.dao.NewCommentDAO;
 import com.jtalk.dto.MemberDTO;
 import com.jtalk.dto.MessageDTO;
 import com.jtalk.dto.NewCommentDTO;
-import com.jtalk.validation.*;
+import com.jtalk.validation.SessionValidator;
+import com.jtalk.validation.ToggleValidator;
 
 @WebServlet("*.action")
 public class ActionController extends HttpServlet {
