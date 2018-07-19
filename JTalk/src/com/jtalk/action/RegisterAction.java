@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Service;
-import com.jtalk.member.RegisterService;
+import com.jtalk.service.member.RegisterService;
 import com.jtalk.core.Action;
 
 public class RegisterAction implements Action{

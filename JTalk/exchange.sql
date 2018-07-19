@@ -12,6 +12,6 @@ create table exchange(
 	hit int default 0,
 	period int not null,
 	category varchar(100) not null
-);
+)COLLATE='utf8_general_ci';
 
 alter table exchange auto_increment = 1;

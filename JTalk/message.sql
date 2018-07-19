@@ -10,6 +10,6 @@ create table message(
 	receiveId varchar(50) not null,
 	writeDate Timestamp default current_timestamp,
 	readMessage char(1) default 0
-);
+)COLLATE='utf8_general_ci';
 
 alter table message auto_increment = 1;

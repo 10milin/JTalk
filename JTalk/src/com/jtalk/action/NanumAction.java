@@ -5,14 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.nanum.DeleteService;
-import com.jtalk.nanum.DetailService;
-import com.jtalk.nanum.ModifyFormService;
-import com.jtalk.nanum.ModifyService;
-import com.jtalk.nanum.ReSoldService;
-import com.jtalk.nanum.SoldoutService;
-import com.jtalk.nanum.NanumService;
-import com.jtalk.nanum.WriteService;
+import com.jtalk.service.nanum.DeleteService;
+import com.jtalk.service.nanum.DetailService;
+import com.jtalk.service.nanum.ModifyFormService;
+import com.jtalk.service.nanum.ModifyService;
+import com.jtalk.service.nanum.NanumService;
+import com.jtalk.service.nanum.ReSoldService;
+import com.jtalk.service.nanum.SoldoutService;
+import com.jtalk.service.nanum.WriteService;
 
 public class NanumAction implements Action{
 

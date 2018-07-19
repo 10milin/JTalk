@@ -5,4 +5,4 @@ create table newComment(
 	postNum int not null,
 	email varchar(50) not null,
 	newCount int default 0
-);
+)COLLATE='utf8_general_ci';

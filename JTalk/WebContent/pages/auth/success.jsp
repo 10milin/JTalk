@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("enter","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +43,7 @@
   </div>
   <br>
   <div class="text-center">
-    <span>${email}<br>JTalk에 로그인하시면 다양한 서비스를 이용하실 수 있습니다.</span>
+    <span><c:out value="${email}"/><br>JTalk에 로그인하시면 다양한 서비스를 이용하실 수 있습니다.</span>
     <br>
     <br>
     <p><a href="javascript:self.close();">현재 창 닫기</a>

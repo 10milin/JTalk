@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.member.AuthService;
+import com.jtalk.service.member.AuthService;
 
 public class AuthAction implements Action {
 

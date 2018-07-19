@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.life.DeleteService;
-import com.jtalk.life.DetailService;
-import com.jtalk.life.DownloadService;
-import com.jtalk.life.ModifyFormService;
-import com.jtalk.life.ModifyService;
-import com.jtalk.life.LifeService;
-import com.jtalk.life.WriteService;
+import com.jtalk.service.life.DeleteService;
+import com.jtalk.service.life.DetailService;
+import com.jtalk.service.life.DownloadService;
+import com.jtalk.service.life.LifeService;
+import com.jtalk.service.life.ModifyFormService;
+import com.jtalk.service.life.ModifyService;
+import com.jtalk.service.life.WriteService;
 
 public class LifeAction implements Action{
 

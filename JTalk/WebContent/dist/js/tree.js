@@ -169,3 +169,20 @@ function anonylike(obj, num){
 		}
 	});
 }
+
+//대나무숲 댓글 보기
+function anonyComment(obj){
+	
+	var comments = $(obj).parents('.items').find('.box-comments');
+	
+	if(comments.hasClass('hidden')){
+		
+		comments.removeClass('hidden');
+		
+	} else {
+		
+		comments.addClass('hidden');
+		
+	}
+	
+}

@@ -3,12 +3,12 @@ package com.jtalk.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jtalk.admin.AdminAccessService;
 import com.jtalk.core.Action;
 import com.jtalk.core.Service;
-import com.jtalk.member.PfModifyService;
-import com.jtalk.member.ProFileService;
-import com.jtalk.member.PwChangeService;
+import com.jtalk.service.admin.AdminAccessService;
+import com.jtalk.service.member.PfModifyService;
+import com.jtalk.service.member.ProFileService;
+import com.jtalk.service.member.PwChangeService;
 
 public class ProfileAction implements Action {
 

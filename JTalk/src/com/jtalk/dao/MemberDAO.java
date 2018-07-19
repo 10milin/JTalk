@@ -307,7 +307,7 @@ public class MemberDAO {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "1234");
+			pstmt.setString(1, "$2a$10$kAx/fvekwISov5f/WRrHuONbDOwk5lTfHtpJLRaFg4kKNkIDJ8YVC");
 			pstmt.setString(2, email);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

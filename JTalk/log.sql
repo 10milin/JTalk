@@ -10,6 +10,6 @@ create table log(
 	deleteId varchar(50) not null,
 	deleteName varchar(50) not null,
 	executeDate Timestamp default current_timestamp
-);
+)COLLATE='utf8_general_ci';
 
 alter table log auto_increment = 1;

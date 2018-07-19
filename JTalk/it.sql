@@ -10,6 +10,6 @@ create table it(
 	originFileName varchar(100),
 	writeDate Timestamp default current_timestamp,
 	hit int default 0
-);
+)COLLATE='utf8_general_ci';
 
 alter table it auto_increment = 1;
