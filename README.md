@@ -71,3 +71,7 @@ Javascript (*.js)
 - 트랜잭션  
   트랜잭션이 적용되지 않아 데이터 무결성이 보장 안됌
   
+- Post forward 이슈  
+  Request에 대한 처리를 forward로 처리하기 때문에 새로고침시 RUD작업의 경우 반복되는 현상 발생  
+  일시적으로 Javascript를 통해 새로고침을 방지
+  
