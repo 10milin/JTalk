@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="JTalk" src="https://i.imgur.com/qQTkKor.png" width="300">
+    <a href="#"><img alt="JTalk" src="https://i.imgur.com/qQTkKor.png" width="300"></a>
 </p>
 
 ## 개요
