@@ -64,19 +64,18 @@ public class WriteService implements Service{
 			
 			request.setAttribute("exception", e);
 			request.setAttribute("error", "업로드 파일용량 초과 및 파일 확장자 불일치");
+			resURL = "/applicaion.exception";
 			
 		} catch(SQLException e){
 			
 			request.setAttribute("exception", e);
 			request.setAttribute("error", "데이터베이스 접근 에러");
+			resURL = "/applicaion.exception";
 			
 		} catch(Exception e){
 			
 			request.setAttribute("exception", e);
 			request.setAttribute("error", "원인을 알수 없는 에러");
-			
-		} finally {
-			
 			resURL = "/applicaion.exception";
 			
 		}
