@@ -9,10 +9,10 @@
 - 커밋 107개
 
 ## 개발환경
-- Java 1.8 / JSP / Servlet / MVC2
-- JDBC / MySQL
+- Java 1.8 / JSP, JSTL / Servlet / MVC2
+- JDBC / MySQL 5.6
 - Javascript / JQuery / Ajax
-- Html / CSS3 / Bootstrap / JSTL
+- Html / CSS3 / Bootstrap
 
 ## 라이브러리
 Java (*.Jar)
@@ -31,13 +31,21 @@ Javascript (*.js)
 - AdminLTE2
 
 ## 프로세스 설계  
+<img src="./diagram.svg">
 
 ## 주요 이슈
 1. 중복 로그인 방지  
-  HttpSessionBindingListener를 상속받아 싱글톤패턴(멀티스레드 동기화 이슈)의 [LoginManager.java](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/core/LoginManager.java)를 구현하여 WAS에서 HashMap으로 관리
+  HttpSessionBindingListener를 상속받아 싱글톤패턴(멀티스레드 동기화 이슈)의 [LoginManager](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/core/LoginManager.java)를 구현하여 WAS에서 HashMap으로 관리
 
 2. 페이징 처리  
   Java단에서 한 페이지에 뿌려 줄 List를 추출하여 화면단에서 자바스크립트로 페이징 처리
   
 3. 조회 수 중복 방지처리  
   쿠키를 활용하여 구현했으며 다음날 00시를 기준으로 남은 시간을 유효시간으로 처리
+  
+4. XSS 방어
+  Filter를 상속받아 [CrossScriptingFilter](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/CrossScriptingFilter.java)를 구현하여 [RequestWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/RequestWrapper.java)에서 문자열을 치환
+  MultipartRequest의 경우 위의 필터와 별개로 처리되므로 [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)를 별도로 구현
+
+5. 파일업로드 확장자 제한
+  [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)에서 허용되지 않은 확장자 파일이 업로드 될 경우 Exception 
