@@ -32,7 +32,7 @@ Javascript (*.js)
   - Chart - 관리자 페이지 차트 처리
 
 ## 뷰페이지 템플릿
-- [AdminLTE2](https://adminlte.io/)
+- <a href="https://adminlte.io/" target="_blank">AdminLTE2</a>
 
 
 ## 프로세스 설계  
