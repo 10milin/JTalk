@@ -24,7 +24,7 @@ Java (*.Jar)
   - Cos - 사진 업로드 기능
   
 Javascript (*.js)
-  - GoogleMapAPI - 주변맛집 정보 지도 표시 (Api key 갱신 )
+  - GoogleMapAPI - 주변맛집 정보 지도 표시 (Api key 갱신이 필요함)
   - pagination - 페이징 처리
   - summernote - 게시글 에디터
   - datepicker - 날짜 선택
