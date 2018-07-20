@@ -41,7 +41,7 @@ public class RecoveryService implements Service{
 			dao.findPass(encodedNewPass, email);
 			
 			try {
-				AuthEmail.send(email, name, encodedNewPass, "find");
+				AuthEmail.send(email, name, newPass, "find");
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
