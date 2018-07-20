@@ -48,4 +48,18 @@ Javascript (*.js)
   MultipartRequest의 경우 위의 필터와 별개로 처리되므로 [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)를 별도로 구현
 
 5. 파일업로드 확장자 제한  
-  [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)에서 허용되지 않은 확장자 파일이 업로드 될 경우 Exception 
+  [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)에서 허용되지 않은 확장자 파일이 업로드 될 경우 Exception 처리
+
+## 보완 사항
+- DB 설계
+  게시판별로 테이블이 설계 되어 있어 게시물 이동과 같은 처리의 비용 발생
+  효율적이지 않은 인덱스 설정
+  
+- SQL
+  JOIN없이 여러 테이블에 접근하여 자료를 추출하기때문에 SQL Connection 비용 발생 (응답시간이 장시간 소요)
+  
+- Log
+  프로그램 작동에 대한 로그가 없어 시스템 문제에 대한 대처가 어려움
+
+- 
+  
