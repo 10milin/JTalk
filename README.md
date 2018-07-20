@@ -1,5 +1,6 @@
 <p align="center">
-    <a href="#"><img alt="JTalk" src="https://i.imgur.com/qQTkKor.png" width="300"></a>
+    <a href="#"><img alt="JTalk" src="https://i.imgur.com/qQTkKor.png" width="300"></a><br>
+    <a href="#"><img alt="JTalk" src="https://github.com/10milin/JTalk/blob/master/jtalk.gif" width="800"></a>
 </p>
 
 ## 개요
