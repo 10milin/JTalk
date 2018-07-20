@@ -24,7 +24,7 @@ Java (*.Jar)
   - Cos - 사진 업로드 기능
   
 Javascript (*.js)
-  - GoogleMapAPI - 주변맛집 정보 지도 표시
+  - GoogleMapAPI - 주변맛집 정보 지도 표시 (Api key 갱신 )
   - pagination - 페이징 처리
   - summernote - 게시글 에디터
   - datepicker - 날짜 선택
@@ -32,7 +32,7 @@ Javascript (*.js)
   - Chart - 관리자 페이지 차트 처리
 
 ## 뷰페이지 템플릿
-- AdminLTE2
+- [AdminLTE2](https://adminlte.io/)
 
 
 ## 프로세스 설계  
@@ -57,7 +57,7 @@ Javascript (*.js)
   [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)에서 허용되지 않은 확장자 파일이 업로드 될 경우 Exception 처리
 
 
-## 보완 사항
+## 보완이 필요한 사항
 - DB 설계  
   게시판별로 테이블이 설계 되어 있어 게시물 이동과 같은 처리의 비용 발생  
   인덱스, 외래키가 하나도 설정되있지 않음 (ERD 만드는데 선이 없어서 확인해보니.. 충격)
