@@ -31,9 +31,6 @@ public class MultipartWrapper {
             throw new IllegalArgumentException("request cannot be null");
         if (saveDirectory == null)
             throw new IllegalArgumentException("saveDirectory cannot be null");
-        if (maxPostSize <= 0) {
-            throw new IllegalArgumentException("maxPostSize must be positive");
-        }
  
         // Save the dir
         File dir = new File(saveDirectory);
@@ -53,9 +50,8 @@ public class MultipartWrapper {
         	parser = new MultipartParser(request, maxPostSize, true, true, encoding);
         	
         }catch(IOException e) {
-        	
-        	throw new IllegalArgumentException("maxPostSize over: " + saveDirectory);
-        	
+
+        	e.printStackTrace();
         }
         
         

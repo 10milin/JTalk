@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jtalk.core.Action;
 import com.jtalk.dao.MemberDAO;
-import com.jtalk.dao.MessageDAO;
 
 public class AdminPwService implements Action{
 
@@ -17,7 +16,20 @@ public class AdminPwService implements Action{
 		String email = request.getParameter("email");
 		
 		MemberDAO dao = MemberDAO.getInstance();
-		result = dao.resetPassword(email);
+		
+		//게스트 계정 비밀번호 초기화 처리
+		if(email.equalsIgnoreCase("guest")) {
+			
+			result = dao.resetGeustPassword();
+			
+		}else {
+		
+			
+			result = dao.resetPassword(email);
+			
+		}
+		
+		
 		
 		json = "{\"result\": \"" + result +"\"}";
 		
