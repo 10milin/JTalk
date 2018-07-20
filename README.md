@@ -43,9 +43,9 @@ Javascript (*.js)
 3. 조회 수 중복 방지처리  
   쿠키를 활용하여 구현했으며 다음날 00시를 기준으로 남은 시간을 유효시간으로 처리
   
-4. XSS 방어
+4. XSS 방어  
   Filter를 상속받아 [CrossScriptingFilter](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/CrossScriptingFilter.java)를 구현하여 [RequestWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/RequestWrapper.java)에서 문자열을 치환
   MultipartRequest의 경우 위의 필터와 별개로 처리되므로 [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)를 별도로 구현
 
-5. 파일업로드 확장자 제한
+5. 파일업로드 확장자 제한  
   [MultipartWrapper](https://github.com/10milin/JTalk/blob/master/JTalk/src/com/jtalk/security/MultipartWrapper.java)에서 허용되지 않은 확장자 파일이 업로드 될 경우 Exception 
