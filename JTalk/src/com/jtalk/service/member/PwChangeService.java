@@ -24,6 +24,8 @@ public class PwChangeService implements Service {
 		MemberDTO dto = (MemberDTO) session.getAttribute("member");
 		
 		String email = dto.getEmail();
+
+		
 		
 		String oldpass = request.getParameter("oldpass");
 		
@@ -33,8 +35,13 @@ public class PwChangeService implements Service {
 		String errorMsg = null;
 		String passwordChangeSuccessMsg = null;
 		
-		if(!bcp.matches(oldpass, dto.getPass()))
+		// 게스트 계정의 경우 비밀번호 변경이 불가능 하도록 처리
+		if(email.equalsIgnoreCase("guest")) 
 		{
+			errorMsg = "손님 계정은 변경할 수 없습니다.";
+			resURL = "/pages/profile/password.jsp";
+			request.setAttribute("errorMsg", errorMsg);
+		}else if(!bcp.matches(oldpass, dto.getPass())){
 			errorMsg = "현재 비밀번호와 일치하지 않습니다.<br>다시 입력해주세요.";
 			resURL = "/pages/profile/password.jsp";
 			request.setAttribute("errorMsg", errorMsg);

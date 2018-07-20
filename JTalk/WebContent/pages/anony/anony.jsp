@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="/JTalk/bower_components/summernote/dist/summernote.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="icon" type="image/png" sizes="16x16" href="/JTalk/dist/img/favicon.png">
 </head>
 <body class="<c:out value="${body}"/>">
 <div class="wrapper">
